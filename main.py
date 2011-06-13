@@ -106,8 +106,7 @@ def writerep_ima(ima_link, i, env={}):
         if DEBUG: print 'imastep1 done',
         return check_confirm(b.open(f.click()))
     else:
-        print >> sys.stderr, 'Error: No IMA form in', ima_link,
-        return b.page
+        raise  Exception('No IMA form in: %s' % ima_link)
 
 def writerep_zipauth(zipauth_link, i):
     """Sends the msg along with the sender details from `i` through the WYR system.
@@ -160,7 +159,7 @@ def writerep_zipauth(zipauth_link, i):
     if form:
         return zipauth_step3(zipauth_step2(zipauth_step1(form)))
     else:
-        print >> sys.stderr, 'Error: No zipauth form in', zipauth_link
+        raise Exception('No zipauth form in: %s' % zipauth_link)
 
 def writerep_wyr(b, form, i):
     """Sends the msg along with the sender details from `i` through the WYR system.
@@ -307,6 +306,7 @@ def contact_state(i):
         try:
             q = writerep_ima(member, i)
         except Exception, e:
+            file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
             print >>sys.stderr, 'fail:', e
 
 def senatetest():
@@ -338,19 +338,20 @@ from config import db
 
 def convert_i(r):
     i = web.storage()
+    i.id = r.parent_id
     i.state = r.state
     i.zip5, i.zip4 = r.zip, r.plus4
     
-    i.prefix = r.get('prefix', 'Mr.')
-    i.fname = r.first_name
-    i.lname = r.last_name
-    i.addr1 = r.address1
-    i.addr2 = r.address2
-    i.city = r.city
+    i.prefix = r.get('prefix', 'Mr.').encode('utf8')
+    i.fname = r.first_name.encode('utf8')
+    i.lname = r.last_name.encode('utf8')
+    i.addr1 = r.address1.encode('utf8')
+    i.addr2 = r.address2.encode('utf8')
+    i.city = r.city.encode('utf8')
     i.phone = '571-336-2637'
-    i.email = r.email
+    i.email = r.email.encode('utf8')
     i.subject = 'Please oppose the PROTECT IP Act'
-    i.full_msg = r.value
+    i.full_msg = r.value.encode('utf8')
     return i
 
 
@@ -360,7 +361,7 @@ totaldone = int(file('TOTAL').read())
 q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment')", where="page_id=118 and a.id > $maxid", order='a.id asc', limit=500, vars=locals())
 
 for r in q:
-    print r.first_name, r.last_name, r.value,
+    print r.first_name.encode('utf8'), r.last_name.encode('utf8'), r.value.encode('utf8'),
     contact_state(convert_i(r))
     totaldone += 1
     file('MAXID', 'w').write(str(r.parent_id))
