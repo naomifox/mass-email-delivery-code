@@ -320,7 +320,7 @@ def housetest():
 def contact_dist(i):
     print i.zip5, i.zip4,
     try:
-        if i.dist not in h_working:
+        if i.dist not in [x.replace('00', '01') for x in h_working]:
             raise Exception('not working: skipped')
         q = writerep(i)
     except Exception, e:
@@ -375,7 +375,7 @@ def convert_i(r):
     i.id = r.parent_id
     i.state = r.state
     i.zip5, i.zip4 = r.zip, r.plus4
-    i.dist = r.us_district.replace('-', '_').replace('00', '01')
+    i.dist = r.us_district.replace('-', '_')
     
     i.prefix = r.get('prefix', 'Mr.').encode('utf8')
     i.fname = r.first_name.encode('utf8')
