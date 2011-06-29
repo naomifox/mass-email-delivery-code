@@ -318,7 +318,7 @@ def housetest():
         fh.flush()
 
 def contact_dist(i):
-    print i.zip5, i.zip4,
+    print i.dist, 
     try:
         if i.dist not in [x.replace('00', '01') for x in h_working]:
             raise Exception('not working: skipped')
