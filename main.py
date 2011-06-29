@@ -375,7 +375,7 @@ def convert_i(r):
     i.id = r.parent_id
     i.state = r.state
     i.zip5, i.zip4 = r.zip, r.plus4
-    i.dist = r.us_district
+    i.dist = r.us_district.replace('-', '_').replace('00', '01')
     
     i.prefix = r.get('prefix', 'Mr.').encode('utf8')
     i.fname = r.first_name.encode('utf8')
