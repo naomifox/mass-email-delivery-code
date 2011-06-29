@@ -398,7 +398,7 @@ def send_to_senate():
     maxid = int(file('%s/MAXID' % PNUM).read())
     totaldone = int(file('%s/TOTAL' % PNUM).read())
 
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', vars=locals())
+    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
 
     for r in q:
         if totaldone > 20000: break
@@ -414,7 +414,7 @@ def send_to_house():
     maxid = int(file('%s/H_MAXID' % PNUM).read())
     totaldone = int(file('%s/H_TOTAL' % PNUM).read())
 
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', vars=locals())
+    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
 
     for r in q:
         if totaldone > 20000: break
