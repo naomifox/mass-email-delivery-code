@@ -392,12 +392,13 @@ def convert_i(r):
 PNUM = 118
 
 def send_to_senate():
+    page_id = PNUM
     from config import db
     
     maxid = int(file('%s/MAXID' % PNUM).read())
     totaldone = int(file('%s/TOTAL' % PNUM).read())
 
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$PNUM and a.id > $maxid", order='a.id asc', vars=locals())
+    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', vars=locals())
 
     for r in q:
         if totaldone > 20000: break
@@ -407,12 +408,13 @@ def send_to_senate():
         file('%s/TOTAL' % PNUM, 'w').write(str(totaldone))
 
 def send_to_house():
+    page_id = PNUM
     from config import db
     
     maxid = int(file('%s/H_MAXID' % PNUM).read())
     totaldone = int(file('%s/H_TOTAL' % PNUM).read())
 
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$PNUM and a.id > $maxid", order='a.id asc', vars=locals())
+    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', vars=locals())
 
     for r in q:
         if totaldone > 20000: break
