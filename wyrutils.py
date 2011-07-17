@@ -22,7 +22,7 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     fname=['fname', 'first', 'name', 'first name'],
                     zipcode=['zip', 'zipcode', 'postal_code'],
                     zip4=['zip4', 'four', 'plus'],
-                    address=['address 1', 'street', 'addr1', 'address1', 'add1', 'address', 'add'],
+                    address=['address 1', 'street', 'addr1', 'address1', 'add1', 'address', 'add', 'street_name'],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
@@ -32,7 +32,9 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     subject=['subject', 'topic'],
                     message=['message', 'msg', 'comment', 'text'],
                     captcha=['captcha', 'validat'],
-                    reply=['reply', 'response', 'answer']
+                    reply=['reply', 'response', 'answer'],
+                    newsletter=['newsletter', 'required-newsletter'],
+                    aff1=['aff1', 'affl1', 'affl']
                 )
 
 def numdists(zip5, zip4=None, address=None):

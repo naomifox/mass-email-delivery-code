@@ -10,7 +10,6 @@ DEBUG = False
 WYR_URL = 'https://writerep.house.gov/writerep/welcome.shtml'
 SEN_URL = 'http://senate.gov/general/contact_information/senators_cfm.xml'
 WYR_MANUAL = {
-  'luetkemeyer': 'https://forms.house.gov/luetkemeyer/webforms/ic_zip_auth.htm', 
   'cleaver': 'http://www.house.gov/cleaver/IMA/issue.htm',
   'quigley': 'http://forms.house.gov/quigley/webforms/issue_subscribe.htm',
   'himes': 'http://himes.house.gov/index.cfm?sectionid=141&sectiontree=54,141',
@@ -40,7 +39,8 @@ WYR_MANUAL = {
   'johnson': 'http://johnson.senate.gov/public/index.cfm?p=ContactForm',
   'thune': 'http://thune.senate.gov/public/index.cfm/contact',
   'fortenberry': 'https://forms.house.gov/fortenberry/webforms/issue_subscribe.html',
-  'wassermanschultz': 'http://wassermanschultz.house.gov/contact/email-me.shtml'
+  'wassermanschultz': 'http://wassermanschultz.house.gov/contact/email-me.shtml',
+  'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
 }
 
 def getdistzipdict(zipdump):
@@ -84,7 +84,7 @@ def writerep_ima(ima_link, i, env={}):
         If it has a captcha img, the form to fill captcha is taken from env.
     """
     def check_confirm(request):
-        if 'Submit.click' in b.page:
+        if 'Submit.click' in b.page or "$('idFrm').submit()" in b.page:
             f = get_form(b, lambda f: 'formproc' in f.action)
             if f:
                 if DEBUG: print 'imastep3 done',
@@ -106,11 +106,12 @@ def writerep_ima(ima_link, i, env={}):
         f.fill(type='textarea', value=i.full_msg)
         captcha_val = None#i.get('captcha_%s' % pol, '')
         f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
-                    issue=['GEN', 'OTH'], subject=i.subject, captcha=captcha_val, reply='yes')
+                    issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
+                    MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
         if DEBUG: print 'imastep1 done',
         return check_confirm(b.open(f.click()))
     else:
-        raise  Exception('No IMA form in: %s' % ima_link)
+        raise Exception('No IMA form in: %s' % ima_link)
 
 def writerep_zipauth(zipauth_link, i):
     """Sends the msg along with the sender details from `i` through the WYR system.
@@ -139,7 +140,9 @@ def writerep_zipauth(zipauth_link, i):
             f.fill_phone(i.phone)
             f.fill(type='textarea', value=i.full_msg)
             f.fill_all(city=i.city, zipcode=i.zip5, zip4=i.zip4, state=i.state.upper(),
-                    email=i.email, issue=['GEN', 'OTH'], subject=i.subject, reply='yes')
+                    email=i.email, issue=['GEN', 'OTH'], subject=i.subject, reply='yes',
+                    newsletter='noAction', aff1='Unsubscribe',
+                    MessageType="Express an opinion or share your views with me")
             if DEBUG: print 'zastep2 done',
             return b.open(f.click())
         else:
@@ -247,7 +250,7 @@ def writerep(i):
             if rep in newurl:
                 newurl = WYR_MANUAL[rep]
         b.open(newurl)
-        if get_form(b, has_textarea):
+        if get_form(b, lambda f: f.find_control_by_type('textarea')):
             return writerep_ima(newurl, i)
         elif get_form(b, has_zipauth):
             return writerep_zipauth(newurl, i)
@@ -279,27 +282,21 @@ def prepare_i(dist):
     return i
 
 
-h_working = set(['NE-03', 'MO-08', 'OH-12', 'OH-13', 'OH-16', 'OH-17', 'OH-18', 'MO-01', 'MO-02', 'GA-07', 'MO-04', 'MO-05', 'MO-06', 'MO-07', 'IL-09', 'IL-08', 'MT-00', 'IL-04', 'CT-05', 'IL-06', 'IL-01', 'CT-02', 'IL-03', 'NC-13', 'NY-11', 'IA-01', 'FL-25', 'NH-01', 'KY-05', 'KY-06', 'GU-00', 'GA-05', 'NM-02', 'OH-10', 'IA-05', 'IL-19', 'IL-16', 'IL-17', 'IL-15', 'IL-12', 'IL-13', 'IL-10', 'CA-45', 'NY-03', 'NY-05', 'NY-04', 'NY-07', 'RI-02', 'NY-09', 'PA-10', 'ND-00', 'TN-09', 'CA-25', 'FL-11', 'FL-10', 'FL-13', 'FL-12', 'NC-12', 'FL-16', 'WY-00', 'TN-08', 'CA-46', 'MS-01', 'NY-12', 'NY-13', 'NY-10', 'CA-32', 'NY-16', 'CA-34', 'NY-14', 'HI-02', 'CA-38', 'HI-01', 'CA-41', 'FL-08', 'FL-09', 'CA-42', 'PR-00', 'FL-02', 'FL-03', 'FL-07', 'FL-04', 'FL-05', 'WV-01', 'MI-11', 'WV-03', 'WV-02', 'CA-01', 'NJ-03', 'GA-06', 'TX-30', 'PA-08', 'PA-03', 'PA-02', 'PA-01', 'TX-32', 'PA-05', 'MI-14', 'CA-23', 'KS-04', 'CA-26', 'KS-03', 'NY-29', 'KS-01', 'CA-28', 'CA-07', 'NY-21', 'AL-02', 'CT-03', 'NC-11', 'ID-01', 'PA-11', 'PA-12', 'PA-13', 'MS-04', 'PA-19', 'MS-03', 'VA-01', 'VA-05', 'MN-06', 'MN-04', 'VA-09', 'GA-13', 'GA-12', 'GA-11', 'WI-07', 'OR-01', 'CA-19', 'CA-18', 'NJ-08', 'NJ-09', 'CA-15', 'WI-08', 'CA-12', 'DE-00', 'NV-01', 'NV-03', 'WA-04', 'WA-01', 'WA-03', 'CA-17', 'CO-07', 'CO-04', 'CA-27', 'MA-06', 'NC-06', 'TX-26', 'TX-27', 'TX-24', 'TX-25', 'TX-15', 'CA-13', 'TX-29', 'RI-01', 'GA-08', 'GA-04', 'MI-10', 'MI-13', 'MI-12', 'MI-15', 'GA-01', 'GA-02', 'GA-03', 'VT-00', 'ME-02', 'AR-03', 'AR-01', 'AR-04', 'LA-05', 'LA-04', 'LA-03', 'IN-01', 'CT-01', 'AL-05', 'IN-06', 'AL-07', 'TX-10', 'TX-17', 'IN-02', 'AL-03', 'TX-14', 'UT-02', 'CA-20', 'IN-08', 'MA-10', 'MI-08', 'TN-05', 'AZ-06', 'CA-33', 'MI-02', 'NJ-13', 'MI-01', 'MI-06', 'IN-04', 'MI-04', 'MI-05', 'MD-01', 'TX-13', 'MD-02', 'CA-24', 'MD-07', 'MD-06', 'MD-08', 'CA-51', 'NY-28', 'IN-05', 'FL-22', 'OH-06', 'OH-05', 'AL-06', 'OH-01', 'SC-06', 'IA-02', 'SC-03', 'OH-08', 'TX-09', 'CO-03', 'TX-04', 'TN-03', 'NC-09', 'TX-07', 'TX-03', 'MA-02', 'MA-03', 'TN-04', 'MA-04', 'MA-05', 'MA-08', 'MA-09'])
+h_working = set(['NE-03', 'MO-08', 'OH-12', 'OH-13', 'OH-16', 'OH-17', 'OH-18', 'MO-01', 'MO-02', 'GA-07', 'MO-04', 'MO-05', 'MO-06', 'MO-07', 'IL-09', 'IL-08', 'MT-00', 'IL-04', 'CT-05', 'IL-06', 'IL-01', 'CT-02', 'IL-03', 'NC-13', 'NY-11', 'IA-01', 'FL-25', 'NH-01', 'KY-05', 'KY-06', 'GU-00', 'GA-05', 'NM-02', 'OH-10', 'IA-05', 'IL-19', 'IL-16', 'IL-17', 'IL-15', 'IL-12', 'IL-13', 'IL-10', 'CA-45', 'NY-03', 'NY-05', 'NY-04', 'NY-07', 'RI-02', 'NY-09', 'PA-10', 'ND-00', 'TN-09', 'CA-25', 'FL-11', 'FL-10', 'FL-13', 'FL-12', 'NC-12', 'FL-16', 'WY-00', 'TN-08', 'CA-46', 'MS-01', 'NY-12', 'NY-13', 'NY-10', 'CA-32', 'NY-16', 'CA-34', 'NY-14', 'HI-02', 'CA-38', 'HI-01', 'CA-41', 'FL-08', 'FL-09', 'CA-42', 'PR-00', 'FL-02', 'FL-03', 'FL-07', 'FL-04', 'FL-05', 'WV-01', 'MI-11', 'WV-03', 'WV-02', 'CA-01', 'NJ-03', 'GA-06', 'TX-30', 'PA-08', 'PA-03', 'PA-02', 'PA-01', 'TX-32', 'PA-05', 'MI-14', 'CA-23', 'KS-04', 'CA-26', 'KS-03', 'NY-29', 'KS-01', 'CA-28', 'CA-07', 'NY-21', 'AL-02', 'CT-03', 'NC-11', 'ID-01', 'PA-11', 'PA-12', 'PA-13', 'MS-04', 'PA-19', 'MS-03', 'VA-01', 'VA-05', 'MN-06', 'MN-04', 'VA-09', 'GA-13', 'GA-12', 'GA-11', 'WI-07', 'OR-01', 'CA-19', 'CA-18', 'NJ-08', 'NJ-09', 'CA-15', 'WI-08', 'CA-12', 'DE-00', 'NV-01', 'NV-03', 'WA-04', 'WA-01', 'WA-03', 'CA-17', 'CO-07', 'CO-04', 'CA-27', 'MA-06', 'NC-06', 'TX-26', 'TX-27', 'TX-24', 'TX-25', 'TX-15', 'CA-13', 'TX-29', 'RI-01', 'GA-08', 'GA-04', 'MI-10', 'MI-13', 'MI-12', 'MI-15', 'GA-01', 'GA-02', 'GA-03', 'VT-00', 'ME-02', 'AR-03', 'AR-01', 'AR-04', 'LA-05', 'LA-04', 'LA-03', 'IN-01', 'CT-01', 'AL-05', 'IN-06', 'AL-07', 'TX-10', 'TX-17', 'IN-02', 'AL-03', 'TX-14', 'UT-02', 'CA-20', 'IN-08', 'MA-10', 'MI-08', 'TN-05', 'AZ-06', 'CA-33', 'MI-02', 'NJ-13', 'MI-01', 'MI-06', 'IN-04', 'MI-04', 'MI-05', 'MD-01', 'TX-13', 'MD-02', 'CA-24', 'MD-07', 'MD-06', 'MD-08', 'CA-51', 'NY-28', 'IN-05', 'FL-22', 'OH-06', 'OH-05', 'AL-06', 'OH-01', 'SC-06', 'IA-02', 'SC-03', 'OH-08', 'TX-09', 'CO-03', 'TX-04', 'TN-03', 'NC-09', 'TX-07', 'TX-03', 'MA-02', 'MA-03', 'TN-04', 'MA-04', 'MA-05', 'MA-08', 'MA-09', 'NC-04', 'CA-39', 'CA-40', 'PA-06', 'FL-23', 'TN-06', 'MI-03', 'NY-15', 'MN-07', 'WI-06', 'IL-02', 'FL-01', 'IA-04', 'OH-15', 'FL-20', 'VA-06', 'VA-02', 'NY-22', 'NY-23', 'AK-00', 'NJ-06', 'TX-21', 'LA-01', 'CA-11', 'OH-04', 'OH-03', 'ID-02', 'TX-01', 'FL-17', 'NY-06', 'TN-01', 'WI-01'])
 
-h_badaddr = set(['IN-07', 'WI-04', 'MO-03', 'CA-53', 'FL-06', 'IL-07', 'KY-04', 'CO-02', 'IL-05', 'MA-01', 'CO-06', 'NJ-12', 'OR-03', 'AZ-04', 'NY-08', 'NY-20', 'NM-03', 'SC-01'])
+h_badaddr = set(['IN-07', 'WI-04', 'MO-03', 'CA-53', 'FL-06', 'IL-07', 'KY-04', 'CO-02', 'IL-05', 'MA-01', 'CO-06', 'NJ-12', 'OR-03', 'AZ-04', 'NY-08', 'NY-20', 'NM-03', 'SC-01', 'CA-31', 'TX-28', 'OK-01', 'OK-04', 'WA-09', 'FL-15', 'FL-24', 'TX-16', 'TX-11', 'GA-0'])
 h_working.update(h_badaddr)
 
 # MessageType="Express an opinion or share your views with me"
 # aff1="Unsubscribe"
 
 def housetest():
-    correction = set(['VA-03', 'DC-00', 'WA-07', 'PA-06', 'SD-00', 'TN-06', 'FL-23', 'OH-02', 'MI-03', 'NE-01'])
-    reqnewsletter = set(['CA-39', 'CA-40'])
-    correction.update(reqnewsletter)
-
-    resend = set(['CA-31'])
-    fail = set(['OH-14'])
-    err = set(['NE-02', 'FL-24', 'MO-09', 'OH-15', 'AZ-03', 'FL-21', 'NY-02', 'CT-04', 'NC-10', 'IL-02', 'AZ-07', 'NH-02', 'KY-01', 'KY-02', 'KY-03', 'CA-36', 'NY-01', 'NM-01', 'CA-10', 'IL-18', 'OH-11', 'IL-14', 'OR-04', 'IL-11', 'CA-44', 'OK-03', 'CA-47', 'OK-04', 'CA-43', 'CA-48', 'CA-49', 'FL-19', 'NY-06', 'FL-15', 'FL-14', 'FL-17', 'OK-02', 'CA-30', 'OK-01', 'CA-35', 'NY-17', 'CA-37', 'NY-15', 'NY-18', 'NY-19', 'FL-01', 'WI-03', 'MN-07', 'PA-09', 'VA-07', 'PA-07', 'WI-05', 'PA-04', 'CA-22', 'CA-21', 'KS-02', 'NJ-11', 'NJ-10', 'NY-27', 'NY-26', 'NY-25', 'NY-24', 'NY-23', 'NY-22', 'PA-14', 'PA-15', 'PA-16', 'PA-17', 'ID-02', 'OK-05', 'PA-18', 'MS-02', 'MN-03', 'MN-02', 'MN-01', 'VA-02', 'TX-31', 'VA-04', 'MN-05', 'VA-06', 'VA-08', 'MN-08', 'WI-06', 'OR-05', 'NJ-01', 'NJ-02', 'GA-10', 'NJ-04', 'NJ-05', 'NJ-06', 'OR-02', 'CA-16', 'CA-14', 'CA-11', 'WI-01', 'WA-08', 'WI-02', 'NV-02', 'NC-02', 'WA-05', 'WA-06', 'NJ-07', 'WA-02', 'CO-01', 'CO-05', 'TX-08', 'VA-10', 'VA-11', 'TX-22', 'TX-23', 'TX-20', 'TX-21', 'TX-28', 'CA-08', 'CA-09', 'GA-09', 'TX-05', 'CA-02', 'CA-03', 'CA-04', 'CA-05', 'CA-06', 'ME-01', 'AR-02', 'LA-07', 'LA-02', 'LA-01', 'WA-09', 'AL-04', 'TX-11', 'IN-03', 'TX-16', 'UT-01', 'UT-03', 'TX-18', 'IN-09', 'FL-20', 'TN-07', 'AZ-01', 'MI-09', 'TN-02', 'AZ-05', 'TN-01', 'IA-04', 'AZ-08', 'IA-03', 'AS-00', 'MD-03', 'MD-05', 'MD-04', 'TX-12', 'CA-52', 'CA-50', 'OH-07', 'AK-00', 'OH-04', 'OH-03', 'AL-01', 'SC-04', 'SC-05', 'SC-02', 'OH-09', 'NC-03', 'AZ-02', 'NC-01', 'CA-29', 'NC-07', 'NC-05', 'MI-07', 'TX-06', 'NC-08', 'TX-01', 'TX-02', 'MA-07', 'TX-19', 'FL-18'])
-    reqnewsletter = set(['CA-39', 'CA-40'])
-    unk = set(['NC-04'])
+    correction = set(['VA-03', 'NE-01', 'DC-00', 'WA-07', 'SD-00', 'OH-02', 'OH-14'])
+    err = set(['NE-02', 'FL-24', 'MO-09', 'AZ-03', 'FL-21', 'NY-02', 'CT-04', 'NC-10', 'AZ-07', 'NH-02', 'KY-01', 'KY-02', 'KY-03', 'CA-36', 'NY-01', 'NM-01', 'CA-10', 'IL-18', 'OH-11', 'IL-14', 'OR-04', 'IL-11', 'CA-44', 'OK-03', 'CA-47', 'CA-43', 'CA-48', 'CA-49', 'FL-19', 'NY-06', 'FL-15', 'FL-14', 'OK-02', 'CA-30', 'CA-35', 'NY-17', 'CA-37', 'NY-18', 'NY-19', 'WI-03', 'PA-09', 'VA-07', 'PA-07', 'WI-05', 'PA-04', 'CA-22', 'CA-21', 'KS-02', 'NJ-11', 'NJ-10', 'NY-27', 'NY-26', 'NY-25', 'NY-24', 'PA-14', 'PA-15', 'PA-16', 'PA-17', 'ID-02', 'OK-05', 'PA-18', 'MS-02', 'MN-03', 'MN-02', 'MN-01', 'TX-31', 'VA-04', 'MN-05', 'VA-08', 'MN-08', 'OR-05', 'NJ-01', 'NJ-02', 'GA-10', 'NJ-04', 'NJ-05', 'OR-02', 'CA-16', 'CA-14', 'CA-11', 'WI-01', 'WA-08', 'WI-02', 'NV-02', 'NC-02', 'WA-05', 'WA-06', 'NJ-07', 'WA-02', 'CO-01', 'CO-05', 'TX-08', 'VA-10', 'VA-11', 'TX-22', 'TX-23', 'TX-20', 'CA-08', 'CA-09', 'GA-09', 'TX-05', 'CA-02', 'CA-03', 'CA-04', 'CA-05', 'CA-06', 'ME-01', 'AR-02', 'LA-07', 'LA-02', 'LA-01', 'WA-09', 'AL-04', 'TX-11', 'IN-03', 'TX-16', 'UT-01', 'UT-03', 'TX-18', 'IN-09', 'TN-07', 'AZ-01', 'MI-09', 'TN-02', 'AZ-05', 'TN-01', 'AZ-08', 'IA-03', 'AS-00', 'MD-03', 'MD-05', 'MD-04', 'TX-12', 'CA-52', 'CA-50', 'OH-07', 'OH-04', 'OH-03', 'AL-01', 'SC-04', 'SC-05', 'SC-02', 'OH-09', 'NC-03', 'AZ-02', 'NC-01', 'CA-29', 'NC-07', 'NC-05', 'MI-07', 'TX-06', 'NC-08', 'TX-01', 'TX-02', 'MA-07', 'TX-19', 'FL-18'])
     
     n = set()
-    n.update(correction); n.update(fail); n.update(resend); n.update(err); n.update(unk)
+    n.update(correction); 
+    #n.update(err);
     
     fh = file('results.log', 'a')
     for dist in dist_zip_dict:
@@ -316,6 +313,7 @@ def housetest():
         except KeyboardInterrupt:
             raise
         except:
+            import traceback; traceback.print_exc()
             print 'err.add(%s)' % repr(dist)
             fh.write('%s.add(%s)\n' % ('err', repr(dist)))
         fh.flush()
@@ -388,7 +386,7 @@ def convert_i(r):
     i.city = r.city.encode('utf8')
     i.phone = '571-336-2637'
     i.email = r.email.encode('utf8')
-    i.subject = 'Please oppose the PROTECT IP Act'
+    i.subject = 'Please oppose this bill'
     i.full_msg = r.value.encode('utf8')
     return i
 
@@ -427,6 +425,10 @@ def send_to_house(PNUM, MAXTODO):
 
 if __name__ == "__main__":
     import sys
+    if sys.argv[1] == 'htest':
+        housetest()
+        sys.exit(0)
+    
     sPNUM = sys.argv[1]
     sMAXTODO = int(sys.argv[3])
     if sys.argv[2] == 'house':
