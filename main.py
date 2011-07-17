@@ -392,9 +392,7 @@ def convert_i(r):
     i.full_msg = r.value.encode('utf8')
     return i
 
-PNUM = 118
-
-def send_to_senate():
+def send_to_senate(PNUM, MAXTODO):
     page_id = PNUM
     from config import db
     
@@ -404,13 +402,14 @@ def send_to_senate():
     q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
 
     for r in q:
-        if totaldone > 20000: break
+        if totaldone > MAXTODO: break
+	else: print totaldone, MAXTODO
         contact_state(convert_i(r))
         totaldone += 1
         file('%s/MAXID' % PNUM, 'w').write(str(r.parent_id))
         file('%s/TOTAL' % PNUM, 'w').write(str(totaldone))
 
-def send_to_house():
+def send_to_house(PNUM, MAXTODO):
     page_id = PNUM
     from config import db
     
@@ -420,11 +419,17 @@ def send_to_house():
     q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
 
     for r in q:
-        if totaldone > 20000: break
+        if totaldone > MAXTODO: break
         contact_dist(convert_i(r))
         totaldone += 1
         file('%s/H_MAXID' % PNUM, 'w').write(str(r.parent_id))
         file('%s/H_TOTAL' % PNUM, 'w').write(str(totaldone))
 
-
-if __name__ == "__main__": housetest()
+if __name__ == "__main__":
+    import sys
+    sPNUM = sys.argv[1]
+    sMAXTODO = int(sys.argv[3])
+    if sys.argv[2] == 'house':
+        send_to_house(sPNUM, sMAXTODO)
+    elif sys.argv[2] == 'senate':
+        send_to_senate(sPNUM, sMAXTODO)
