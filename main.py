@@ -371,6 +371,12 @@ def senatetest():
             import sys
             sys.exit(1)
 
+SUBJECT_DB = {
+  128: "Oppose H.R. 1981, the Internet Snooping Bill",
+  119: "Oppose Klobuchar's S.978, which would criminalize online streaming",
+  118: "Oppose Leahy's S.968, the Internet Blacklist Bill"
+}
+
 def convert_i(r):
     i = web.storage()
     i.id = r.parent_id
@@ -386,8 +392,8 @@ def convert_i(r):
     i.city = r.city.encode('utf8')
     i.phone = '571-336-2637'
     i.email = r.email.encode('utf8')
-    i.subject = 'Please oppose this bill'
     i.full_msg = r.value.encode('utf8')
+    i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
     return i
 
 def send_to_senate(PNUM, MAXTODO):
