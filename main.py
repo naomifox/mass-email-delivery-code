@@ -357,9 +357,11 @@ def contact_state(i):
 def senatetest():
     sendb = get_senate_offices()
     for state in sendb:
-        for member in ['inouye']:#sendb[state]:
+        for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
+            #if sen != 'inouye': continue
+            #print repr(sen)
         
             unsure = ['lieberman', 'brown', 'hagan']
             funnynames = ['inhofe', 'lgraham']
@@ -368,7 +370,7 @@ def senatetest():
             noformdetect = ['feinstein']
             captcha = ['shelby', 'crapo', 'risch', 'moran', 'roberts']
             failure = e500 + requirespost + captcha + funnynames
-            if sen in working + failure: continue
+            #if sen in working + failure: continue
         
             print repr(sen)
             q = writerep_ima(member, prepare_i(state))
@@ -455,6 +457,9 @@ if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'htest':
         housetest()
+        sys.exit(0)
+    elif sys.argv[1] == 'stest':
+        senatetest()
         sys.exit(0)
     
     if sys.argv[2] == 'make':
