@@ -40,7 +40,8 @@ WYR_MANUAL = {
   'thune': 'http://thune.senate.gov/public/index.cfm/contact',
   'fortenberry': 'https://forms.house.gov/fortenberry/webforms/issue_subscribe.html',
   'wassermanschultz': 'http://wassermanschultz.house.gov/contact/email-me.shtml',
-  'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
+  'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm',
+  'feinstein': 'https://www.feinstein.senate.gov/public/index.cfm/e-mail-me'
 }
 
 def getdistzipdict(zipdump):
@@ -360,7 +361,7 @@ def senatetest():
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-            #if sen != 'inouye': continue
+            #if sen != 'feinstein': continue
             #print repr(sen)
         
             unsure = ['lieberman', 'brown', 'hagan']
