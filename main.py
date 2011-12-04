@@ -19,7 +19,6 @@ WYR_MANUAL = {
   'bingaman': 'http://bingaman.senate.gov/contact/types/email-issue.cfm', #email avail
   'johanns': 'http://johanns.senate.gov/public/?p=EmailSenatorJohanns',
   'bennelson': 'http://bennelson.senate.gov/email-issues.cfm',
-  'schumer': 'http://schumer.senate.gov/new_website/contactchuck.cfm',
   'boxer': 'http://boxer.senate.gov/en/contact/policycomments.cfm',
   'warner': 'http://warner.senate.gov/public//index.cfm?p=ContactPage',
   'markudall': 'http://markudall.senate.gov/?p=contact_us',
