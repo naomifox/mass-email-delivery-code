@@ -1,4 +1,4 @@
-import urllib2, re, subprocess, sys, os
+import urllib2, re, subprocess, sys, os, time
 import web
 import browser, captchasolver, xmltramp
 from wyrutils import *
@@ -57,7 +57,7 @@ def getzip(dist):
     try:
         if DEBUG: print dist_zip_dict[dist]
         return dist_zip_dict[dist]
-    except:
+    except Exception:
         return '', ''    
 
 def not_signup_or_search(form):
@@ -111,7 +111,7 @@ def writerep_ima(ima_link, i, env={}):
         if DEBUG: print 'imastep1 done',
         return check_confirm(b.open(f.click()))
     else:
-        raise Exception('No IMA form in: %s' % ima_link)
+        raise StandardError('No IMA form in: %s' % ima_link)
 
 def writerep_zipauth(zipauth_link, i):
     """Sends the msg along with the sender details from `i` through the WYR system.
@@ -165,7 +165,7 @@ def writerep_zipauth(zipauth_link, i):
     if form:
         return zipauth_step3(zipauth_step2(zipauth_step1(form)))
     else:
-        raise Exception('No zipauth form in: %s' % zipauth_link)
+        raise StandardError('No zipauth form in: %s' % zipauth_link)
 
 def writerep_wyr(b, form, i):
     """Sends the msg along with the sender details from `i` through the WYR system.
@@ -194,6 +194,7 @@ def writerep_wyr(b, form, i):
     
 
 r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
+writerep_cache = {}
 def writerep(i):
     """Looks up the right contact page and handles any simple challenges."""
     
@@ -203,14 +204,6 @@ def writerep(i):
     
     b = browser.Browser()
 
-    b.open(WYR_URL)
-    form = get_form(b, not_signup_or_search)
-    # state names are in form: "PRPuerto Rico"
-    state_options = form.find_control_by_name('state').items
-    state_l = [s.name for s in state_options if s.name[:2] == i.state]
-    form.fill_all(state=state_l[0], zipcode=i.zip5, zip4=i.zip4)
-    if DEBUG: print 'step1 done',
-    
     def step2(request):
         b.open(request)
         newurl = False
@@ -222,7 +215,7 @@ def writerep(i):
             elif b.has_text("Use your web browser's <b>BACK</b> capability "): raise WyrError
             else:
                 if 'http-equiv="refresh"' in b.page:
-                    print b.page
+                    #print b.page
                     newurl = r_refresh.findall(b.page)[0]
                     if DEBUG: print newurl
                 else:
@@ -240,8 +233,24 @@ def writerep(i):
                     return step2(form.click())
         return form, newurl
     
-    form, newurl = step2(form.click())
             
+    zipkey = (i.zip5, i.zip4)
+    if zipkey in writerep_cache:
+        form = None
+        newurl = writerep_cache[zipkey]
+        print 'cachehit', len(writerep_cache),
+    else:
+        b.open(WYR_URL)
+        form = get_form(b, not_signup_or_search)
+        # state names are in form: "PRPuerto Rico"
+        state_options = form.find_control_by_name('state').items
+        state_l = [s.name for s in state_options if s.name[:2] == i.state]
+        form.fill_all(state=state_l[0], zipcode=i.zip5, zip4=i.zip4)
+        form, newurl = step2(form.click())
+        if DEBUG: print 'step1 done',
+        if not form and newurl:
+            writerep_cache[zipkey] = newurl
+    
     if form:
         return writerep_wyr(b, form, i)
     elif newurl:
@@ -256,7 +265,7 @@ def writerep(i):
             return writerep_zipauth(newurl, i)
         else:
             if DEBUG: print newurl
-            raise Exception('no valid form')
+            raise StandardError('no valid form')
 
 #def contact_dist():
 def prepare_i(dist):
@@ -310,9 +319,7 @@ def housetest():
             result = raw_input('%s? ' % dist)
             print result + '.add(%s)' % repr(dist)
             fh.write('%s.add(%s)\n' % (result, repr(dist)))
-        except KeyboardInterrupt:
-            raise
-        except:
+        except Exception:
             import traceback; traceback.print_exc()
             print 'err.add(%s)' % repr(dist)
             fh.write('%s.add(%s)\n' % ('err', repr(dist)))
@@ -322,7 +329,7 @@ def contact_dist(i):
     print i.dist, 
     try:
         if i.dist not in [x.replace('00', '01') for x in h_working]:
-            raise Exception('not working: skipped %s' % i.dist)
+            raise StandardError('not working: skipped %s' % i.dist)
         q = writerep(i)
     except Exception, e:
         file('failures.log', 'a').write('%s %s %s\n' % (i.id, i.dist, e))
@@ -340,7 +347,7 @@ def contact_state(i):
         print sen,
         try:
             if sen not in working:
-                raise Exception('not working: skipped %s' % sen)
+                raise StandardError('not working: skipped %s' % sen)
             q = writerep_ima(member, i)
         except Exception, e:
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
@@ -350,7 +357,7 @@ def contact_state(i):
 def senatetest():
     sendb = get_senate_offices()
     for state in sendb:
-        for member in sendb[state]:
+        for member in ['inouye']:#sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
         
@@ -373,8 +380,19 @@ def senatetest():
 
 SUBJECT_DB = {
   128: "Oppose H.R. 1981, the Internet Snooping Bill",
+  127: "Oppose Rep Grimm's H.R. 2483 -- The Corporate Fiend Protection Act",
   119: "Oppose Klobuchar's S.978, which would criminalize online streaming",
-  118: "Oppose Leahy's S.968, the Internet Blacklist Bill"
+  118: "Oppose the PROTECT IP Act!",
+  120: "Oppose the PROTECT IP Act!",
+  132: "Oppose the PROTECT IP Act!",
+  140: "Oppose the PROTECT IP Act!",
+  135: "Please introduce legislation to abolish of death penalty",
+  139: "Oppose Senator Hutchison's resolution of dissaproval",
+  149: "Please oppose the Internet Blacklist Bill -- SOPA, HR 3261",
+  151: "Oppose Sen Hutchison's resolution of disapproval",
+  153: "Oppose SOPA (HR 3261), the Internet blacklist bill",
+  157: "Oppose SOPA (HR 3261), the Internet blacklist bill",
+  163: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
 }
 
 def convert_i(r):
@@ -392,47 +410,60 @@ def convert_i(r):
     i.city = r.city.encode('utf8')
     i.phone = '571-336-2637'
     i.email = r.email.encode('utf8')
-    i.full_msg = r.value.encode('utf8')
+    i.full_msg = r.value.encode('utf8') + "\n\nPlease look at Feingold's Federal Death Penalty Abolition Act of 2009 for an example."
     i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
     return i
 
-def send_to_senate(PNUM, MAXTODO):
-    page_id = PNUM
+def send_to(chamber, pnum, maxtodo):
+    page_id = pnum
     from config import db
+    chamberprefix = {'S': '', 'H': 'H_'}[chamber]
+    maxid = int(file('%s/%sMAXID' % (pnum, chamberprefix)).read())
+    totaldone = int(file('%s/%sTOTAL' % (pnum, chamberprefix)).read())
+    q = 1
+    while q:
+        tries = 3
+        while tries:
+            try:
+                q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
+                break
+            except Exception:
+                q = []
+                tries -= 1
+		db._ctx.clear()
+                import traceback; traceback.print_exc()
+                time.sleep(60)
     
-    maxid = int(file('%s/MAXID' % PNUM).read())
-    totaldone = int(file('%s/TOTAL' % PNUM).read())
+        print 'todo:', len(q)
+        for r in q:
+            if totaldone > maxtodo: return
+            print totaldone, maxtodo
+            try:
+                if chamber == 'S': contact_state(convert_i(r))
+                elif chamber == 'H': contact_dist(convert_i(r))
+            except Exception:
+                import traceback; traceback.print_exc()
+            totaldone += 1
+            maxid = r.parent_id
+            file('%s/%sMAXID' % (pnum, chamberprefix), 'w').write(str(maxid))
+            file('%s/%sTOTAL' % (pnum, chamberprefix), 'w').write(str(totaldone))
 
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
-
-    for r in q:
-        if totaldone > MAXTODO: break
-	else: print totaldone, MAXTODO
-        contact_state(convert_i(r))
-        totaldone += 1
-        file('%s/MAXID' % PNUM, 'w').write(str(r.parent_id))
-        file('%s/TOTAL' % PNUM, 'w').write(str(totaldone))
-
-def send_to_house(PNUM, MAXTODO):
-    page_id = PNUM
-    from config import db
-    
-    maxid = int(file('%s/H_MAXID' % PNUM).read())
-    totaldone = int(file('%s/H_TOTAL' % PNUM).read())
-
-    q = db.select("core_action a join core_user u on (u.id = a.user_id) join core_actionfield f on (a.id=f.parent_id and f.name = 'comment') join core_location l on (l.user_id = u.id)", where="page_id=$page_id and a.id > $maxid", order='a.id asc', limit=5000, vars=locals())
-
-    for r in q:
-        if totaldone > MAXTODO: break
-        contact_dist(convert_i(r))
-        totaldone += 1
-        file('%s/H_MAXID' % PNUM, 'w').write(str(r.parent_id))
-        file('%s/H_TOTAL' % PNUM, 'w').write(str(totaldone))
+def send_to_senate(pnum, maxtodo): return send_to('S', pnum, maxtodo)
+def send_to_house(pnum, maxtodo): return send_to('H', pnum, maxtodo)
 
 if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'htest':
         housetest()
+        sys.exit(0)
+    
+    if sys.argv[2] == 'make':
+        num = sys.argv[1]
+        os.mkdir(num)
+        file('%s/MAXID' % num, 'w').write('0')
+        file('%s/TOTAL' % num, 'w').write('0')
+        file('%s/H_MAXID' % num, 'w').write('0')
+        file('%s/H_TOTAL' % num, 'w').write('0')
         sys.exit(0)
     
     sPNUM = sys.argv[1]
