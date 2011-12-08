@@ -1,0 +1,32 @@
+File:mass-email-delivery-code/README
+Author: Naomi Fox <naomi.fox@gmail.com>
+Date: Dec 8, 2011
+
+= Description =
+Set of files for 
+
+= Dependencies =
+== Webpy ==
+ cd .. 
+ git clone git://github.com/webpy/webpy.git
+ ln -s ../webpy/web .
+
+== BeautifulSoup ==
+ easy_install BeautifulSoup 
+
+== ClientForm ==
+ easy_install ClientForm
+
+= To run example =
+Test senators:
+ python main.py stest
+Test representatives:
+ python main.py htest
+
+= Weird required fields on each senators page =
+In order to fix the "failures", I am going through each problem-senator's contact page to see where the issues are.  I am listing them below.
+
+boxer - required field, Subject
+lautenberg - required field, view
+
+webb - homePhone and workPhone fields (not required, but the Form class fill_phone class was assuming the number should be split into area code and phone number, so had to fix this).
