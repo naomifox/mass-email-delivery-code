@@ -393,7 +393,9 @@ SUBJECT_DB = {
   151: "Oppose Sen Hutchison's resolution of disapproval",
   153: "Oppose SOPA (HR 3261), the Internet blacklist bill",
   157: "Oppose SOPA (HR 3261), the Internet blacklist bill",
-  163: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
+  163: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
+  164: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
+  160: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
 }
 
 def convert_i(r):
