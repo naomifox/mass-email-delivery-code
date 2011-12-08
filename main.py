@@ -42,6 +42,13 @@ WYR_MANUAL = {
   'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
 }
 
+def get_senate_offices():
+    out = {}
+    d = xmltramp.load('senators_cfm.xml')
+    for member in d: 
+        out.setdefault(str(member.state), []).append(str(member.email))
+    return out
+
 def getdistzipdict(zipdump):
     """returns a dict with district names as keys zipcodes falling in it as values"""
     d = {}
@@ -69,13 +76,6 @@ def not_signup_or_search(form):
         search = 'search' in action or 'thomas.loc.gov' in action
         return not(search or signup)
 
-def get_senate_offices():
-    out = {}
-    d = xmltramp.load('senators_cfm.xml')
-    for member in d: 
-        out.setdefault(str(member.state), []).append(str(member.email))
-    return out
-
 def writerep_ima(ima_link, i, env={}):
     """Sends the msg along with the sender details from `i` through the form @ ima_link.
         The web page at `ima_link` typically has a single form, with the sender's details
@@ -86,7 +86,7 @@ def writerep_ima(ima_link, i, env={}):
         if 'Submit.click' in b.page or "$('idFrm').submit()" in b.page:
             f = get_form(b, lambda f: 'formproc' in f.action)
             if f:
-                if DEBUG: print 'imastep3 done',
+                if DEBUG: print 'Submitting ima confirmation form...',
                 return b.open(f.click())
         
         return request
@@ -107,7 +107,7 @@ def writerep_ima(ima_link, i, env={}):
         f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
                     issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
                     MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
-        if DEBUG: print 'imastep1 done',
+        if DEBUG: print 'Submitting first ima form...',
         return check_confirm(b.open(f.click()))
     else:
         raise StandardError('No IMA form in: %s' % ima_link)
@@ -126,7 +126,7 @@ def writerep_zipauth(zipauth_link, i):
         f.fill_all(email=i.email, zipcode=i.zip5, zip4=i.zip4, city=i.city)
         if 'lamborn.house.gov' in zipauth_link:
             f.f.action = urljoin(zipauth_link, '/Contact/ContactForm.htm') #@@ they do it in ajax
-        if DEBUG: print 'zastep1 done',
+        if DEBUG: print 'Submitting first zip form...',
         return f.click()
         
     def zipauth_step2(request):
@@ -142,7 +142,7 @@ def writerep_zipauth(zipauth_link, i):
                     email=i.email, issue=['GEN', 'OTH'], subject=i.subject, reply='yes',
                     newsletter='noAction', aff1='Unsubscribe',
                     MessageType="Express an opinion or share your views with me")
-            if DEBUG: print 'zastep2 done',
+            if DEBUG: print 'Submitting second zip form...',
             return b.open(f.click())
         else:
             print >> sys.stderr, 'no form with text area'
@@ -154,7 +154,7 @@ def writerep_zipauth(zipauth_link, i):
         if 'Submit.click' in b.page:
             f = get_form(b, lambda f: 'formproc' in f.action)
             if f:
-                if DEBUG: print 'zastep3 done',
+                if DEBUG: print 'Submitting zip confirmation form...',
                 return b.open(f.click())
         return request
             
@@ -173,23 +173,23 @@ def writerep_wyr(b, form, i):
     Form 2 asks for sender's details such as prefix, name, city, address, email, phone etc
     Form 3 asks for the msg to send.
     """
-    def wyr_step2(form):
+    def wyr_step1(form):
         if form and form.fill_name(i.prefix, i.fname, i.lname):
             form.fill_address(i.addr1, i.addr2)
             form.fill_all(city=i.city, phone=i.phone, email=i.email)
             request = form.click()
-            if DEBUG: print 'step2 done',
+            if DEBUG: print 'Submitting first wyr form...',
             return request
             
-    def wyr_step3(request):
+    def wyr_step2(request):
         if DEBUG: print request
         b.open(request)
         form = get_form(b, lambda f: f.find_control_by_type('textarea'))
         if form and form.fill(i.full_msg, type='textarea'):
-            if DEBUG: print 'step3 done',
+            if DEBUG: print 'Submitting textarea wyr form...',
             return b.open(form.click())
     
-    return wyr_step3(wyr_step2(form))
+    return wyr_step2(wyr_step1(form))
     
 
 r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
@@ -359,7 +359,7 @@ def senatetest():
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-            #if sen != 'feinstein': continue
+            if sen != 'schumer': continue
             #print repr(sen)
         
             unsure = ['lieberman', 'brown', 'hagan']
