@@ -30,3 +30,10 @@ boxer - required field, Subject
 lautenberg - required field, view
 
 webb - homePhone and workPhone fields (not required, but the Form class fill_phone class was assuming the number should be split into area code and phone number, so had to fix this).
+
+hagan - Needs a radio button filled.  RESPOND = yes.
+
+inhofe - the ids for the form inputs are all weird (A01 for prefix, B01 for first name, C01 for last name, etc).  Had to write a special function
+       for the inhofe case.
+
+
