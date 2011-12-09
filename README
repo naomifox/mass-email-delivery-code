@@ -36,4 +36,5 @@ hagan - Needs a radio button filled.  RESPOND = yes.
 inhofe - the ids for the form inputs are all weird (A01 for prefix, B01 for first name, C01 for last name, etc).  Had to write a special function
        for the inhofe case.
 
+coburn - has a pesky radio-button without a label that needs to be filled in with Y or N.  I tried to fill all non-filled controls with a "Y" but that introduced some exceptions like "exception occurred control 'Clear' is ignored, hence read-only", for example on toomey
 
