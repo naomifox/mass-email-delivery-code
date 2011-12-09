@@ -474,7 +474,7 @@ def convert_i(r):
     i.city = r.city.encode('utf8')
     i.phone = '571-336-2637'
     i.email = r.email.encode('utf8')
-    i.full_msg = r.value.encode('utf8') + "\n\nPlease look at Feingold's Federal Death Penalty Abolition Act of 2009 for an example."
+    i.full_msg = r.value.encode('utf8')
     i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
     
     
