@@ -152,6 +152,11 @@ class Form(object):
             # split the 10-digit number into area-code and regular 7-digit number
             self.f.set_value(phone[:3], name=ph_ctrls[0], type='text', nr=0)
             self.f.set_value(phone[3:], name=ph_ctrls[1], type='text', nr=0)
+        elif num_ph == 3 and ph_ctrls[1].lower().find("home")>=0 and ph_ctrls[2].lower().find("work") >= 0:
+            # if the second and third numbers are home and work, paste the same number in both controls
+            self.f.set_value(phone, ph_ctrls[0], type='text', nr=0)
+            self.f.set_value(phone, ph_ctrls[1], type='text', nr=0)
+            self.f.set_value(phone, ph_ctrls[2], type='text', nr=0)
         elif num_ph == 3:
             # split the 10-digit number into area-code, exchange, and last 4-digits
             self.f.set_value(phone[:3], name=ph_ctrls[0], type='text', nr=0)
