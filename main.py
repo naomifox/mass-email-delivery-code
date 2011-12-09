@@ -105,7 +105,7 @@ def writerep_ima(ima_link, i, env={}):
         b.open(ima_link)
         f = get_form(b, lambda f: f.find_control_by_type('textarea'))
 
-    if f:
+    if f:            
         f.fill_name(i.prefix, i.fname, i.lname)
         f.fill_address(i.addr1, i.addr2)
         f.fill_phone(i.phone)
@@ -454,7 +454,7 @@ def senatetest():
     Creates a file sen/schumer.html with schumers contact page
     '''
     sendb = get_senate_offices()
-    status={}
+    statfile = open("senate-test-out.txt", "w")
     for state in sendb:
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
@@ -464,18 +464,21 @@ def senatetest():
             print repr(sen)
             q = None
 
-            status[member] = "nothing"
             try:
                 q = writerep_ima(member, prepare_i(state))
                 file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
-                subprocess.Popen(['open', 'sen/%s.html' % sen])
-                subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
-                if (q.lower.find("thanks") >= 0):
-                    status[member] = "thanked"
-            except Exception, e:
-                print "Caught exception on senator: %s", member
-                status[member] = "problem"
-    return status
+                #subprocess.Popen(['open', 'sen/%s.html' % sen])
+                #subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
+                if q.lower().find("thank") >= 0:
+                    status = "Thanked"
+                else:
+                    status = "Failed.  reason unknown."
+            except Exception as e:
+                print "Caught exception on senator: %s " % member
+                status="failed.  exception occurred %s" % e
+            statfile.write("Member: %s, Status: %s\n" % (member, status))
+            statfile.flush()
+    statfile.close()
 
 from subjects import SUBJECT_DB
 
@@ -558,7 +561,8 @@ if __name__ == "__main__":
         senatetest2(member)
         sys.exit(0)
     elif sys.argv[1] == 'stest':
-        print senatetest()
+        senatetest()
+
         sys.exit(0)
     
     if sys.argv[2] == 'make':
