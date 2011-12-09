@@ -394,8 +394,19 @@ def senatetest2(member2email):
             q = writerep_ima(member, prepare_i(state))
             
             file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
+
+            success=False
+            if q.lower().find("thank") >= 0:
+                #if you're getting thanked, you're probably successful
+                success=True
+            
             subprocess.Popen(['open', 'sen/%s.html' % sen])
             subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
+
+            if (success):
+                print "Successfully wrote to %s" % member2email
+            else:
+                print "Failed to write to %s" % member2email
             import sys
             sys.exit(1)
 
@@ -443,6 +454,7 @@ def senatetest():
     Creates a file sen/schumer.html with schumers contact page
     '''
     sendb = get_senate_offices()
+    status={}
     for state in sendb:
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
@@ -450,12 +462,20 @@ def senatetest():
             #if sen != 'schumer': continue
             #if sen in working + failure: continue
             print repr(sen)
-            q = writerep_ima(member, prepare_i(state))
-            file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
-            subprocess.Popen(['open', 'sen/%s.html' % sen])
-            subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
-            #import sys
-            #sys.exit(1)
+            q = None
+
+            status[member] = "nothing"
+            try:
+                q = writerep_ima(member, prepare_i(state))
+                file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
+                subprocess.Popen(['open', 'sen/%s.html' % sen])
+                subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
+                if (q.lower.find("thanks") >= 0):
+                    status[member] = "thanked"
+            except Exception, e:
+                print "Caught exception on senator: %s", member
+                status[member] = "problem"
+    return status
 
 SUBJECT_DB = {
   128: "Oppose H.R. 1981, the Internet Snooping Bill",
@@ -555,7 +575,7 @@ if __name__ == "__main__":
         senatetest2(member)
         sys.exit(0)
     elif sys.argv[1] == 'stest':
-        senatetest()
+        print senatetest()
         sys.exit(0)
     
     if sys.argv[2] == 'make':
