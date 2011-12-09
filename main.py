@@ -356,12 +356,12 @@ def housetest():
 def contact_dist(i):
     print i.dist, 
     try:
-        if i.dist not in [x.replace('00', '01') for x in h_working]:
-            raise StandardError('not working: skipped %s' % i.dist)
+        #if i.dist not in [x.replace('00', '01') for x in h_working]:
+        #    raise StandardError('not working: skipped %s' % i.dist)
         q = writerep(i)
     except Exception, e:
         file('failures.log', 'a').write('%s %s %s\n' % (i.id, i.dist, e))
-        print >>sys.stderr, 'fail:', e
+        print >>sys.stderr, 'fail:', i.dist, e
     print
 
 working = ['coons', 'kohl', 'akaka', 'inouye', 'shaheen', 'menendez', 'cantwell', 'carper', 'manchin', 'rockefeller', 'barrasso', 'ayotte', 'tomudall', 'hutchison', 'landrieu', 'vitter', 'burr', 'conrad', 'johanns', 'bennelson', 'gillibrand', 'schumer', 'casey', 'toomey', 'boxer', 'heller', 'reid', 'bennet', 'markudall', 'sessions', 'boozman', 'leahy', 'sanders', 'kirk', 'isakson', 'coats', 'lugar', 'grassley', 'harkin', 'kyl', 'mccain', 'blumenthal', 'lieberman', 'collins', 'cardin', 'mikulski', 'kerry', 'brown', 'portman', 'mccaskill', 'franken', 'klobuchar', 'levin', 'stabenow', 'reed', 'whitehouse', 'baucus', 'tester', 'cochran', 'wicker', 'paul', 'merkley', 'wyden', 'murray', 'ronjohnson', 'rubio', 'enzi', 'bingaman', 'cornyn', 'hagan', 'hoeven', 'alexander', 'corker', 'warner', 'begich', 'murkowski', 'pryor', 'durbin', 'chambliss', 'coburn', 'snowe', 'scottbrown', 'hatch', 'lee', 'blunt', 'demint', 'mcconnell', 'johnson', 'thune']
@@ -374,12 +374,12 @@ def contact_state(i):
         
         print sen,
         try:
-            if sen not in working:
-                raise StandardError('not working: skipped %s' % sen)
+            #if sen not in working:
+            #    raise StandardError('not working: skipped %s' % sen)
             q = writerep_ima(member, i)
         except Exception, e:
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
-            print >>sys.stderr, 'fail:', e
+            print >>sys.stderr, 'fail:', sen, e
     print
 
 
@@ -457,24 +457,7 @@ def senatetest():
             #import sys
             #sys.exit(1)
 
-SUBJECT_DB = {
-  128: "Oppose H.R. 1981, the Internet Snooping Bill",
-  127: "Oppose Rep Grimm's H.R. 2483 -- The Corporate Fiend Protection Act",
-  119: "Oppose Klobuchar's S.978, which would criminalize online streaming",
-  118: "Oppose the PROTECT IP Act!",
-  120: "Oppose the PROTECT IP Act!",
-  132: "Oppose the PROTECT IP Act!",
-  140: "Oppose the PROTECT IP Act!",
-  135: "Please introduce legislation to abolish of death penalty",
-  139: "Oppose Senator Hutchison's resolution of dissaproval",
-  149: "Please oppose the Internet Blacklist Bill -- SOPA, HR 3261",
-  151: "Oppose Sen Hutchison's resolution of disapproval",
-  153: "Oppose SOPA (HR 3261), the Internet blacklist bill",
-  157: "Oppose SOPA (HR 3261), the Internet blacklist bill",
-  163: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
-  164: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
-  160: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
-}
+from subjects import SUBJECT_DB
 
 def convert_i(r):
     i = web.storage()
