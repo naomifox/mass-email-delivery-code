@@ -1,4 +1,4 @@
-import urllib2, re, subprocess, sys, os, time
+import urllib2, re, subprocess, sys, os, time, urlparse
 import web
 import browser, captchasolver, xmltramp
 from wyrutils import *
@@ -145,7 +145,7 @@ def writerep_zipauth(zipauth_link, i):
         f.fill_phone(i.phone)
         f.fill_all(email=i.email, zipcode=i.zip5, zip4=i.zip4, city=i.city)
         if 'lamborn.house.gov' in zipauth_link:
-            f.f.action = urljoin(zipauth_link, '/Contact/ContactForm.htm') #@@ they do it in ajax
+            f.f.action = urlparse.urljoin(zipauth_link, '/Contact/ContactForm.htm') #@@ they do it in ajax
         if DEBUG: print 'Submitting first zip form...',
         return f.click()
         
