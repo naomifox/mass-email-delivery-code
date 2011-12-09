@@ -88,13 +88,20 @@ def writerep_ima(ima_link, i, env={}):
             if f:
                 if DEBUG: print 'Submitting ima confirmation form...',
                 return b.open(f.click())
-        
         return request
-    
+
+    def fill_inhofe_lgraham(f, i):
+        """special function to fill in forms for inhofe and lgraham"""
+        f.fill_all(A01=i.prefix, B01=i.fname, C01=i.lname, D01=i.addr1, E01=i.addr2, F01=i.city,
+                   G01=i.state, H01=i.zip5, H02=i.phone, H03=i.phone, I01=i.email, J01="Communications")
+        
     b = browser.Browser(env.get('cookies', []))
     b.url, b.page = ima_link, env.get('form')
+
     f = get_form(b, lambda f: f.find_control_by_type('textarea'))
+    
     if not f:
+        print "Form not retrieved.  will open ima_link", ima_link
         b.open(ima_link)
         f = get_form(b, lambda f: f.find_control_by_type('textarea'))
 
@@ -104,10 +111,23 @@ def writerep_ima(ima_link, i, env={}):
         f.fill_phone(i.phone)
         f.fill(type='textarea', value=i.full_msg)
         captcha_val = None#i.get('captcha_%s' % pol, '')
+
+        #
+        # NKF - 8-Dec-11 - added extra values to handle senator pages where form submission was broken
+        #
+        #f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
+        #            issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
+        #            MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
         f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
                     issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
-                    MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
+                    MessageType="Express an opinion or share your views with me", aff1='Unsubscribe',
+                    Subject=i.subject, messageSubject=i.subject, view=i.subject, RESPOND="yes")
+
+        if ima_link.find("inhofe") >= 0 or ima_link.find("lgraham") >= 0:
+             fill_inhofe_lgraham(f, i)
+        
         if DEBUG: print 'Submitting first ima form...',
+        print "Form to submit: ", f
         return check_confirm(b.open(f.click()))
     else:
         raise StandardError('No IMA form in: %s' % ima_link)
@@ -268,6 +288,10 @@ def writerep(i):
 
 #def contact_dist():
 def prepare_i(dist):
+    '''
+    get the fields for the email form.
+    the only thing that changes is the state
+    '''
     i = web.storage()
     i.state = dist[:2]
     if len(dist) == 2:
@@ -284,9 +308,14 @@ def prepare_i(dist):
     i.addr2 = ''
     i.city = 'Franklin'
     i.phone = '571-336-2637'
-    i.email = 'demandprogressoutreach@gmail.com'
+    # Aaron's
+#   i.email = 'demandprogressoutreach@gmail.com'
+    # Naomi's
+    i.email = 'demandprogressoutreach@yahoo.com'
     i.subject = 'Please oppose the Protect IP Act'
+        
     i.full_msg = 'I urge you to reject S. 968, the PROTECT IP Act. (My understanding is that the House is currently developing companion legislation.) I am deeply concerned by the danger the bill poses to Internet security, free speech online, and innovation.  The PROTECT IP Act is dangerous and short-sighted, and I urge you to join Senator Wyden, Rep. Zoe Lofgren, and other members of Congress in opposing it.'
+    
     return i
 
 
@@ -353,31 +382,80 @@ def contact_state(i):
             print >>sys.stderr, 'fail:', e
     print
 
-def senatetest():
+
+def senatetest2(member2email):
     sendb = get_senate_offices()
     for state in sendb:
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-            if sen != 'schumer': continue
-            #print repr(sen)
-        
-            unsure = ['lieberman', 'brown', 'hagan']
-            funnynames = ['inhofe', 'lgraham']
-            e500 = ['lautenberg', 'webb']
-            requirespost = ['billnelson']
-            noformdetect = ['feinstein']
-            captcha = ['shelby', 'crapo', 'risch', 'moran', 'roberts']
-            failure = e500 + requirespost + captcha + funnynames
-            #if sen in working + failure: continue
-        
+            if sen != member2email : continue
             print repr(sen)
             q = writerep_ima(member, prepare_i(state))
+            
             file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
             subprocess.Popen(['open', 'sen/%s.html' % sen])
             subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
             import sys
             sys.exit(1)
+
+
+def brokensenators():
+    '''
+    this list was compiled by Aaron.
+    For these senators, there were various problems with their
+    email submission pages
+    '''
+
+    # fixed 1 of the 3
+    # lieberman redirects to a page with all these broken links
+    # brown never gets to the "Thank you" page
+    # hagan - fixed.  needed RESPOND=yes in the form
+    unsure = ['lieberman', 'brown', 'hagan']
+
+    #fixed these two
+    # inhofe - had to write a special function since the ids in the form fields were weird.
+    # same exact function also worked for lgraham
+    funnynames = ['inhofe', 'lgraham']
+
+    # fixed these two
+    #lautenberg - required field, view
+    # webb - homePhone and workPhone fields (not required, but the Form class fill_phone class
+    #        was assuming the number should be split into area code and phone number,
+    #        so had to fix this).
+    e500 = ['lautenberg', 'webb']
+
+    # has a two step process for the email form
+    # will take more testing
+    requirespost = ['billnelson']
+
+    # didn't find this to be broken
+    noformdetect = ['feinstein']
+
+    # no idea what to do with the captcha pages
+    captcha = ['shelby', 'crapo', 'risch', 'moran', 'roberts']
+    
+    failure = e500 + requirespost + captcha + funnynames
+    return failure
+            
+def senatetest():
+    '''
+    Creates a file sen/schumer.html with schumers contact page
+    '''
+    sendb = get_senate_offices()
+    for state in sendb:
+        for member in sendb[state]:
+            sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
+            if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
+            #if sen != 'schumer': continue
+            #if sen in working + failure: continue
+            print repr(sen)
+            q = writerep_ima(member, prepare_i(state))
+            file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
+            subprocess.Popen(['open', 'sen/%s.html' % sen])
+            subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
+            #import sys
+            #sys.exit(1)
 
 SUBJECT_DB = {
   128: "Oppose H.R. 1981, the Internet Snooping Bill",
@@ -415,9 +493,16 @@ def convert_i(r):
     i.email = r.email.encode('utf8')
     i.full_msg = r.value.encode('utf8') + "\n\nPlease look at Feingold's Federal Death Penalty Abolition Act of 2009 for an example."
     i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
+    
+    
     return i
 
 def send_to(chamber, pnum, maxtodo):
+    '''
+    chamber is either S or H for senate or house
+    pnum is ?
+    maxtodo is ?
+    '''
     page_id = pnum
     from config import db
     chamberprefix = {'S': '', 'H': 'H_'}[chamber]
@@ -454,10 +539,20 @@ def send_to(chamber, pnum, maxtodo):
 def send_to_senate(pnum, maxtodo): return send_to('S', pnum, maxtodo)
 def send_to_house(pnum, maxtodo): return send_to('H', pnum, maxtodo)
 
+def usage():
+    ''' print command line usage '''
+    print "htest - house test"
+    print "stest - senate test"
+    print "Unknown usage"
+
 if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'htest':
         housetest()
+        sys.exit(0)
+    elif sys.argv[1] == 'stest2':
+        member = sys.argv[2]
+        senatetest2(member)
         sys.exit(0)
     elif sys.argv[1] == 'stest':
         senatetest()
