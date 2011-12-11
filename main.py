@@ -119,9 +119,10 @@ def writerep_ima(ima_link, i, env={}):
         #            issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
         #            MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
         f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
-                    issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
+                    issue=i.subject,
+                    subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
                     MessageType="Express an opinion or share your views with me", aff1='Unsubscribe',
-                    Subject=i.subject, messageSubject=i.subject, view=i.subject, RESPOND="yes")
+                    Subject=i.subject, messageSubject=i.subject, view=i.subject, respond="yes")
 
         if ima_link.find("inhofe") >= 0 or ima_link.find("lgraham") >= 0:
              fill_inhofe_lgraham(f, i)
@@ -396,7 +397,7 @@ def senatetest2(member2email):
             file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
 
             success=False
-            if q.lower().find("thank") >= 0:
+            if "thank" in q.lower() or "your message has been submitted" in q.lower() or "your message has been submitted" in q.lower() : 
                 #if you're getting thanked, you're probably successful
                 success=True
             
