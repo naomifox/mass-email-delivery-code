@@ -39,7 +39,7 @@ WYR_MANUAL = {
   'thune': 'http://thune.senate.gov/public/index.cfm/contact',
   'fortenberry': 'https://forms.house.gov/fortenberry/webforms/issue_subscribe.html',
   'wassermanschultz': 'http://wassermanschultz.house.gov/contact/email-me.shtml',
-  'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
+  #'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
 }
 
 def get_senate_offices():
@@ -101,7 +101,7 @@ def writerep_ima(ima_link, i, env={}):
     f = get_form(b, lambda f: f.find_control_by_type('textarea'))
     
     if not f:
-        print "Form not retrieved.  will open ima_link", ima_link
+        if DEBUG: print "Form not retrieved.  will open ima_link", ima_link
         b.open(ima_link)
         f = get_form(b, lambda f: f.find_control_by_type('textarea'))
 
@@ -127,8 +127,7 @@ def writerep_ima(ima_link, i, env={}):
         if ima_link.find("inhofe") >= 0 or ima_link.find("lgraham") >= 0:
              fill_inhofe_lgraham(f, i)
         
-        if DEBUG: print 'Submitting first ima form...',
-        print "Form to submit: ", f
+        if DEBUG: print 'Submitting first ima form...', f
         return check_confirm(b.open(f.click()))
     else:
         raise StandardError('No IMA form in: %s' % ima_link)
@@ -149,11 +148,22 @@ def writerep_zipauth(zipauth_link, i):
             f.f.action = urlparse.urljoin(zipauth_link, '/Contact/ContactForm.htm') #@@ they do it in ajax
         if DEBUG: print 'Submitting first zip form...',
         return f.click()
-        
+
+    def countforms():
+        ''' Count forms in browser.  Used for debugging. '''
+        formcount = 0
+        for f in b.get_forms():
+            if DEBUG: print "form: ", f
+            formcount += 1
+        return formcount
+    
     def zipauth_step2(request):
         request.add_header('Cookie', 'District=%s' % i.zip5)  #@@ done in ajax :(
         response = b.open(request)
+
+        if DEBUG: print "\n count: %d"% countforms()
         f = get_form(b, lambda f: f.find_control_by_type('textarea'))
+
         if f:
             f.fill_name(i.prefix, i.fname, i.lname)
             f.fill_address(i.addr1, i.addr2)
@@ -169,7 +179,8 @@ def writerep_zipauth(zipauth_link, i):
             print >> sys.stderr, 'no form with text area'
             if b.has_text('zip code is split between more'): raise ZipShared
             if b.has_text('Access to the requested form is denied'): raise ZipIncorrect
-            if b.has_text('you are outside'): raise ZipIncorrect 
+            if b.has_text('you are outside'): raise ZipIncorrect
+            raise StandardError('no form with text area', b.get_text())
     
     def zipauth_step3(request):
         if 'Submit.click' in b.page:
@@ -215,6 +226,13 @@ def writerep_wyr(b, form, i):
 
 r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
 writerep_cache = {}
+
+
+direct_contact_pages= {'UT-03' : 'https://chaffetz.house.gov/contact/email-me.shtml',
+                       'CA-03' : 'https://forms.house.gov/matsui/webforms/issue_subscribe.htm',
+                       'AR-02' : 'https://timgriffinforms.house.gov/Forms/WriteYourRep/',
+                       'AZ-02' : 'http://franks.house.gov/contacts/new'}
+
 def writerep(i):
     """Looks up the right contact page and handles any simple challenges."""
     
@@ -235,9 +253,9 @@ def writerep(i):
             elif b.has_text("Use your web browser's <b>BACK</b> capability "): raise WyrError
             else:
                 if 'http-equiv="refresh"' in b.page:
-                    #print b.page
+                    if DEBUG: print b.page
                     newurl = r_refresh.findall(b.page)[0]
-                    if DEBUG: print newurl
+                    if DEBUG: print "Step2 newurl:", newurl
                 else:
                     raise NoForm
         else:
@@ -267,23 +285,45 @@ def writerep(i):
         state_l = [s.name for s in state_options if s.name[:2] == i.state]
         form.fill_all(state=state_l[0], zipcode=i.zip5, zip4=i.zip4)
         form, newurl = step2(form.click())
-        if DEBUG: print 'step1 done',
+        if DEBUG: print 'step1 done\n',
         if not form and newurl:
             writerep_cache[zipkey] = newurl
     
     if form:
         return writerep_wyr(b, form, i)
     elif newurl:
-        newurl = newurl.replace(' ', '')
+        print "newurl : ", newurl
+
+        # this replace was causing a problem with TX-02
+        #newurl = newurl.replace(' ', '')
+        newurl = newurl.replace(' ', '%20')
+
+        # These 3 lines were causing a problem with Sheila Jackson and Jesse Jackson.
+        # For house, would be better to look up by district than name.
         for rep in WYR_MANUAL:
             if rep in newurl:
                 newurl = WYR_MANUAL[rep]
+                
         b.open(newurl)
+        print "newurl: ", newurl
+        if DEBUG:
+            for form in b.get_forms(): print "step2 form:", form
         if get_form(b, lambda f: f.find_control_by_type('textarea')):
             return writerep_ima(newurl, i)
         elif get_form(b, has_zipauth):
             return writerep_zipauth(newurl, i)
+        elif i.dist in direct_contact_pages.keys():
+            print "found i.dist in direct_contact_pages"
+            try:
+                return writerep_ima(direct_contact_pages[i.dist], i)
+            except:
+                try:
+                    return writerep_zipauth(direct_contact_pages[i.dist], i)
+                except:
+                    raise StandardError('unable to use form in direct contact page %s ' % direct_contact_pages[i.dist])
         else:
+            print "Can't fill form?"
+            if DEBUG: for f in b.get_forms(): print "Form: ", f
             if DEBUG: print newurl
             raise StandardError('no valid form')
 
@@ -294,6 +334,7 @@ def prepare_i(dist):
     the only thing that changes is the state
     '''
     i = web.storage()
+    i.dist=dist
     i.state = dist[:2]
     if len(dist) == 2:
         i.zip5, i.zip4 = getzip(dist + '-00')
@@ -331,14 +372,23 @@ h_working.update(h_badaddr)
 def housetest():
     correction = set(['VA-03', 'NE-01', 'DC-00', 'WA-07', 'SD-00', 'OH-02', 'OH-14'])
     err = set(['NE-02', 'FL-24', 'MO-09', 'AZ-03', 'FL-21', 'NY-02', 'CT-04', 'NC-10', 'AZ-07', 'NH-02', 'KY-01', 'KY-02', 'KY-03', 'CA-36', 'NY-01', 'NM-01', 'CA-10', 'IL-18', 'OH-11', 'IL-14', 'OR-04', 'IL-11', 'CA-44', 'OK-03', 'CA-47', 'CA-43', 'CA-48', 'CA-49', 'FL-19', 'NY-06', 'FL-15', 'FL-14', 'OK-02', 'CA-30', 'CA-35', 'NY-17', 'CA-37', 'NY-18', 'NY-19', 'WI-03', 'PA-09', 'VA-07', 'PA-07', 'WI-05', 'PA-04', 'CA-22', 'CA-21', 'KS-02', 'NJ-11', 'NJ-10', 'NY-27', 'NY-26', 'NY-25', 'NY-24', 'PA-14', 'PA-15', 'PA-16', 'PA-17', 'ID-02', 'OK-05', 'PA-18', 'MS-02', 'MN-03', 'MN-02', 'MN-01', 'TX-31', 'VA-04', 'MN-05', 'VA-08', 'MN-08', 'OR-05', 'NJ-01', 'NJ-02', 'GA-10', 'NJ-04', 'NJ-05', 'OR-02', 'CA-16', 'CA-14', 'CA-11', 'WI-01', 'WA-08', 'WI-02', 'NV-02', 'NC-02', 'WA-05', 'WA-06', 'NJ-07', 'WA-02', 'CO-01', 'CO-05', 'TX-08', 'VA-10', 'VA-11', 'TX-22', 'TX-23', 'TX-20', 'CA-08', 'CA-09', 'GA-09', 'TX-05', 'CA-02', 'CA-03', 'CA-04', 'CA-05', 'CA-06', 'ME-01', 'AR-02', 'LA-07', 'LA-02', 'LA-01', 'WA-09', 'AL-04', 'TX-11', 'IN-03', 'TX-16', 'UT-01', 'UT-03', 'TX-18', 'IN-09', 'TN-07', 'AZ-01', 'MI-09', 'TN-02', 'AZ-05', 'TN-01', 'AZ-08', 'IA-03', 'AS-00', 'MD-03', 'MD-05', 'MD-04', 'TX-12', 'CA-52', 'CA-50', 'OH-07', 'OH-04', 'OH-03', 'AL-01', 'SC-04', 'SC-05', 'SC-02', 'OH-09', 'NC-03', 'AZ-02', 'NC-01', 'CA-29', 'NC-07', 'NC-05', 'MI-07', 'TX-06', 'NC-08', 'TX-01', 'TX-02', 'MA-07', 'TX-19', 'FL-18'])
-    
+
+
+    # 38 judiciary members
+    judiciary=set(['TX-21', 'WI-05', 'NC-06', 'CA-24', 'VA-06', 'CA-03', 'OH-01',  'IN-06', 'VA-04', 'IA-05', 'AZ-02', 'TX-01', 'OH-04', 'TX-02', 'UT-03', 'AR-02', 'PA-10', 'SC-04', 'FL-12', 'FL-24', 'AZ-03', 'NV-02', 'MI-14', 'CA-28', 'NY-08', 'VA-03', 'NC-12', 'CA-16', 'TX-18', 'CA-35', 'TN-09', 'GA-04', 'PR-00', 'IL-05', 'CA-32', 'FL-19', 'CA-39'])
+
+    # judiciary members with captchas
+    judCaptcha=set(['CA-49', 'MI-14' ])
+
     n = set()
     n.update(correction); 
     #n.update(err);
     
     fh = file('results.log', 'a')
     for dist in dist_zip_dict:
-        if dist in h_working or dist in n: continue
+        #if dist in h_working or dist in n: continue
+        #if dist != 'NC-06': continue
+        if dist not in judiciary: continue
         print dist,
         try:
             q = writerep(prepare_i(dist))
