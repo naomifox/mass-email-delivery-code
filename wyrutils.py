@@ -18,23 +18,24 @@ class WyrError(Exception): pass
 class NoForm(Exception): pass
 
 name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
-                    lname=['lname', 'last', 'last name'],
-                    fname=['fname', 'first', 'name', 'first name'],
+                    lname=['lname', 'last', 'last name', 'required-first'],
+                    fname=['fname', 'first', 'name', 'first name', 'required-first'],
                     zipcode=['zip', 'zipcode', 'postal_code'],
                     zip4=['zip4', 'four', 'plus'],
-                    address=['address 1', 'street', 'addr1', 'address1', 'add1', 'address', 'add', 'street_name'],
+                    address=['address 1', 'street', 'addr1', 'address1', 'add1', 'address', 'add', 'street_name', 'req_street'],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
                     email=['email', 'e-mail'],
                     phone=['phone'],
                     issue=['issue', 'title'],
-                    subject=['subject', 'topic', 'Subject', 'view'],
+                    subject=['subject', 'topic', 'Subject', 'view', 'subjectline'],
                     message=['message', 'msg', 'comment', 'text'],
                     captcha=['captcha', 'validat'],
                     reply=['reply', 'response', 'answer'],
                     newsletter=['newsletter', 'required-newsletter'],
-                    aff1=['aff1', 'affl1', 'affl']
+                    aff1=['aff1', 'affl1', 'affl'],
+                    respond=['respond', 'response', 'Response']
                 )
 
 def numdists(zip5, zip4=None, address=None):
@@ -140,28 +141,32 @@ class Form(object):
     def fill_phone(self, phone):
         phone = phone + ' '* (10 - len(phone)) # make phone length 10
         # get the controls (fields) for phone
-        ph_ctrls = [c.name for c in self.controls if ('phone' in c.name.lower() or any('phone' in x.text.lower() for x in c.get_labels())) and c.type == 'text']
+
+        # Howard Coble page has phone control type as tel
+        ph_ctrl_types = ['text', 'tel']
+    
+        ph_ctrls = [c for c in self.controls if ('phone' in c.name.lower() or any('phone' in x.text.lower() for x in c.get_labels())) and c.type in ph_ctrl_types]
         num_ph = len(ph_ctrls)
         if num_ph == 1:
-            return self.f.set_value(phone, ph_ctrls[0], type='text', nr=0)
+            return self.f.set_value(phone, ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
         elif num_ph == 2 and ph_ctrls[0].lower().find("home")>=0 and ph_ctrls[1].lower().find("work") >= 0:
             # if the two numbers are home and work, paste the same number in both controls
-            self.f.set_value(phone, ph_ctrls[0], type='text', nr=0)
-            self.f.set_value(phone, ph_ctrls[1], type='text', nr=0)
+            self.f.set_value(phone, name=ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
+            self.f.set_value(phone, name=ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
         elif num_ph == 2:
             # split the 10-digit number into area-code and regular 7-digit number
-            self.f.set_value(phone[:3], name=ph_ctrls[0], type='text', nr=0)
-            self.f.set_value(phone[3:], name=ph_ctrls[1], type='text', nr=0)
+            self.f.set_value(phone[:3], name=ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
+            self.f.set_value(phone[3:], name=ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
         elif num_ph == 3 and ph_ctrls[1].lower().find("home")>=0 and ph_ctrls[2].lower().find("work") >= 0:
             # if the second and third numbers are home and work, paste the same number in both controls
-            self.f.set_value(phone, ph_ctrls[0], type='text', nr=0)
-            self.f.set_value(phone, ph_ctrls[1], type='text', nr=0)
-            self.f.set_value(phone, ph_ctrls[2], type='text', nr=0)
+            self.f.set_value(phone, ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
+            self.f.set_value(phone, ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
+            self.f.set_value(phone, ph_ctrls[2].name, type=ph_ctrls[2].type, nr=0)
         elif num_ph == 3:
             # split the 10-digit number into area-code, exchange, and last 4-digits
-            self.f.set_value(phone[:3], name=ph_ctrls[0], type='text', nr=0)
-            self.f.set_value(phone[3:6], name=ph_ctrls[1], type='text', nr=0)
-            self.f.set_value(phone[6:], name=ph_ctrls[2], type='text', nr=0)
+            self.f.set_value(phone[:3], name=ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
+            self.f.set_value(phone[3:6], name=ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
+            self.f.set_value(phone[6:], name=ph_ctrls[2].name, type=ph_ctrls[2].type, nr=0)
 
     def select_value(self, control, options):
         if not isinstance(options, list): options = [options]
@@ -186,15 +191,19 @@ class Form(object):
     def fill_all(self, **d):
         #fill all the fields of the form with the values from `d`
         for c in self.controls:
+            print "control: ", c.name
             filled = False
+            print d.keys
             if c.name in d.keys():
                 filled = self.fill(d[c.name], control=c)
+                print "filled ", c.name, " with ", d[c.name]
             else:
                 for k in d.keys():
+                    print "key: ", k
                     if matches(k, [c.name, c.get_labels()]):
                         filled = self.fill(d[k], control=c)
-                        #print 'filled', k
-            #if not filled and not c.value: print "couldn't fill %s" % (c.name),
+                        print 'filled', k, "with ", d[k], "in control ", c
+            if not filled and not c.value: print "couldn't fill %s" % (c.name)
 
     def has(self, name=None, type=None):
         return bool(self.find_control(name=name, type=type))
