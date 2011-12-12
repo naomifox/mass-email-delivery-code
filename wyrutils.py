@@ -10,6 +10,8 @@ test_email = 'me@aaronsw.com' #wyr test emails to go to this
 production_test_email = 'me@aaronsw.com' #all production wyr msgs and their responses go here
 production_mode = True
 
+DEBUG = False
+
             
 class ZipShared(Exception): pass
 class ZipIncorrect(Exception): pass
@@ -191,18 +193,18 @@ class Form(object):
     def fill_all(self, **d):
         #fill all the fields of the form with the values from `d`
         for c in self.controls:
-            print "control: ", c.name
+            if DEBUG: print "control: ", c.name
+            if DEBUG: print d.keys
             filled = False
-            print d.keys
             if c.name in d.keys():
                 filled = self.fill(d[c.name], control=c)
-                print "filled ", c.name, " with ", d[c.name]
+                if DEBUG: print "filled ", c.name, " with ", d[c.name]
             else:
                 for k in d.keys():
-                    print "key: ", k
+                    if DEBUG: print "key: ", k
                     if matches(k, [c.name, c.get_labels()]):
                         filled = self.fill(d[k], control=c)
-                        print 'filled', k, "with ", d[k], "in control ", c
+                        if DEBUG: print 'filled', k, "with ", d[k], "in control ", c
             if not filled and not c.value: print "couldn't fill %s" % (c.name)
 
     def has(self, name=None, type=None):
