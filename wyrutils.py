@@ -151,7 +151,7 @@ class Form(object):
         num_ph = len(ph_ctrls)
         if num_ph == 1:
             return self.f.set_value(phone, ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
-        elif num_ph == 2 and ph_ctrls[0].lower().find("home")>=0 and ph_ctrls[1].lower().find("work") >= 0:
+        elif num_ph == 2 and 'home' in ph_ctrls[0].name.lower() and 'work' in ph_ctrls[1].name.lower():
             # if the two numbers are home and work, paste the same number in both controls
             self.f.set_value(phone, name=ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
             self.f.set_value(phone, name=ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
@@ -159,7 +159,7 @@ class Form(object):
             # split the 10-digit number into area-code and regular 7-digit number
             self.f.set_value(phone[:3], name=ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
             self.f.set_value(phone[3:], name=ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
-        elif num_ph == 3 and ph_ctrls[1].lower().find("home")>=0 and ph_ctrls[2].lower().find("work") >= 0:
+        elif num_ph == 3 and 'home' in ph_ctrls[1].name.lower() and 'work' in ph_ctrls[2].name.lower():
             # if the second and third numbers are home and work, paste the same number in both controls
             self.f.set_value(phone, ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
             self.f.set_value(phone, ph_ctrls[1].name, type=ph_ctrls[1].type, nr=0)
