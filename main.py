@@ -313,7 +313,7 @@ def writerep(i):
         elif get_form(b, has_zipauth):
             return writerep_zipauth(newurl, i)
         elif i.dist in direct_contact_pages.keys():
-            print "found i.dist in direct_contact_pages"
+            if DEBUG: print "WYR form did not work.  Trying contact page ", direct_contact_pages[i.dist]
             try:
                 return writerep_ima(direct_contact_pages[i.dist], i)
             except:
@@ -323,7 +323,9 @@ def writerep(i):
                     raise StandardError('unable to use form in direct contact page %s ' % direct_contact_pages[i.dist])
         else:
             print "Can't fill form?"
-            if DEBUG: for f in b.get_forms(): print "Form: ", f
+            if DEBUG:
+                for f in b.get_forms():
+                    print "Form: ", f
             if DEBUG: print newurl
             raise StandardError('no valid form')
 
@@ -383,6 +385,12 @@ def housetest():
     n = set()
     n.update(correction); 
     #n.update(err);
+
+
+    # Speed up test.
+    # To check the return pages using pattern matching
+    # rather than by eye, set this flag to false
+    checkByEye=True
     
     fh = file('results.log', 'a')
     for dist in dist_zip_dict:
@@ -393,9 +401,17 @@ def housetest():
         try:
             q = writerep(prepare_i(dist))
             file('%s.html' % dist, 'w').write(q)
-            subprocess.Popen(['open', '%s.html' % dist])
-            print
-            result = raw_input('%s? ' % dist)
+            if checkByEye:
+                subprocess.Popen(['open', '%s.html' % dist])
+                print
+                result = raw_input('%s? ' % dist)
+            else:
+                if 'thank' in q.lower() or 'your message has been submitted' in q.lower() or 'your message has been submitted' in q.lower() : 
+                    result='thanked'
+                elif 'the street number in the input address was not valid' in q.lower():
+                    result='bad-street-address'
+                else:
+                    result='err'
             print result + '.add(%s)' % repr(dist)
             fh.write('%s.add(%s)\n' % (result, repr(dist)))
         except Exception:
