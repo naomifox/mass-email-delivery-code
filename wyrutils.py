@@ -171,12 +171,21 @@ class Form(object):
             self.f.set_value(phone[6:], name=ph_ctrls[2].name, type=ph_ctrls[2].type, nr=0)
 
     def select_value(self, control, options):
+        '''
+        TODO: do a nicer job finding a selection object that is closer to
+        what the user wants.  for now, if the value is not found
+        the second item in the list is returned.
+        '''
         if not isinstance(options, list): options = [options]
         items = [str(item).lstrip('*') for item in control.items]
         for option in options:
             for item in items:
                 if option.lower() in item.lower():
                     return [item]
+        if len(items) >= 2:
+            print items
+            print "selecting ", items[1]
+            return [items[1]]
         return [item]
 
     def fill(self, value, name=None, type=None, control=None):
