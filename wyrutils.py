@@ -205,7 +205,7 @@ class Form(object):
                     if matches(k, [c.name, c.get_labels()]):
                         filled = self.fill(d[k], control=c)
                         if DEBUG: print 'filled', k, "with ", d[k], "in control ", c
-            if not filled and not c.value: print "couldn't fill %s" % (c.name)
+            if DEBUG and not filled and not c.value: print "couldn't fill %s" % (c.name)
 
     def has(self, name=None, type=None):
         return bool(self.find_control(name=name, type=type))
