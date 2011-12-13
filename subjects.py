@@ -8,6 +8,7 @@ SUBJECT_DB = {
   140: "Oppose the PROTECT IP Act!",
   135: "Please introduce legislation to abolish of death penalty",
   139: "Oppose Senator Hutchison's resolution of dissaproval",
+  148: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
   149: "Please oppose the Internet Blacklist Bill -- SOPA, HR 3261",
   151: "Oppose Sen Hutchison's resolution of disapproval",
   153: "Oppose SOPA (HR 3261), the Internet blacklist bill",
@@ -15,5 +16,6 @@ SUBJECT_DB = {
   163: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
   164: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
   160: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
-  158: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
+  158: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
+  156: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
 }
