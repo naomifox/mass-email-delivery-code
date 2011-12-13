@@ -112,18 +112,17 @@ def writerep_ima(ima_link, i, env={}):
         f.fill(type='textarea', value=i.full_msg)
         captcha_val = None#i.get('captcha_%s' % pol, '')
 
-        #
         # NKF - 8-Dec-11 - added extra values to handle senator pages where form submission was broken
         #
         #f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
         #            issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
         #            MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
         f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
-                    issue=i.subject,
-                    subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
-                    MessageType="Express an opinion or share your views with me", aff1='Unsubscribe',
-                    Subject=i.subject, messageSubject=i.subject, view=i.subject, respond="yes")
-
+                   issue=i.subject,
+                   subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
+                   MessageType="Express an opinion or share your views with me", aff1='Unsubscribe',
+                   Subject=i.subject, messageSubject=i.subject, view=i.subject, respond="yes")
+        
         if ima_link.find("inhofe") >= 0 or ima_link.find("lgraham") >= 0:
              fill_inhofe_lgraham(f, i)
         
@@ -160,8 +159,7 @@ def writerep_zipauth(zipauth_link, i):
     def zipauth_step2(request):
         request.add_header('Cookie', 'District=%s' % i.zip5)  #@@ done in ajax :(
         response = b.open(request)
-
-        if DEBUG: print "\n count: %d"% countforms()
+        
         f = get_form(b, lambda f: f.find_control_by_type('textarea'))
 
         if f:
@@ -231,7 +229,10 @@ writerep_cache = {}
 direct_contact_pages= {'UT-03' : 'https://chaffetz.house.gov/contact/email-me.shtml',
                        'CA-03' : 'https://forms.house.gov/matsui/webforms/issue_subscribe.htm',
                        'AR-02' : 'https://timgriffinforms.house.gov/Forms/WriteYourRep/',
-                       'AZ-02' : 'http://franks.house.gov/contacts/new'}
+                       'AZ-02' : 'http://franks.house.gov/contacts/new',
+                       'VA-04' : 'https://forbesforms.house.gov/Contact/ContactForm.htm',
+                       'CA-16' : 'https://forms.house.gov/lofgren/webforms/contactzipauth.html'
+                     }
 
 def writerep(i):
     """Looks up the right contact page and handles any simple challenges."""
@@ -309,10 +310,20 @@ def writerep(i):
         if DEBUG:
             for form in b.get_forms(): print "step2 form:", form
         if get_form(b, lambda f: f.find_control_by_type('textarea')):
-            return writerep_ima(newurl, i)
-        elif get_form(b, has_zipauth):
-            return writerep_zipauth(newurl, i)
-        elif i.dist in direct_contact_pages.keys():
+            print "has textarea"
+            try:
+                return writerep_ima(newurl, i)
+            except:
+                print "writerep_ima($s, i) did not work", newurl
+                print "will continue trying"
+        if get_form(b, has_zipauth):
+            print "has zipauth, newurl", newurl
+            try:
+                return writerep_zipauth(newurl, i)
+            except:
+                print "writerep_zipauth($s, i) did not work", newurl
+                print "will continue trying"
+        if i.dist in direct_contact_pages.keys():
             if DEBUG: print "WYR form did not work.  Trying contact page ", direct_contact_pages[i.dist]
             try:
                 return writerep_ima(direct_contact_pages[i.dist], i)
@@ -321,14 +332,22 @@ def writerep(i):
                     return writerep_zipauth(direct_contact_pages[i.dist], i)
                 except:
                     raise StandardError('unable to use form in direct contact page %s ' % direct_contact_pages[i.dist])
-        else:
-            print "Can't fill form?"
-            if DEBUG:
-                for f in b.get_forms():
-                    print "Form: ", f
-            if DEBUG: print newurl
-            raise StandardError('no valid form')
+        print "Can't fill form?"
+        if DEBUG:
+            for f in b.get_forms():
+                print "Form: ", f
+        if DEBUG: print newurl
+        raise StandardError('no valid form')
 
+
+# some district forms require the street match
+
+distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
+                         'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
+                         'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },
+                         'NY-08' : { 'addr1' : '10 BATTERY PL', 'city' : 'BOWLING GREEN', 'state' : 'NY', 'zip5' : '10004', 'zip4' : '1042' },
+                         'FL-19' : { 'addr1' : '7268 W ATLANTIC BLVD', 'city' : 'MARGATE', 'state' : 'FL', 'zip5' : '33063', 'zip4' : '4237' }
+                         }
 #def contact_dist():
 def prepare_i(dist):
     '''
@@ -344,7 +363,8 @@ def prepare_i(dist):
             i.zip5, i.zip4 = getzip(dist + '-01')
     else:
         i.zip5, i.zip4 = getzip(dist)
-    
+
+        
     i.prefix = 'Mr.'
     i.fname = 'James'
     i.lname = 'Smith'
@@ -359,6 +379,15 @@ def prepare_i(dist):
     i.subject = 'Please oppose the Protect IP Act'
         
     i.full_msg = 'I urge you to reject S. 968, the PROTECT IP Act. (My understanding is that the House is currently developing companion legislation.) I am deeply concerned by the danger the bill poses to Internet security, free speech online, and innovation.  The PROTECT IP Act is dangerous and short-sighted, and I urge you to join Senator Wyden, Rep. Zoe Lofgren, and other members of Congress in opposing it.'
+
+
+    if dist in distsStreetAddresses.keys():
+        distAddress= distsStreetAddresses[dist]
+        i.addr1 = distAddress['addr1']
+        i.city = distAddress['city']
+        i.zip5 = distAddress['zip5']
+        i.zip4 = distAddress['zip4']
+
     
     return i
 
@@ -371,6 +400,11 @@ h_working.update(h_badaddr)
 # MessageType="Express an opinion or share your views with me"
 # aff1="Unsubscribe"
 
+
+
+
+
+
 def housetest():
     correction = set(['VA-03', 'NE-01', 'DC-00', 'WA-07', 'SD-00', 'OH-02', 'OH-14'])
     err = set(['NE-02', 'FL-24', 'MO-09', 'AZ-03', 'FL-21', 'NY-02', 'CT-04', 'NC-10', 'AZ-07', 'NH-02', 'KY-01', 'KY-02', 'KY-03', 'CA-36', 'NY-01', 'NM-01', 'CA-10', 'IL-18', 'OH-11', 'IL-14', 'OR-04', 'IL-11', 'CA-44', 'OK-03', 'CA-47', 'CA-43', 'CA-48', 'CA-49', 'FL-19', 'NY-06', 'FL-15', 'FL-14', 'OK-02', 'CA-30', 'CA-35', 'NY-17', 'CA-37', 'NY-18', 'NY-19', 'WI-03', 'PA-09', 'VA-07', 'PA-07', 'WI-05', 'PA-04', 'CA-22', 'CA-21', 'KS-02', 'NJ-11', 'NJ-10', 'NY-27', 'NY-26', 'NY-25', 'NY-24', 'PA-14', 'PA-15', 'PA-16', 'PA-17', 'ID-02', 'OK-05', 'PA-18', 'MS-02', 'MN-03', 'MN-02', 'MN-01', 'TX-31', 'VA-04', 'MN-05', 'VA-08', 'MN-08', 'OR-05', 'NJ-01', 'NJ-02', 'GA-10', 'NJ-04', 'NJ-05', 'OR-02', 'CA-16', 'CA-14', 'CA-11', 'WI-01', 'WA-08', 'WI-02', 'NV-02', 'NC-02', 'WA-05', 'WA-06', 'NJ-07', 'WA-02', 'CO-01', 'CO-05', 'TX-08', 'VA-10', 'VA-11', 'TX-22', 'TX-23', 'TX-20', 'CA-08', 'CA-09', 'GA-09', 'TX-05', 'CA-02', 'CA-03', 'CA-04', 'CA-05', 'CA-06', 'ME-01', 'AR-02', 'LA-07', 'LA-02', 'LA-01', 'WA-09', 'AL-04', 'TX-11', 'IN-03', 'TX-16', 'UT-01', 'UT-03', 'TX-18', 'IN-09', 'TN-07', 'AZ-01', 'MI-09', 'TN-02', 'AZ-05', 'TN-01', 'AZ-08', 'IA-03', 'AS-00', 'MD-03', 'MD-05', 'MD-04', 'TX-12', 'CA-52', 'CA-50', 'OH-07', 'OH-04', 'OH-03', 'AL-01', 'SC-04', 'SC-05', 'SC-02', 'OH-09', 'NC-03', 'AZ-02', 'NC-01', 'CA-29', 'NC-07', 'NC-05', 'MI-07', 'TX-06', 'NC-08', 'TX-01', 'TX-02', 'MA-07', 'TX-19', 'FL-18'])
@@ -378,6 +412,16 @@ def housetest():
 
     # 38 judiciary members
     judiciary=set(['TX-21', 'WI-05', 'NC-06', 'CA-24', 'VA-06', 'CA-03', 'OH-01',  'IN-06', 'VA-04', 'IA-05', 'AZ-02', 'TX-01', 'OH-04', 'TX-02', 'UT-03', 'AR-02', 'PA-10', 'SC-04', 'FL-12', 'FL-24', 'AZ-03', 'NV-02', 'MI-14', 'CA-28', 'NY-08', 'VA-03', 'NC-12', 'CA-16', 'TX-18', 'CA-35', 'TN-09', 'GA-04', 'PR-00', 'IL-05', 'CA-32', 'FL-19', 'CA-39'])
+
+#broken
+# 'IL-05' - get the Your zip code indicates that you are outside of the 5th District of Illinois error.  Don't get the error from the form directly.
+# 'VA-04'
+# 'MI-14' - has a captcha
+# 'FL-12' -
+# 'CA-16'
+
+
+    
 
     # judiciary members with captchas
     judCaptcha=set(['CA-49', 'MI-14' ])
@@ -390,13 +434,18 @@ def housetest():
     # Speed up test.
     # To check the return pages using pattern matching
     # rather than by eye, set this flag to false
-    checkByEye=True
+    checkByEye=False
+
+    
+    confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
+                           'your message has been sent', 'your message has been submitted']
     
     fh = file('results.log', 'a')
     for dist in dist_zip_dict:
         #if dist in h_working or dist in n: continue
-        #if dist != 'NC-06': continue
+        #if dist not in ['SC-04', 'AR-02', 'FL-24', 'NY-08', 'FL-19'] : continue
         if dist not in judiciary: continue
+        #if dist not in ['CA-16']: continue
         print dist,
         try:
             q = writerep(prepare_i(dist))
@@ -406,10 +455,13 @@ def housetest():
                 print
                 result = raw_input('%s? ' % dist)
             else:
-                if 'thank' in q.lower() or 'your message has been submitted' in q.lower() or 'your message has been submitted' in q.lower() : 
+                confirmations=[cstr for cstr in confirmationStrings if cstr in q.lower()]
+                if len(confirmations) > 0:
                     result='thanked'
                 elif 'the street number in the input address was not valid' in q.lower():
                     result='bad-street-address'
+                elif q == None:
+                    result='form-retrieval-problem'
                 else:
                     result='err'
             print result + '.add(%s)' % repr(dist)
