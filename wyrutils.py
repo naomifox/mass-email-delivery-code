@@ -190,7 +190,7 @@ class Form(object):
         if len(items) >= 2:
             print items
             print "selecting ", items[-1]
-            return [items[-11]]
+            return [items[-1]]
         return [item]
 
     def fill(self, value, name=None, type=None, control=None):
