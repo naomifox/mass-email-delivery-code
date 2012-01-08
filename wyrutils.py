@@ -2,7 +2,8 @@ import web
 import sys
 from ClientForm import ControlNotFoundError, AmbiguityError
 
-__all__ = ['ZipShared', 'ZipIncorrect', 'ZipNotFound', 'NoForm', 'WyrError', #all exceptions
+__all__ = ['ZipShared', 'ZipIncorrect', 'ZipNotFound', 'NoForm', 'NoStreetMatch',
+           'WyrError', 'Captcha', 'FrameError', 'JsRedirectError', 'UnsuccessfulAfter5Attempts', #all exceptions
             'numdists', 'getcontact', 'has_captcha', 'dist2pols',
             'Form', 'require_captcha', 'get_form', 'has_zipauth', 'has_textarea']
 
@@ -10,7 +11,7 @@ test_email = 'me@aaronsw.com' #wyr test emails to go to this
 production_test_email = 'me@aaronsw.com' #all production wyr msgs and their responses go here
 production_mode = True
 
-DEBUG = False
+DEBUG = True
 
             
 class ZipShared(Exception): pass
@@ -18,26 +19,31 @@ class ZipIncorrect(Exception): pass
 class ZipNotFound(Exception): pass
 class WyrError(Exception): pass
 class NoForm(Exception): pass
+class NoStreetMatch(Exception): pass
+class Captcha(Exception): pass
+class FrameError(Exception): pass
+class JsRedirectError(Exception): pass
+class UnsuccessfulAfter5Attempts(Exception): pass
 
 name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     lname=['lname', 'last', 'last name', 'required-first'],
-                    fname=['fname', 'first', 'name', 'first name', 'required-first'],
+                    fname=['fname', 'first', 'name', 'first name', 'required-first', 'fullname'],
                     zipcode=['zip', 'zipcode', 'postal_code'],
                     zip4=['zip4', 'four', 'plus'],
-                    address=['address 1', 'street', 'addr1', 'address1', 'add1', 'address', 'add', 'street_name', 'req_street'],
+                    address=['address 1', 'required-address', 'street', 'street_name', 'req_street', 'addr1', 'address1', 'add1', 'address', 'add', ],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
                     email=['email', 'e-mail'],
                     phone=['phone'],
                     issue=['issue', 'title'],
-                    subject=['subject', 'topic', 'Subject', 'view', 'subjectline'],
+                    subject=['subject', 'topic', 'view', 'subjectline'],
                     message=['message', 'msg', 'comment', 'text', 'body'],
                     captcha=['captcha', 'validat'],
-                    reply=['reply', 'response', 'answer'],
+                    reply=['reply', 'response', 'answer', 'respond'],
                     newsletter=['newsletter', 'required-newsletter'],
                     aff1=['aff1', 'affl1', 'affl'],
-                    respond=['respond', 'response', 'Response']
+                    respond=['respond', 'response']
                 )
 
 def numdists(zip5, zip4=None, address=None):
@@ -127,18 +133,38 @@ class Form(object):
 
     def fill_name(self, prefix, fname, lname):
         self.fill(prefix, 'prefix')
-        if self.fill(lname, 'lname'):
+
+        lnamecontrol = self.find_control(name='lname')
+        fnamecontrol = self.find_control(name='fname')
+        if lnamecontrol and fnamecontrol and lnamecontrol != fnamecontrol and self.fill(lname, 'lname'):
             return self.fill(fname, 'fname')
         else:
             name = "%s %s %s" % (prefix, lname, fname)
-            return self.fill(fname, 'fname')
+            return self.fill(name, 'fname')
 
-    def fill_address(self, addr1, addr2):    
-        if self.fill(addr2, 'addr2'):
-            return self.fill(addr1, 'address')
+    def fill_address(self, addr1, addr2):
+        print "Filling address ", addr1, addr2
+        addr1control = self.find_control(name='address')
+        addr2control = self.find_control(name='addr2')
+        emailcontrol = self.find_control(name='email')
+        if emailcontrol == addr1control:
+            #need to be more restrictive
+            print "email control and addr1control match.  that's not good"
+
+        if (addr2control):
+            print "Found addr2control"
+            self.fill(addr2, control=addr2control)
+            return self.fill(addr1, control=addr1control)
+        #if self.fill(addr2, 'addr2'):
+         #   self.fill(addr1, 'address')
+        elif (addr1control):
+            print "Found one address control: ", addr1control.name
+            fulladdress = "%s %s" % (addr1, addr2)
+            #return self.fill(fulladdress, 'address')
+            return self.fill(fulladdress,  control=addr1control)
         else:
-            address = "%s %s" % (addr1, addr2)
-            return self.fill(address, 'address')
+            print "Found no address controls.  Returning false"
+            return False
 
     def fill_phone(self, phone):
         phone = phone + ' '* (10 - len(phone)) # make phone length 10
@@ -181,17 +207,26 @@ class Form(object):
         what the user wants.  for now, if the value is not found
         the second item in the list is returned.
         '''
+        if DEBUG: print "In select_value, for control " , control.name
         if not isinstance(options, list): options = [options]
-        items = [str(item).lstrip('*') for item in control.items]
+        items = [str(item).lstrip('*') for item in control.items]        
+        #first, look for an exact match
+        for option in options:
+            for item in items:
+                if option.lower() == item.lower():
+                    return [item]
+        #second, look if it starts with it
+        for option in options:
+            for item in items:
+                if item.lower().startswith(option.lower()):
+                    return [item]
+        #third, look it it just contains the string
         for option in options:
             for item in items:
                 if option.lower() in item.lower():
                     return [item]
-        if len(items) >= 2:
-            print items
-            print "selecting ", items[-1]
-            return [items[-1]]
-        return [item]
+        #fourth, just select the last item
+        return [items[-1]]
 
     def fill(self, value, name=None, type=None, control=None):
         c = control or self.find_control(name=name, type=type)
@@ -201,14 +236,21 @@ class Form(object):
             elif isinstance(value, list):
                 value = value[0]
             self.f.set_value(value, name=c.name, type=c.type, nr=0)
-            return True 
+            if DEBUG: print "value set for ", c.name, "  is ", value
+            return True
         return False
 
     def fill_all(self, **d):
         #fill all the fields of the form with the values from `d`
         for c in self.controls:
             if DEBUG: print "control: ", c.name
-            if DEBUG: print d.keys
+            if DEBUG: print "labels: "
+            if DEBUG:
+                for l in c.get_labels():
+                    print l
+            if DEBUG: print "All keys"
+            if DEBUG:
+                for k in d.keys(): print k
             filled = False
             if c.name in d.keys():
                 filled = self.fill(d[c.name], control=c)
@@ -230,27 +272,85 @@ class Form(object):
 
         try:
             names = name_options[name]
+            for name in names:
+                print "name: ", name
+            for c in self.controls:
+                print "control: ", c.name
+                for label in c.get_labels():
+                    print "  label: ", label
         except KeyError:
             names = name and [name]
         c = None
-        if type: c = self.find_control_by_type(type)
-        if not c and names: c = first(self.find_control_by_label(name) for name in names)
-        if not c and names: c = first(self.find_control_by_name(name) for name in names)
-        if not c and names: c = first(self.find_control_by_id(name) for name in names)
 
+        if type:
+            print "finding control by type"
+            return self.find_control_by_type(type)
+            
+        c_id = first(self.find_control_by_id(name) for name in names)
+        c_name = first(self.find_control_by_name(name) for name in names)        
+        c_label = first(self.find_control_by_label(name) for name in names)
+        labels = None
+        if c_label:
+            labels = (label.text for label in c_label.get_labels() if label.text.lower() == name)
+    
+        if c_id: print "c_id ", c_id.name
+        if c_name: print "c_name ", c_name.name
+        if c_label: print "c_label ", c_label.name
+
+        # do tie-breakers - we want to see if any are any exact match first, before settling for a subset match
+        if type and c_type:
+            c = c_type
+        elif c_id and c_id.id.lower() == name:
+            c = c_id
+        elif c_name and c_name.name.lower() == name:
+            c = c_name
+        elif labels:
+            c = c_label
+        elif c_id:
+            c = c_id
+        elif c_name:
+            c = c_name
+        elif c_label:
+            c = c_label
+        else: print "no control found"
+
+
+        #if not c and names:
+        #    c = first(self.find_control_by_label(name) for name in names)
+        #    if c: print "Found by label", c.name
+        #if not c and names:
+        #    c = first(self.find_control_by_name(name) for name in names)
+        #    if c: print "Found by name", c.name
+        #if not c and names:
+        #    c = first(self.find_control_by_id(name) for name in names)
+        #    if c: print "Found by id", c.name
+        #else: print "no control found"
         return c     
 
     def find_control_by_name(self, name):
+        print "In find_control_by_name: name=", name
         name = name.lower()
-        return first(c for c in self.controls if c.name and name in c.name.lower())
+        import itertools
+        potentialMatchesGen = itertools.chain( (c for c in self.controls if c.name and name == c.name.lower()),
+                                                (c for c in self.controls if c.name and name in c.name.lower()))
+        return first(potentialMatchesGen)
+        #return first(c for c in self.controls if c.name and name in c.name.lower())
 
     def find_control_by_id(self, id):
         id = id.lower()
-        return first(c for c in self.controls if c.id and id in c.id.lower())
+        import itertools
+        potentialMatches = itertools.chain( (c for c in self.controls if c.id and id == c.id.lower()),
+                                            (c for c in self.controls if c.id and id in c.id.lower()) )
+        return first(potentialMatches)
+        #return first(c for c in self.controls if c.id and id in c.id.lower())
 
     def find_control_by_label(self, label):
         id = label.lower()
-        return first(c for c in self.controls if any(id in x.text.lower() for x in c.get_labels()))
+        import itertools
+        potentialMatches = itertools.chain((c for c in self.controls if any(id == x.text.lower() for x in c.get_labels())),
+                              (c for c in self.controls if any(id in x.text.lower() for x in c.get_labels())))
+        return first(potentialMatches)
+        #return first(c for c in self.controls if any(id in x.text.lower() for x in c.get_labels()))
 
     def find_control_by_type(self, type):
         try:
