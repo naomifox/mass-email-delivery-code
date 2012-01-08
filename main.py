@@ -6,7 +6,7 @@ from ClientForm import ParseResponse, ControlNotFoundError, AmbiguityError
 
 import socket; socket.setdefaulttimeout(30)
 
-DEBUG = False
+DEBUG = True
 WYR_URL = 'https://writerep.house.gov/writerep/welcome.shtml'
 SEN_URL = 'http://senate.gov/general/contact_information/senators_cfm.xml'
 WYR_MANUAL = {
@@ -42,6 +42,75 @@ WYR_MANUAL = {
   #'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
 }
 
+# these are all weird enough that we won't figure out a more general approach to them, yet
+# hand-compiled by naome. hoping jordan's list can replace this
+direct_contact_pages= {'UT-03' : 'https://chaffetz.house.gov/contact/email-me.shtml',
+                       'CA-03' : 'https://forms.house.gov/matsui/webforms/issue_subscribe.htm',
+                       'AR-02' : 'https://timgriffinforms.house.gov/Forms/WriteYourRep/',
+                       'AZ-02' : 'http://franks.house.gov/contacts/new',
+                       'VA-04' : 'https://forbesforms.house.gov/Contact/ContactForm.htm',
+                       'CA-16' : 'https://forms.house.gov/lofgren/webforms/contactzipauth.html',
+                       'MA-07' : 'http://markey.house.gov/index.php?option=com_email_form',
+                       'TX-07' : 'http://culbersonforms.house.gov/Contact/ZipAuth.htm',
+                       'TX-05' : 'https://hensarling.house.gov/contact/email-me.shtml',
+                       'OH-09' : 'https://forms.house.gov/kaptur/webforms/issue_subscribe.htm',
+                       'LA-07' : 'http://www.house.gov/formcharlesboustany/ic_zip_auth.htm',
+                       'AL-04' : 'https://aderholtforms.house.gov/contact-congressman-robert-b-aderholt',
+                       'AL-01' : 'https://forms.house.gov/bonner/webforms/issue_subscribe.html',
+                       'TN-02' : 'http://duncan.house.gov/services/zip-auth.shtml',
+                       'MO-05' : 'http://www.house.gov/cleaver/IMA/issue.htm',
+                       'IL-05' : 'http://forms.house.gov/quigley/webforms/issue_subscribe.htm',
+                       'IL-02' : 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm',
+                       'CA-49' : 'http://issa.house.gov/index.php?option=com_content&view=article&id=597&Itemid=73',
+                       'NY-18' : 'http://lowey.house.gov/contact-us',
+                       'PA-04' : 'https://forms.house.gov/altmire/webforms/issue_subscribe.htm',
+                       'CA-09' : 'https://leeforms.house.gov/legislation-comment-form1',
+                       'CA-52' : 'https://forms.house.gov/hunter/webforms/zipauthen_contact.shtml',
+                       'PA-14' : 'https://doyle.house.gov/contact/email-me.shtml',
+                       'PA-18' : 'http://murphy.house.gov/index.cfm?sectionid=157',
+                       'IA-01' : 'https://braley.house.gov/contact',
+                       'OH-07' : 'http://austria.house.gov/index.cfm?sectionid=7&sectiontree=4,7',
+                       'TN-02' : 'http://duncan.house.gov/services/zip-auth.shtml',
+                       'KY-02' : 'https://guthrieforms.house.gov/index.cfm?sectionid=117&sectiontree=4,117',
+                       'MN-02' : 'http://kline.house.gov/index.cfm?sectionid=7&sectiontree=4,7',
+                       'GA-10' : 'http://broun.house.gov/Contact/zipauth.htm',
+                       'NJ-04' : 'http://chrissmith.house.gov/zipauth.html',
+                       'NJ-07' : 'http://lance.house.gov/contact-me1',
+                       'IN-03' : 'https://stutzman.house.gov/contact/email-me.shtml',
+                       'IN-09' : 'http://toddyoung.house.gov/index.cfm?sectionid=114',
+                       'AZ-08' : 'https://giffordsforms.house.gov/contact/email.shtml',
+                       'NC-01' : 'https://butterfieldforms.house.gov/contact-us-form',
+                       'NC-08' : 'https://forms.house.gov/kissell/contact-form.shtml',
+                       'NC-10' : 'http://mchenry.house.gov/Contact/zipauth.htm',
+                       'OK-02' : 'http://boren.house.gov/emailsignup.shtml',
+                       'WA-08' : 'http://reichert.house.gov/Contact/ZipAuth.htm',
+                       'WA-06' : 'http://www.house.gov/dicks/newemail.shtml?legislation',
+                       'WA-02' : 'https://larsen.house.gov/contact/email-me.shtml',
+                       'OR-05' : 'http://schrader.house.gov/index.cfm?sectionid=81',
+                       'WI-03' : 'https://kindforms.house.gov/index.cfm?sectionid=146&sectiontree=18,146',
+                       'NM-01' : 'http://heinrich.house.gov/index.cfm?sectionid=72&sectiontree=7,72'
+                     }
+
+forms_with_frame = {'CT-04' : 'https://forms.house.gov/himes/form/zipauthentication.shtml',
+                    'LA-07' : 'http://www.house.gov/formcharlesboustany/ic_zip_auth.htm',
+                    'CA-49' : 'http://issaforms.house.gov/index.cfm?FuseAction=Contact.ContactForm'}
+
+# some district forms require the street match
+distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
+                         'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
+                         'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },
+                         'NY-08' : { 'addr1' : '10 BATTERY PL', 'city' : 'BOWLING GREEN', 'state' : 'NY', 'zip5' : '10004', 'zip4' : '1042' },
+                         'FL-19' : { 'addr1' : '7268 W ATLANTIC BLVD', 'city' : 'MARGATE', 'state' : 'FL', 'zip5' : '33063', 'zip4' : '4237' },
+                         'CO-06' : { 'addr1' : '9220 KIMMER DR', 'city' : 'Lone Tree',  'state' : 'CO', 'zip5' : '80124', 'zip4' : '2878' },
+                         'IA-05' : { 'addr1' : '40 Pearl Street', 'city' : 'Council Bluffs', 'state' : 'IA', 'zip5' : '51503', 'zip4': '0817' },
+                         'MO-09' : { 'addr1' : '516 Jefferson St', 'city' : 'Washington', 'state' : 'MO', 'zip5': '63090', 'zip4': '2706' },
+                         'MA-01' : { 'addr1' : '57 Suffolk St', 'city': 'Holyoke', 'state' : 'MA', 'zip5' : '01040', 'zip4' : '5015'},
+                        # 'AR-01' : { 'addr1' : '112 S. First St', 'city': 'Cabot', 'state' : 'AR', 'zip5' : '72023', 'zip4' : '3007'}
+                         }
+
+r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
+writerep_cache = {}
+
 def get_senate_offices():
     out = {}
     d = xmltramp.load('senators_cfm.xml')
@@ -53,15 +122,25 @@ def getdistzipdict(zipdump):
     """returns a dict with district names as keys zipcodes falling in it as values"""
     d = {}
     for line in zipdump.strip().split('\n'):
-        zip5, zip4, district = line.split('\t')
+        zip5, zip4, district = line.split() # line.split('\t')
         d[district] = (zip5.strip(), zip4.strip())
     return d
 
 dist_zip_dict = getdistzipdict(file('zip_per_dist.tsv').read())
 
+def getcontactcongressdict(ccdump):
+    """returns a dict with district names as keys and email-contact urls as values"""
+    d = {}
+    for line in ccdump.strip().split('\n'):
+        (district, name, party, dc_office, dc_voice, district_voice, email_form, website) = line.split('\t')
+        dist = ''.join( (district[:2], '-', district[2:]) )
+        d[dist] = email_form
+    return d
+
+contact_congress_dict = getcontactcongressdict(file('ContactingCongress.tsv').read())
+
 def getzip(dist):
     try:
-        if DEBUG: print dist_zip_dict[dist]
         return dist_zip_dict[dist]
     except Exception:
         return '', ''    
@@ -76,279 +155,189 @@ def not_signup_or_search(form):
         search = 'search' in action or 'thomas.loc.gov' in action
         return not(search or signup)
 
-def writerep_ima(ima_link, i, env={}):
-    """Sends the msg along with the sender details from `i` through the form @ ima_link.
-        The web page at `ima_link` typically has a single form, with the sender's details
-        and subject and msg (and with a captcha img for few reps/senators).
-        If it has a captcha img, the form to fill captcha is taken from env.
-    """
-    def check_confirm(request):
-        if 'Submit.click' in b.page or "$('idFrm').submit()" in b.page:
-            f = get_form(b, lambda f: 'formproc' in f.action)
-            if f:
-                if DEBUG: print 'Submitting ima confirmation form...',
-                return b.open(f.click())
-        return request
+# these strings show up when successful at submitting form
+confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
+                       'your message has been sent', 'your message has been submitted',
+                       'contact_opinion_ty.cfm', #weird one for harkin
+                       '../free_details.asp?id=79', #weird one for sarbanes
+                       'email confirmation']
 
-    def fill_inhofe_lgraham(f, i):
+def writerep_general(contact_link, i):
+    """ General function.
+    Works for the house's WYR form or just directly to a contact page.
+    Loops through 5 times attempting to fill in form details and clicking.
+    Stops either when 5 loops is complete, or has achieved success, or known failure
+    """
+
+    b = browser.Browser()
+    print "In writerep_general, opening contact_link", contact_link
+    b.open(contact_link)
+
+
+    
+    def fill_inhofe_lgraham(f):
         """special function to fill in forms for inhofe and lgraham"""
+        if DEBUG: print "Filling special inhofe or lgraham form"
         f.fill_all(A01=i.prefix, B01=i.fname, C01=i.lname, D01=i.addr1, E01=i.addr2, F01=i.city,
-                   G01=i.state, H01=i.zip5, H02=i.phone, H03=i.phone, I01=i.email, J01="Communications")
-        
-    b = browser.Browser(env.get('cookies', []))
-    b.url, b.page = ima_link, env.get('form')
-
-    f = get_form(b, lambda f: f.find_control_by_type('textarea'))
-    
-    if not f:
-        if DEBUG: print "Form not retrieved.  will open ima_link", ima_link
-        b.open(ima_link)
-        f = get_form(b, lambda f: f.find_control_by_type('textarea'))
-
-    if f:            
-        f.fill_name(i.prefix, i.fname, i.lname)
-        f.fill_address(i.addr1, i.addr2)
-        f.fill_phone(i.phone)
+                   G01=i.state, H01=i.zip5, H02=i.phone, H03=i.phone, I01=i.email, J01="Communications", K01=i.full_msg)
         f.fill(type='textarea', value=i.full_msg)
-        captcha_val = None#i.get('captcha_%s' % pol, '')
+        if DEBUG: print "f filled and ready to submit: ", f
+        return b.open(f.click())
 
-        # NKF - 8-Dec-11 - added extra values to handle senator pages where form submission was broken
-        #
-        #f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
-        #            issue=['GEN', 'OTH', ""], subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
-        #            MessageType="Express an opinion or share your views with me", aff1='Unsubscribe')
-        f.fill_all(city=i.city, state=i.state.upper(), zipcode=i.zip5, zip4=i.zip4, email=i.email,
-                   issue=i.subject,
-                   subject=i.subject, captcha=captcha_val, reply='yes', newsletter='noAction',
-                   MessageType="Express an opinion or share your views with me", aff1='Unsubscribe',
-                   Subject=i.subject, messageSubject=i.subject, view=i.subject, respond="yes")
-        
-        if ima_link.find("inhofe") >= 0 or ima_link.find("lgraham") >= 0:
-             fill_inhofe_lgraham(f, i)
-        
-        if DEBUG: print 'Submitting first ima form...', f
-        return check_confirm(b.open(f.click()))
-    else:
-        raise StandardError('No IMA form in: %s' % ima_link)
-
-def writerep_zipauth(zipauth_link, i):
-    """Sends the msg along with the sender details from `i` through the WYR system.
-      This has 2 forms typically.
-      Form 1 asks for zipcode and few user details 
-      Form 2 asks for the subject and msg to send and other sender's details.
-      Form 3 (sometimes) asks for them to confirm.
-    """
-    def zipauth_step1(f):
-        f.fill_name(i.prefix, i.fname, i.lname)
-        f.fill_address(i.addr1, i.addr2)
-        f.fill_phone(i.phone)
-        f.fill_all(email=i.email, zipcode=i.zip5, zip4=i.zip4, city=i.city)
-        if 'lamborn.house.gov' in zipauth_link:
-            f.f.action = urlparse.urljoin(zipauth_link, '/Contact/ContactForm.htm') #@@ they do it in ajax
-        if DEBUG: print 'Submitting first zip form...',
-        return f.click()
-
-    def countforms():
-        ''' Count forms in browser.  Used for debugging. '''
-        formcount = 0
-        for f in b.get_forms():
-            if DEBUG: print "form: ", f
-            formcount += 1
-        return formcount
     
-    def zipauth_step2(request):
-        request.add_header('Cookie', 'District=%s' % i.zip5)  #@@ done in ajax :(
-        response = b.open(request)
-        
-        f = get_form(b, lambda f: f.find_control_by_type('textarea'))
+    def fill_form(f):
+        ''' f is a form '''
 
-        if f:
+        try:
             f.fill_name(i.prefix, i.fname, i.lname)
+            print "in fill_form, filling addr"
             f.fill_address(i.addr1, i.addr2)
+            print "in fill_form, filling phone"
             f.fill_phone(i.phone)
+            print "in fill_form, filling textarea"
             f.fill(type='textarea', value=i.full_msg)
+            print "in fill_form, filling all"
+
             f.fill_all(city=i.city, zipcode=i.zip5, zip4=i.zip4, state=i.state.upper(),
-                    email=i.email, issue=['GEN', 'OTH'], subject=i.subject, reply='yes',
-                    newsletter='noAction', aff1='Unsubscribe',
-                    MessageType="Express an opinion or share your views with me")
-            if DEBUG: print 'Submitting second zip form...',
+                       email=i.email, issue=['GEN', 'OTH'], subject=i.subject, reply='yes',
+                       Re='issue', #for billnelson
+                       newsletter='noAction', aff1='Unsubscribe',
+                       MessageType="Express an opinion or share your views with me")
+            if DEBUG: print "f filled and ready to submit to ", b.url, "\n", f
             return b.open(f.click())
-        else:
-            print >> sys.stderr, 'no form with text area'
+            
+        except Exception, detail:
+            print "Error in fill_form"
             if b.has_text('zip code is split between more'): raise ZipShared
             if b.has_text('Access to the requested form is denied'): raise ZipIncorrect
+            if b.has_text('street name match could not be found'): raise ZipIncorrect
             if b.has_text('you are outside'): raise ZipIncorrect
-            raise StandardError('no form with text area', b.get_text())
-    
-    def zipauth_step3(request):
-        if 'Submit.click' in b.page:
-            f = get_form(b, lambda f: 'formproc' in f.action)
-            if f:
-                if DEBUG: print 'Submitting zip confirmation form...',
-                return b.open(f.click())
-        return request
-            
-    b = browser.Browser()
-    b.open(zipauth_link)
-    form = get_form(b, lambda f: f.has(name='zip'))
-    if form:
-        return zipauth_step3(zipauth_step2(zipauth_step1(form)))
-    else:
-        raise StandardError('No zipauth form in: %s' % zipauth_link)
+            if b.has_text('Zip Authentication Unsuccessful'): raise ZipIncorrect
+            raise StandardError('problem filling form', detail, b.get_text())
+        
 
-def writerep_wyr(b, form, i):
-    """Sends the msg along with the sender details from `i` through the WYR system.
-    The WYR system has 3 forms typically (and a captcha form for few reps in between 1st and 2nd forms).
-    Form 1 asks for state and zipcode
-    Form 2 asks for sender's details such as prefix, name, city, address, email, phone etc
-    Form 3 asks for the msg to send.
-    """
-    def wyr_step1(form):
-        if form and form.fill_name(i.prefix, i.fname, i.lname):
-            form.fill_address(i.addr1, i.addr2)
-            form.fill_all(city=i.city, phone=i.phone, email=i.email)
-            request = form.click()
-            if DEBUG: print 'Submitting first wyr form...',
-            return request
-            
-    def wyr_step2(request):
-        if DEBUG: print request
-        b.open(request)
-        form = get_form(b, lambda f: f.find_control_by_type('textarea'))
-        if form and form.fill(i.full_msg, type='textarea'):
-            if DEBUG: print 'Submitting textarea wyr form...',
-            return b.open(form.click())
-    
-    return wyr_step2(wyr_step1(form))
-    
+    # max loops
+    k = 6
 
-r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
-writerep_cache = {}
+    # needed this from some weird error that I forgot to document.
+    # we only want to do the WYR form once,
+    # so it's a flag so we don't choose this one again. 
+    completedWyrForm = False
+    for cnt in range(1,k):
+        # todo, place newurl into cache
+        if DEBUG: print "Loop ", cnt, ":\n", b.url, "\n", b.page, "\n Done with page ", cnt, "\n\n"
 
+        # check if this is a refresh page
+        # to do: see if we can get javascript window.location refreshes
+        # (would require some smart parsing or using a javascript interpreter module)
+        if 'http-equiv="refresh"' in b.page:
+            if DEBUG: print "Redirect to a new page:"
+            newurl = r_refresh.findall(b.page)[0]
+            newurl = newurl.replace(' ', '%20')
+            newurl = newurl.replace('&amp;', '&')
+            if DEBUG: print "\nNewurl:", newurl
+            try:
+                b.open(newurl)
+                continue #next loop
+            except:
+                print "Failed to open url ", newurl, " error: ", sys.exc_info()[0]
 
-direct_contact_pages= {'UT-03' : 'https://chaffetz.house.gov/contact/email-me.shtml',
-                       'CA-03' : 'https://forms.house.gov/matsui/webforms/issue_subscribe.htm',
-                       'AR-02' : 'https://timgriffinforms.house.gov/Forms/WriteYourRep/',
-                       'AZ-02' : 'http://franks.house.gov/contacts/new',
-                       'VA-04' : 'https://forbesforms.house.gov/Contact/ContactForm.htm',
-                       'CA-16' : 'https://forms.house.gov/lofgren/webforms/contactzipauth.html'
-                     }
+        # some pages have multiple forms on them.
+        # For example, there may be a search tool in the sidebar.
+        # or there may be forms which are hidden by not displayed by the css.
+        # try to see what we can grab out the page, then we'll decide which one's the best to try
+        textareaform = get_form(b, lambda f: f.find_control_by_type('textarea'))
+        zipform = get_form(b, lambda f: f.has(name='zip'))
+        verificationform = get_form(b, lambda f: 'formproc' in f.action)
+        nameform = get_form(b, lambda f: 'wrep_const' in f.action) #see AL-06 for an example,  has zip form in page too
+        wyrform = get_form(b, lambda f: f.find_control_by_id('state') and f.find_control_by_name('zip') and f.find_control_by_name('zip4')) #get_form(b, not_signup_or_search)
 
-def writerep(i):
-    """Looks up the right contact page and handles any simple challenges."""
-    
-    def get_challenge():
-        labels = b.find_nodes('label', lambda x: x.get('for') == 'HIP_response')
-        if labels: return labels[0].string
-    
-    b = browser.Browser()
+        #choose which form we want to use
+        form = None
+        if textareaform:
+            if DEBUG: print "textareaform"
+            form = textareaform
+        elif wyrform and not completedWyrForm:
+            if DEBUG: print "wyrform"
+            form = wyrform
+            completedWyrForm = True
+        elif nameform:
+            if DEBUG: print "step2 contact form with name"
+            form = nameform
+        elif zipform:
+            if DEBUG: print "zipform"
+            form = zipform
+        elif verificationform:
+            if DEBUG: print "verification form"
+            form = verificationform
 
-    def step2(request):
-        b.open(request)
-        newurl = False
-        form = get_form(b, not_signup_or_search)
+        #if no form was found, we will check if one of these common error occurred
         if not form:
             if b.has_text("is shared by more than one"): raise ZipShared
             elif b.has_text("not correct for the selected State"): raise ZipIncorrect
+            #elif b.has_text("unable to reply to any email from constituents outside of"): raise ZipIncorrect
             elif b.has_text("was not found in our database."): raise ZipNotFound
             elif b.has_text("Use your web browser's <b>BACK</b> capability "): raise WyrError
-            else:
-                if 'http-equiv="refresh"' in b.page:
-                    if DEBUG: print b.page
-                    newurl = r_refresh.findall(b.page)[0]
-                    if DEBUG: print "Step2 newurl:", newurl
-                else:
-                    raise NoForm
-        else:
-            challenge = get_challenge()
-            if challenge:
-                try:
-                    solution = captchasolver.solve(challenge)
-                except Exception, detail:
-                    print >> sys.stderr, 'Exception in CaptchaSolve', detail
-                    print >> sys.stderr, 'Could not solve:"%s"' % challenge,
-                else:        
-                    form.f['HIP_response'] = str(solution)
-                    return step2(form.click())
-        return form, newurl
-    
+            elif b.has_text('window.location'): raise JsRedirectError
+            elif b.has_text('iframe'): raise FrameError
+            else: raise NoForm
+            #else: raise StandardException("No form. Unknown problem.")
             
-    zipkey = (i.zip5, i.zip4)
-    if zipkey in writerep_cache:
-        form = None
-        newurl = writerep_cache[zipkey]
-        print 'cachehit', len(writerep_cache),
-    else:
-        b.open(WYR_URL)
-        form = get_form(b, not_signup_or_search)
-        # state names are in form: "PRPuerto Rico"
-        state_options = form.find_control_by_name('state').items
-        state_l = [s.name for s in state_options if s.name[:2] == i.state]
-        form.fill_all(state=state_l[0], zipcode=i.zip5, zip4=i.zip4)
-        form, newurl = step2(form.click())
-        if DEBUG: print 'step1 done\n',
-        if not form and newurl:
-            writerep_cache[zipkey] = newurl
+        #to do, add back in captcha solver
+        if form.find_control_by_name('captcha') or  form.find_control_by_name('validation'):
+            print "captcha found"
+            raise Captcha
+        else:
+            print "no captcha found"
+
+        try:
+            if DEBUG: print "going to fill_form from ", b.url, " now \n", form, "\n End form", cnt, "\n"
+            
+            if "inhofe" in contact_link or "lgraham" in contact_link:
+                nextpage = fill_inhofe_lgraham(form)
+            else:
+                nextpage = fill_form(form)
+        except Exception, detail:
+            print "Failed to fill form:", detail, sys.exc_info()[0]
+            raise  StandardError("Failed to fill and submit:", sys.exc_info()[0])
+        except:
+            raise StandardError("Failed to fill form:", sys.exc_info()[0])
+
+        print "Looking for errors in page ", b.page
+        if b.has_text("is shared by more than one"): raise ZipShared
+        elif b.has_text("not correct for the selected State"): raise ZipIncorrect
+        #elif b.has_text("unable to reply to any email from constituents outside of"): raise ZipIncorrect
+        elif b.has_text("exact street name match could not be found") or b.has_text("Address matched to multiple records"): raise NoStreetMatch
+        elif b.has_text("was not found in our database."): raise NoStreetMatch
+        elif b.has_text("Use your web browser's <b>BACK</b> capability "): raise WyrError
+
+        print "Looking for thank you in page: " , nextpage.lower()
+        confirmations=[cstr for cstr in confirmationStrings if cstr in nextpage.lower()]
+
+        if len(confirmations) > 0:
+            print 'thanked, done with ', contact_link
+            return nextpage
+        else:
+            print "not done yet.  step ", cnt
+    raise UnsuccessfulAfter5Attempts
     
-    if form:
-        return writerep_wyr(b, form, i)
-    elif newurl:
-        print "newurl : ", newurl
 
-        # this replace was causing a problem with TX-02
-        #newurl = newurl.replace(' ', '')
-        newurl = newurl.replace(' ', '%20')
+def writerep(i):
+    """Looks up the right contact page and handles any simple challenges."""
+    b = browser.Browser()
 
-        # These 3 lines were causing a problem with Sheila Jackson and Jesse Jackson.
-        # For house, would be better to look up by district than name.
-        for rep in WYR_MANUAL:
-            if rep in newurl:
-                newurl = WYR_MANUAL[rep]
-                
-        b.open(newurl)
-        print "newurl: ", newurl
-        if DEBUG:
-            for form in b.get_forms(): print "step2 form:", form
-        if get_form(b, lambda f: f.find_control_by_type('textarea')):
-            print "has textarea"
-            try:
-                return writerep_ima(newurl, i)
-            except:
-                print "writerep_ima($s, i) did not work", newurl
-                print "will continue trying"
-        if get_form(b, has_zipauth):
-            print "has zipauth, newurl", newurl
-            try:
-                return writerep_zipauth(newurl, i)
-            except:
-                print "writerep_zipauth($s, i) did not work", newurl
-                print "will continue trying"
-        if i.dist in direct_contact_pages.keys():
-            if DEBUG: print "WYR form did not work.  Trying contact page ", direct_contact_pages[i.dist]
-            try:
-                return writerep_ima(direct_contact_pages[i.dist], i)
-            except:
-                try:
-                    return writerep_zipauth(direct_contact_pages[i.dist], i)
-                except:
-                    raise StandardError('unable to use form in direct contact page %s ' % direct_contact_pages[i.dist])
-        print "Can't fill form?"
-        if DEBUG:
-            for f in b.get_forms():
-                print "Form: ", f
-        if DEBUG: print newurl
-        raise StandardError('no valid form')
+    # for some forms, we just need a direct link
+    if i.dist in forms_with_frame:
+        contact_link = forms_with_frame[i.dist]
+    else:
+        contact_link = contact_congress_dict[i.dist]
+        
+    q = writerep_general(contact_link, i)
+    #if the direct link did not work, tries the house's WYR form.
+    if not q:
+        q = writerep_general(WYR_URL, i)
+    return q
 
-
-# some district forms require the street match
-
-distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
-                         'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
-                         'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },
-                         'NY-08' : { 'addr1' : '10 BATTERY PL', 'city' : 'BOWLING GREEN', 'state' : 'NY', 'zip5' : '10004', 'zip4' : '1042' },
-                         'FL-19' : { 'addr1' : '7268 W ATLANTIC BLVD', 'city' : 'MARGATE', 'state' : 'FL', 'zip5' : '33063', 'zip4' : '4237' }
-                         }
-#def contact_dist():
 def prepare_i(dist):
     '''
     get the fields for the email form.
@@ -364,7 +353,6 @@ def prepare_i(dist):
     else:
         i.zip5, i.zip4 = getzip(dist)
 
-        
     i.prefix = 'Mr.'
     i.fname = 'James'
     i.lname = 'Smith'
@@ -379,49 +367,31 @@ def prepare_i(dist):
     i.subject = 'Please oppose the Protect IP Act'
         
     i.full_msg = 'I urge you to reject S. 968, the PROTECT IP Act. (My understanding is that the House is currently developing companion legislation.) I am deeply concerned by the danger the bill poses to Internet security, free speech online, and innovation.  The PROTECT IP Act is dangerous and short-sighted, and I urge you to join Senator Wyden, Rep. Zoe Lofgren, and other members of Congress in opposing it.'
-
-
+    
     if dist in distsStreetAddresses.keys():
         distAddress= distsStreetAddresses[dist]
         i.addr1 = distAddress['addr1']
         i.city = distAddress['city']
         i.zip5 = distAddress['zip5']
-        i.zip4 = distAddress['zip4']
-
-    
+        i.zip4 = distAddress['zip4']    
     return i
-
 
 h_working = set(['NE-03', 'MO-08', 'OH-12', 'OH-13', 'OH-16', 'OH-17', 'OH-18', 'MO-01', 'MO-02', 'GA-07', 'MO-04', 'MO-05', 'MO-06', 'MO-07', 'IL-09', 'IL-08', 'MT-00', 'IL-04', 'CT-05', 'IL-06', 'IL-01', 'CT-02', 'IL-03', 'NC-13', 'NY-11', 'IA-01', 'FL-25', 'NH-01', 'KY-05', 'KY-06', 'GU-00', 'GA-05', 'NM-02', 'OH-10', 'IA-05', 'IL-19', 'IL-16', 'IL-17', 'IL-15', 'IL-12', 'IL-13', 'IL-10', 'CA-45', 'NY-03', 'NY-05', 'NY-04', 'NY-07', 'RI-02', 'NY-09', 'PA-10', 'ND-00', 'TN-09', 'CA-25', 'FL-11', 'FL-10', 'FL-13', 'FL-12', 'NC-12', 'FL-16', 'WY-00', 'TN-08', 'CA-46', 'MS-01', 'NY-12', 'NY-13', 'NY-10', 'CA-32', 'NY-16', 'CA-34', 'NY-14', 'HI-02', 'CA-38', 'HI-01', 'CA-41', 'FL-08', 'FL-09', 'CA-42', 'PR-00', 'FL-02', 'FL-03', 'FL-07', 'FL-04', 'FL-05', 'WV-01', 'MI-11', 'WV-03', 'WV-02', 'CA-01', 'NJ-03', 'GA-06', 'TX-30', 'PA-08', 'PA-03', 'PA-02', 'PA-01', 'TX-32', 'PA-05', 'MI-14', 'CA-23', 'KS-04', 'CA-26', 'KS-03', 'NY-29', 'KS-01', 'CA-28', 'CA-07', 'NY-21', 'AL-02', 'CT-03', 'NC-11', 'ID-01', 'PA-11', 'PA-12', 'PA-13', 'MS-04', 'PA-19', 'MS-03', 'VA-01', 'VA-05', 'MN-06', 'MN-04', 'VA-09', 'GA-13', 'GA-12', 'GA-11', 'WI-07', 'OR-01', 'CA-19', 'CA-18', 'NJ-08', 'NJ-09', 'CA-15', 'WI-08', 'CA-12', 'DE-00', 'NV-01', 'NV-03', 'WA-04', 'WA-01', 'WA-03', 'CA-17', 'CO-07', 'CO-04', 'CA-27', 'MA-06', 'NC-06', 'TX-26', 'TX-27', 'TX-24', 'TX-25', 'TX-15', 'CA-13', 'TX-29', 'RI-01', 'GA-08', 'GA-04', 'MI-10', 'MI-13', 'MI-12', 'MI-15', 'GA-01', 'GA-02', 'GA-03', 'VT-00', 'ME-02', 'AR-03', 'AR-01', 'AR-04', 'LA-05', 'LA-04', 'LA-03', 'IN-01', 'CT-01', 'AL-05', 'IN-06', 'AL-07', 'TX-10', 'TX-17', 'IN-02', 'AL-03', 'TX-14', 'UT-02', 'CA-20', 'IN-08', 'MA-10', 'MI-08', 'TN-05', 'AZ-06', 'CA-33', 'MI-02', 'NJ-13', 'MI-01', 'MI-06', 'IN-04', 'MI-04', 'MI-05', 'MD-01', 'TX-13', 'MD-02', 'CA-24', 'MD-07', 'MD-06', 'MD-08', 'CA-51', 'NY-28', 'IN-05', 'FL-22', 'OH-06', 'OH-05', 'AL-06', 'OH-01', 'SC-06', 'IA-02', 'SC-03', 'OH-08', 'TX-09', 'CO-03', 'TX-04', 'TN-03', 'NC-09', 'TX-07', 'TX-03', 'MA-02', 'MA-03', 'TN-04', 'MA-04', 'MA-05', 'MA-08', 'MA-09', 'NC-04', 'CA-39', 'CA-40', 'PA-06', 'FL-23', 'TN-06', 'MI-03', 'NY-15', 'MN-07', 'WI-06', 'IL-02', 'FL-01', 'IA-04', 'OH-15', 'FL-20', 'VA-06', 'VA-02', 'NY-22', 'NY-23', 'AK-00', 'NJ-06', 'TX-21', 'LA-01', 'CA-11', 'OH-04', 'OH-03', 'ID-02', 'TX-01', 'FL-17', 'NY-06', 'TN-01', 'WI-01'])
 
 h_badaddr = set(['IN-07', 'WI-04', 'MO-03', 'CA-53', 'FL-06', 'IL-07', 'KY-04', 'CO-02', 'IL-05', 'MA-01', 'CO-06', 'NJ-12', 'OR-03', 'AZ-04', 'NY-08', 'NY-20', 'NM-03', 'SC-01', 'CA-31', 'TX-28', 'OK-01', 'OK-04', 'WA-09', 'FL-15', 'FL-24', 'TX-16', 'TX-11', 'GA-0'])
 h_working.update(h_badaddr)
 
-# MessageType="Express an opinion or share your views with me"
-# aff1="Unsubscribe"
-
-
-
-
-
-
-def housetest():
+def housetest(distToEmail=None):
+    '''
+    Test every house form, or just check the particular distToEmail form.
+    Todo: add the check-by-eye option
+    '''
     correction = set(['VA-03', 'NE-01', 'DC-00', 'WA-07', 'SD-00', 'OH-02', 'OH-14'])
     err = set(['NE-02', 'FL-24', 'MO-09', 'AZ-03', 'FL-21', 'NY-02', 'CT-04', 'NC-10', 'AZ-07', 'NH-02', 'KY-01', 'KY-02', 'KY-03', 'CA-36', 'NY-01', 'NM-01', 'CA-10', 'IL-18', 'OH-11', 'IL-14', 'OR-04', 'IL-11', 'CA-44', 'OK-03', 'CA-47', 'CA-43', 'CA-48', 'CA-49', 'FL-19', 'NY-06', 'FL-15', 'FL-14', 'OK-02', 'CA-30', 'CA-35', 'NY-17', 'CA-37', 'NY-18', 'NY-19', 'WI-03', 'PA-09', 'VA-07', 'PA-07', 'WI-05', 'PA-04', 'CA-22', 'CA-21', 'KS-02', 'NJ-11', 'NJ-10', 'NY-27', 'NY-26', 'NY-25', 'NY-24', 'PA-14', 'PA-15', 'PA-16', 'PA-17', 'ID-02', 'OK-05', 'PA-18', 'MS-02', 'MN-03', 'MN-02', 'MN-01', 'TX-31', 'VA-04', 'MN-05', 'VA-08', 'MN-08', 'OR-05', 'NJ-01', 'NJ-02', 'GA-10', 'NJ-04', 'NJ-05', 'OR-02', 'CA-16', 'CA-14', 'CA-11', 'WI-01', 'WA-08', 'WI-02', 'NV-02', 'NC-02', 'WA-05', 'WA-06', 'NJ-07', 'WA-02', 'CO-01', 'CO-05', 'TX-08', 'VA-10', 'VA-11', 'TX-22', 'TX-23', 'TX-20', 'CA-08', 'CA-09', 'GA-09', 'TX-05', 'CA-02', 'CA-03', 'CA-04', 'CA-05', 'CA-06', 'ME-01', 'AR-02', 'LA-07', 'LA-02', 'LA-01', 'WA-09', 'AL-04', 'TX-11', 'IN-03', 'TX-16', 'UT-01', 'UT-03', 'TX-18', 'IN-09', 'TN-07', 'AZ-01', 'MI-09', 'TN-02', 'AZ-05', 'TN-01', 'AZ-08', 'IA-03', 'AS-00', 'MD-03', 'MD-05', 'MD-04', 'TX-12', 'CA-52', 'CA-50', 'OH-07', 'OH-04', 'OH-03', 'AL-01', 'SC-04', 'SC-05', 'SC-02', 'OH-09', 'NC-03', 'AZ-02', 'NC-01', 'CA-29', 'NC-07', 'NC-05', 'MI-07', 'TX-06', 'NC-08', 'TX-01', 'TX-02', 'MA-07', 'TX-19', 'FL-18'])
 
 
     # 38 judiciary members
     judiciary=set(['TX-21', 'WI-05', 'NC-06', 'CA-24', 'VA-06', 'CA-03', 'OH-01',  'IN-06', 'VA-04', 'IA-05', 'AZ-02', 'TX-01', 'OH-04', 'TX-02', 'UT-03', 'AR-02', 'PA-10', 'SC-04', 'FL-12', 'FL-24', 'AZ-03', 'NV-02', 'MI-14', 'CA-28', 'NY-08', 'VA-03', 'NC-12', 'CA-16', 'TX-18', 'CA-35', 'TN-09', 'GA-04', 'PR-00', 'IL-05', 'CA-32', 'FL-19', 'CA-39'])
-
-#broken
-# 'IL-05' - get the Your zip code indicates that you are outside of the 5th District of Illinois error.  Don't get the error from the form directly.
-# 'VA-04'
-# 'MI-14' - has a captcha
-# 'FL-12' -
-# 'CA-16'
-
-
-    
 
     # judiciary members with captchas
     judCaptcha=set(['CA-49', 'MI-14' ])
@@ -430,22 +400,19 @@ def housetest():
     n.update(correction); 
     #n.update(err);
 
-
     # Speed up test.
     # To check the return pages using pattern matching
     # rather than by eye, set this flag to false
     checkByEye=False
-
     
-    confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
-                           'your message has been sent', 'your message has been submitted']
+    #confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
+    #                       'your message has been sent', 'your message has been submitted', 'email confirmation']
     
     fh = file('results.log', 'a')
     for dist in dist_zip_dict:
         #if dist in h_working or dist in n: continue
-        #if dist not in ['SC-04', 'AR-02', 'FL-24', 'NY-08', 'FL-19'] : continue
-        if dist not in judiciary: continue
-        #if dist not in ['CA-16']: continue
+        #if dist not in judiciary: continue
+        if distToEmail and dist != distToEmail: continue
         print dist,
         try:
             q = writerep(prepare_i(dist))
@@ -466,10 +433,23 @@ def housetest():
                     result='err'
             print result + '.add(%s)' % repr(dist)
             fh.write('%s.add(%s)\n' % (result, repr(dist)))
+
+        except (ZipShared, ZipIncorrect, ZipNotFound, NoStreetMatch):
+            import traceback; traceback.print_exc()
+            print "Some error with zip codes or address"
+            fh.write('%s.add(%s) %s\n' % ('err', repr(dist), 'Zip or address error'))
+        except (Captcha):
+            import traceback; traceback.print_exc()
+            print "Captcha problem"
+            fh.write('%s.add(%s) %s\n' % ('err', repr(dist), 'Captcha error'))
+        except (NoForm):
+            import traceback; traceback.print_exc()
+            print "No form found error"
+            fh.write('%s.add(%s) %s\n' % ('err', repr(dist), 'No form found'))
         except Exception:
             import traceback; traceback.print_exc()
-            print 'err.add(%s)' % repr(dist)
-            fh.write('%s.add(%s)\n' % ('err', repr(dist)))
+            print 'err.add(%s)' % (repr(dist))
+            fh.write('%s.add(%s) %s\n' % ('err', repr(dist), 'Unknown error'))
         fh.flush()
 
 def contact_dist(i):
@@ -495,12 +475,11 @@ def contact_state(i):
         try:
             #if sen not in working:
             #    raise StandardError('not working: skipped %s' % sen)
-            q = writerep_ima(member, i)
+            q = writerep(member, i)
         except Exception, e:
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
             print >>sys.stderr, 'fail:', sen, e
     print
-
 
 def senatetest2(member2email):
     sendb = get_senate_offices()
@@ -510,8 +489,14 @@ def senatetest2(member2email):
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
             if sen != member2email : continue
             print repr(sen)
-            q = writerep_ima(member, prepare_i(state))
-            
+            q = writerep_general(member, prepare_i(state))
+
+            if not q:
+                print "Failed to write to %s" % member2email
+                import sys
+                sys.exit(1)
+                
+                
             file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
 
             success=False
@@ -537,33 +522,16 @@ def brokensenators():
     email submission pages
     '''
 
-    # fixed 1 of the 3
-    # lieberman redirects to a page with all these broken links
+    # unclear whether the lieberman emails are getting through
     # brown never gets to the "Thank you" page
-    # hagan - fixed.  needed RESPOND=yes in the form
-    unsure = ['lieberman', 'brown', 'hagan']
-
-    #fixed these two
-    # inhofe - had to write a special function since the ids in the form fields were weird.
-    # same exact function also worked for lgraham
-    funnynames = ['inhofe', 'lgraham']
-
-    # fixed these two
-    #lautenberg - required field, view
-    # webb - homePhone and workPhone fields (not required, but the Form class fill_phone class
-    #        was assuming the number should be split into area code and phone number,
-    #        so had to fix this).
-    e500 = ['lautenberg', 'webb']
-
-    # has a two step process for the email form
-    # will take more testing
-    requirespost = ['billnelson']
-
-    # didn't find this to be broken
-    noformdetect = ['feinstein']
+    # corker just has some issue with getting redirected to a www.www page.  not sure why.  maybe temporary
+    # coburn problem is there is a label is not properly parsed, so one control goes unfilled
+    notworking = ['lieberman', 'brown', 'corker', 'coburn']
 
     # no idea what to do with the captcha pages
     captcha = ['shelby', 'crapo', 'risch', 'moran', 'roberts']
+
+    workingbutnoconfirm = ['grassley']
     
     failure = e500 + requirespost + captcha + funnynames
     return failure
@@ -572,19 +540,23 @@ def senatetest():
     '''
     Creates a file sen/schumer.html with schumers contact page
     '''
+    # not working - 6-Jan-2011
+    notworking = ['hagan', 'corker', 'shelby', 'grassley', 'senate', 'coburn', 'inhofe', 'crapo', 'risch', 'lieberman', 'brown', 'moran', 'roberts']
+    
     sendb = get_senate_offices()
     statfile = open("senate-test-out.txt", "w")
     for state in sendb:
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
             if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-            #if sen != 'schumer': continue
+            #if sen != 'billnelson': continue
             #if sen in working + failure: continue
             print repr(sen)
             q = None
 
             try:
-                q = writerep_ima(member, prepare_i(state))
+                q = writerep_general(member, prepare_i(state))
+                                
                 file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
                 #subprocess.Popen(['open', 'sen/%s.html' % sen])
                 #subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
@@ -618,8 +590,6 @@ def convert_i(r):
     i.email = r.email.encode('utf8')
     i.full_msg = r.value.encode('utf8')
     i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
-    
-    
     return i
 
 def send_to(chamber, pnum, maxtodo):
@@ -672,8 +642,11 @@ def usage():
 
 if __name__ == "__main__":
     import sys
-    if sys.argv[1] == 'htest':
+    if sys.argv[1] == 'htest' and len(sys.argv)==2:
         housetest()
+        sys.exit(0)
+    if sys.argv[1] == 'htest' and len(sys.argv)==3:
+        housetest(sys.argv[2])
         sys.exit(0)
     elif sys.argv[1] == 'stest2':
         member = sys.argv[2]
@@ -681,8 +654,19 @@ if __name__ == "__main__":
         sys.exit(0)
     elif sys.argv[1] == 'stest':
         senatetest()
-
         sys.exit(0)
+    elif sys.argv[1] == 'dumpemails':
+        for dist in sorted(contact_congress_dict.iterkeys()):
+            print dist, contact_congress_dict[dist]
+            
+        for dist in direct_contact_pages:
+            url1 = direct_contact_pages[dist]
+            url2 = contact_congress_dict[dist]
+            if url1 == url2:
+                print "matches for ", dist, url1, url2
+            else:
+                print "no match for ", dist, url1, url2                  
+        sys.exit()
     
     if sys.argv[2] == 'make':
         num = sys.argv[1]
