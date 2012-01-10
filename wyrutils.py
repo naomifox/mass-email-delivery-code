@@ -34,13 +34,13 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     fname=['required-first', 'fullname', 'fname', 'first', 'name', 'first name' ],
                     zipcode=['zip5', 'zipcode', 'zip code', 'zip', 'postal_code'],
                     zip4=['zip4', 'four', 'plus'],
-                    address=['address 1', 'required-address', 'req_street', 'street', 'street_name', 'addr1', 'address1', 'add1', 'address', 'add', ],
+                    address=['address 1', 'address 1 *', 'required-address', 'req_street', 'street', 'street_name', 'address *', 'addr1', 'address1', 'add1', 'address', 'add', ],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
                     email=['email', 'e-mail'],
                     phone=['phone'],
-                    issue=['issue', 'title'],
+                    issue=['issue', 'title', 'Re'], #Re from bill nelson's form
                     subject=['subject', 'topic', 'view', 'subjectline'],
                     message=['message', 'msg', 'comment', 'text', 'body'],
                     captcha=['captcha', 'validat'],
@@ -307,23 +307,32 @@ class Form(object):
         c_id = first(self.find_control_by_id(name) for name in names)
         c_name = first(self.find_control_by_name(name) for name in names)        
         c_label = first(self.find_control_by_label(name) for name in names)
-        labels = None
+        #labels = None
         if c_label:
-            labels = [label.text for label in c_label.get_labels() if label.text.lower() == name]
+            labeltext = [label.text for label in c_label.get_labels() ][0].lower()
 
         print "Name to match: ", name
-        if c_id: print "c_id ", c_id.name
-        if c_name: print "c_name ", c_name.name
-        if c_label: print "c_label ", c_label.name
+        if DEBUG:
+            if c_id: print "c_id ", c_id.name
+            if c_name: print "c_name ", c_name.name
+            if c_label:
+                print "c_label ", c_label.name
+                for label in c_label.get_labels(): print " ", label.text
 
-        # do tie-breakers - we want to see if any are any exact match first, before settling for a subset match
+        # do tie-breakers - we want to see if any are any exact match first, before settling for a subset match         
         if type and c_type:
             c = c_type
         elif c_id and c_id.id.lower() == name:
             c = c_id
         elif c_name and c_name.name.lower() == name:
             c = c_name
-        elif labels and labels[0].lower() == name:
+        elif c_label and  labeltext == name:
+            c = c_label
+        elif c_id and name in c_id.id.lower() :
+            c = c_id
+        elif c_name and name in c_name.name.lower():
+            c = c_name
+        elif c_label and name in labeltext :
             c = c_label
         elif c_id:
             c = c_id
@@ -333,20 +342,9 @@ class Form(object):
             c = c_label
         else: print "no control found"
 
-        if c:
+        if DEBUG and c:
             print "control chosen ", c.name
         
-
-        #if not c and names:
-        #    c = first(self.find_control_by_label(name) for name in names)
-        #    if c: print "Found by label", c.name
-        #if not c and names:
-        #    c = first(self.find_control_by_name(name) for name in names)
-        #    if c: print "Found by name", c.name
-        #if not c and names:
-        #    c = first(self.find_control_by_id(name) for name in names)
-        #    if c: print "Found by id", c.name
-        #else: print "no control found"
         return c     
 
     def find_control_by_name(self, name):
@@ -371,8 +369,9 @@ class Form(object):
         print "In find_control_by_label: label=", label
         id = label.lower()
         import itertools
-        potentialMatches = itertools.chain((c for c in self.controls if any(id == x.text.lower() for x in c.get_labels())),
-                              (c for c in self.controls if any(id in x.text.lower() for x in c.get_labels())))
+        potentialMatches = itertools.chain((c for c in self.controls if any(label == x.text.lower() for x in c.get_labels())),
+                              (c for c in self.controls if any(label in x.text.lower() for x in c.get_labels())))
+
         return first(potentialMatches)
         #return first(c for c in self.controls if any(id in x.text.lower() for x in c.get_labels()))
 
