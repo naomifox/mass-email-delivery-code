@@ -44,34 +44,7 @@ WYR_MANUAL = {
 }
 
 # these are forms that for whatever reason, were not correct in ContactCongress.tsv
-other_direct_forms = {'IL-18' : 'https://schockforms.house.gov/Contact/ContactForm.htm',
-                      'MI-06' : 'http://upton.house.gov/Contact/zipauth.htm',
-                      'VA-03' : 'https://forms.house.gov/bobbyscott/webforms/issue_subscribe.htm',
-                      'FL-09' : 'https://forms.house.gov/bilirakis/IMA/issue_subscribe.htm',
-                      'CA-02' : 'https://forms.house.gov/herger/webforms/contactzipauth.html',
-                      'OH-10' : 'https://kucinichforms.house.gov/Contact/ContactForm.htm',
-                      'UT-01' : 'https://robbishopforms.house.gov/ContactMe/default.aspx',
-                      'VA-04' : 'https://forbesforms.house.gov/Contact/ContactForm.htm',
-                      'TX-11' : 'https://conawayforms.house.gov/Forms/WriteYourRep/default.aspx',
-                      'AZ-05' : 'https://schweikertforms.house.gov/ContactForm/default.aspx'
-                      }
 
-forms_with_frame = {'CT-04' : 'https://forms.house.gov/himes/form/zipauthentication.shtml',
-                    'LA-07' : 'http://www.house.gov/formcharlesboustany/ic_zip_auth.htm',
-                    'CA-49' : 'http://issaforms.house.gov/index.cfm?FuseAction=Contact.ContactForm',
-                    'AL-04' : 'http://www.house.gov/formaderholt/ic_zip_auth.htm',
-                    'AR-02' : 'https://timgriffinforms.house.gov/Forms/WriteYourRep/',
-                    'CA-09' : 'https://leeforms.house.gov/legislation-comment-form1',
-                    'IA-03' : 'http://www.house.gov/formboswell/ic_contact.html',
-                    'IL-15' : 'http://www.house.gov/formtimjohnson/ic_contact-form.shtml',
-                    'IL-19' : 'http://www.house.gov/formshimkus/ic_emailme.shtml',
-                    'MD-04' : 'http://www.house.gov/formdonnaedwards/ic_zip_auth.htm',
-                    'MN-02' : 'http://www.house.gov/formjohnkline/ic_zip_auth.htm',
-                    'NY-01' : 'http://www.house.gov/formtimbishop/zip_auth.htm',
-                    'OH-07' : 'http://www.house.gov/formsteveaustria/ic_contact-form.shtml',
-                    'WV-03' : 'http://www.house.gov/formrahall/webforms/ic_issue_subscribe.htm',
-                    'NJ-03' : 'https://forms.house.gov/runyan/zipauthentication_nj03.shtml'
-                    }
 
 # some district forms require the street match
 distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
@@ -122,10 +95,6 @@ generalErrorStrs = ["there was an error processing the submitted information",
                      "Use your web browser's <b>BACK</b> capability",
                     "oops!",
                     "following problems were found in your submission"]
-
-
-errorStrings = zipIncorrectErrorStrs + addressMatchErrorStrs + captchaStrs + generalErrorStrs
-#errorStrings = zipIncorrectErrorStrs + addressMatchErrorStrs + jsRedirectErrorStrs + frameErrorStrs + captchaStrs + generalErrorStrs
 
 
 def getError(pagetxt):
@@ -187,7 +156,6 @@ def getcontactcongressdict2(ccdump):
     d = {}
     for line in ccdump.strip().split('\n'):
         if line.strip():
-            print line
             (dist, email_form) = line.split()
             d[dist] = email_form
     return d
@@ -268,10 +236,12 @@ def writerep_general(contact_link, i):
                    MessageType="Express an opinion or share your views with me")
 
         # page has one required control that has no name.  so we need to fill it in
-        if (i.dist == 'SD-00'):
+        if (i.dist == 'SD-00' or 'coburn' in b.url):
             empty_controls = [c for c in f.controls if not c.value]
             for c in empty_controls:
                 print f.fill('OTH', control=c)
+
+            
 
 
         # Solve captchas.  I included this here because it was placed here by Aaron,
@@ -299,7 +269,7 @@ def writerep_general(contact_link, i):
     completedWyrForm = False
     for cnt in range(1,k):
         # todo, place newurl into cache
-        if DEBUG: print "Loop ", cnt, ":\n", b.url, "\n", b.page, "\n Done with page ", cnt, "\n\n"
+        if DEBUG: print "Loop ", cnt, ":\n", b.url, "\n" #, b.page, "\n Done with page ", cnt, "\n\n"
 
         # check if this is a refresh page
         # to do: see if we can get javascript window.location refreshes
@@ -316,9 +286,6 @@ def writerep_general(contact_link, i):
             except:
                 print "Failed to open url ", newurl, " error: ", traceback.print_exc()
 
-        #save b.page
-        oldpage = b.page
-
         # some pages have multiple forms on them.
         # For example, there may be a search tool in the sidebar.
         # or there may be forms which are hidden by not displayed by the css.
@@ -328,6 +295,7 @@ def writerep_general(contact_link, i):
         verificationform = get_form(b, lambda f: 'formproc' in f.action)
         nameform = get_form(b, lambda f: 'wrep_const' in f.action) #see AL-06 for an example,  has zip form in page too
         wyrform = get_form(b, lambda f: f.find_control_by_id('state') and f.find_control_by_name('zip') and f.find_control_by_name('zip4')) #get_form(b, not_signup_or_search)
+        indexform = get_form(b, lambda f: f.has(name='Re')) # see billnelson for example
 
         #choose which form we want to use
         form = None
@@ -347,6 +315,9 @@ def writerep_general(contact_link, i):
         elif verificationform:
             if DEBUG: print "verification form"
             form = verificationform
+        elif indexform:
+            if DEBUG: print "index form"
+            form = indexform
 
         #if no redirect and no form was found, just return.  can go no further
         if not form:
@@ -375,27 +346,18 @@ def writerep_general(contact_link, i):
             print "Failed to submit form for url ",  b.url, " error: ", traceback.print_exc()
             return "Failed to submit form for url "+  b.url+ " error: "+ traceback.format_exc()
 
-
-        #except Exception, detail:
-            #print "Failed to fill form:", detail
-            #traceback.print_exc()
-            #raise  StandardError("Failed to fill and submit:", detail)
-        #except:
-        #    raise StandardError("Failed to fill form:", traceback.print_exc())
         
-        # Now, look for commont errors or confirmations.  
-        print "Looking for errors in page ", b.page
+        # Now, look for common errors or confirmations.
         foundError = False
         thanked = False
-
+        if DEBUG: print "Looking for errors in page " #, b.page
+        
         errorStr = getError(b.page)
         if errorStr:
-            print "Found error: ", errorStr, " done with ", contact_link
+            if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
             foundError = True
 
-        if not nextpage:
-            nextpage = oldpage
-        print "Looking for thank you in page: " , nextpage.lower()
+        if DEBUG: print "Looking for thank you in page: "# , nextpage.lower()
         confirmations=[cstr for cstr in confirmationStrings if cstr in nextpage.lower()]
 
         if len(confirmations) > 0:
@@ -409,7 +371,7 @@ def writerep_general(contact_link, i):
         if thanked or foundError:
             return nextpage
 
-    print "Tried ", k, "times, unsuccessfully, to fill form"
+    if DEBUG: print "Tried ", k, "times, unsuccessfully, to fill form"
     return b.page
     #raise UnsuccessfulAfter5Attempts(b.page)    
 
@@ -427,9 +389,11 @@ def writerep(i):
 
     print "contact_link selected: ", link
     q = writerep_general(link, i)
+
+    # No longer user the WYR form.  Using the direct links works better
     #if the direct link did not work, tries the house's WYR form.
-    if not q:
-        q = writerep_general(WYR_URL, i)
+    #if not q:
+    #    q = writerep_general(WYR_URL, i)
     return q
 
 def prepare_i(dist):
@@ -599,6 +563,9 @@ def senatetest2(member2email):
             if "thank" in q.lower() or "your message has been submitted" in q.lower() or "your message has been submitted" in q.lower() : 
                 #if you're getting thanked, you're probably successful
                 success=True
+                
+            errorString = getError(q)
+            print "ErrorString: ", errorString
             
             subprocess.Popen(['open', 'sen/%s.html' % sen])
             subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
