@@ -75,6 +75,7 @@ forms_with_frame = {'CT-04' : 'https://forms.house.gov/himes/form/zipauthenticat
 
 # some district forms require the street match
 distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
+                         'AR-01' : { 'addr1' : '2400 Highland Dr', 'city' : 'Jonesboro', 'state' : 'AR', 'zip5' : '72401', 'zip4' : '6213' },
                          'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
                          'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },
                          'NY-08' : { 'addr1' : '10 BATTERY PL', 'city' : 'BOWLING GREEN', 'state' : 'NY', 'zip5' : '10004', 'zip4' : '1042' },
@@ -102,7 +103,7 @@ distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Sparta
                          'OK-04' : {'addr1' : '711 SW D Ave., Ste. 201', 'city' : 'Lawton', 'state' : 'OK', 'zip5' : '73501', 'zip4' : '4561'},
                          'CA-25' : {'addr1' : '26650 The Old Road Suite 203', 'city' : 'Santa Clarita', 'state' : 'CA', 'zip5' : '91381', 'zip4' : '0750'},
                          'NC-10' : {'addr1' : '87 4th St. NW', 'city' : 'Hickory', 'state' : 'NC', 'zip5' : '28601', 'zip4' : '6142' },
-                         'FL-12' : {'addr1' : '170 Fitzgerald Rd', 'city' : 'Lakeland', 'state' : 'FL', 'zip5' : '33813', 'zip5' : '2633' }
+                         'FL-12' : {'addr1' : '170 Fitzgerald Rd', 'city' : 'Lakeland', 'state' : 'FL', 'zip5' : '33813', 'zip4' : '2633' }
                          }
 
 
@@ -123,13 +124,14 @@ generalErrorStrs = ["there was an error processing the submitted information",
                     "following problems were found in your submission"]
 
 
-errorStrings = zipIncorrectErrorStrs + addressMatchErrorStrs + jsRedirectErrorStrs + captchaStrs + generalErrorStrs
+errorStrings = zipIncorrectErrorStrs + addressMatchErrorStrs + captchaStrs + generalErrorStrs
 #errorStrings = zipIncorrectErrorStrs + addressMatchErrorStrs + jsRedirectErrorStrs + frameErrorStrs + captchaStrs + generalErrorStrs
 
 
 def getError(pagetxt):
     ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
-    for stringList in [zipIncorrectErrorStrs, addressMatchErrorStrs, jsRedirectErrorStrs,
+    for stringList in [zipIncorrectErrorStrs, addressMatchErrorStrs,
+                       #jsRedirectErrorStrs,
                        #frameErrorStrs,
                        captchaStrs, generalErrorStrs]:        
         for errorStr in stringList:
@@ -371,6 +373,7 @@ def writerep_general(contact_link, i):
         except:
             print "caught an http error"
             print "Failed to submit form for url ",  b.url, " error: ", traceback.print_exc()
+            return "Failed to submit form for url "+  b.url+ " error: "+ traceback.format_exc()
 
 
         #except Exception, detail:
@@ -390,6 +393,8 @@ def writerep_general(contact_link, i):
             print "Found error: ", errorStr, " done with ", contact_link
             foundError = True
 
+        if not nextpage:
+            nextpage = oldpage
         print "Looking for thank you in page: " , nextpage.lower()
         confirmations=[cstr for cstr in confirmationStrings if cstr in nextpage.lower()]
 
@@ -413,12 +418,12 @@ def writerep(i):
     b = browser.Browser()
 
     # for some forms, we just need a direct link
-    if i.dist in forms_with_frame:
-        link = forms_with_frame[i.dist]
-    elif i.dist in other_direct_forms:
-        link = other_direct_forms[i.dist]
-    else:
-        link = contact_congress_dict[i.dist]
+    #if i.dist in forms_with_frame:
+    #    link = forms_with_frame[i.dist]
+    #elif i.dist in other_direct_forms:
+    #    link = other_direct_forms[i.dist]
+    #else:
+    link = contact_congress_dict[i.dist]
 
     print "contact_link selected: ", link
     q = writerep_general(link, i)
