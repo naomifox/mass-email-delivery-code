@@ -25,12 +25,16 @@ class FrameError(Exception): pass
 class JsRedirectError(Exception): pass
 class UnsuccessfulAfter5Attempts(Exception): pass
 
+
+# maps the different strings to the same category, used for finding the control in a form by id, name, or label
+# for each list, the strings should be ordered from most restrictive to least restrictive.
+# for example 'firstname' goes before 'name', 'zipcode' goes before 'zip'
 name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
-                    lname=['lname', 'last', 'last name', 'required-first'],
-                    fname=['fname', 'first', 'name', 'first name', 'required-first', 'fullname'],
-                    zipcode=['zip', 'zipcode', 'postal_code'],
+                    lname=['required-lastname', 'lname', 'last', 'last name', 'lastname' ],
+                    fname=['required-first', 'fullname', 'fname', 'first', 'name', 'first name' ],
+                    zipcode=['zip5', 'zipcode', 'zip code', 'zip', 'postal_code'],
                     zip4=['zip4', 'four', 'plus'],
-                    address=['address 1', 'required-address', 'street', 'street_name', 'req_street', 'addr1', 'address1', 'add1', 'address', 'add', ],
+                    address=['address 1', 'required-address', 'req_street', 'street', 'street_name', 'addr1', 'address1', 'add1', 'address', 'add', ],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
@@ -40,11 +44,10 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     subject=['subject', 'topic', 'view', 'subjectline'],
                     message=['message', 'msg', 'comment', 'text', 'body'],
                     captcha=['captcha', 'validat'],
-                    reply=['reply', 'response', 'answer', 'respond'],
-                    newsletter=['newsletter', 'required-newsletter'],
-                    aff1=['aff1', 'affl1', 'affl'],
-                    respond=['respond', 'response']
-                )
+                    reply=['reply', 'response', 'answer', 'respond', 'required-rsp', 'Express an opinion or share your views with me'],
+                    newsletter=['enewssign', 'required-newsletter',  'newsletter'],
+                    aff1=['aff1', 'affl1', 'affl']
+                    )
 
 def numdists(zip5, zip4=None, address=None):
     return len(get_dist(zip5, zip4, address))
@@ -167,13 +170,25 @@ class Form(object):
             return False
 
     def fill_phone(self, phone):
+
+        print "in fill_phone"
         phone = phone + ' '* (10 - len(phone)) # make phone length 10
         # get the controls (fields) for phone
 
         # Howard Coble page has phone control type as tel
-        ph_ctrl_types = ['text', 'tel']
-    
+        ph_ctrl_types = ['text', 'tel']  
         ph_ctrls = [c for c in self.controls if ('phone' in c.name.lower() or any('phone' in x.text.lower() for x in c.get_labels())) and c.type in ph_ctrl_types]
+
+        print "phone controls: ", ph_ctrls
+        for c in ph_ctrls: print c
+        
+        #add area code, if present
+        if DEBUG: print "finding area_code"
+        area_code = self.find_control(name='areacode')
+
+        if area_code:
+            ph_ctrls.insert(0, area_code)
+        
         num_ph = len(ph_ctrls)
         if num_ph == 1:
             return self.f.set_value(phone, ph_ctrls[0].name, type=ph_ctrls[0].type, nr=0)
@@ -269,11 +284,16 @@ class Form(object):
     def find_control(self, name=None, type=None):
         """return the form control of type `type` or matching `name_options` of `name`"""
         if not (name or type): return
-
+        
+        if type:
+            print "finding control by type"
+            c = self.find_control_by_type(type)
+            print "found control by type ", type, c
+            return c
         try:
             names = name_options[name]
-            for name in names:
-                print "name: ", name
+            for nameopt in names:
+                print "nameopt: ", nameopt
             for c in self.controls:
                 print "control: ", c.name
                 for label in c.get_labels():
@@ -282,17 +302,16 @@ class Form(object):
             names = name and [name]
         c = None
 
-        if type:
-            print "finding control by type"
-            return self.find_control_by_type(type)
+
             
         c_id = first(self.find_control_by_id(name) for name in names)
         c_name = first(self.find_control_by_name(name) for name in names)        
         c_label = first(self.find_control_by_label(name) for name in names)
         labels = None
         if c_label:
-            labels = (label.text for label in c_label.get_labels() if label.text.lower() == name)
-    
+            labels = [label.text for label in c_label.get_labels() if label.text.lower() == name]
+
+        print "Name to match: ", name
         if c_id: print "c_id ", c_id.name
         if c_name: print "c_name ", c_name.name
         if c_label: print "c_label ", c_label.name
@@ -304,7 +323,7 @@ class Form(object):
             c = c_id
         elif c_name and c_name.name.lower() == name:
             c = c_name
-        elif labels:
+        elif labels and labels[0].lower() == name:
             c = c_label
         elif c_id:
             c = c_id
@@ -314,6 +333,9 @@ class Form(object):
             c = c_label
         else: print "no control found"
 
+        if c:
+            print "control chosen ", c.name
+        
 
         #if not c and names:
         #    c = first(self.find_control_by_label(name) for name in names)
@@ -337,6 +359,7 @@ class Form(object):
         #return first(c for c in self.controls if c.name and name in c.name.lower())
 
     def find_control_by_id(self, id):
+        print "In find_control_by_id: id=", id
         id = id.lower()
         import itertools
         potentialMatches = itertools.chain( (c for c in self.controls if c.id and id == c.id.lower()),
@@ -345,6 +368,7 @@ class Form(object):
         #return first(c for c in self.controls if c.id and id in c.id.lower())
 
     def find_control_by_label(self, label):
+        print "In find_control_by_label: label=", label
         id = label.lower()
         import itertools
         potentialMatches = itertools.chain((c for c in self.controls if any(id == x.text.lower() for x in c.get_labels())),
@@ -353,13 +377,13 @@ class Form(object):
         #return first(c for c in self.controls if any(id in x.text.lower() for x in c.get_labels()))
 
     def find_control_by_type(self, type):
+        print "In find_control_by_type: type=", type
         try:
             return self.f.find_control(type=type)
         except ControlNotFoundError:
             return None
         except AmbiguityError:  #@@  TO BE FIXED
             return self.f.find_control(type=type, nr=1)
-
 
 def get_form(browser, predicate=None):
     """wrapper for browser.get_form method to return Form ojects instead of ClientForm objects"""
