@@ -375,6 +375,29 @@ def writerep_general(contact_link, i):
     return b.page
     #raise UnsuccessfulAfter5Attempts(b.page)    
 
+
+def writesenator(member, i):
+    """Looks up the right contact page and handles any simple challenges."""
+    b = browser.Browser()
+
+    # for some forms, we just need a direct link
+    #if i.dist in forms_with_frame:
+    #    link = forms_with_frame[i.dist]
+    #elif i.dist in other_direct_forms:
+    #    link = other_direct_forms[i.dist]
+    #else:
+    #link = contact_congress_dict[i.dist]
+
+    link = member
+    print "contact_link selected: ", link
+    q = writerep_general(link, i)
+
+    # No longer user the WYR form.  Using the direct links works better
+    #if the direct link did not work, tries the house's WYR form.
+    #if not q:
+    #    q = writerep_general(WYR_URL, i)
+    return q
+
 def writerep(i):
     """Looks up the right contact page and handles any simple challenges."""
     b = browser.Browser()
@@ -402,6 +425,7 @@ def prepare_i(dist):
     the only thing that changes is the state
     '''
     i = web.storage()
+    i.id="jamesmith"
     i.dist=dist
     i.state = dist[:2]
     if len(dist) == 2:
@@ -434,10 +458,6 @@ def prepare_i(dist):
         i.zip4 = distAddress['zip4']    
     return i
 
-h_working = set(['NE-03', 'MO-08', 'OH-12', 'OH-13', 'OH-16', 'OH-17', 'OH-18', 'MO-01', 'MO-02', 'GA-07', 'MO-04', 'MO-05', 'MO-06', 'MO-07', 'IL-09', 'IL-08', 'MT-00', 'IL-04', 'CT-05', 'IL-06', 'IL-01', 'CT-02', 'IL-03', 'NC-13', 'NY-11', 'IA-01', 'FL-25', 'NH-01', 'KY-05', 'KY-06', 'GU-00', 'GA-05', 'NM-02', 'OH-10', 'IA-05', 'IL-19', 'IL-16', 'IL-17', 'IL-15', 'IL-12', 'IL-13', 'IL-10', 'CA-45', 'NY-03', 'NY-05', 'NY-04', 'NY-07', 'RI-02', 'NY-09', 'PA-10', 'ND-00', 'TN-09', 'CA-25', 'FL-11', 'FL-10', 'FL-13', 'FL-12', 'NC-12', 'FL-16', 'WY-00', 'TN-08', 'CA-46', 'MS-01', 'NY-12', 'NY-13', 'NY-10', 'CA-32', 'NY-16', 'CA-34', 'NY-14', 'HI-02', 'CA-38', 'HI-01', 'CA-41', 'FL-08', 'FL-09', 'CA-42', 'PR-00', 'FL-02', 'FL-03', 'FL-07', 'FL-04', 'FL-05', 'WV-01', 'MI-11', 'WV-03', 'WV-02', 'CA-01', 'NJ-03', 'GA-06', 'TX-30', 'PA-08', 'PA-03', 'PA-02', 'PA-01', 'TX-32', 'PA-05', 'MI-14', 'CA-23', 'KS-04', 'CA-26', 'KS-03', 'NY-29', 'KS-01', 'CA-28', 'CA-07', 'NY-21', 'AL-02', 'CT-03', 'NC-11', 'ID-01', 'PA-11', 'PA-12', 'PA-13', 'MS-04', 'PA-19', 'MS-03', 'VA-01', 'VA-05', 'MN-06', 'MN-04', 'VA-09', 'GA-13', 'GA-12', 'GA-11', 'WI-07', 'OR-01', 'CA-19', 'CA-18', 'NJ-08', 'NJ-09', 'CA-15', 'WI-08', 'CA-12', 'DE-00', 'NV-01', 'NV-03', 'WA-04', 'WA-01', 'WA-03', 'CA-17', 'CO-07', 'CO-04', 'CA-27', 'MA-06', 'NC-06', 'TX-26', 'TX-27', 'TX-24', 'TX-25', 'TX-15', 'CA-13', 'TX-29', 'RI-01', 'GA-08', 'GA-04', 'MI-10', 'MI-13', 'MI-12', 'MI-15', 'GA-01', 'GA-02', 'GA-03', 'VT-00', 'ME-02', 'AR-03', 'AR-01', 'AR-04', 'LA-05', 'LA-04', 'LA-03', 'IN-01', 'CT-01', 'AL-05', 'IN-06', 'AL-07', 'TX-10', 'TX-17', 'IN-02', 'AL-03', 'TX-14', 'UT-02', 'CA-20', 'IN-08', 'MA-10', 'MI-08', 'TN-05', 'AZ-06', 'CA-33', 'MI-02', 'NJ-13', 'MI-01', 'MI-06', 'IN-04', 'MI-04', 'MI-05', 'MD-01', 'TX-13', 'MD-02', 'CA-24', 'MD-07', 'MD-06', 'MD-08', 'CA-51', 'NY-28', 'IN-05', 'FL-22', 'OH-06', 'OH-05', 'AL-06', 'OH-01', 'SC-06', 'IA-02', 'SC-03', 'OH-08', 'TX-09', 'CO-03', 'TX-04', 'TN-03', 'NC-09', 'TX-07', 'TX-03', 'MA-02', 'MA-03', 'TN-04', 'MA-04', 'MA-05', 'MA-08', 'MA-09', 'NC-04', 'CA-39', 'CA-40', 'PA-06', 'FL-23', 'TN-06', 'MI-03', 'NY-15', 'MN-07', 'WI-06', 'IL-02', 'FL-01', 'IA-04', 'OH-15', 'FL-20', 'VA-06', 'VA-02', 'NY-22', 'NY-23', 'AK-00', 'NJ-06', 'TX-21', 'LA-01', 'CA-11', 'OH-04', 'OH-03', 'ID-02', 'TX-01', 'FL-17', 'NY-06', 'TN-01', 'WI-01'])
-
-h_badaddr = set(['IN-07', 'WI-04', 'MO-03', 'CA-53', 'FL-06', 'IL-07', 'KY-04', 'CO-02', 'IL-05', 'MA-01', 'CO-06', 'NJ-12', 'OR-03', 'AZ-04', 'NY-08', 'NY-20', 'NM-03', 'SC-01', 'CA-31', 'TX-28', 'OK-01', 'OK-04', 'WA-09', 'FL-15', 'FL-24', 'TX-16', 'TX-11', 'GA-0'])
-h_working.update(h_badaddr)
 
 def housetest(distToEmail=None):
     '''
@@ -523,23 +543,37 @@ def contact_dist(i):
         print >>sys.stderr, 'fail:', i.dist, e
     print
 
-working = ['coons', 'kohl', 'akaka', 'inouye', 'shaheen', 'menendez', 'cantwell', 'carper', 'manchin', 'rockefeller', 'barrasso', 'ayotte', 'tomudall', 'hutchison', 'landrieu', 'vitter', 'burr', 'conrad', 'johanns', 'bennelson', 'gillibrand', 'schumer', 'casey', 'toomey', 'boxer', 'heller', 'reid', 'bennet', 'markudall', 'sessions', 'boozman', 'leahy', 'sanders', 'kirk', 'isakson', 'coats', 'lugar', 'grassley', 'harkin', 'kyl', 'mccain', 'blumenthal', 'lieberman', 'collins', 'cardin', 'mikulski', 'kerry', 'brown', 'portman', 'mccaskill', 'franken', 'klobuchar', 'levin', 'stabenow', 'reed', 'whitehouse', 'baucus', 'tester', 'cochran', 'wicker', 'paul', 'merkley', 'wyden', 'murray', 'ronjohnson', 'rubio', 'enzi', 'bingaman', 'cornyn', 'hagan', 'hoeven', 'alexander', 'corker', 'warner', 'begich', 'murkowski', 'pryor', 'durbin', 'chambliss', 'coburn', 'snowe', 'scottbrown', 'hatch', 'lee', 'blunt', 'demint', 'mcconnell', 'johnson', 'thune']
-
 def contact_state(i):
     sendb = get_senate_offices()
+    status = ""
     for member in sendb.get(i.state, []):
+        print "member", member
         sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
         if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-        
+        print "writing to member", member
         print sen,
+        q=None
         try:
             #if sen not in working:
             #    raise StandardError('not working: skipped %s' % sen)
-            q = writerep(member, i)
-        except Exception, e:
+            #q = writerep(member, i)
+            q = writerep_general(member, i)
+
+            confirmations=[cstr for cstr in confirmationStrings if cstr in q.lower()]
+            if len(confirmations) > 0:
+                status +=  'Thanked by ' + sen + "."
+            else:
+               status +=  'Failure with ' + sen + "."
+               print status
+               file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, status))
+
+        except Exception as e:
+            print "Caught an exception on member ", member
+            import traceback; traceback.print_exc()
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
             print >>sys.stderr, 'fail:', sen, e
-    print
+            status += "Caught an exception on member ", member
+    return (q, status)
 
 def senatetest2(member2email):
     sendb = get_senate_offices()
@@ -627,9 +661,9 @@ def senatetest():
                     status = "Thanked"
                 else:
                     status = "Failed.  reason unknown."
-            except Exception as e:
+            except Exception, e:
                 print "Caught exception on senator: %s " % member
-                status="failed.  exception occurred %s" % e
+                status="failed.  exception occurred %s" % e.__str__()
             statfile.write("Member: %s, Status: %s\n" % (member, status))
             statfile.flush()
     statfile.close()
@@ -697,6 +731,54 @@ def send_to(chamber, pnum, maxtodo):
 def send_to_senate(pnum, maxtodo): return send_to('S', pnum, maxtodo)
 def send_to_house(pnum, maxtodo): return send_to('H', pnum, maxtodo)
 
+
+    
+def bsd_Send_To_Senate():
+    '''
+    Parse from the blue-state-digital csv file
+    '''
+    import csv
+    from ZipLookup import ZipLookup
+    reader = csv.reader(open('demo-dataz.csv', 'r'), delimiter=',', quotechar='\"')
+    for row in reader:
+        name='unknown'
+        state='unknown'
+        try:
+            (date, email, name, addr1, addr2, zip5, city, message, source, subsource, ip) = row
+            print zip5
+            z = ZipLookup()
+            state = z.getState(zip5)
+            print "found state: ", state
+            i = prepare_i(state+"_" + "01") #hack, need dist for prepare_i
+            if email:
+                i.email=email
+            if name:
+                names = name.split()
+                i.fname = names[0]
+                i.lname = names[-1]
+                i.id = name
+            if addr1:
+                i.addr1 = addr1
+                i.addr2 = addr2
+            if zip5:
+                i.zip5 = zip5
+                i.zip4 = '0001'
+            if city:
+                i.city = city
+            if message:
+                i.full_msg = message
+            (q, status) = contact_state(i)
+            file('bsd_Send_To_Senate.log', 'a').write('%s, %s, "%s"\n' % (name, state, status))
+        except Exception, e:
+            status='failed: ' + e.__str__()
+            file('bsd_Send_To_Senate.log', 'a').write('%s, %s, "%s"\n' % (name, state, status))
+
+                
+                
+
+        
+    
+
 def usage():
     ''' print command line usage '''
     print "htest - house test"
@@ -705,6 +787,9 @@ def usage():
 
 if __name__ == "__main__":
     import sys
+    if sys.argv[1] == 'senatebsd':
+        bsd_Send_To_Senate()
+        sys.exit(0)
     if sys.argv[1] == 'htest' and len(sys.argv)==2:
         housetest()
         sys.exit(0)
