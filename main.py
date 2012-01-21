@@ -7,7 +7,7 @@ import traceback
 
 import socket; socket.setdefaulttimeout(30)
 
-DEBUG = True
+DEBUG = False
 WYR_URL = 'https://writerep.house.gov/writerep/welcome.shtml'
 SEN_URL = 'http://senate.gov/general/contact_information/senators_cfm.xml'
 WYR_MANUAL = {
@@ -214,18 +214,18 @@ def writerep_general(contact_link, i):
         ''' f is a form '''
 
         f.fill_name(i.prefix, i.fname, i.lname)
-        print "in fill_form, filling addr"
+        if DEBUG: print "in fill_form, filling addr"
         f.fill_address(i.addr1, i.addr2)
-        print "in fill_form, filling phone"
+        if DEBUG: print "in fill_form, filling phone"
         f.fill_phone(i.phone)
-        print "in fill_form, filling textarea"
+        if DEBUG: print "in fill_form, filling textarea"
         textareacontrol = f.fill(type='textarea', value=i.full_msg)
-        print 'filled textareacontrol' , textareacontrol
-        print "in fill_form, filling all"
+        if DEBUG: print 'filled textareacontrol' , textareacontrol
+        if DEBUG: print "in fill_form, filling all"
 
-        print "Printing all controls"
+        if DEBUG: print "Printing all controls"
         for c in f.controls:
-            print "control: ", c.name, " type: ", c.type
+            if DEBUG: print "control: ", c.name, " type: ", c.type
         
         f.fill_all(city=i.city, zipcode=i.zip5, zip4=i.zip4, state=i.state.upper(),
                    email=i.email,
@@ -239,7 +239,7 @@ def writerep_general(contact_link, i):
         if (i.dist == 'SD-00' or 'coburn' in b.url):
             empty_controls = [c for c in f.controls if not c.value]
             for c in empty_controls:
-                print f.fill('OTH', control=c)
+                if DEBUG: print f.fill('OTH', control=c)
 
             
 
@@ -326,11 +326,11 @@ def writerep_general(contact_link, i):
             
         #to do, add back in captcha solver
         if form.find_control_by_name('captcha') or  form.find_control_by_name('validation'):
-            print "captcha found"
+            if DEBUG: print "captcha found"
             #raise Captcha
             return b.page
         else:
-            print "no captcha found"
+            if DEBUG: print "no captcha found"
 
         #try:
         if DEBUG: print "going to fill_form from ", b.url, " now \n", form, "\n End form", cnt, "\n"
@@ -546,33 +546,43 @@ def contact_dist(i):
 def contact_state(i):
     sendb = get_senate_offices()
     status = ""
+    #these are the senators with captchas.  we'll just skip them.
+    captcha = ['shelby', 'crapo', 'risch', 'moran', 'roberts']
     for member in sendb.get(i.state, []):
         print "member", member
         sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
         if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-        print "writing to member", member
+        if sen in captcha:
+            #file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, "Captcha-no-attempt-made"))
+            status += "Captcha with " + sen + ". "
+            continue
+        if DEBUG: print "writing to member", member
         print sen,
         q=None
         try:
-            #if sen not in working:
-            #    raise StandardError('not working: skipped %s' % sen)
-            #q = writerep(member, i)
             q = writerep_general(member, i)
 
             confirmations=[cstr for cstr in confirmationStrings if cstr in q.lower()]
             if len(confirmations) > 0:
-                status +=  'Thanked by ' + sen + "."
+                status +=  'Thanked by ' + sen + ". "
             else:
-               status +=  'Failure with ' + sen + "."
-               print status
-               file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, status))
+               status +=  'Failure with ' + sen + ". "
+               if DEBUG: print status
+               #file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, status))
 
         except Exception as e:
             print "Caught an exception on member ", member
             import traceback; traceback.print_exc()
-            file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
+            #file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
             print >>sys.stderr, 'fail:', sen, e
             status += "Caught an exception on member ", member
+        except:
+            print "Caught an exception on member ", member
+            import traceback; traceback.print_exc()
+            #file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, "unknown error"))
+            print >>sys.stderr, 'fail:', sen, "unknown error"
+            status += "Caught an unknown exception on member ", member
+        
     return (q, status)
 
 def senatetest2(member2email):
@@ -733,13 +743,13 @@ def send_to_house(pnum, maxtodo): return send_to('H', pnum, maxtodo)
 
 
     
-def bsd_Send_To_Senate():
+def bsd_Send_To_Senate(csvfile='demo-dataz.csv', statfile='bsd_Send_To_Senate.log'):
     '''
     Parse from the blue-state-digital csv file
     '''
     import csv
     from ZipLookup import ZipLookup
-    reader = csv.reader(open('demo-dataz.csv', 'r'), delimiter=',', quotechar='\"')
+    reader = csv.reader(open(csvfile, 'r'), delimiter=',', quotechar='\"')
     for row in reader:
         name='unknown'
         state='unknown'
@@ -768,10 +778,9 @@ def bsd_Send_To_Senate():
             if message:
                 i.full_msg = message
             (q, status) = contact_state(i)
-            file('bsd_Send_To_Senate.log', 'a').write('%s, %s, "%s"\n' % (name, state, status))
         except Exception, e:
             status='failed: ' + e.__str__()
-            file('bsd_Send_To_Senate.log', 'a').write('%s, %s, "%s"\n' % (name, state, status))
+        file(statfile, 'a').write('%s, %s, "%s"\n' % (name, state, status))
 
                 
                 
@@ -783,12 +792,15 @@ def usage():
     ''' print command line usage '''
     print "htest - house test"
     print "stest - senate test"
+    print "senatebsd csvfile statfile"
     print "Unknown usage"
 
 if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'senatebsd':
-        bsd_Send_To_Senate()
+        csvfile = sys.argv[2]
+        statfile = sys.argv[3]
+        bsd_Send_To_Senate(csvfile, statfile)
         sys.exit(0)
     if sys.argv[1] == 'htest' and len(sys.argv)==2:
         housetest()

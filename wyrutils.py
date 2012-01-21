@@ -11,7 +11,7 @@ test_email = 'me@aaronsw.com' #wyr test emails to go to this
 production_test_email = 'me@aaronsw.com' #all production wyr msgs and their responses go here
 production_mode = True
 
-DEBUG = True
+DEBUG = False
 
             
 class ZipShared(Exception): pass
@@ -146,32 +146,32 @@ class Form(object):
             return self.fill(name, 'fname')
 
     def fill_address(self, addr1, addr2):
-        print "Filling address ", addr1, addr2
+        if DEBUG: print "Filling address ", addr1, addr2
         addr1control = self.find_control(name='address')
         addr2control = self.find_control(name='addr2')
         emailcontrol = self.find_control(name='email')
         if emailcontrol == addr1control:
             #need to be more restrictive
-            print "email control and addr1control match.  that's not good"
+            if DEBUG: print "email control and addr1control match.  that's not good"
 
         if (addr2control):
-            print "Found addr2control"
+            if DEBUG: print "Found addr2control"
             self.fill(addr2, control=addr2control)
             return self.fill(addr1, control=addr1control)
         #if self.fill(addr2, 'addr2'):
          #   self.fill(addr1, 'address')
         elif (addr1control):
-            print "Found one address control: ", addr1control.name
+            if DEBUG: print "Found one address control: ", addr1control.name
             fulladdress = "%s %s" % (addr1, addr2)
             #return self.fill(fulladdress, 'address')
             return self.fill(fulladdress,  control=addr1control)
         else:
-            print "Found no address controls.  Returning false"
+            if DEBUG: print "Found no address controls.  Returning false"
             return False
 
     def fill_phone(self, phone):
 
-        print "in fill_phone"
+        if DEBUG: print "in fill_phone"
         phone = phone + ' '* (10 - len(phone)) # make phone length 10
         # get the controls (fields) for phone
 
@@ -179,8 +179,9 @@ class Form(object):
         ph_ctrl_types = ['text', 'tel']  
         ph_ctrls = [c for c in self.controls if ('phone' in c.name.lower() or any('phone' in x.text.lower() for x in c.get_labels())) and c.type in ph_ctrl_types]
 
-        print "phone controls: ", ph_ctrls
-        for c in ph_ctrls: print c
+        if DEBUG: print "phone controls: ", ph_ctrls
+        if DEBUG:
+            for c in ph_ctrls: print c
         
         #add area code, if present
         if DEBUG: print "finding area_code"
@@ -286,18 +287,19 @@ class Form(object):
         if not (name or type): return
         
         if type:
-            print "finding control by type"
+            if DEBUG: print "finding control by type"
             c = self.find_control_by_type(type)
-            print "found control by type ", type, c
+            if DEBUG: print "found control by type ", type, c
             return c
         try:
             names = name_options[name]
-            for nameopt in names:
-                print "nameopt: ", nameopt
-            for c in self.controls:
-                print "control: ", c.name
-                for label in c.get_labels():
-                    print "  label: ", label
+            if DEBUG:
+                for nameopt in names:
+                    print "nameopt: ", nameopt
+                for c in self.controls:
+                    print "control: ", c.name
+                    for label in c.get_labels():
+                        print "  label: ", label
         except KeyError:
             names = name and [name]
         c = None
@@ -310,8 +312,8 @@ class Form(object):
         #labels = None
         if c_label:
             labeltext = [label.text for label in c_label.get_labels() ][0].lower()
-
-        print "Name to match: ", name
+            
+        if DEBUG: print "Name to match: ", name
         if DEBUG:
             if c_id: print "c_id ", c_id.name
             if c_name: print "c_name ", c_name.name
@@ -340,7 +342,8 @@ class Form(object):
             c = c_name
         elif c_label:
             c = c_label
-        else: print "no control found"
+        else:
+            if DEBUG: print "no control found"
 
         if DEBUG and c:
             print "control chosen ", c.name
@@ -348,7 +351,7 @@ class Form(object):
         return c     
 
     def find_control_by_name(self, name):
-        print "In find_control_by_name: name=", name
+        if DEBUG: print "In find_control_by_name: name=", name
         name = name.lower()
         import itertools
         potentialMatchesGen = itertools.chain( (c for c in self.controls if c.name and name == c.name.lower()),
@@ -357,7 +360,7 @@ class Form(object):
         #return first(c for c in self.controls if c.name and name in c.name.lower())
 
     def find_control_by_id(self, id):
-        print "In find_control_by_id: id=", id
+        if DEBUG: print "In find_control_by_id: id=", id
         id = id.lower()
         import itertools
         potentialMatches = itertools.chain( (c for c in self.controls if c.id and id == c.id.lower()),
@@ -366,7 +369,7 @@ class Form(object):
         #return first(c for c in self.controls if c.id and id in c.id.lower())
 
     def find_control_by_label(self, label):
-        print "In find_control_by_label: label=", label
+        if DEBUG: print "In find_control_by_label: label=", label
         id = label.lower()
         import itertools
         potentialMatches = itertools.chain((c for c in self.controls if any(label == x.text.lower() for x in c.get_labels())),
@@ -376,7 +379,7 @@ class Form(object):
         #return first(c for c in self.controls if any(id in x.text.lower() for x in c.get_labels()))
 
     def find_control_by_type(self, type):
-        print "In find_control_by_type: type=", type
+        if DEBUG: print "In find_control_by_type: type=", type
         try:
             return self.f.find_control(type=type)
         except ControlNotFoundError:

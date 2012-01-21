@@ -28,6 +28,7 @@ class ZipLookup:
         return d
 
     def getState(self, zip5):
+        print "In getState(", zip5,")"
         zip5Str = str(zip5)
         first3digits = int(zip5Str[:3])
         return self.zipLookupTable[first3digits]
