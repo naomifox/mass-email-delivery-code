@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+#
+# File to call WriteYourRep class.
+#
+
 from WriteYourRep import *
 from DataForWriteYourRep import *
 
@@ -211,13 +217,20 @@ def contact_state(i):
 
 def usage():
     ''' print command line usage '''
-    print "htest - house test"
-    print "stest - senate test"
-    print "senatebsd csvfile statfile"
+    print sys.argv[0], " htest - house test"
+    print sys.argv[0], "stest - senate test"
+    print sys.argv[0], "dumpemails - print out all email contact links"
+    print sys.argv[0], "num make - Aaron's target"
+    print sys.argv[0], "sPNUM house sMAXTODO - Aaron's database usage"
+    print sys.argv[0], "sPNUM senate sMAXTODO - Aaron's database usage"        
+
     print "Unknown usage"
 
 if __name__ == "__main__":
     import sys
+    if len sys.argv[0]:
+        usage()
+        sys.exit(0)
     if sys.argv[1] == 'htest' and len(sys.argv)==2:
         housetest()
         sys.exit(0)
@@ -246,10 +259,15 @@ if __name__ == "__main__":
         file('%s/H_MAXID' % num, 'w').write('0')
         file('%s/H_TOTAL' % num, 'w').write('0')
         sys.exit(0)
-    
-    sPNUM = sys.argv[1]
-    sMAXTODO = int(sys.argv[3])
-    if sys.argv[2] == 'house':
-        send_to_house(sPNUM, sMAXTODO)
-    elif sys.argv[2] == 'senate':
-        send_to_senate(sPNUM, sMAXTODO)
+
+    if lsen(sys.argv == 4):
+        sPNUM = sys.argv[1]
+        sMAXTODO = int(sys.argv[3])
+        if sys.argv[2] == 'house':
+            send_to_house(sPNUM, sMAXTODO)
+        elif sys.argv[2] == 'senate':
+            send_to_senate(sPNUM, sMAXTODO)
+        sys.exit(0)
+
+    usage()
+        
