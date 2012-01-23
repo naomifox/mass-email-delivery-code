@@ -1,6 +1,6 @@
 File:mass-email-delivery-code/README
 Author: Naomi Fox <naomi.fox@gmail.com>
-Date: Dec 8, 2011
+Date: Dec 8, 2011, Januar 22, 2011
 
 = Description =
 Set of files for 
@@ -12,13 +12,49 @@ Set of files for
  ln -s ../webpy/web .
 
 == BeautifulSoup ==
- easy_install BeautifulSoup 
+ sudo easy_install BeautifulSoup 
 
 == ClientForm ==
- easy_install ClientForm
+ sudo easy_install ClientForm
 
-= To run example =
-Test senators:
+
+= Testing =
+
+To run unittests:
+ python TestWriteYourRep.py
+
+To run on one senator:
+  python WriteYourRep.py stest senator - example: stest boxer
+
+To run for one district:
+ python WriteYourRep.py htest dist - example: stest MA-01
+
+To run test over all senators:
  python main.py stest
-Test representatives:
+
+To run test over all reps:
  python main.py htest
+
+= Deliving emails for a large number of signers in a form =
+
+(1) Download data as a csv from the blue state digital site.
+
+(2) Create a new main file to process your CSV file.  See SendBsdCSV.py as an example.
+
+(3) Create an Amazon Web Services account: http://aws.amazon.com/
+
+(4) Set up an EC2 spot instance (be sure to choose one with more memory, and not the micro).  
+With the 64 big Amazon Linux m1.xlarge (8 ECUs, 4 Cores, 15 G memory), we are able to send X emails per hour.
+
+(5) Launch the EC2 instance, scp data over and install the code and dependencies (follow installation instructions above).
+For Amazon Linux, you must install git first: sudo yum install git
+
+(6) Connect to your EC2 instance via ssh.  Split up your csv file into smaller chunks using the unix split command.  
+For example, "split -l 5000 my-data.csv" will split my-data.csv file into smaller files, each with 5000 lines each.  Be careful how you choose to split your file since you may have line breaks in your csv row.
+
+(7) Start multiple jobs.
+    for f in x??; do echo "python mymain.py $f $f.stat > $f.stdout 2> $f.stderr &" > runAll.sh; done
+    /bin/sh runAll.sh
+
+You can monitor how many emails have been sent out by doing a line count on your status file.
+    wc -l data/*stat

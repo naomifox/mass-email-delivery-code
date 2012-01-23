@@ -15,6 +15,8 @@ class WriteYourRep:
 
       def __init__(self):
           self.sendb = get_senate_offices()
+
+          
           
       def writerep(self, i):
       	  """Looks up the right contact page and handles any simple challenges."""
@@ -40,7 +42,7 @@ class WriteYourRep:
       def writesenator(self, senator, i):
       	  """Looks up the right contact page and handles any simple challenges."""
     	  b = browser.Browser()
-          (state, link ) = writer.getSenatorStateAndContactLink(senator)
+          (state, link ) = self.getSenatorStateAndContactLink(senator)
           if state == None:
               raise Exception("Sorry, senator "  + senator + " not found")
           q = self.writerep_general(link, i)
@@ -110,6 +112,38 @@ class WriteYourRep:
                              'email confirmation']
 
 
+      def getStatus(self, pagetxt):
+          confirmations=[cstr for cstr in confirmationStrings if cstr in pagetxt.lower()]
+          if confirmations:
+              return "Thanked"
+          errorStr = self.getError(pagetxt)
+          if errorStr:
+              return "Failed: ", errorStr
+          return "Unknown status"
+           
+      def getError(self, pagetxt):
+          ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
+          for stringList in [zipIncorrectErrorStrs, addressMatchErrorStrs,
+                             #jsRedirectErrorStrs,
+                             #frameErrorStrs,
+                             captchaStrs, generalErrorStrs]:        
+              for errorStr in stringList:
+                  if errorStr.lower() in pagetxt.lower():
+                      if stringList == zipIncorrectErrorStrs:
+                          error = "Zip incorrect: " + errorStr
+                      elif stringList == addressMatchErrorStrs:
+                          error = "Address match problem: " + errorStr
+                      elif stringList == jsRedirectErrorStrs:
+                          error = "Js redirect problem: " + errorStr
+                      elif stringList == frameErrorStrs:
+                          error = "Frame problem: " + errorStr
+                      elif stringList == captchaStrs:
+                          error = "Captcha problem: " + errorStr
+                      elif stringList == generalErrorStrs:
+                          error = "General error: " + errorStr
+                          return error
+          return None
+    
       def getSenators(self, state):
           return self.sendb.get(state, [])
 
@@ -130,29 +164,7 @@ class WriteYourRep:
               labels = b.find_nodes('label', lambda x: x.get('for') == 'HIP_response')
               if labels: return labels[0].string
 
-          def getError(pagetxt):
-              ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
-              for stringList in [zipIncorrectErrorStrs, addressMatchErrorStrs,
-                                 #jsRedirectErrorStrs,
-                                 #frameErrorStrs,
-                                 captchaStrs, generalErrorStrs]:        
-                  for errorStr in stringList:
-                      if errorStr.lower() in pagetxt.lower():
-                          if stringList == zipIncorrectErrorStrs:
-                              error = "Zip incorrect: " + errorStr
-                          elif stringList == addressMatchErrorStrs:
-                              error = "Address match problem: " + errorStr
-                          elif stringList == jsRedirectErrorStrs:
-                              error = "Js redirect problem: " + errorStr
-                          elif stringList == frameErrorStrs:
-                              error = "Frame problem: " + errorStr
-                          elif stringList == captchaStrs:
-                              error = "Captcha problem: " + errorStr
-                          elif stringList == generalErrorStrs:
-                              error = "General error: " + errorStr
-                          return error
-              return None
-    
+          
     
           def fill_inhofe_lgraham(f):
               """special function to fill in forms for inhofe and lgraham"""
@@ -301,7 +313,7 @@ class WriteYourRep:
               thanked = False
               if DEBUG: print "Looking for errors in page " #, b.page
           
-              errorStr = getError(b.page)
+              errorStr = self.getError(b.page)
               if errorStr:
                   if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
                   foundError = True

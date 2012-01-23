@@ -531,7 +531,6 @@ def housetest(distToEmail=None):
         if q:
             file('%s.html' % dist, 'w').write(q)
 
-
 def contact_dist(i):
     print i.dist, 
     try:
@@ -542,6 +541,7 @@ def contact_dist(i):
         file('failures.log', 'a').write('%s %s %s\n' % (i.id, i.dist, e))
         print >>sys.stderr, 'fail:', i.dist, e
     print
+
 
 def contact_state(i):
     sendb = get_senate_offices()
