@@ -22,6 +22,10 @@ class TestSequenceFunctions(unittest.TestCase):
         state, link = self.writer.getSenatorStateAndContactLink('boxer')
         self.assertTrue(link == 'http://boxer.senate.gov/en/contact/policycomments.cfm')
         self.assertTrue(state == 'CA')
+        state, link = self.writer.getSenatorStateAndContactLink('paul')
+        self.assertTrue(link == 'http://www.paul.senate.gov/?p=contact')
+        self.assertTrue(state == 'KY')
+
 
         
     def testWriteBoxer(self):
