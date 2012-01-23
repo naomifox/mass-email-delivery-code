@@ -104,7 +104,8 @@ captchaStrs = ["captcha"]
 generalErrorStrs = ["there was an error processing the submitted information",
                      "Use your web browser's <b>BACK</b> capability",
                     "oops!",
-                    "following problems were found in your submission"]
+                    "following problems were found in your submission",
+                    "web page you have requested is experiencing technical difficulties"]
 
 # these strings show up when successful at submitting form
 confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
