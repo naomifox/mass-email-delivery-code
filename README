@@ -44,7 +44,7 @@ To run test over all reps:
 (3) Create an Amazon Web Services account: http://aws.amazon.com/
 
 (4) Set up an EC2 spot instance (be sure to choose one with more memory, and not the micro).  
-With the 64 big Amazon Linux m1.xlarge (8 ECUs, 4 Cores, 15 G memory), we are able to send X emails per hour.
+With the 64 big Amazon Linux m1.xlarge (8 ECUs, 4 Cores, 15 G memory), we are able to send > 10,000 emails per hour.
 
 (5) Launch the EC2 instance, scp data over and install the code and dependencies (follow installation instructions above).
 For Amazon Linux, you must install git first: sudo yum install git
