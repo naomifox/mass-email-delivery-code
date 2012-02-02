@@ -17,5 +17,8 @@ SUBJECT_DB = {
   164: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
   160: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
   158: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
-  156: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill"
+  156: "Oppose PIPA (S.968) and SOPA (H.3261), the Internet censorship bill",
+  178: "Please oppose PROTECT IP Act",
+  194: "I pledge to vote against Internet censorship supporters",
+  205: "Oppose Lamar Smith's snooping bill, HR 1981"
 }

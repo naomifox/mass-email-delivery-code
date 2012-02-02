@@ -119,6 +119,25 @@ def housetest(distToEmail=None):
         if q:
             file('%s.html' % dist, 'w').write(q)    
 
+def convert_i(r):
+    i = web.storage()
+    i.id = r.parent_id
+    i.state = r.state
+    i.zip5, i.zip4 = r.zip, r.plus4
+    i.dist = r.us_district.replace('_', '-')
+    
+    i.prefix = r.get('prefix', 'Mr.').encode('utf8')
+    i.fname = r.first_name.encode('utf8')
+    i.lname = r.last_name.encode('utf8')
+    i.addr1 = r.address1.encode('utf8')
+    i.addr2 = r.address2.encode('utf8')
+    i.city = r.city.encode('utf8')
+    i.phone = '571-336-2637'
+    i.email = r.email.encode('utf8')
+    i.full_msg = r.value.encode('utf8')
+    i.subject = SUBJECT_DB.get(r.page_id, 'Please oppose this bill')
+    return i
+
 def send_to(chamber, pnum, maxtodo):
     '''
     chamber is either S or H for senate or house
@@ -217,18 +236,17 @@ def contact_state(i):
 
 def usage():
     ''' print command line usage '''
-    print sys.argv[0], " htest - house test"
+    print sys.argv[0], "htest - house test"
     print sys.argv[0], "stest - senate test"
     print sys.argv[0], "dumpemails - print out all email contact links"
-    print sys.argv[0], "num make - Aaron's target"
-    print sys.argv[0], "sPNUM house sMAXTODO - Aaron's database usage"
-    print sys.argv[0], "sPNUM senate sMAXTODO - Aaron's database usage"        
+    print sys.argv[0], "<page_id> make - initiate ActionKit delivery"
+    print sys.argv[0], "<page_id> (house|senate) <maxtodo> - ActionKit delivery"
 
     print "Unknown usage"
 
 if __name__ == "__main__":
     import sys
-    if len sys.argv[0]:
+    if len(sys.argv) == 0:
         usage()
         sys.exit(0)
     if sys.argv[1] == 'htest' and len(sys.argv)==2:
@@ -260,7 +278,8 @@ if __name__ == "__main__":
         file('%s/H_TOTAL' % num, 'w').write('0')
         sys.exit(0)
 
-    if lsen(sys.argv == 4):
+    if len(sys.argv) == 4:
+	from subjects import SUBJECT_DB
         sPNUM = sys.argv[1]
         sMAXTODO = int(sys.argv[3])
         if sys.argv[2] == 'house':
