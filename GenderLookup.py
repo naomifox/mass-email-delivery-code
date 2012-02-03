@@ -19,13 +19,13 @@ class GenderLookup:
 
     def getFemaleRank(self, name):
         """ returns rank if name is found.  -1 if name is not found """
-        if name in self.femaleLookupTable:
+        if name.upper() in self.femaleLookupTable:
             return self.femaleLookupTable[name]
         return -1
 
     def getMaleRank(self, name):
         """ returns rank if name is found. -1 if name is not found """
-        if name in self.maleLookupTable:
+        if name.upper() in self.maleLookupTable:
             return self.maleLookupTable[name]
         return -1
 
@@ -34,8 +34,8 @@ class GenderLookup:
         attempts to assign a gender to a first name.
         returns M for male, F for female, and N for not found
         """
-        femaleRank = self.getFemaleRank(name)
-        maleRank = self.getMaleRank(name)
+        femaleRank = self.getFemaleRank(name.upper())
+        maleRank = self.getMaleRank(name.upper())
         if femaleRank < 0 and maleRank < 0:
             return 'N'
         elif femaleRank < 0:
