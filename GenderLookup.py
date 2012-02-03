@@ -2,7 +2,6 @@
 # Class for looking up gender by name
 # 
 
-import sys
 
 class GenderLookup:
     def __init__(self):
@@ -32,7 +31,7 @@ class GenderLookup:
 
     def getGender(self, name):
         """
-        attempts to determine gender of name.
+        attempts to assign a gender to a first name.
         returns M for male, F for female, and N for not found
         """
         femaleRank = self.getFemaleRank(name)
@@ -50,6 +49,10 @@ class GenderLookup:
 
 if __name__ == "__main__":
     import sys
+    if len(sys.argv) != 2:
+        print "Prints out gender based on name: M, F, or N (for not found)"
+        print "Usage: \n python %s name" % sys.argv[0]
+        exit (0)
     name = sys.argv[1].upper()
     z = GenderLookup()
     print "Gender of %s is %s" % (name, z.getGender(name))
