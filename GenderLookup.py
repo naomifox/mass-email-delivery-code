@@ -29,6 +29,13 @@ class GenderLookup:
             return self.maleLookupTable[name]
         return -1
 
+    def getPrefix(self, name):
+        """return Ms. if female, and otherwise return Mr."""
+        if self.getGender(name) == 'F':
+            return 'Ms.'
+        else:
+            return 'Mr.'
+        
     def getGender(self, name):
         """
         attempts to assign a gender to a first name.
@@ -55,4 +62,4 @@ if __name__ == "__main__":
         exit (0)
     name = sys.argv[1].upper()
     z = GenderLookup()
-    print "Gender of %s is %s" % (name, z.getGender(name))
+    print "Gender of %s %s is %s" % (z.getPrefix(name), name, z.getGender(name))
