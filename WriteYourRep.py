@@ -238,6 +238,7 @@ class WriteYourRep:
               # (would require some smart parsing or using a javascript interpreter module)
               if 'http-equiv="refresh"' in b.page:
                   if DEBUG: print "Redirect to a new page:"
+                  r_refresh = re.compile('[Uu][Rr][Ll]=([^"]+)')
                   newurl = r_refresh.findall(b.page)[0]
                   newurl = newurl.replace(' ', '%20')
                   newurl = newurl.replace('&amp;', '&')
