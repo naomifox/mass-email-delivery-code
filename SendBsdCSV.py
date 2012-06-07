@@ -113,8 +113,9 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) == 4:
         csvfile = sys.argv[1]
-        statfile = sys.argv[2]
-        bsd_Send_To_Senate(csvfile, statfile)
+        messagefile = sys.argv[2]
+        statfile = sys.argv[3]
+        bsd_Send_To_Senate(csvfile, messagefile, statfile)
         sys.exit(0)
     if len(sys.argv) == 5 and sys.argv[1] == '-d': #dry run
         csvfile = sys.argv[2]
