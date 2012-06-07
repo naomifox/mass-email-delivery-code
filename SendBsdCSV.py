@@ -17,12 +17,14 @@ def bsd_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
 
     (subject, message) = parseMessageFile(messagefile)
     for row in reader:
-        name='unknown'
         state='unknown'
         status = ""
         try:
             #print len(row)
+            first_name = ''
+            last_name = ''
             (id, email,first_name,last_name,addr1,city,state,zip5,postal) = row
+            customizedmessage=message.replace('$FIRSTNAME$', first_name).replace('$LASTNAME$', last_name)
             addr2=""
             #(date, email, name, addr1, addr2, zip5, city, message, source, subsource, ip) = row
             print zip5
@@ -33,13 +35,15 @@ def bsd_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             if email:
                 print email
                 i.email=email
-            if name:
+            if first_name:
+                # this code below was used when a single name field was given
+                # and not separate first and last name fields
                 #names = name.split()
                 #i.fname = "".join(iter(names[0:len(names)-1]))
                 #i.lname = names[-1]
                 i.fname = first_name
                 i.lname = last_name
-                i.prefix = genderassigner.getPrefix(i.fname)                     
+                i.prefix = genderassigner.getPrefix(i.fname)
                 i.id = "%s %s" % (first_name, last_name)
             if addr1:
                 i.addr1 = addr1
@@ -50,7 +54,7 @@ def bsd_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             if city:
                 i.city = city
             if message:
-                i.full_msg = message
+                i.full_msg = customizedmessage
             if subject:
                 i.subject = subject
             sens = writeYourRep.getSenators(state)
@@ -90,10 +94,16 @@ def usage():
     print "csvfile is of form: "
     print "id, email,first_name,last_name,addr1,city,state,zip5,postal"
     print ""
+    print "messagefile can contain FIRSTNAME and LASTNAME fields which are replaced."
     print "messagefile is of the form: "
     print "This is the message subject."
     print "This is the message body."
     print "And this is more of the message body."
+    print "Sincerely,"
+    print "$FIRSTNAME$ $LASTNAME$"
+    print " "
+    print "And here is more."
+    
     
 if __name__ == "__main__":
     import sys
