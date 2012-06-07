@@ -40,7 +40,7 @@ def bsd_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                 i.fname = first_name
                 i.lname = last_name
                 i.prefix = genderassigner.getPrefix(i.fname)                     
-                i.id = name
+                i.id = "%s %s" % (first_name, last_name)
             if addr1:
                 i.addr1 = addr1
                 i.addr2 = addr2
