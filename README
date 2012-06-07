@@ -53,8 +53,15 @@ For Amazon Linux, you must install git first: sudo yum install git
 For example, "split -l 5000 my-data.csv" will split my-data.csv file into smaller files, each with 5000 lines each.  Be careful how you choose to split your file since you may have line breaks in your csv row.
 
 (7) Start multiple jobs.
-    for f in x??; do echo "python mymain.py $f $f.stat > $f.stdout 2> $f.stderr &" > runAll.sh; done
-    /bin/sh runAll.sh
+    	  rm runAll.sh
+    	  for f in x??; do echo "python mymain.py $f $f.stat > $f.stdout 2> $f.stderr &" >> runAll.sh; done
+    Start a screen session, so you can log out and the jobs will continue to run.	
+    	  screen   
+    	  /bin/sh runAll.sh
+    	  Ctrl-a Ctrl-d
+
+    To reattach to the screen later:
+       screen -r
 
 You can monitor how many emails have been sent out by doing a line count on your status file.
     wc -l data/*stat
