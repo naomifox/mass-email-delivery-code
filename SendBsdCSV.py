@@ -51,6 +51,10 @@ def bsd_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             if zip5:
                 i.zip5 = zip5
                 i.zip4 = '0001'
+            if postal:
+                tokens = postal.split('-')
+                if len(tokens) == 2:
+                    i.zip5 = tokens[1]
             if city:
                 i.city = city
             if message:
