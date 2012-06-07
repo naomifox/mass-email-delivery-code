@@ -118,7 +118,7 @@ class WriteYourRep:
               return "Thanked"
           errorStr = self.getError(pagetxt)
           if errorStr:
-              return "Failed: ", errorStr
+              return "Failed: %s" % errorStr
           return "Unknown status"
            
       def getError(self, pagetxt):
