@@ -23,7 +23,9 @@ class Browser:
         
     def open(self, request, data=None):
         """opens the url or processes the request and returns the response"""
-        response = urllib2.build_opener(self.cp).open(request, data)
+        opener = urllib2.build_opener(self.cp)
+        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        response = opener.open(request, data)
         self.response = response
         self.page = response.read()
         self.url = response.geturl()
