@@ -203,7 +203,7 @@ def contact_state(i):
         if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
         if sen in captcha:
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, "Captcha-no-attempt-made"))
-            status += "Captcha with " + sen + ". "
+            status += "Captcha with " + `sen` + ". "
             continue
         if DEBUG: print "writing to member", member
         print sen,
@@ -213,9 +213,9 @@ def contact_state(i):
 
             confirmations=[cstr for cstr in confirmationStrings if cstr in q.lower()]
             if len(confirmations) > 0:
-                status +=  'Thanked by ' + sen + ". "
+                status +=  'Thanked by ' + `sen` + ". "
             else:
-               status +=  'Failure with ' + sen + ". "
+               status +=  'Failure with ' + `sen` + ". "
                if DEBUG: print status
                file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, status))
 
@@ -224,7 +224,7 @@ def contact_state(i):
             import traceback; traceback.print_exc()
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, e))
             print >>sys.stderr, 'fail:', sen, e
-            status += "Caught an exception on member ", member
+            status += "Caught an exception on member " + `member`
         except:
             print "Caught an exception on member ", member
             import traceback; traceback.print_exc()
