@@ -75,7 +75,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             #print len(row)
             first_name = ''
             last_name = ''
-            (first_name, last_name, email, addr1, zip5) = row
+            (first_name, email, addr1, zip5) = row
             (first_name, last_name) = cleanName(first_name, last_name)
             addr2=""
             zip5=zip5.zfill(5)
