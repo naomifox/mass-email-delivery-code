@@ -3,7 +3,10 @@ Author: Naomi Fox <naomi.fox@gmail.com>
 Date: Dec 8, 2011, Januar 22, 2011
 
 = Description =
-Set of files for 
+Set of files for submitting form-based emails to members of congress.
+
+To get a copy of this code:
+ git clone git://github/naomifox/mass-email-delivery-code.git
 
 = Dependencies =
 == Webpy ==
@@ -16,7 +19,6 @@ Set of files for
 
 == ClientForm ==
  sudo easy_install ClientForm
-
 
 = Testing =
 
