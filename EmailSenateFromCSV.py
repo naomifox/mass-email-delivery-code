@@ -35,10 +35,27 @@ def cleanName(first_name, last_name):
         lname = ' '.join(fnames[len(fnames)-2:len(fnames)])
     return (fname,lname)
 
+
+
          
 def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False):
     '''
-    Parse from the blue-state-digital csv file
+    Parse from the csv file
+
+    Problem forms:
+    www.vitter.senate.gov Problem with link to contact page on senators website
+    www.mccain.senate.gov unknown url type, need to look into this one further
+    levin.senate.gov urllib2.URLError: <urlopen error [Errno 61] Connection refused>
+    www.lieberman.senate.gov Unclear whether it worked or not.
+    franken.senate.gov Unclear whether it worked or not.
+    www.toomey.senate.gov CAPTCHA
+    www.sessions.senate.gov CAPTCHA
+    www.shelby.senate.gov CAPTCHA
+    www.coburn.senate.gov CAPTCHA
+    www.crapo.senate.gov CAPTCHA
+    www.moran.senate.gov CAPTCHA
+    www.roberts.senate.gov CAPTCHA
+    www.paul.senate.gov CAPTCHA
     '''
     import csv
     from ZipLookup import ZipLookup
@@ -91,10 +108,12 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             sens = writeYourRep.getSenators(state)
             for sen in sens:
                 senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
-                #print senname
                 customizedmessage=message.replace('[[NAME]]', "%s %s" % (first_name, last_name)).replace('[[CITY]]', city).replace('[[STATE]]', state).replace('[[SENATOR]]', senname.title())
                 i.full_msg = customizedmessage
-                if dryrun:
+                captchaforms=['toomey','sessions','shelby','coburn','crapo','moran','roberts','paul']
+                if senname in captchaforms:
+                    status += senname + " has captcha.  skipping.  "
+                elif dryrun:
                     status += sen + " " + senname + ": Not attempted with "+ i.__str__()+"\n"
                 else:
                     status += senname + ": "
@@ -123,7 +142,7 @@ def usage():
     import sys
     print "Usages of ", sys.argv[0], ":"
     print "Normal: " + sys.argv[0] + " csvfile messagefile statfile"
-    print "Dryrun: " + sys.argv[0] + "-d csvfile messagefile statfile"
+    print "Dryrun: " + sys.argv[0] + " -d csvfile messagefile statfile"
     print "csvfile is of form: "
     print "first_name, last_name, email, addr1, zip5"
     print ""
