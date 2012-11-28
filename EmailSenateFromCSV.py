@@ -26,6 +26,8 @@ def cleanName(first_name, last_name):
         if len(fnames)>1:
             fname=' '.join(fnames[0:len(fnames)-1])
             lname=fnames[-1]
+        else:
+            lname=first_name #default, just set last name to the first name
     else: # if last_name field is not empty
         if len(fnames)>1 and fnames[-1] == lname:
             fname = ' '.join(fnames[0:len(fnames)-1])

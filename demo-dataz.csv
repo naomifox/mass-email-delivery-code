@@ -2,4 +2,5 @@
 "test2 user2 Jr","user2","test@testuser.com","22 Test St","90210"
 "test3 user3","user3","test@testuser.com","22 Test St My City, CA","90210"
 "test4 user4 jr","user4","test@testuser.com","22 Test St My City, CA","90210"
-"test5 user5 IV","","test@testuser.com","22 Test St My City, CA","90210"
+"test5 user5 IV","","test@testuser.com","22 Test St My City, CA","1002"
+"test6",,"test@testuser.com","22 Test St My City, CA",1002
