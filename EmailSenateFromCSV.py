@@ -92,7 +92,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             for sen in sens:
                 senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
                 #print senname
-                customizedmessage=message.replace('[[NAME]]', "%s %s" % (first_name, last_name)).replace('[[CITY]]', city).replace('[[STATE]]', state).replace('[[SENATOR]]', senname)
+                customizedmessage=message.replace('[[NAME]]', "%s %s" % (first_name, last_name)).replace('[[CITY]]', city).replace('[[STATE]]', state).replace('[[SENATOR]]', senname.title())
                 i.full_msg = customizedmessage
                 if dryrun:
                     status += sen + " " + senname + ": Not attempted with "+ i.__str__()+"\n"
