@@ -1,0 +1,15 @@
+Protect the Constitution: update ECPA now!
+Dear Senator [[SENATOR]],
+ 
+Our nation’s privacy laws are profoundly out of date. I am writing to urge you to support updating the Electronic Communications Privacy Act of 1986 to protect our Fourth Amendment rights and uphold the integrity of law enforcement in the digital age.
+ 
+My emails, online documents, and text messages should have the same protections from unreasonable search and seizure as my phone calls, postal mail, and paper documents. The government should have to get a warrant from a judge to obtain these documents, or to track my location using my cell phone. Prosecutors, regulatory agencies and other government officials should not be able to issue their own subpoenas to read my emails.
+ 
+The last significant update to electronic communications privacy legislation was in 1986 when the Internet was in its infancy and email was a novelty. Current electronic privacy laws don’t adequately protect online communications. This legal uncertainty harms the growth of modern businesses that increasingly store documents in “the cloud.” Updating ECPA will support small businesses, create jobs, and reinforce our Constitutional rights.
+ 
+I am following this issue closely and look forward to your reply.
+
+Sincerely,
+[[NAME]]
+[[CITY]], [[STATE]]
+
