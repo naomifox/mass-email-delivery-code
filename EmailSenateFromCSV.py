@@ -30,12 +30,12 @@ def cleanName(first_name, last_name):
         if len(fnames)>1 and fnames[-1] == lname:
             fname = ' '.join(fnames[0:len(fnames)-1])
     # take care of Jrs, etc.
-    if fnames[-1].upper() in ('JR.', 'JR', 'SR', 'SR.', 'II', 'III', 'IV'):
+    if fnames[-1].upper() in ('JR.', 'JR', 'SR.', 'SR', 'I', 'II', 'III', 'IV', 'V', 'VI'):
         fname = ' '.join(fnames[0:len(fnames)-2])
         lname = ' '.join(fnames[len(fnames)-2:len(fnames)])
     return (fname,lname)
-        
-    
+
+         
 def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False):
     '''
     Parse from the blue-state-digital csv file
@@ -59,7 +59,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             (first_name, last_name, email, addr1, zip5) = row
             (first_name, last_name) = cleanName(first_name, last_name)
             addr2=""
-            print zip5
+            zip5=zip5.zfill(5)
             (city, state) = zipLookup.getCityAndState(zip5)
             print "found city and state: %s, %s" % (city, state)
             i = writeYourRep.prepare_i(state+"_" + "01") #hack, need dist for prepare_i
