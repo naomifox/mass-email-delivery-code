@@ -1,8 +1,10 @@
 #
 # Class for looking up state by zips
-# 
+#
 
-class ZipLookup:
+import csv
+
+class ZipLookupState:
     def __init__(self):
         self.zipLookupTable = self.getZipLookupTable(file('ZipTable.txt').read())
 
@@ -31,13 +33,45 @@ class ZipLookup:
         print "In getState(", zip5,")"
         zip5Str = str(zip5)
         first3digits = int(zip5Str[:3])
+        if first3digits not in self.zipLookupTable:
+            raise Exception("Zip not recognized: " + zip5)
         return self.zipLookupTable[first3digits]
+
+
+
+class ZipLookupCityAndState:
+    def __init__(self):
+        self.zipLookupTable = self.getZipLookupTable(open('zip_code_database.csv','rb'))
+
+    def getZipLookupTable(self, zipdump):
+        """returns a dict with of first zip to city and state"""
+        d = {}
+        reader = csv.reader(zipdump)
+        for row in reader:
+            #"zip","type","primary_city","acceptable_cities","unacceptable_cities","state","county","timezone","area_codes","latitude","longitude","world_region","country","decommissioned","estimated_population","notes"
+            zip5=row[0]
+            primary_city=row[2]
+            state=row[5]
+            d[zip5]=(primary_city, state)
+        return d
+
+    def getCityAndState(self, zip5):
+        #print "In getCityAndState(", zip5,")"
+        zip5Str = str(zip5)
+        if zip5Str not in self.zipLookupTable:
+            raise Exception("Zip not recognized: " + zip5)
+        return self.zipLookupTable[zip5Str]
 
 
 
 if __name__ == "__main__":
     import sys
     zip = int(sys.argv[1])
-    z = ZipLookup()
-    state = z.getState(zip)
+    z1 = ZipLookupState()
+    state = z1.getState(zip)
     print "zip: ", zip, "state: ", state
+
+    z2 = ZipLookupCityAndState()
+    (city,state) = z2.getCityAndState(zip)
+    print "zip: ", zip, "city: ", city, "state: ", state
+
