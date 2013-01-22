@@ -67,3 +67,21 @@ For example, "split -l 5000 my-data.csv" will split my-data.csv file into smalle
 
 You can monitor how many emails have been sent out by doing a line count on your status file.
     wc -l data/*stat
+
+= Updating =
+
+When a member changes, or the url to the contact page changes, local data files need to be updates.
+
+To update the senate contact data, retrieve this file:
+http://www.senate.gov/general/contact_information/senators_cfm.xml
+
+Test the contact links by running:
+python main.py stest
+
+Then view the file senate_test_out.txt for failures.  Attempt to find the correct contact links for those that failed and update senators_cfm.xml
+
+To update the house contact data, retrieve this file:
+http://www.contactingthecongress.org/downloads/ContactingCongress.db.txt
+
+Test contact links and update as needed:
+python main.py htest
