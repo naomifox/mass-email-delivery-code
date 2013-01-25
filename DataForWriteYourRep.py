@@ -59,11 +59,14 @@ def getzip(dist):
 
 
 # some district forms require the street match
-distsStreetAddresses = { 'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
+distsStreetAddresses = { 
+    'AL-04' : {'addr1:' : '1710 ALABAMA AVE', 'city' : 'JASPER', 'state' : 'AL', 'zip5' : '35501', 'zip4' : '5400'},
+    'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
                          'AR-01' : { 'addr1' : '2400 Highland Dr', 'city' : 'Jonesboro', 'state' : 'AR', 'zip5' : '72401', 'zip4' : '6213' },
                          'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
                          'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },
                          'NY-08' : { 'addr1' : '10 BATTERY PL', 'city' : 'BOWLING GREEN', 'state' : 'NY', 'zip5' : '10004', 'zip4' : '1042' },
+                         'FL-16' : { 'addr1' : '111 South Orange Ave', 'city' : 'Sarasota', 'state' : 'FL', 'zip5' : '34236', 'zip4' : '5806' },
                          'FL-19' : { 'addr1' : '7268 W ATLANTIC BLVD', 'city' : 'MARGATE', 'state' : 'FL', 'zip5' : '33063', 'zip4' : '4237' },
                          'CO-06' : { 'addr1' : '9220 KIMMER DR', 'city' : 'Lone Tree',  'state' : 'CO', 'zip5' : '80124', 'zip4' : '2878' },
                          'IA-05' : { 'addr1' : '40 Pearl Street', 'city' : 'Council Bluffs', 'state' : 'IA', 'zip5' : '51503', 'zip4': '0817' },
@@ -121,6 +124,7 @@ def get_senate_offices():
         out.setdefault(str(member.state), []).append(str(member.email))
     return out
 
+
 def getcontactcongressdict2(ccdump):
     """returns a dict with district names as keys and email-contact urls as values"""
     d = {}
@@ -129,7 +133,25 @@ def getcontactcongressdict2(ccdump):
             (dist, email_form) = line.split()
             d[dist] = email_form
     return d
-contact_congress_dict = getcontactcongressdict2(file('ContactingCongress-FromJordan.tsv').read())
+#contact_congress_dict = getcontactcongressdict2(file('ContactingCongress-FromJordan.tsv').read())
+
+def getcontactcongressdict(ccdump):
+    """returns a dict with district names as keys and email-contact urls as values
+    District	Name	Party	DC Office	DC Voice	District Voice	Electronic Correspondence	Web
+    """
+    d = {}
+    for line in ccdump.strip().split('\n'):
+        if line.strip():
+            (dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
+            dist2=dist[:2]+"-" + dist[2:]
+            d[dist2] = email_form
+    return d
+
+contact_congress_dict = getcontactcongressdict(file('ContactingCongress.db.txt').read())
+
+
+
+
 
 def getError(pagetxt):
     ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
