@@ -25,6 +25,8 @@ class Browser:
         """opens the url or processes the request and returns the response"""
         opener = urllib2.build_opener(self.cp)
         opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        print "request: ", request
+        print "data: ", data
         response = opener.open(request, data)
         self.response = response
         self.page = response.read()
@@ -36,8 +38,12 @@ class Browser:
         try:
             forms = ParseFile(StringIO(self.page), self.url, backwards_compat=False)
         except ParseError:
-            forms = ParseFile(StringIO(self.page), self.url, backwards_compat=False, \
-                    form_parser_class=XHTMLCompatibleFormParser)
+            try:
+                forms = ParseFile(StringIO(self.page), self.url, backwards_compat=False, form_parser_class=XHTMLCompatibleFormParser)
+            except ParseError:
+                print "error parsing page."
+                #print self.page
+                forms = ()
         return (f for f in forms if predicate is None or predicate(f))
     
     def get_form(self, predicate):
