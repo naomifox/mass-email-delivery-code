@@ -496,7 +496,7 @@ VASR	Mark R. Warner	D	475 Russell Senate Office Building	202-224-2023	703-442-06
 VAJR	Tim M. Kaine	D	B40C Dirksen Senate Office Building	202-224-4024	804-771-2221	http://www.kaine.senate.gov/contact.cfm	http://www.kaine.senate.gov/
 VA01	Rob Wittman	R	2454 Rayburn House Office Building	202-225-4261	757-874-6687	https://forms.house.gov/wittman/webforms/webforms/issue_subscribe.htm	http://www.wittman.house.gov/
 VA02	Scott Rigell	R	418 Cannon House Office Building	202-225-4215	757-687-8290	http://rigell.house.gov/contact/	http://rigell.house.gov/
-VA03	Bobby Scott	D	1201 Longworth House Office Building	202-225-8351	757-380-1000	https://forms.house.gov/bobbyscott/webforms/issue_subscribe.htm http://bobbyscott.house.gov
+VA03	Bobby Scott	D	1201 Longworth House Office Building	202-225-8351	757-380-1000	https://forms.house.gov/bobbyscott/webforms/issue_subscribe.htm	http://bobbyscott.house.gov
 VA04	J. Randy Forbes	R	2135 Rayburn House Office Building	202-225-6365	757-382-0080	http://forbes.house.gov/contact/zipauth.htm	http://forbes.house.gov/
 VA05	Robert Hurt	R	125 Cannon House Office Building	202-225-4711	434-791-2596	https://hurt.house.gov/index.cfm/email-me	http://hurt.house.gov/
 VA06	Bob Goodlatte	R	2309 Rayburn House Office Building	202-225-5431	540-885-3861	http://goodlatte.house.gov/contacts/new	http://goodlatte.house.gov/
