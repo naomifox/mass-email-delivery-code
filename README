@@ -6,12 +6,13 @@ Date: Dec 8, 2011, Januar 22, 2011
 Set of files for submitting form-based emails to members of congress.
 
 To get a copy of this code:
- git clone git://github/naomifox/mass-email-delivery-code.git
+ git clone git://github.com/naomifox/mass-email-delivery-code.git
 
 = Dependencies =
 == Webpy ==
- cd .. 
+ 
  git clone git://github.com/webpy/webpy.git
+ cd mass-email-delivery-code 
  ln -s ../webpy/web .
 
 == BeautifulSoup ==
