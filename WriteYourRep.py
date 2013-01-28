@@ -1,23 +1,50 @@
 import urllib2, re, subprocess, sys, os, time, urlparse
-import web
 import browser, captchasolver, xmltramp
+import web
+
 from wyrutils import *
 from ClientForm import ParseResponse, ControlNotFoundError, AmbiguityError
 import traceback
+
+from BeautifulSoup import *
 
 import socket; socket.setdefaulttimeout(30)
 
 from DataForWriteYourRep import *
 
-DEBUG = False
+DEBUG = True
 
 class WriteYourRep:
 
       def __init__(self):
           self.sendb = get_senate_offices()
+        
+      #
+      #
+      #         <a href="http://cleaver.house.gov/contact-me/email-me"><img src="/content/static/img/icon-email.gif" width="17" height="11" alt="Go to contact form" class="repLink"></a>        
+      def getWyrContactLink(self, i):      	
+      	  b = browser.Browser()
+      	  b.open('http://www.house.gov/htbin/findrep?ADDRLK')
+      	  f = get_form(b, lambda f: f.find_control_by_id('state'))
+          f.fill_address(i.addr1, i.addr2)
+          f.fill_all(city=i.city, state=i.state.upper())
+          nextpage = b.open(f.click())
+          print "Next page: ", nextpage
+          
+          def has_repLink(tag):
+    		return tag.has_attr('class') and tag.attrs['class']=='repLink'
+    	
+          soup = BeautifulSoup(nextpage)
+          imageTags=soup.findAll("img", attrs={'alt' : 'Go to contact form'})
+          fullEmailLink=imageTags[0].parent
+          print "fullEmailLink", fullEmailLink
+          contactUrl = fullEmailLink['href']
+          print  contactUrl
+          return contactUrl
 
-          
-          
+      	  
+
+       
       def writerep(self, i):
       	  """Looks up the right contact page and handles any simple challenges."""
     	  b = browser.Browser()
@@ -28,6 +55,8 @@ class WriteYourRep:
           # elif i.dist in other_direct_forms:
           #    link = other_direct_forms[i.dist]
           # else:
+          
+          #link = getWyrContactLink(i)          
           link = contact_congress_dict[i.dist]
 
           if DEBUG: print "contact_link selected: ", link
@@ -91,9 +120,9 @@ class WriteYourRep:
           #   i.email = 'demandprogressoutreach@gmail.com'
           # Naomi's
           i.email = 'demandprogressoutreach@yahoo.com'
-          i.subject = 'Please oppose the Protect IP Act'
-          
-          i.full_msg = 'I urge you to reject S. 968, the PROTECT IP Act. (My understanding is that the House is currently developing companion legislation.) I am deeply concerned by the danger the bill poses to Internet security, free speech online, and innovation.  The PROTECT IP Act is dangerous and short-sighted, and I urge you to join Senator Wyden, Rep. Zoe Lofgren, and other members of Congress in opposing it.'
+          i.subject = 'Testing'
+      
+          i.full_msg = 'Testing'
     
           if dist in distsStreetAddresses.keys():
               distAddress= distsStreetAddresses[dist]
@@ -200,11 +229,11 @@ class WriteYourRep:
                          MessageType="Express an opinion or share your views with me")
 
               # page has one required control that has no name.  so we need to fill it in
-              if DEBUG:
-                  if (i.dist == 'SD-00' or 'coburn' in b.url):
-                      empty_controls = [c for c in f.controls if not c.value]
-                  for c in empty_controls:
-                      print f.fill('OTH', control=c)
+              #if DEBUG:
+              #    if (i.dist == 'SD-00' or 'coburn' in b.url):
+              #        empty_controls = [c for c in f.controls if not c.value]
+              #    for c in empty_controls:
+              #        print f.fill('OTH', control=c)
 
             
               # Solve captchas.  I included this here because it was placed here by Aaron,
@@ -286,6 +315,7 @@ class WriteYourRep:
 
               # if no redirect and no form was found, just return.  can go no further
               if not form:
+                  if DEBUG: print "no form found"
                   return b.page
             
               # look for captcha
@@ -303,9 +333,15 @@ class WriteYourRep:
                   fill_form(form) #, aggressive=True)
 
               try:
+                  print "trying the next page"
                   nextpage = b.open(form.click())
+
+              except urllib2.HTTPError, error:
+                  print >>sys.stderr, "caught a urllib2 http error"
+                  print >>sys.stderr, "Failed to submit form for url ",  b.url, " error: ", traceback.print_exc()
+                  return "Failed to submit form for url "+  b.url+ " error: "+ traceback.format_exc()
               except:
-                  print >>sys.stderr, "caught an http error"
+                  print >>sys.stderr, "caught an unexpected http error"
                   print >>sys.stderr, "Failed to submit form for url ",  b.url, " error: ", traceback.print_exc()
                   return "Failed to submit form for url "+  b.url+ " error: "+ traceback.format_exc()
           
@@ -361,6 +397,14 @@ if __name__ == "__main__":
             print "Last page in %s.html"% dist
         else:
             usage()
+    elif len(sys.argv) == 2 and sys.argv[1] != 'stest' and sys.argv[1] != 'htest':
+          # try a link
+          link = sys.argv[1]
+          writer = WriteYourRep()
+          i = writer.prepare_i('MA-01')
+          q = writer.writerep_general(link, i)
+          print q
+
     if len(sys.argv) == 3:
         if sys.argv[1] == 'stest':
             writer = WriteYourRep()
