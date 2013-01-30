@@ -97,7 +97,6 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             	contactLink=writeYourRep.getWyrContactLink(i)
             	status += contactLink + " " + ": Not attempted with "+ i.__str__()+"\n"
             else:
-                status += i.id + ": "
                 q = writeYourRep.writerep(i)
                 status += writeYourRep.getStatus(q) +", "
         except Exception, e:
