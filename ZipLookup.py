@@ -31,7 +31,7 @@ class ZipLookup:
         #print "In getCityAndState(", zip5,")"
         zip5Str = str(zip5)
         if zip5Str not in self.zipLookupTable:
-            print self.zipLookupTable
+            #print self.zipLookupTable
             raise Exception("Zip not recognized: " + zip5Str)
         return self.zipLookupTable[zip5Str]
 
