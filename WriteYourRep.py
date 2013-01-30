@@ -29,22 +29,16 @@ class WriteYourRep:
           f.fill_address(i.addr1, i.addr2)
           f.fill_all(city=i.city, state=i.state.upper())
           nextpage = b.open(f.click())
-          print "Next page: ", nextpage
-          
-          def has_repLink(tag):
-    		return tag.has_attr('class') and tag.attrs['class']=='repLink'
-    	
           soup = BeautifulSoup(nextpage)
           imageTags=soup.findAll("img", attrs={'alt' : 'Go to contact form'})
-          fullEmailLink=imageTags[0].parent
-          print "fullEmailLink", fullEmailLink
+          if len(imageTags) > 0:
+          	fullEmailLink=imageTags[0].parent
+          else:
+          	raise Exception("Could not find contact email at find your rep page")
+          print "Contact link:", fullEmailLink
           contactUrl = fullEmailLink['href']
-          print  contactUrl
           return contactUrl
-
-      	  
-
-       
+    
       def writerep(self, i):
       	  """Looks up the right contact page and handles any simple challenges."""
     	  b = browser.Browser()
@@ -56,8 +50,12 @@ class WriteYourRep:
           #    link = other_direct_forms[i.dist]
           # else:
           
-          #link = getWyrContactLink(i)          
-          link = contact_congress_dict[i.dist]
+          print i.dist
+          #if (i.dist[3:]!='XX'):
+          #	link = contact_congress_dict[i.dist]
+          #else:
+          link = self.getWyrContactLink(i)          
+          
 
           if DEBUG: print "contact_link selected: ", link
           q = self.writerep_general(link, i)
