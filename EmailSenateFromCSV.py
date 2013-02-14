@@ -79,7 +79,8 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             (first_name,last_name,email,addr1,addr2,city,state,region,zip5,country) = row
             (first_name, last_name) = cleanName(first_name, last_name)
             if zip5.find('-'):
-                zip5 = zip5.split('-')[0]
+                zip4 = zip5.split('-')[1]
+                zip5 = zip5.split('-')[0]            
             (first_name, last_name) = cleanName(first_name, last_name)
             addr2=""
             zip5=zip5.zfill(5)
@@ -105,6 +106,8 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             if zip5:
                 i.zip5 = zip5
                 i.zip4 = '0001'
+            if zip4:
+                i.zip4 = zip4
             if city:
                 i.city = city
             if message:
