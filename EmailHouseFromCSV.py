@@ -60,8 +60,11 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             #first_name = ''
             #last_name = ''
             #(id, first_name, last_name, email, addr1, zip5) = row
-            (id,first_name,last_name,email,addr1,addr2,city,zip5) = row
+            #(id,first_name,last_name,email,addr1,addr2,city,zip5) = row
+            (first_name,last_name,email,addr1,addr2,city,state,region,zip5,country) = row
             (first_name, last_name) = cleanName(first_name, last_name)
+            if zip5.find('-'):
+                zip5 = zip5.split('-')[0]
             addr2=""
             zip5=zip5.zfill(5)
             (city, state) = zipLookup.getCityAndState(zip5)
