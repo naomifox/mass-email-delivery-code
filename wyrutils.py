@@ -11,7 +11,7 @@ test_email = 'me@aaronsw.com' #wyr test emails to go to this
 production_test_email = 'me@aaronsw.com' #all production wyr msgs and their responses go here
 production_mode = True
 
-DEBUG = False
+DEBUG = False #True
 
             
 class ZipShared(Exception): pass

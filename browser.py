@@ -7,6 +7,8 @@ from BeautifulSoup import BeautifulSoup
 from ClientForm import ParseFile, ParseError, XHTMLCompatibleFormParser
 from StringIO import StringIO
 
+DEBUG=False
+
 class Browser:
     def __init__(self, state=None):
         self.cp = urllib2.HTTPCookieProcessor()
@@ -25,8 +27,8 @@ class Browser:
         """opens the url or processes the request and returns the response"""
         opener = urllib2.build_opener(self.cp)
         opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        print "request: ", request
-        print "data: ", data
+        if DEBUG: print "request: ", request
+        if DEBUG: print "data: ", data
         response = opener.open(request, data)
         self.response = response
         self.page = response.read()

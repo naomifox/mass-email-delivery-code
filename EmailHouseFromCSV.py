@@ -63,16 +63,16 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             #(id,first_name,last_name,email,addr1,addr2,city,zip5) = row
             (first_name,last_name,email,addr1,addr2,city,state,region,zip5,country) = row
             (first_name, last_name) = cleanName(first_name, last_name)
-            if zip5.find('-'):
+            if zip5.find('-')>0:
                 zip4 = zip5.split('-')[1]
                 zip5 = zip5.split('-')[0]            
             addr2=""
             zip5=zip5.zfill(5)
             (city, state) = zipLookup.getCityAndState(zip5)
-            print "found city and state: %s, %s" % (city, state)
+            #print "found city and state: %s, %s" % (city, state)
             i = writeYourRep.prepare_i(state+"_" + "XX") #hack, need dist for prepare_i
             if email:
-                print email
+                #print email
                 i.email=email
             if first_name:
                 # this code below was used when a single name field was given

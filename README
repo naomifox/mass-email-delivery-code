@@ -38,7 +38,7 @@ To run test over all senators:
 To run test over all reps:
  python main.py htest
 
-= Deliving emails for a large number of signers in a form =
+= Delivering emails for a large number of signers in a form =
 
 (1) Download data as a csv from the blue state digital site.
 

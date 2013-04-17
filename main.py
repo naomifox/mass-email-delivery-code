@@ -85,7 +85,7 @@ def housetest(distToEmail=None):
             q = writeYourRep.writerep(writeYourRep.prepare_i(dist))
             errorString = None
             if checkByEye:
-                subprocess.Popen(['open', '%s.html' % dist])
+                subprocess.Popen(['open', 'house/%s.html' % dist])
                 print
                 result = raw_input('%s? ' % dist)
             else:
@@ -113,11 +113,10 @@ def housetest(distToEmail=None):
             errorString = detail.__str__()
             import traceback; traceback.print_exc()
             print 'err.add(%s)' % (repr(dist))
-            fh.write('%s.add(%s) %s\n' % ('err', repr(dist),errorString))
-            
+            fh.write('%s.add(%s) %s\n' % ('err', repr(dist),errorString))          
         fh.flush()
         if q:
-            file('%s.html' % dist, 'w').write(q)    
+            file('house/%s.html' % dist, 'w').write(q)    
 
 def convert_i(r):
     i = web.storage()

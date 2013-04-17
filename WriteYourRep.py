@@ -12,7 +12,7 @@ import socket; socket.setdefaulttimeout(30)
 
 from DataForWriteYourRep import *
 
-DEBUG = True
+DEBUG = False #True
 
 class WriteYourRep:
 
@@ -51,10 +51,10 @@ class WriteYourRep:
           # else:
           
           print i.dist
-          #if (i.dist[3:]!='XX'):
-          #	link = contact_congress_dict[i.dist]
-          #else:
-          link = self.getWyrContactLink(i)          
+          if (i.dist[3:]!='XX'):
+          	link = contact_congress_dict[i.dist]
+          else:
+                link = self.getWyrContactLink(i)          
           
 
           if DEBUG: print "contact_link selected: ", link
@@ -331,7 +331,7 @@ class WriteYourRep:
                   fill_form(form) #, aggressive=True)
 
               try:
-                  print "trying the next page"
+                  if DEBUG: print "trying the next page"
                   nextpage = b.open(form.click())
 
               except urllib2.HTTPError, error:
