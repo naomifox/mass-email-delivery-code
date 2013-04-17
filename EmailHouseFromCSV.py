@@ -63,6 +63,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             #(id,first_name,last_name,email,addr1,addr2,city,zip5) = row
             (first_name,last_name,email,addr1,addr2,city,state,region,zip5,country) = row
             (first_name, last_name) = cleanName(first_name, last_name)
+            zip4=None
             if zip5.find('-')>0:
                 zip4 = zip5.split('-')[1]
                 zip5 = zip5.split('-')[0]            
