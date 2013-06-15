@@ -12,7 +12,7 @@ import socket; socket.setdefaulttimeout(30)
 
 from DataForWriteYourRep import *
 
-DEBUG = False #True
+DEBUG = True
 
 class WriteYourRep:
 
@@ -101,10 +101,11 @@ class WriteYourRep:
         i.state = dist[:2]
         if len(dist) == 2:
             (i.zip5, i.zip4) = getzip(dist + '-00')
-        if len(dist) == 2 and not i.zip5:
-            i.zip5, i.zip4 = getzip(dist + '-01')
-        else:
-            i.zip5, i.zip4 = getzip(dist)
+        if not i.zip5:
+            if len(dist) == 2:
+                i.zip5, i.zip4 = getzip(dist + '-01')
+            else:
+                i.zip5, i.zip4 = getzip(dist)
 
         # stuff in some default values
         i.prefix = 'Mr.'
@@ -158,14 +159,19 @@ class WriteYourRep:
                 if errorStr.lower() in pagetxt.lower():
                     if stringList == zipIncorrectErrorStrs:
                         error = "Zip incorrect: " + errorStr
+                        return error
                     elif stringList == addressMatchErrorStrs:
                         error = "Address match problem: " + errorStr
+                        return error
                     elif stringList == jsRedirectErrorStrs:
                         error = "Js redirect problem: " + errorStr
+                        return error
                     elif stringList == frameErrorStrs:
                         error = "Frame problem: " + errorStr
+                        return error
                     elif stringList == captchaStrs:
                         error = "Captcha problem: " + errorStr
+                        return error
                     elif stringList == generalErrorStrs:
                         error = "General error: " + errorStr
                         return error
@@ -204,6 +210,7 @@ class WriteYourRep:
         def fill_form(f):
             ''' f is a form '''
 
+            if DEBUG: print "in fill_form, filling name"
             f.fill_name(i.prefix, i.fname, i.lname)
             if DEBUG: print "in fill_form, filling addr"
             f.fill_address(i.addr1, i.addr2)
@@ -350,6 +357,7 @@ class WriteYourRep:
 
             errorStr = self.getError(b.page)
             if errorStr:
+                #import pdb; pdb.set_trace();
                 if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
                 foundError = True
 

@@ -55,7 +55,7 @@ def getzip(dist):
     try:
         return dist_zip_dict[dist]
     except Exception:
-        return '', ''    
+        return '', ''
 
 
 # some district forms require the street match
@@ -98,7 +98,8 @@ distsStreetAddresses = {
 zipIncorrectErrorStrs = ["not correct for the selected state",
                          "was not found in our database",                     
                          "it appears that you live outside of",
-                         "Please re-enter your complete zip code"]
+                         "Please re-enter your complete zip code",
+                         "Zip Code is required"]
 addressMatchErrorStrs = ["exact street name match could not be found", "Address matched to multiple records", "is shared by more than one",
                          "street number in the input address was not valid"]
 jsRedirectErrorStrs = ["window.location"]
