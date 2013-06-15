@@ -101,7 +101,7 @@ class WriteYourRep:
         i.state = dist[:2]
         if len(dist) == 2:
             (i.zip5, i.zip4) = getzip(dist + '-00')
-        if not i.zip5:
+        if "zip5" not in i or not i.zip5:
             if len(dist) == 2:
                 i.zip5, i.zip4 = getzip(dist + '-01')
             else:
@@ -129,6 +129,8 @@ class WriteYourRep:
             i.city = distAddress['city']
             i.zip5 = distAddress['zip5']
             i.zip4 = distAddress['zip4']
+
+        if DEBUG: print "contact info object:\n", i
 
         return i
 
@@ -179,6 +181,14 @@ class WriteYourRep:
 
     def getSenators(self, state):
         return self.sendb.get(state, [])
+
+    def is_thankyou_genuine(self, pagetxt):
+        negation_texts = ["Zip Authenticated"]
+        for string in negation_texts:
+            if string.lower() in pagetxt.lower():
+                return False
+
+        return True
 
     def writerep_general(self, contact_link, i):
         """ General function.
@@ -357,7 +367,7 @@ class WriteYourRep:
 
             errorStr = self.getError(b.page)
             if errorStr:
-                #import pdb; pdb.set_trace();
+                import pdb; pdb.set_trace();
                 if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
                 foundError = True
 
@@ -373,7 +383,7 @@ class WriteYourRep:
             if b.url in successUrls:
                 thanked = True
 
-            if thanked or foundError:
+            if (thanked and self.is_thankyou_genuine(b.page)) or foundError:
                 return nextpage
 
         if DEBUG: print "Tried ", k, "times, unsuccessfully, to fill form"

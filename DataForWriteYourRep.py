@@ -99,7 +99,8 @@ zipIncorrectErrorStrs = ["not correct for the selected state",
                          "was not found in our database",                     
                          "it appears that you live outside of",
                          "Please re-enter your complete zip code",
-                         "Zip Code is required"]
+                         "Zip Code is required",
+                         "Zip Code Authentication Failed"]
 addressMatchErrorStrs = ["exact street name match could not be found", "Address matched to multiple records", "is shared by more than one",
                          "street number in the input address was not valid"]
 jsRedirectErrorStrs = ["window.location"]

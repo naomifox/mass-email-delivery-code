@@ -1,1 +1,966 @@
 err.add('AK-00') 'zip5'
+err.add('AK-00') 'zip5'
+err.add('AL-01') 'zip5'
+err.add('AL-02') 'zip5'
+err.add('AL-03') 'zip5'
+err.add('AL-04') 'zip5'
+err.add('AL-05') 'zip5'
+err.add('AL-06') 'zip5'
+err.add('AL-07') 'zip5'
+err.add('AR-01') 'zip5'
+err.add('AR-02') 'zip5'
+err.add('AR-03') 'zip5'
+err.add('AR-04') 'zip5'
+err.add('AS-00') 'zip5'
+err.add('AZ-01') 'zip5'
+err.add('AZ-02') 'zip5'
+err.add('AZ-03') 'zip5'
+err.add('AZ-04') 'zip5'
+err.add('AZ-05') 'zip5'
+err.add('AZ-06') 'zip5'
+err.add('AZ-07') 'zip5'
+err.add('AZ-08') 'zip5'
+err.add('CA-01') 'zip5'
+err.add('CA-02') 'zip5'
+err.add('CA-03') 'zip5'
+err.add('CA-04') 'zip5'
+err.add('CA-05') 'zip5'
+err.add('CA-06') 'zip5'
+err.add('CA-07') 'zip5'
+err.add('CA-08') 'zip5'
+err.add('CA-09') 'zip5'
+err.add('CA-10') 'zip5'
+err.add('CA-11') 'zip5'
+err.add('CA-12') 'zip5'
+err.add('CA-13') 'zip5'
+err.add('CA-14') 'zip5'
+err.add('CA-15') 'zip5'
+err.add('CA-16') 'zip5'
+err.add('CA-17') 'zip5'
+err.add('CA-18') 'zip5'
+err.add('CA-19') 'zip5'
+err.add('CA-20') 'zip5'
+err.add('CA-21') 'zip5'
+err.add('CA-22') 'zip5'
+err.add('CA-23') 'zip5'
+err.add('CA-24') 'zip5'
+err.add('CA-25') 'zip5'
+err.add('CA-26') 'zip5'
+err.add('CA-27') 'zip5'
+err.add('CA-28') 'zip5'
+err.add('CA-29') 'zip5'
+err.add('CA-30') 'zip5'
+err.add('CA-31') 'zip5'
+err.add('CA-32') 'zip5'
+err.add('CA-33') 'zip5'
+err.add('CA-34') 'zip5'
+err.add('CA-35') 'zip5'
+err.add('CA-36') 'zip5'
+err.add('CA-37') 'zip5'
+err.add('CA-38') 'zip5'
+err.add('CA-39') 'zip5'
+err.add('CA-40') 'zip5'
+err.add('CA-41') 'zip5'
+err.add('CA-42') 'zip5'
+err.add('CA-43') 'zip5'
+err.add('CA-44') 'zip5'
+err.add('CA-45') 'zip5'
+err.add('CA-46') 'zip5'
+err.add('CA-47') 'zip5'
+err.add('CA-48') 'zip5'
+err.add('CA-49') 'zip5'
+err.add('CA-50') 'zip5'
+err.add('CA-51') 'zip5'
+err.add('CA-52') 'zip5'
+err.add('CA-53') 'zip5'
+err.add('CO-01') 'zip5'
+err.add('CO-02') 'zip5'
+err.add('CO-03') 'zip5'
+err.add('CO-04') 'zip5'
+err.add('CO-05') 'zip5'
+err.add('CO-06') 'zip5'
+err.add('CO-07') 'zip5'
+err.add('CT-01') 'zip5'
+err.add('CT-02') 'zip5'
+err.add('CT-03') 'zip5'
+err.add('CT-04') 'zip5'
+err.add('CT-05') 'zip5'
+err.add('DC-00') 'zip5'
+err.add('DE-00') 'zip5'
+err.add('FL-01') 'zip5'
+err.add('FL-02') 'zip5'
+err.add('FL-03') 'zip5'
+err.add('FL-04') 'zip5'
+err.add('FL-05') 'zip5'
+err.add('FL-06') 'zip5'
+err.add('FL-07') 'zip5'
+err.add('FL-08') 'zip5'
+err.add('FL-09') 'zip5'
+err.add('FL-10') 'zip5'
+err.add('FL-11') 'zip5'
+err.add('FL-12') 'zip5'
+err.add('FL-13') 'zip5'
+err.add('FL-14') 'zip5'
+err.add('FL-15') 'zip5'
+err.add('FL-16') 'zip5'
+err.add('FL-17') 'zip5'
+err.add('FL-18') 'zip5'
+err.add('FL-19') 'zip5'
+err.add('FL-20') 'zip5'
+err.add('FL-21') 'zip5'
+err.add('FL-22') 'zip5'
+err.add('FL-23') 'zip5'
+err.add('FL-24') 'zip5'
+err.add('FL-25') 'zip5'
+err.add('GA-01') 'zip5'
+err.add('GA-02') 'zip5'
+err.add('GA-03') 'zip5'
+err.add('GA-04') 'zip5'
+err.add('GA-05') 'zip5'
+err.add('GA-06') 'zip5'
+err.add('GA-07') 'zip5'
+err.add('GA-08') 'zip5'
+err.add('GA-09') 'zip5'
+err.add('GA-10') 'zip5'
+err.add('GA-11') 'zip5'
+err.add('GA-12') 'zip5'
+err.add('GA-13') 'zip5'
+err.add('GU-00') 'zip5'
+err.add('HI-01') 'zip5'
+err.add('HI-02') 'zip5'
+err.add('IA-01') 'zip5'
+err.add('IA-02') 'zip5'
+err.add('IA-03') 'zip5'
+err.add('IA-04') 'zip5'
+err.add('IA-05') 'zip5'
+err.add('ID-01') 'zip5'
+err.add('ID-02') 'zip5'
+err.add('IL-01') 'zip5'
+err.add('IL-02') 'zip5'
+err.add('IL-03') 'zip5'
+err.add('IL-04') 'zip5'
+err.add('IL-05') 'zip5'
+err.add('IL-06') 'zip5'
+err.add('IL-07') 'zip5'
+err.add('IL-08') 'zip5'
+err.add('IL-09') 'zip5'
+err.add('IL-10') 'zip5'
+err.add('IL-11') 'zip5'
+err.add('IL-12') 'zip5'
+err.add('IL-13') 'zip5'
+err.add('IL-14') 'zip5'
+err.add('IL-15') 'zip5'
+err.add('IL-16') 'zip5'
+err.add('IL-17') 'zip5'
+err.add('IL-18') 'zip5'
+err.add('IL-19') 'zip5'
+err.add('IN-01') 'zip5'
+err.add('IN-02') 'zip5'
+err.add('IN-03') 'zip5'
+err.add('IN-04') 'zip5'
+err.add('IN-05') 'zip5'
+err.add('IN-06') 'zip5'
+err.add('IN-07') 'zip5'
+err.add('IN-08') 'zip5'
+err.add('IN-09') 'zip5'
+err.add('KS-01') 'zip5'
+err.add('KS-02') 'zip5'
+err.add('KS-03') 'zip5'
+err.add('KS-04') 'zip5'
+err.add('KY-01') 'zip5'
+err.add('KY-02') 'zip5'
+err.add('KY-03') 'zip5'
+err.add('KY-04') 'zip5'
+err.add('KY-05') 'zip5'
+err.add('KY-06') 'zip5'
+err.add('LA-01') 'zip5'
+err.add('LA-02') 'zip5'
+err.add('LA-03') 'zip5'
+err.add('LA-04') 'zip5'
+err.add('LA-05') 'zip5'
+err.add('LA-07') 'zip5'
+err.add('MA-01') 'zip5'
+err.add('MA-02') 'zip5'
+err.add('MA-03') 'zip5'
+err.add('MA-04') 'zip5'
+err.add('MA-05') 'zip5'
+err.add('MA-06') 'zip5'
+err.add('MA-07') 'zip5'
+err.add('MA-08') 'zip5'
+err.add('MA-09') 'zip5'
+err.add('MA-10') 'zip5'
+err.add('MD-01') 'zip5'
+err.add('MD-02') 'zip5'
+err.add('MD-03') 'zip5'
+err.add('MD-04') 'zip5'
+err.add('MD-05') 'zip5'
+err.add('MD-06') 'zip5'
+err.add('MD-07') 'zip5'
+err.add('MD-08') 'zip5'
+err.add('ME-01') 'zip5'
+err.add('ME-02') 'zip5'
+err.add('MI-01') 'zip5'
+err.add('MI-02') 'zip5'
+err.add('MI-03') 'zip5'
+err.add('MI-04') 'zip5'
+err.add('MI-05') 'zip5'
+err.add('MI-06') 'zip5'
+err.add('MI-07') 'zip5'
+err.add('MI-08') 'zip5'
+err.add('MI-09') 'zip5'
+err.add('MI-10') 'zip5'
+err.add('MI-11') 'zip5'
+err.add('MI-12') 'zip5'
+err.add('MI-13') 'zip5'
+err.add('MI-14') 'zip5'
+err.add('MI-15') 'zip5'
+err.add('MN-01') 'zip5'
+err.add('MN-02') 'zip5'
+err.add('MN-03') 'zip5'
+err.add('MN-04') 'zip5'
+err.add('MN-05') 'zip5'
+err.add('MN-06') 'zip5'
+err.add('MN-07') 'zip5'
+err.add('MN-08') 'zip5'
+err.add('MO-01') 'zip5'
+err.add('MO-02') 'zip5'
+err.add('MO-03') 'zip5'
+err.add('MO-04') 'zip5'
+err.add('MO-05') 'zip5'
+err.add('MO-06') 'zip5'
+err.add('MO-07') 'zip5'
+err.add('MO-08') 'zip5'
+err.add('MO-09') 'zip5'
+err.add('MS-01') 'zip5'
+err.add('MS-02') 'zip5'
+err.add('MS-03') 'zip5'
+err.add('MS-04') 'zip5'
+err.add('MT-00') 'zip5'
+err.add('NC-01') 'zip5'
+err.add('NC-02') 'zip5'
+err.add('NC-03') 'zip5'
+err.add('NC-04') 'zip5'
+err.add('NC-05') 'zip5'
+err.add('NC-06') 'zip5'
+err.add('NC-07') 'zip5'
+err.add('NC-08') 'zip5'
+err.add('NC-09') 'zip5'
+err.add('NC-10') 'zip5'
+err.add('NC-11') 'zip5'
+err.add('NC-12') 'zip5'
+err.add('NC-13') 'zip5'
+err.add('ND-00') 'zip5'
+err.add('NE-01') 'zip5'
+err.add('NE-02') 'zip5'
+err.add('NE-03') 'zip5'
+err.add('NH-01') 'zip5'
+err.add('NH-02') 'zip5'
+err.add('NJ-01') 'zip5'
+err.add('NJ-02') 'zip5'
+err.add('NJ-03') 'zip5'
+err.add('NJ-04') 'zip5'
+err.add('NJ-05') 'zip5'
+err.add('NJ-06') 'zip5'
+err.add('NJ-07') 'zip5'
+err.add('NJ-08') 'zip5'
+err.add('NJ-09') 'zip5'
+err.add('NJ-10') 'zip5'
+err.add('NJ-11') 'zip5'
+err.add('NJ-12') 'zip5'
+err.add('NJ-13') 'zip5'
+err.add('NM-01') 'zip5'
+err.add('NM-02') 'zip5'
+err.add('NM-03') 'zip5'
+err.add('NV-01') 'zip5'
+err.add('NV-02') 'zip5'
+err.add('NV-03') 'zip5'
+err.add('NY-01') 'zip5'
+err.add('NY-02') 'zip5'
+err.add('NY-03') 'zip5'
+err.add('NY-04') 'zip5'
+err.add('NY-05') 'zip5'
+err.add('NY-06') 'zip5'
+err.add('NY-07') 'zip5'
+err.add('NY-08') 'zip5'
+err.add('NY-09') 'zip5'
+err.add('NY-10') 'zip5'
+err.add('NY-11') 'zip5'
+err.add('NY-12') 'zip5'
+err.add('NY-13') 'zip5'
+err.add('NY-14') 'zip5'
+err.add('NY-15') 'zip5'
+err.add('NY-16') 'zip5'
+err.add('NY-17') 'zip5'
+err.add('NY-18') 'zip5'
+err.add('NY-19') 'zip5'
+err.add('NY-20') 'zip5'
+err.add('NY-21') 'zip5'
+err.add('NY-22') 'zip5'
+err.add('NY-23') 'zip5'
+err.add('NY-24') 'zip5'
+err.add('NY-25') 'zip5'
+err.add('NY-26') 'zip5'
+err.add('NY-27') 'zip5'
+err.add('NY-28') 'zip5'
+err.add('NY-29') 'zip5'
+err.add('OH-01') 'zip5'
+err.add('OH-02') 'zip5'
+err.add('OH-03') 'zip5'
+err.add('OH-04') 'zip5'
+err.add('OH-05') 'zip5'
+err.add('OH-06') 'zip5'
+err.add('OH-07') 'zip5'
+err.add('OH-08') 'zip5'
+err.add('OH-09') 'zip5'
+err.add('OH-10') 'zip5'
+err.add('OH-11') 'zip5'
+err.add('OH-12') 'zip5'
+err.add('OH-13') 'zip5'
+err.add('OH-14') 'zip5'
+err.add('OH-15') 'zip5'
+err.add('OH-16') 'zip5'
+err.add('OH-17') 'zip5'
+err.add('OH-18') 'zip5'
+err.add('OK-01') 'zip5'
+err.add('OK-02') 'zip5'
+err.add('OK-03') 'zip5'
+err.add('OK-04') 'zip5'
+err.add('OK-05') 'zip5'
+err.add('OR-01') 'zip5'
+err.add('OR-02') 'zip5'
+err.add('OR-03') 'zip5'
+err.add('OR-04') 'zip5'
+err.add('OR-05') 'zip5'
+err.add('PA-01') 'zip5'
+err.add('PA-02') 'zip5'
+err.add('PA-03') 'zip5'
+err.add('PA-04') 'zip5'
+err.add('PA-05') 'zip5'
+err.add('PA-06') 'zip5'
+err.add('PA-07') 'zip5'
+err.add('PA-08') 'zip5'
+err.add('PA-09') 'zip5'
+err.add('PA-10') 'zip5'
+err.add('PA-11') 'zip5'
+err.add('PA-12') 'zip5'
+err.add('PA-13') 'zip5'
+err.add('PA-14') 'zip5'
+err.add('PA-15') 'zip5'
+err.add('PA-16') 'zip5'
+err.add('PA-17') 'zip5'
+err.add('PA-18') 'zip5'
+err.add('PA-19') 'zip5'
+err.add('PR-00') 'zip5'
+err.add('RI-01') 'zip5'
+err.add('RI-02') 'zip5'
+err.add('SC-01') 'zip5'
+err.add('SC-02') 'zip5'
+err.add('SC-03') 'zip5'
+err.add('SC-04') 'zip5'
+err.add('SC-05') 'zip5'
+err.add('SC-06') 'zip5'
+err.add('SD-00') 'zip5'
+err.add('TN-01') 'zip5'
+err.add('TN-02') 'zip5'
+err.add('TN-03') 'zip5'
+err.add('TN-04') 'zip5'
+err.add('TN-05') 'zip5'
+err.add('TN-06') 'zip5'
+err.add('TN-07') 'zip5'
+err.add('TN-08') 'zip5'
+err.add('TN-09') 'zip5'
+err.add('TX-01') 'zip5'
+err.add('TX-02') 'zip5'
+err.add('TX-03') 'zip5'
+err.add('TX-04') 'zip5'
+err.add('TX-05') 'zip5'
+err.add('TX-06') 'zip5'
+err.add('TX-07') 'zip5'
+err.add('TX-08') 'zip5'
+err.add('TX-09') 'zip5'
+err.add('TX-10') 'zip5'
+err.add('TX-11') 'zip5'
+err.add('TX-12') 'zip5'
+err.add('TX-13') 'zip5'
+err.add('TX-14') 'zip5'
+err.add('TX-15') 'zip5'
+err.add('TX-16') 'zip5'
+err.add('TX-17') 'zip5'
+err.add('TX-18') 'zip5'
+err.add('TX-19') 'zip5'
+err.add('TX-20') 'zip5'
+err.add('TX-21') 'zip5'
+err.add('TX-22') 'zip5'
+err.add('TX-23') 'zip5'
+err.add('TX-24') 'zip5'
+err.add('TX-25') 'zip5'
+err.add('TX-26') 'zip5'
+err.add('TX-27') 'zip5'
+err.add('TX-28') 'zip5'
+err.add('TX-29') 'zip5'
+err.add('TX-30') 'zip5'
+err.add('TX-31') 'zip5'
+err.add('TX-32') 'zip5'
+err.add('UT-01') 'zip5'
+err.add('UT-02') 'zip5'
+err.add('UT-03') 'zip5'
+err.add('VA-01') 'zip5'
+err.add('VA-02') 'zip5'
+err.add('VA-03') 'zip5'
+err.add('VA-04') 'zip5'
+err.add('VA-05') 'zip5'
+err.add('VA-06') 'zip5'
+err.add('VA-07') 'zip5'
+err.add('VA-08') 'zip5'
+err.add('VA-09') 'zip5'
+err.add('VA-10') 'zip5'
+err.add('VA-11') 'zip5'
+err.add('VT-00') 'zip5'
+err.add('WA-01') 'zip5'
+err.add('WA-02') 'zip5'
+err.add('WA-03') 'zip5'
+err.add('WA-04') 'zip5'
+err.add('WA-05') 'zip5'
+err.add('WA-06') 'zip5'
+err.add('WA-07') 'zip5'
+err.add('WA-08') 'zip5'
+err.add('WA-09') 'zip5'
+err.add('WI-01') 'zip5'
+err.add('WI-02') 'zip5'
+err.add('WI-03') 'zip5'
+err.add('WI-04') 'zip5'
+err.add('WI-05') 'zip5'
+err.add('WI-06') 'zip5'
+err.add('WI-07') 'zip5'
+err.add('WI-08') 'zip5'
+err.add('WV-01') 'zip5'
+err.add('WV-02') 'zip5'
+err.add('WV-03') 'zip5'
+err.add('WY-00') 'zip5'
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AK-00')
+thanked.add('AK-00')
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+err.add('AL-05')
+err.add('AL-06')
+thanked.add('AL-07')
+thanked.add('AR-01')
+err.add('AR-02')
+thanked.add('AR-03')
+thanked.add('AR-04')
+err.add('AS-00') unknown url type: faleomavaega@mail.house.gov
+thanked.add('AZ-01')
+err.add('AZ-02')
+err.add('AZ-03') HTTP Error 404: File Not Found
+thanked.add('AZ-04')
+thanked.add('AZ-05')
+err.add('AZ-06')
+thanked.add('AZ-07')
+thanked.add('AZ-08')
+err.add('CA-01')
+thanked.add('CA-02')
+err.add('CA-03')
+thanked.add('CA-04')
+thanked.add('CA-05')
+err.add('CA-06')
+err.add('CA-07') HTTP Error 404: Not Found
+thanked.add('CA-08')
+err.add('CA-09') HTTP Error 404: Not found
+thanked.add('CA-10')
+thanked.add('CA-11')
+thanked.add('CA-12')
+thanked.add('CA-13')
+thanked.add('CA-14')
+thanked.add('CA-15')
+err.add('CA-16')
+err.add('CA-17')
+err.add('CA-18')
+err.add('CA-19')
+thanked.add('CA-20')
+thanked.add('CA-21')
+err.add('CA-22') Captcha problem: captcha
+err.add('CA-23')
+thanked.add('CA-24')
+thanked.add('CA-25')
+err.add('CA-26')
+thanked.add('CA-27')
+thanked.add('CA-28')
+err.add('CA-29')
+thanked.add('CA-30')
+thanked.add('CA-31')
+thanked.add('CA-32')
+err.add('CA-33')
+thanked.add('CA-34')
+err.add('CA-35') HTTP Error 404: Not Found
+err.add('CA-36')
+thanked.add('CA-37')
+thanked.add('CA-38')
+thanked.add('CA-39')
+err.add('CA-40') Address match problem: exact street name match could not be found
+thanked.add('CA-41')
+err.add('CA-42')
+thanked.add('CA-43')
+thanked.add('CA-44')
+err.add('CA-45')
+thanked.add('CA-46')
+thanked.add('CA-47')
+thanked.add('CA-48')
+err.add('CA-49') Captcha problem: captcha
+err.add('CA-50') <urlopen error [Errno 8] nodename nor servname provided, or not known>
+thanked.add('CA-51')
+thanked.add('CA-52')
+thanked.add('CA-53')
+thanked.add('CO-01')
+err.add('CO-02') Address match problem: street number in the input address was not valid
+thanked.add('CO-03')
+thanked.add('CO-04')
+err.add('CO-05') General error: following problems were found in your submission
+thanked.add('CO-06')
+thanked.add('CO-07')
+thanked.add('CT-01')
+thanked.add('CT-02')
+thanked.add('CT-03')
+thanked.add('CT-04')
+thanked.add('CT-05')
+thanked.add('DC-00')
+thanked.add('DE-00')
+thanked.add('FL-01')
+thanked.add('FL-02')
+thanked.add('FL-03')
+err.add('FL-04')
+thanked.add('FL-05')
+thanked.add('FL-06')
+err.add('FL-07')
+err.add('FL-08') Address match problem: exact street name match could not be found
+err.add('FL-09')
+thanked.add('FL-10')
+err.add('FL-11')
+err.add('FL-12')
+err.add('FL-13')
+err.add('FL-14')
+err.add('FL-15')
+thanked.add('FL-16')
+err.add('FL-17')
+err.add('FL-18') Address match problem: exact street name match could not be found
+thanked.add('FL-19')
+err.add('FL-20')
+err.add('FL-21') Address match problem: street number in the input address was not valid
+thanked.add('FL-22')
+err.add('FL-23')
+err.add('FL-24')
+err.add('FL-25') <urlopen error [Errno 8] nodename nor servname provided, or not known>
+thanked.add('GA-01')
+thanked.add('GA-02')
+thanked.add('GA-03')
+thanked.add('GA-04')
+thanked.add('GA-05')
+thanked.add('GA-06')
+thanked.add('GA-07')
+err.add('GA-08')
+err.add('GA-09')
+thanked.add('GA-10')
+thanked.add('GA-11')
+err.add('GA-12') HTTP Error 404: Not found
+err.add('GA-13')
+thanked.add('GU-00')
+thanked.add('HI-01')
+thanked.add('HI-02')
+thanked.add('IA-01')
+err.add('IA-02') Address match problem: exact street name match could not be found
+thanked.add('IA-03')
+thanked.add('IA-04')
+err.add('IA-05') 'IA-05'
+thanked.add('ID-01')
+thanked.add('ID-02')
+err.add('IL-01')
+err.add('IL-02') unknown url type: N/A
+thanked.add('IL-03')
+thanked.add('IL-04')
+err.add('IL-05')
+err.add('IL-06')
+thanked.add('IL-07')
+thanked.add('IL-08')
+thanked.add('IL-09')
+thanked.add('IL-10')
+err.add('IL-11')
+thanked.add('IL-12')
+err.add('IL-13')
+thanked.add('IL-14')
+err.add('IL-15') HTTP Error 404: Not Found
+err.add('IL-16')
+thanked.add('IL-17')
+thanked.add('IL-18')
+err.add('IL-19') 'IL-19'
+thanked.add('IN-01')
+err.add('IN-02')
+thanked.add('IN-03')
+thanked.add('IN-04')
+thanked.add('IN-05')
+thanked.add('IN-06')
+thanked.add('IN-07')
+thanked.add('IN-08')
+err.add('IN-09')
+err.add('KS-01')
+thanked.add('KS-02')
+thanked.add('KS-03')
+thanked.add('KS-04')
+thanked.add('KY-01')
+err.add('KY-02') Address match problem: exact street name match could not be found
+thanked.add('KY-03')
+thanked.add('KY-04')
+thanked.add('KY-05')
+thanked.add('KY-06')
+thanked.add('LA-01')
+thanked.add('LA-02')
+err.add('LA-03')
+thanked.add('LA-04')
+err.add('LA-05')
+err.add('LA-07') 'LA-07'
+thanked.add('MA-01')
+err.add('MA-02') Zip incorrect: it appears that you live outside of
+err.add('MA-03')
+thanked.add('MA-04')
+thanked.add('MA-05')
+err.add('MA-06') HTTP Error 404: Not found
+err.add('MA-07')
+err.add('MA-08')
+thanked.add('MA-09')
+err.add('MA-10') 'MA-10'
+thanked.add('MD-01')
+thanked.add('MD-02')
+thanked.add('MD-03')
+err.add('MD-04')
+thanked.add('MD-05')
+err.add('MD-06')
+thanked.add('MD-07')
+thanked.add('MD-08')
+thanked.add('ME-01')
+thanked.add('ME-02')
+thanked.add('MI-01')
+thanked.add('MI-02')
+thanked.add('MI-03')
+thanked.add('MI-04')
+thanked.add('MI-05')
+thanked.add('MI-06')
+err.add('MI-07') HTTP Error 404: Not Found
+thanked.add('MI-08')
+thanked.add('MI-09')
+thanked.add('MI-10')
+err.add('MI-11')
+thanked.add('MI-12')
+err.add('MI-13')
+thanked.add('MI-14')
+err.add('MI-15') 'MI-15'
+thanked.add('MN-01')
+err.add('MN-02')
+thanked.add('MN-03')
+thanked.add('MN-04')
+thanked.add('MN-05')
+thanked.add('MN-06')
+thanked.add('MN-07')
+thanked.add('MN-08')
+thanked.add('MO-01')
+thanked.add('MO-02')
+err.add('MO-03') Address match problem: exact street name match could not be found
+thanked.add('MO-04')
+thanked.add('MO-05')
+thanked.add('MO-06')
+thanked.add('MO-07')
+err.add('MO-08')
+err.add('MO-09') 'MO-09'
+thanked.add('MS-01')
+thanked.add('MS-02')
+err.add('MS-03') Address match problem: exact street name match could not be found
+err.add('MS-04') HTTP Error 404: Not Found
+err.add('MT-00')
+thanked.add('NC-01')
+thanked.add('NC-02')
+thanked.add('NC-03')
+thanked.add('NC-04')
+err.add('NC-05') Address match problem: Address matched to multiple records
+err.add('NC-06') Address match problem: Address matched to multiple records
+err.add('NC-07')
+err.add('NC-08')
+err.add('NC-09')
+thanked.add('NC-10')
+err.add('NC-11')
+err.add('NC-12')
+thanked.add('NC-13')
+thanked.add('ND-00')
+thanked.add('NE-01')
+thanked.add('NE-02')
+thanked.add('NE-03')
+thanked.add('NH-01')
+thanked.add('NH-02')
+err.add('NJ-01')
+thanked.add('NJ-02')
+err.add('NJ-03')
+thanked.add('NJ-04')
+thanked.add('NJ-05')
+err.add('NJ-06')
+err.add('NJ-07') General error: following problems were found in your submission
+thanked.add('NJ-08')
+thanked.add('NJ-09')
+thanked.add('NJ-10')
+err.add('NJ-11') General error: following problems were found in your submission
+thanked.add('NJ-12')
+err.add('NJ-13') 'NJ-13'
+err.add('NM-01')
+thanked.add('NM-02')
+thanked.add('NM-03')
+thanked.add('NV-01')
+err.add('NV-02')
+thanked.add('NV-03')
+thanked.add('NY-01')
+err.add('NY-02') unknown url type: Pete.King@mail.house.gov
+thanked.add('NY-03')
+thanked.add('NY-04')
+thanked.add('NY-05')
+thanked.add('NY-06')
+err.add('NY-07')
+err.add('NY-08')
+thanked.add('NY-09')
+thanked.add('NY-10')
+thanked.add('NY-11')
+thanked.add('NY-12')
+err.add('NY-13')
+thanked.add('NY-14')
+thanked.add('NY-15')
+err.add('NY-16')
+thanked.add('NY-17')
+err.add('NY-18')
+thanked.add('NY-19')
+thanked.add('NY-20')
+thanked.add('NY-21')
+err.add('NY-22')
+thanked.add('NY-23')
+thanked.add('NY-24')
+thanked.add('NY-25')
+thanked.add('NY-26')
+thanked.add('NY-27')
+err.add('NY-28') 'NY-28'
+err.add('NY-29') 'NY-29'
+thanked.add('OH-01')
+thanked.add('OH-02')
+err.add('OH-03')
+thanked.add('OH-04')
+thanked.add('OH-05')
+thanked.add('OH-06')
+err.add('OH-07')
+thanked.add('OH-08')
+thanked.add('OH-09')
+thanked.add('OH-10')
+thanked.add('OH-11')
+err.add('OH-12')
+thanked.add('OH-13')
+err.add('OH-14')
+thanked.add('OH-15')
+thanked.add('OH-16')
+err.add('OH-17') 'OH-17'
+err.add('OH-18') 'OH-18'
+err.add('OK-01')
+thanked.add('OK-02')
+thanked.add('OK-03')
+thanked.add('OK-04')
+thanked.add('OK-05')
+thanked.add('OR-01')
+err.add('OR-02') General error: following problems were found in your submission
+thanked.add('OR-03')
+thanked.add('OR-04')
+err.add('OR-05') Address match problem: street number in the input address was not valid
+thanked.add('PA-01')
+thanked.add('PA-02')
+thanked.add('PA-03')
+thanked.add('PA-04')
+thanked.add('PA-05')
+thanked.add('PA-06')
+err.add('PA-07')
+thanked.add('PA-08')
+thanked.add('PA-09')
+thanked.add('PA-10')
+thanked.add('PA-11')
+err.add('PA-12')
+thanked.add('PA-13')
+thanked.add('PA-14')
+thanked.add('PA-15')
+thanked.add('PA-16')
+err.add('PA-17')
+thanked.add('PA-18')
+err.add('PA-19') 'PA-19'
+thanked.add('PR-00')
+thanked.add('RI-01')
+thanked.add('RI-02')
+err.add('SC-01') unknown url type: N/A
+thanked.add('SC-02')
+thanked.add('SC-03')
+thanked.add('SC-04')
+thanked.add('SC-05')
+err.add('SC-06') HTTP Error 404: Not found
+err.add('SD-00') General error: there was an error processing the submitted information
+thanked.add('TN-01')
+thanked.add('TN-02')
+thanked.add('TN-03')
+err.add('TN-04')
+thanked.add('TN-05')
+thanked.add('TN-06')
+thanked.add('TN-07')
+err.add('TN-08')
+thanked.add('TN-09')
+thanked.add('TX-01')
+thanked.add('TX-02')
+err.add('TX-03') Address match problem: exact street name match could not be found
+err.add('TX-04')
+thanked.add('TX-05')
+thanked.add('TX-06')
+err.add('TX-07') Address match problem: exact street name match could not be found
+err.add('TX-08')
+thanked.add('TX-09')
+thanked.add('TX-10')
+thanked.add('TX-11')
+thanked.add('TX-12')
+err.add('TX-13') Address match problem: exact street name match could not be found
+thanked.add('TX-14')
+thanked.add('TX-15')
+err.add('TX-16')
+err.add('TX-17') Address match problem: exact street name match could not be found
+thanked.add('TX-18')
+err.add('TX-19') <urlopen error [Errno 8] nodename nor servname provided, or not known>
+thanked.add('TX-20')
+thanked.add('TX-21')
+err.add('TX-22')
+thanked.add('TX-23')
+thanked.add('TX-24')
+thanked.add('TX-25')
+thanked.add('TX-26')
+err.add('TX-27') Address match problem: exact street name match could not be found
+err.add('TX-28') Zip incorrect: it appears that you live outside of
+thanked.add('TX-29')
+thanked.add('TX-30')
+err.add('TX-31')
+err.add('TX-32') Captcha problem: captcha
+thanked.add('UT-01')
+err.add('UT-02')
+thanked.add('UT-03')
+err.add('VA-01')
+err.add('VA-02')
+thanked.add('VA-03')
+thanked.add('VA-04')
+err.add('VA-05') General error: there was an error processing the submitted information
+thanked.add('VA-06')
+thanked.add('VA-07')
+err.add('VA-08')
+thanked.add('VA-09')
+err.add('VA-10') General error: following problems were found in your submission
+thanked.add('VA-11')
+thanked.add('VT-00')
+thanked.add('WA-01')
+thanked.add('WA-02')
+thanked.add('WA-03')
+thanked.add('WA-04')
+err.add('WA-05')
+thanked.add('WA-06')
+thanked.add('WA-07')
+err.add('WA-08')
+thanked.add('WA-09')
+thanked.add('WI-01')
+thanked.add('WI-02')
+err.add('WI-03')
+thanked.add('WI-04')
+err.add('WI-05') HTTP Error 404: Not Found
+thanked.add('WI-06')
+thanked.add('WI-07')
+thanked.add('WI-08')
+err.add('WV-01')
+thanked.add('WV-02')
+thanked.add('WV-03')
+thanked.add('WY-00')
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+err.add('AL-05')
+err.add('AL-06')
+thanked.add('AL-07')
+thanked.add('AR-01')
+err.add('AR-02')
+thanked.add('AR-03')
+thanked.add('AR-04')
+err.add('AS-00') unknown url type: faleomavaega@mail.house.gov
+thanked.add('AZ-01')
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+err.add('AL-05')
+err.add('AL-06')
+thanked.add('AL-07')
+thanked.add('AR-01')
+err.add('AR-02')
+thanked.add('AR-03')
+thanked.add('AR-04')
+err.add('AS-00') unknown url type: faleomavaega@mail.house.gov
+thanked.add('AZ-01')
+err.add('AK-00') global name 'true' is not defined
+err.add('AL-01') global name 'true' is not defined
+err.add('AL-02') global name 'true' is not defined
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+err.add('AL-05')
+err.add('AL-06')
+thanked.add('AL-07')
+thanked.add('AR-01')
+err.add('AR-02')
+thanked.add('AR-03')
+thanked.add('AR-04')
+err.add('AS-00') unknown url type: faleomavaega@mail.house.gov
+thanked.add('AZ-01')
+err.add('AZ-02') 
+thanked.add('AK-00')
+thanked.add('AL-01')
+thanked.add('AL-02')
+thanked.add('AL-03')
+err.add('AL-04') 'addr1'
+err.add('AL-05')
+err.add('AL-06')
+thanked.add('AL-07')
+thanked.add('AR-01')
+err.add('AR-02')
+thanked.add('AR-03')
+thanked.add('AR-04')
+err.add('AS-00') unknown url type: faleomavaega@mail.house.gov
+thanked.add('AZ-01')
+thanked.add('AZ-02')
+err.add('AZ-03') HTTP Error 404: File Not Found
+thanked.add('AZ-04')
+err.add('AZ-05') Zip incorrect: Zip Code Authentication Failed
+err.add('AZ-06')
+thanked.add('AZ-07')
+err.add('AZ-08') Zip incorrect: Zip Code Authentication Failed
+err.add('CA-01')
+thanked.add('CA-02')
+err.add('CA-03') Zip incorrect: Zip Code Authentication Failed
+thanked.add('CA-04')
+thanked.add('CA-05')
+err.add('CA-06')
+err.add('CA-07') HTTP Error 404: Not Found
+err.add('CA-08') Zip incorrect: Zip Code Authentication Failed
+err.add('CA-09') HTTP Error 404: Not found
+err.add('CA-10') Zip incorrect: Zip Code Authentication Failed
+thanked.add('CA-11')
+err.add('CA-12') 
+err.add('CA-13')

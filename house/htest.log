@@ -1,0 +1,968 @@
+
+------------
+AK-00 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AK-00', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AK', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '99501', 'zip4': '0999'}>
+AK-00
+contact_link selected:  http://donyoung.house.gov/contact/
+In writerep_general, opening contact_link http://donyoung.house.gov/contact/
+Loop  1 :
+http://donyoung.house.gov/contact/ 
+
+zipform
+no captcha found
+going to fill_form from  http://donyoung.house.gov/contact/  now 
+<GET http://donyoung.house.gov/forms/writeyourrep/ application/x-www-form-urlencoded
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(<None>=Submit) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  http://donyoung.house.gov/contact/ 
+<GET http://donyoung.house.gov/forms/writeyourrep/ application/x-www-form-urlencoded
+  <TextControl(zip5=99501)>
+  <TextControl(zip4=0999)>
+  <SubmitControl(<None>=Submit) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  http://donyoung.house.gov/contact/
+ErrorString:  None
+thanked.add('AK-00')
+
+------------
+AL-01 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-01', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '36425', 'zip4': '0001'}>
+AL-01
+contact_link selected:  https://forms.house.gov/bonner/webforms/issue_subscribe.html
+In writerep_general, opening contact_link https://forms.house.gov/bonner/webforms/issue_subscribe.html
+Loop  1 :
+https://forms.house.gov/bonner/webforms/issue_subscribe.html 
+
+textareaform
+no captcha found
+going to fill_form from  https://forms.house.gov/bonner/webforms/issue_subscribe.html  now 
+<POST https://forms.house.gov/htbin/formproc_za/bonner/webforms/issue_subscribe_parm.txt&form=/bonner/webforms/issue_subscribe_verify.htm application/x-www-form-urlencoded
+  <SelectControl(required-Prefix=[(*---), Dr., Father, Mr., Mrs., Ms., Rev., Sister])>
+  <TextControl(required-first=)>
+  <TextControl(required-last=)>
+  <TextControl(required-address=)>
+  <TextControl(address2=)>
+  <TextControl(required-city=)>
+  <SelectControl(required-state=[*AL])>
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <TextControl(required-email=)>
+  <TextControl(phone=)>
+  <SelectControl(required-issue=[(*---), APPOINTMENTS, ARTCONTEST, GRANTS, LEGISLATION, ACADEMIES, TOURS, OTHER])>
+  <TextareaControl(required-message=)>
+  <SubmitControl(<None>=Send Email) (readonly)>
+  <IgnoreControl(<None>=<None>)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol True
+in fill_form, filling all
+Printing all controls
+control:  required-Prefix  type:  select
+control:  required-first  type:  text
+control:  required-last  type:  text
+control:  required-address  type:  text
+control:  address2  type:  text
+control:  required-city  type:  text
+control:  required-state  type:  select
+control:  zip5  type:  text
+control:  zip4  type:  text
+control:  required-email  type:  text
+control:  phone  type:  text
+control:  required-issue  type:  select
+control:  required-message  type:  textarea
+f filled and ready to submit to  https://forms.house.gov/bonner/webforms/issue_subscribe.html 
+<POST https://forms.house.gov/htbin/formproc_za/bonner/webforms/issue_subscribe_parm.txt&form=/bonner/webforms/issue_subscribe_verify.htm application/x-www-form-urlencoded
+  <SelectControl(required-Prefix=[(---), Dr., Father, *Mr., Mrs., Ms., Rev., Sister])>
+  <TextControl(required-first=James)>
+  <TextControl(required-last=Smith)>
+  <TextControl(required-address=12 Main St)>
+  <TextControl(address2=)>
+  <TextControl(required-city=Franklin)>
+  <SelectControl(required-state=[*AL])>
+  <TextControl(zip5=36425)>
+  <TextControl(zip4=0001)>
+  <TextControl(required-email=demandprogressoutreach@yahoo.com)>
+  <TextControl(phone=demandprogressoutreach@yahoo.com)>
+  <SelectControl(required-issue=[(---), APPOINTMENTS, ARTCONTEST, GRANTS, LEGISLATION, ACADEMIES, TOURS, *OTHER])>
+  <TextareaControl(required-message=Testing)>
+  <SubmitControl(<None>=Send Email) (readonly)>
+  <IgnoreControl(<None>=<None>)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://forms.house.gov/bonner/webforms/issue_subscribe.html
+ErrorString:  None
+thanked.add('AL-01')
+
+------------
+AL-02 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-02', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '36003', 'zip4': '0001'}>
+AL-02
+contact_link selected:  https://roby.house.gov/contact-me
+In writerep_general, opening contact_link https://roby.house.gov/contact-me
+Loop  1 :
+https://roby.house.gov/contact-me 
+
+textareaform
+no captcha found
+going to fill_form from  https://roby.house.gov/contact-me  now 
+<contactForm POST https://roby.house.gov/htbin/formproc/email-me.txt&display=/contact-me/email-me-thankyou&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(prefix=)>
+  <TextControl(required-first=)>
+  <TextControl(middle=)>
+  <TextControl(required-last=)>
+  <TextControl(suffix=)>
+  <TextControl(required-address=)>
+  <TextControl(address2=)>
+  <TextControl(required-city=)>
+  <TextControl(required-state=)>
+  <TextControl(required-zip5=)>
+  <TextControl(zip4=)>
+  <TextControl(required-valid-email=)>
+  <TextControl(phone=)>
+  <SelectControl(required-issue=[*, AG, AN, ART, BANK, BUD, CONG, DEF, ED, EN, ENV, FR, GUN, HE, HUD, IM, JUD, LAB, POST, SCI, SENIORS, SS, TAX, COMM, TRAN, TRD, VET, OTHER])>
+  <TextareaControl(required-message=)>
+  <SubmitControl(submit=Send Email) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol True
+in fill_form, filling all
+Printing all controls
+control:  prefix  type:  text
+control:  required-first  type:  text
+control:  middle  type:  text
+control:  required-last  type:  text
+control:  suffix  type:  text
+control:  required-address  type:  text
+control:  address2  type:  text
+control:  required-city  type:  text
+control:  required-state  type:  text
+control:  required-zip5  type:  text
+control:  zip4  type:  text
+control:  required-valid-email  type:  text
+control:  phone  type:  text
+control:  required-issue  type:  select
+control:  required-message  type:  textarea
+f filled and ready to submit to  https://roby.house.gov/contact-me 
+<contactForm POST https://roby.house.gov/htbin/formproc/email-me.txt&display=/contact-me/email-me-thankyou&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(prefix=Mr.)>
+  <TextControl(required-first=James)>
+  <TextControl(middle=)>
+  <TextControl(required-last=Smith)>
+  <TextControl(suffix=)>
+  <TextControl(required-address=12 Main St)>
+  <TextControl(address2=)>
+  <TextControl(required-city=Franklin)>
+  <TextControl(required-state=AL)>
+  <TextControl(required-zip5=36003)>
+  <TextControl(zip4=0001)>
+  <TextControl(required-valid-email=demandprogressoutreach@yahoo.com)>
+  <TextControl(phone=571-336-2637)>
+  <SelectControl(required-issue=[, AG, AN, ART, BANK, BUD, CONG, DEF, ED, EN, ENV, FR, GUN, HE, HUD, IM, JUD, LAB, POST, SCI, SENIORS, SS, TAX, COMM, TRAN, TRD, VET, *OTHER])>
+  <TextareaControl(required-message=Testing)>
+  <SubmitControl(submit=Send Email) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://roby.house.gov/contact-me
+ErrorString:  None
+thanked.add('AL-02')
+
+------------
+AL-03 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-03', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '35011', 'zip4': '0001'}>
+AL-03
+contact_link selected:  https://mike-rogers.house.gov/contact-mike/email-me
+In writerep_general, opening contact_link https://mike-rogers.house.gov/contact-mike/email-me
+Loop  1 :
+https://mike-rogers.house.gov/contact-mike/email-me 
+
+zipform
+no captcha found
+going to fill_form from  https://mike-rogers.house.gov/contact-mike/email-me  now 
+<POST https://mike-rogers.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-mike/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <IgnoreControl(<None>=<None>)>
+  <HiddenControl(__ncforminfo=uBm_QT2HuxGITzyHn1pEAdU_cPyC-tQNrF_8sBIcB6f8Tz7zFkL70Wyj75tms6zHHJIls0AHovCYTmDJImy8xw==) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  https://mike-rogers.house.gov/contact-mike/email-me 
+<POST https://mike-rogers.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-mike/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(zip5=35011)>
+  <TextControl(zip4=0001)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <IgnoreControl(<None>=<None>)>
+  <HiddenControl(__ncforminfo=uBm_QT2HuxGITzyHn1pEAdU_cPyC-tQNrF_8sBIcB6f8Tz7zFkL70Wyj75tms6zHHJIls0AHovCYTmDJImy8xw==) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://mike-rogers.house.gov/contact-mike/email-me
+ErrorString:  None
+thanked.add('AL-03')
+
+------------
+AL-04 
+
+err.add('AL-04')
+
+------------
+AL-05 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-05', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '35602', 'zip4': '0001'}>
+AL-05
+contact_link selected:  https://brooksforms.house.gov/email-me
+In writerep_general, opening contact_link https://brooksforms.house.gov/email-me
+Loop  1 :
+http://www.house.gov/ 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/ 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35602)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  2 :
+http://www.house.gov/htbin/findrep?ZIP=35602 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35602  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 2 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35602 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35602)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  3 :
+http://www.house.gov/htbin/findrep?ZIP=35602 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35602  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 3 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35602 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35602)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  4 :
+http://www.house.gov/htbin/findrep?ZIP=35602 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35602  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 4 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35602 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35602)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  5 :
+http://www.house.gov/htbin/findrep?ZIP=35602 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35602  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 5 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35602 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35602)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Tried  6 times, unsuccessfully, to fill form
+ErrorString:  None
+err.add('AL-05')
+
+------------
+AL-06 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-06', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '35004', 'zip4': '0001'}>
+AL-06
+contact_link selected:  https://forms.house.gov/write/bachus/email-me.shtml
+In writerep_general, opening contact_link https://forms.house.gov/write/bachus/email-me.shtml
+Loop  1 :
+https://forms.house.gov/write/bachus/email-me.shtml 
+
+zipform
+no captcha found
+going to fill_form from  https://forms.house.gov/write/bachus/email-me.shtml  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  https://forms.house.gov/write/bachus/email-me.shtml 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35004)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  2 :
+http://www.house.gov/htbin/findrep?ZIP=35004 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35004  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 2 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35004 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35004)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  3 :
+http://www.house.gov/htbin/findrep?ZIP=35004 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35004  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 3 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35004 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35004)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  4 :
+http://www.house.gov/htbin/findrep?ZIP=35004 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35004  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 4 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35004 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35004)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  5 :
+http://www.house.gov/htbin/findrep?ZIP=35004 
+
+zipform
+no captcha found
+going to fill_form from  http://www.house.gov/htbin/findrep?ZIP=35004  now 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=)>
+  <SubmitButtonControl(<None>=) (readonly)>> 
+ End form 5 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  ZIP  type:  text
+f filled and ready to submit to  http://www.house.gov/htbin/findrep?ZIP=35004 
+<GET http://www.house.gov/htbin/findrep application/x-www-form-urlencoded
+  <TextControl(ZIP=35004)>
+  <SubmitButtonControl(<None>=) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Tried  6 times, unsuccessfully, to fill form
+ErrorString:  None
+err.add('AL-06')
+
+------------
+AL-07 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AL-07', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AL', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '35020', 'zip4': '0400'}>
+AL-07
+contact_link selected:  https://sewell.house.gov/contact-me/email-me
+In writerep_general, opening contact_link https://sewell.house.gov/contact-me/email-me
+Loop  1 :
+https://sewell.house.gov/contact-me/email-me 
+
+zipform
+no captcha found
+going to fill_form from  https://sewell.house.gov/contact-me/email-me  now 
+<POST https://sewell.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-me/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=AC7uakXlEzAOImP20kuHPk6oJ0vVAQnOkDtNdOgRNgGehtCdC1-vwr3jFShIuKNEISPOQl98QJ_uCNmx8Hdagg==) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  required-zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  https://sewell.house.gov/contact-me/email-me 
+<POST https://sewell.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-me/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=35020)>
+  <TextControl(zip4=0400)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=AC7uakXlEzAOImP20kuHPk6oJ0vVAQnOkDtNdOgRNgGehtCdC1-vwr3jFShIuKNEISPOQl98QJ_uCNmx8Hdagg==) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://sewell.house.gov/contact-me/email-me
+ErrorString:  None
+thanked.add('AL-07')
+
+------------
+AR-01 
+
+contact info object:
+<Storage {'city': 'Jonesboro', 'dist': 'AR-01', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AR', 'addr2': '', 'fname': 'James', 'addr1': '2400 Highland Dr', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '72401', 'zip4': '6213'}>
+AR-01
+contact_link selected:  http://crawford.house.gov/contact/
+In writerep_general, opening contact_link http://crawford.house.gov/contact/
+Loop  1 :
+http://crawford.house.gov/contact/ 
+
+zipform
+no captcha found
+going to fill_form from  http://crawford.house.gov/contact/  now 
+<GET http://crawford.house.gov/Forms/WriteYourRep/ application/x-www-form-urlencoded
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(<None>=Submit) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  http://crawford.house.gov/contact/ 
+<GET http://crawford.house.gov/Forms/WriteYourRep/ application/x-www-form-urlencoded
+  <TextControl(zip5=72401)>
+  <TextControl(zip4=6213)>
+  <SubmitControl(<None>=Submit) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  2 :
+https://crawford.house.gov/forms/writeyourrep/default.aspx?zip5=72401&zip4=6213 
+
+textareaform
+no captcha found
+going to fill_form from  https://crawford.house.gov/forms/writeyourrep/default.aspx?zip5=72401&zip4=6213  now 
+<POST https://crawford.house.gov/forms/writeyourrep/default.aspx?zip5=72401&zip4=6213 application/x-www-form-urlencoded
+  <HiddenControl(__VIEWSTATE=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) (readonly)>
+  <HiddenControl(__VIEWSTATEENCRYPTED=) (readonly)>
+  <HiddenControl(__EVENTVALIDATION=psx8k2IZS+hJOWzlUtJbOCsaFbOvlv5q/JWi7n2gAzp8iXgJ2UJlijCfpCWnrrECcSigwXqSEpPpSmOdkaZ6BI8Mwrtd8N89qJzNFzMX8HG89dD7DVBsWOvWgz4nYBjoGOaUZFITuud9oaO3IQfQ1ER0kt1BaoqdVxqqzE0O1xrknZtjVYeTrkIWjbdJvoUHEfnjyF3CBQFnCuO0VqkjtuvdbWJAXpXRCPYz2it8ChVvMVoKjxg/r/Nr5bBhHIUQXgUQC87i3fhXdmPr9ifRqPKp9G9i0joRo6RbQNVAtdmos/M7lgAGaDHaBaOYgSc7gZ9PQ/a/SinfPGzO0+vrpBQiIU813O/zvVjyVtEOjMwvtekajnx5AZmPvAJzcDURPJEn++ziDPSw4ckIGxScDrVoAcMEN7C+09+YWuWTVS+QWphtCwaQ1z6p5LO3iWdz3G0h4B7tsaNU66WawhuyAzJGXAYGZcpXyLQBD3+eyY9SuIppSPSgrYgJcMxuswhPGpo/r/+lhXzfo1QX1HTVvWu7+4yoVGXvYjBFnjCawWKCxFQqCZoqYkNKmj+G2QJJSNMgnLONyLqFqRC+C+sKG+A9xlAYqHMyY1sksp3DsRBmz+5/2DLYceMRp5VbQWsAz5a1HYlg2DIteSmPjVsXtQxnGv7Pp2Flwykcfa70MLxMy3elEu41jCw70LJkz7jly4VQQcnqKT1wjKyOmc4a2+gYQ0yHm/0Sx+HhD3hSYE4XsWLhy7EkR9kQa7HLsNwcmUnhblb/bTXvnZAoVxbxRvyRb34mf5Rlv+0b/I9EOz4+0v5cSiDaESoMDek49OgURtJOTGjYBcjx0C9EzWgZAol5lyqgECNPh3lt4cx5uhVX8pAOrGwcDuv8H2rf0MjBWcC0lPq1amhBxQF0l7iX3QQ6q2sIWaVDMxY02P7VDNZQoWdEuqEF8qW8yhOL6AXt) (readonly)>
+  <SelectControl(ctl00$ctl12$PrefixList=[*Mr., Mrs., Ms., Miss, Dr., Mr. & Mrs., Dr. & Mrs., Dr. & Mr., C.O., Representative, Senator, The Honorable, Col.])>
+  <TextControl(ctl00$ctl12$FirstName=)>
+  <TextControl(ctl00$ctl12$LastName=)>
+  <TextControl(ctl00$ctl12$Street=)>
+  <TextControl(ctl00$ctl12$City=)>
+  <SelectControl(ctl00$ctl12$State=[AL, AK, AZ, *AR, CA, CO, CT, DE, DC, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AA, AE, AP, FM, GU, MH, MP, PR])>
+  <TextControl(ctl00$ctl12$Zip=)>
+  <TextControl(ctl00$ctl12$Phone=)>
+  <TextControl(ctl00$ctl12$Email=)>
+  <CheckboxControl(ctl00$ctl12$SubscribeChoice=[on])>
+  <SelectControl(ctl00$ctl12$IssuesList=[*, 27723, 27644, 56253, 56254, 56226, 56228, 27236, 56224, 27602, 27239, 56255, 27604, 56256, 27419, 27409, 56258, 27501, 56259, 56230, 27287, 56231, 56232, 27801, 42748])>
+  <RadioControl(ctl00$ctl12$ReplyChoice=[*Respond, Comment])>
+  <TextControl(ctl00$ctl12$Subject=)>
+  <TextareaControl(ctl00$ctl12$Body=)>
+  <HiddenControl(ctl00$ctl12$CampaignID=) (readonly)>
+  <HiddenControl(ctl00$ctl12$CampaignInfo=) (readonly)>
+  <HiddenControl(ctl00$ctl12$DeliveryAgent=) (readonly)>
+  <HiddenControl(ctl00$ctl12$DeliveryAgentContact=) (readonly)>
+  <HiddenControl(ctl00$ctl12$Organization=) (readonly)>
+  <HiddenControl(ctl00$ctl12$OrganizationContact=) (readonly)>
+  <HiddenControl(ctl00$ctl12$OrganizationDescription=) (readonly)>
+  <SubmitControl(ctl00$ctl12$SubmitButton=Submit) (readonly)>> 
+ End form 2 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol True
+in fill_form, filling all
+Printing all controls
+control:  ctl00$ctl12$PrefixList  type:  select
+control:  ctl00$ctl12$FirstName  type:  text
+control:  ctl00$ctl12$LastName  type:  text
+control:  ctl00$ctl12$Street  type:  text
+control:  ctl00$ctl12$City  type:  text
+control:  ctl00$ctl12$State  type:  select
+control:  ctl00$ctl12$Zip  type:  text
+control:  ctl00$ctl12$Phone  type:  text
+control:  ctl00$ctl12$Email  type:  text
+control:  ctl00$ctl12$SubscribeChoice  type:  checkbox
+control:  ctl00$ctl12$IssuesList  type:  select
+control:  ctl00$ctl12$ReplyChoice  type:  radio
+control:  ctl00$ctl12$Subject  type:  text
+control:  ctl00$ctl12$Body  type:  textarea
+f filled and ready to submit to  https://crawford.house.gov/forms/writeyourrep/default.aspx?zip5=72401&zip4=6213 
+<POST https://crawford.house.gov/forms/writeyourrep/default.aspx?zip5=72401&zip4=6213 application/x-www-form-urlencoded
+  <HiddenControl(__VIEWSTATE=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) (readonly)>
+  <HiddenControl(__VIEWSTATEENCRYPTED=) (readonly)>
+  <HiddenControl(__EVENTVALIDATION=psx8k2IZS+hJOWzlUtJbOCsaFbOvlv5q/JWi7n2gAzp8iXgJ2UJlijCfpCWnrrECcSigwXqSEpPpSmOdkaZ6BI8Mwrtd8N89qJzNFzMX8HG89dD7DVBsWOvWgz4nYBjoGOaUZFITuud9oaO3IQfQ1ER0kt1BaoqdVxqqzE0O1xrknZtjVYeTrkIWjbdJvoUHEfnjyF3CBQFnCuO0VqkjtuvdbWJAXpXRCPYz2it8ChVvMVoKjxg/r/Nr5bBhHIUQXgUQC87i3fhXdmPr9ifRqPKp9G9i0joRo6RbQNVAtdmos/M7lgAGaDHaBaOYgSc7gZ9PQ/a/SinfPGzO0+vrpBQiIU813O/zvVjyVtEOjMwvtekajnx5AZmPvAJzcDURPJEn++ziDPSw4ckIGxScDrVoAcMEN7C+09+YWuWTVS+QWphtCwaQ1z6p5LO3iWdz3G0h4B7tsaNU66WawhuyAzJGXAYGZcpXyLQBD3+eyY9SuIppSPSgrYgJcMxuswhPGpo/r/+lhXzfo1QX1HTVvWu7+4yoVGXvYjBFnjCawWKCxFQqCZoqYkNKmj+G2QJJSNMgnLONyLqFqRC+C+sKG+A9xlAYqHMyY1sksp3DsRBmz+5/2DLYceMRp5VbQWsAz5a1HYlg2DIteSmPjVsXtQxnGv7Pp2Flwykcfa70MLxMy3elEu41jCw70LJkz7jly4VQQcnqKT1wjKyOmc4a2+gYQ0yHm/0Sx+HhD3hSYE4XsWLhy7EkR9kQa7HLsNwcmUnhblb/bTXvnZAoVxbxRvyRb34mf5Rlv+0b/I9EOz4+0v5cSiDaESoMDek49OgURtJOTGjYBcjx0C9EzWgZAol5lyqgECNPh3lt4cx5uhVX8pAOrGwcDuv8H2rf0MjBWcC0lPq1amhBxQF0l7iX3QQ6q2sIWaVDMxY02P7VDNZQoWdEuqEF8qW8yhOL6AXt) (readonly)>
+  <SelectControl(ctl00$ctl12$PrefixList=[*Mr., Mrs., Ms., Miss, Dr., Mr. & Mrs., Dr. & Mrs., Dr. & Mr., C.O., Representative, Senator, The Honorable, Col.])>
+  <TextControl(ctl00$ctl12$FirstName=James)>
+  <TextControl(ctl00$ctl12$LastName=Smith)>
+  <TextControl(ctl00$ctl12$Street=2400 Highland Dr )>
+  <TextControl(ctl00$ctl12$City=Jonesboro)>
+  <SelectControl(ctl00$ctl12$State=[AL, AK, AZ, *AR, CA, CO, CT, DE, DC, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AA, AE, AP, FM, GU, MH, MP, PR])>
+  <TextControl(ctl00$ctl12$Zip=72401)>
+  <TextControl(ctl00$ctl12$Phone=571-336-2637)>
+  <TextControl(ctl00$ctl12$Email=demandprogressoutreach@yahoo.com)>
+  <CheckboxControl(ctl00$ctl12$SubscribeChoice=[on])>
+  <SelectControl(ctl00$ctl12$IssuesList=[, 27723, 27644, 56253, 56254, 56226, 56228, 27236, 56224, 27602, 27239, 56255, 27604, 56256, 27419, 27409, 56258, 27501, 56259, 56230, 27287, 56231, 56232, 27801, *42748])>
+  <RadioControl(ctl00$ctl12$ReplyChoice=[Respond, *Comment])>
+  <TextControl(ctl00$ctl12$Subject=Testing)>
+  <TextareaControl(ctl00$ctl12$Body=Testing)>
+  <HiddenControl(ctl00$ctl12$CampaignID=) (readonly)>
+  <HiddenControl(ctl00$ctl12$CampaignInfo=) (readonly)>
+  <HiddenControl(ctl00$ctl12$DeliveryAgent=) (readonly)>
+  <HiddenControl(ctl00$ctl12$DeliveryAgentContact=) (readonly)>
+  <HiddenControl(ctl00$ctl12$Organization=) (readonly)>
+  <HiddenControl(ctl00$ctl12$OrganizationContact=) (readonly)>
+  <HiddenControl(ctl00$ctl12$OrganizationDescription=) (readonly)>
+  <SubmitControl(ctl00$ctl12$SubmitButton=Submit) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  http://crawford.house.gov/contact/
+ErrorString:  None
+thanked.add('AR-01')
+
+------------
+AR-02 
+
+contact info object:
+<Storage {'city': 'Adona', 'dist': 'AR-02', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AR', 'addr2': '', 'fname': 'James', 'addr1': '717 ADA VALLEY RD', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '72001', 'zip4': '8706'}>
+AR-02
+contact_link selected:  https://griffin.house.gov/contact-me/email-me
+In writerep_general, opening contact_link https://griffin.house.gov/contact-me/email-me
+Loop  1 :
+https://griffin.house.gov/contact-me/email-me 
+
+no form found
+ErrorString:  None
+err.add('AR-02')
+
+------------
+AR-03 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AR-03', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AR', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '72601', 'zip4': '1200'}>
+AR-03
+contact_link selected:  http://womack.house.gov/contact/
+In writerep_general, opening contact_link http://womack.house.gov/contact/
+Loop  1 :
+http://womack.house.gov/contact/ 
+
+zipform
+no captcha found
+going to fill_form from  http://womack.house.gov/contact/  now 
+<GET http://womack.house.gov/Contact/ContactForm.htm application/x-www-form-urlencoded
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(<None>=Submit) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  http://womack.house.gov/contact/ 
+<GET http://womack.house.gov/Contact/ContactForm.htm application/x-www-form-urlencoded
+  <TextControl(zip5=72601)>
+  <TextControl(zip4=1200)>
+  <SubmitControl(<None>=Submit) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+Loop  2 :
+https://womack.house.gov/contact/contactform.htm?zip5=72601&zip4=1200 
+
+textareaform
+no captcha found
+going to fill_form from  https://womack.house.gov/contact/contactform.htm?zip5=72601&zip4=1200  now 
+<contact POST https://womack.house.gov/submit-contact.aspx application/x-www-form-urlencoded
+  <SelectControl(required-prefix=[*, Mr., Ms., Miss, Mrs., Mr. & Mrs., Dr., Reverend, Sister, Pastor])>
+  <TextControl(required-first=)>
+  <TextControl(middle=)>
+  <TextControl(required-last=)>
+  <TextControl(suffix=)>
+  <TextControl(required-address=)>
+  <TextControl(required-city=)>
+  <SelectControl(required-state=[*AR])>
+  <TextControl(zip5=)>
+  <TextControl(zip4=)>
+  <TextControl(phone=)>
+  <TextControl(required-email=)>
+  <SelectControl(required-issue=[(select one), *, AG, ART, BANK, BUD, CFR, CONG, DEF, ED, EN, ENV, FED, FR, HE, IM, JUD, LAB, SCI, SENIORS, SS, SOC.SERVICES, TAX, COMM, TRAN, TRD, VET, WOMEN, OTHER])>
+  <TextControl(required-subject=)>
+  <TextareaControl(required-message=)>
+  <CheckboxControl(subscribe=[subscribe])>
+  <TextControl(district-contact=InD)>
+  <SubmitControl(<None>=Send Email) (readonly)>
+  <IgnoreControl(<None>=<None>)>> 
+ End form 2 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol True
+in fill_form, filling all
+Printing all controls
+control:  required-prefix  type:  select
+control:  required-first  type:  text
+control:  middle  type:  text
+control:  required-last  type:  text
+control:  suffix  type:  text
+control:  required-address  type:  text
+control:  required-city  type:  text
+control:  required-state  type:  select
+control:  zip5  type:  text
+control:  zip4  type:  text
+control:  phone  type:  text
+control:  required-email  type:  text
+control:  required-issue  type:  select
+control:  required-subject  type:  text
+control:  required-message  type:  textarea
+control:  subscribe  type:  checkbox
+control:  district-contact  type:  text
+f filled and ready to submit to  https://womack.house.gov/contact/contactform.htm?zip5=72601&zip4=1200 
+<contact POST https://womack.house.gov/submit-contact.aspx application/x-www-form-urlencoded
+  <SelectControl(required-prefix=[, *Mr., Ms., Miss, Mrs., Mr. & Mrs., Dr., Reverend, Sister, Pastor])>
+  <TextControl(required-first=James)>
+  <TextControl(middle=)>
+  <TextControl(required-last=Smith)>
+  <TextControl(suffix=)>
+  <TextControl(required-address=12 Main St )>
+  <TextControl(required-city=Franklin)>
+  <SelectControl(required-state=[*AR])>
+  <TextControl(zip5=72601)>
+  <TextControl(zip4=1200)>
+  <TextControl(phone=571-336-2637)>
+  <TextControl(required-email=demandprogressoutreach@yahoo.com)>
+  <SelectControl(required-issue=[(select one), , AG, ART, BANK, BUD, CFR, CONG, DEF, ED, EN, ENV, FED, FR, HE, IM, JUD, LAB, SCI, SENIORS, SS, SOC.SERVICES, TAX, COMM, TRAN, TRD, VET, WOMEN, *OTHER])>
+  <TextControl(required-subject=Testing)>
+  <TextareaControl(required-message=Testing)>
+  <CheckboxControl(subscribe=[subscribe])>
+  <TextControl(district-contact=InD)>
+  <SubmitControl(<None>=Send Email) (readonly)>
+  <IgnoreControl(<None>=<None>)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  http://womack.house.gov/contact/
+ErrorString:  None
+thanked.add('AR-03')
+
+------------
+AR-04 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AR-04', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AR', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '71601', 'zip4': '2400'}>
+AR-04
+contact_link selected:  https://cotton.house.gov/contact/email-me
+In writerep_general, opening contact_link https://cotton.house.gov/contact/email-me
+Loop  1 :
+https://cotton.house.gov/contact/email-me 
+
+zipform
+no captcha found
+going to fill_form from  https://cotton.house.gov/contact/email-me  now 
+<emailForm POST https://cotton.house.gov/htbin/formproc_za/zip-auth.txt%26form%3D/contact/email-me/email-me-zip-authenticated%26nobase%26fpGetVer%3D2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=iGNqX-kjjyk8umFgt2Xj8uj-O8oqBOaXylLYYXaKy-4c-yhWQBSUIbLIq66h0kStrU8AQRm8SH49iWa_p3lIgA==) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  required-zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  https://cotton.house.gov/contact/email-me 
+<emailForm POST https://cotton.house.gov/htbin/formproc_za/zip-auth.txt%26form%3D/contact/email-me/email-me-zip-authenticated%26nobase%26fpGetVer%3D2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=71601)>
+  <TextControl(zip4=2400)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=iGNqX-kjjyk8umFgt2Xj8uj-O8oqBOaXylLYYXaKy-4c-yhWQBSUIbLIq66h0kStrU8AQRm8SH49iWa_p3lIgA==) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://cotton.house.gov/contact/email-me
+ErrorString:  None
+thanked.add('AR-04')
+
+------------
+AS-00 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AS-00', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AS', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '96799', 'zip4': '0001'}>
+AS-00
+contact_link selected:  faleomavaega@mail.house.gov
+In writerep_general, opening contact_link faleomavaega@mail.house.gov
+err.add('AS-00')
+
+------------
+AZ-01 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AZ-01', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AZ', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '85222', 'zip4': '0001'}>
+AZ-01
+contact_link selected:  https://kirkpatrick.house.gov/contact/email-me
+In writerep_general, opening contact_link https://kirkpatrick.house.gov/contact/email-me
+Loop  1 :
+https://kirkpatrick.house.gov/contact/email-me 
+
+zipform
+no captcha found
+going to fill_form from  https://kirkpatrick.house.gov/contact/email-me  now 
+<emailForm POST https://kirkpatrick.house.gov/htbin/formproc_za/zip-auth.txt%26form%3D/contact/email-me/email-me-zip-authenticated%26nobase%26fpGetVer%3D2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=Z6gRXX--XIBrz6EeLPehX2EXL7pHLqiE3yip-XziFXEcidUQrZXK-IZ1jGPKX_OFgO4E0jjMj7B96yGp3dK3-g==) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  required-zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  https://kirkpatrick.house.gov/contact/email-me 
+<emailForm POST https://kirkpatrick.house.gov/htbin/formproc_za/zip-auth.txt%26form%3D/contact/email-me/email-me-zip-authenticated%26nobase%26fpGetVer%3D2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=85222)>
+  <TextControl(zip4=0001)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>
+  <HiddenControl(__ncforminfo=Z6gRXX--XIBrz6EeLPehX2EXL7pHLqiE3yip-XziFXEcidUQrZXK-IZ1jGPKX_OFgO4E0jjMj7B96yGp3dK3-g==) (readonly)>>
+trying the next page
+Looking for errors in page 
+Looking for thank you in page: 
+thanked, done with  https://kirkpatrick.house.gov/contact/email-me
+ErrorString:  None
+thanked.add('AZ-01')
+
+------------
+AZ-02 
+
+contact info object:
+<Storage {'city': 'Franklin', 'dist': 'AZ-02', 'full_msg': 'Testing', 'prefix': 'Mr.', 'email': 'demandprogressoutreach@yahoo.com', 'lname': 'Smith', 'phone': '571-336-2637', 'state': 'AZ', 'addr2': '', 'fname': 'James', 'addr1': '12 Main St', 'subject': 'Testing', 'id': 'jamesmith', 'zip5': '85302', 'zip4': '0001'}>
+AZ-02
+contact_link selected:  https://barber.house.gov/contact-me/email-me
+In writerep_general, opening contact_link https://barber.house.gov/contact-me/email-me
+Loop  1 :
+https://barber.house.gov/contact-me/email-me 
+
+zipform
+no captcha found
+going to fill_form from  https://barber.house.gov/contact-me/email-me  now 
+<POST https://barber.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-me/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=)>
+  <TextControl(zip4=)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>> 
+ End form 1 
+
+in fill_form, filling name
+in fill_form, filling addr
+in fill_form, filling phone
+in fill_form, filling textarea
+filled textareacontrol False
+in fill_form, filling all
+Printing all controls
+control:  required-zip5  type:  text
+control:  zip4  type:  text
+f filled and ready to submit to  https://barber.house.gov/contact-me/email-me 
+<POST https://barber.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-me/email-me-zip-authenticated&nobase&fpGetVer=2 application/x-www-form-urlencoded
+  <TextControl(required-zip5=85302)>
+  <TextControl(zip4=0001)>
+  <SubmitControl(submit=Go To Next Step) (readonly)>>
+trying the next page
+Looking for errors in page 
+> /Users/paul/mass-email-delivery-code/WriteYourRep.py(363)writerep_general()
+-> if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
+(Pdb) 
