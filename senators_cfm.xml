@@ -66,12 +66,11 @@
         
         <state>WI</state>
         
-        <address>1 RUSSELL COURTYARD WASHINGTON DC 20510</address>
+        <address>717 HART WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5653</phone>
         
-        <email></email>
-        <!--<website>http://www.barrasso.senate.gov</website>-->
+        <email>http://www.baldwin.senate.gov/contact.cfm</email>
         
         <website>http://www.baldwin.senate.gov/</website>
         
@@ -203,7 +202,7 @@
         
         <state>CT</state>
         
-        <address>702 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>724 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-2823</phone>
         
@@ -487,7 +486,32 @@
         <bioguide_id>C000286</bioguide_id>
     
     </member>
-
+   
+    <member>
+        
+        <member_full>Chiesa (R-NJ)</member_full>
+        
+        <last_name>Chiesa</last_name>
+        
+        <first_name>Jeff</first_name>
+        
+        <party>R</party>
+        
+        <state>NJ</state>
+        
+        <address>1 RUSSELL COURTYARD WASHINGTON DC 20510</address>
+        
+        <phone>(202) 224-3224</phone>
+        
+        <email>mailto:Senator_Chiesa@Chiesa.Senate.gov</email>
+        
+        <website>http://www.chiesa.senate.gov/</website>
+        
+        <class>Class II</class>
+        
+        <bioguide_id>C001100</bioguide_id>
+    
+    </member>
 
     
     <member>
@@ -589,7 +613,7 @@
         
         <phone>(202) 224-2523</phone>
         
-        <email>http://www.collins.senate.gov/public/continue.cfm?FuseAction=ContactSenatorCollins.EmailIssue</email>
+        <email>http://www.collins.senate.gov/public/index.cfm/email</email>
         
         <website>http://www.collins.senate.gov</website>
         
@@ -638,7 +662,7 @@
         
         <state>TN</state>
         
-        <address>185 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>425 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-3344</phone>
         
@@ -676,6 +700,34 @@
         <class>Class II</class>
         
         <bioguide_id>C001056</bioguide_id>
+    
+    </member>
+
+    
+    <member>
+        
+        <member_full>Cowan (D-MA)</member_full>
+        
+        <last_name>Cowan</last_name>
+        
+        <first_name>William M.</first_name>
+        
+        <party>D</party>
+        
+        <state>MA</state>
+        
+        <address>218 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510
+        </address>
+        
+        <phone>(202) 224-2742</phone>
+        
+        <email>http://www.cowan.senate.gov/contact</email>
+        
+        <website>http://www.cowan.senate.gov</website>
+        
+        <class>Class II</class>
+        
+        <bioguide_id>C001099</bioguide_id>
     
     </member>
 
@@ -720,7 +772,7 @@
         
         <state>TX</state>
         
-        <address>B40B DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>185 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5922</phone>
         
@@ -747,11 +799,11 @@
         
         <state>IN</state>
         
-        <address>B33 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>720 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4814</phone>
         
-        <email>http://www.donnelly.senate.gov/contact.cfm</email>
+        <email>http://www.donnelly.senate.gov/contact/email-joe</email>
         
         <website>http://www.donnelly.senate.gov</website>
         
@@ -867,7 +919,7 @@
         
         <phone>(202) 224-6551</phone>
         
-        <email>http://www.fischer.senate.gov/contact.cfm</email>
+        <email>http://www.fischer.senate.gov/public/index.cfm/email-me</email>
         
         <website>http://www.fischer.senate.gov</website>
         
@@ -890,7 +942,7 @@
         
         <state>AZ</state>
         
-        <address>B85 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>368 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4521</phone>
         
@@ -976,7 +1028,7 @@
         
         <phone>(202) 224-5972</phone>
         
-        <email>http://www.lgraham.senate.gov/public/index.cfm?FuseAction=Contact.EmailSenatorGraham</email>
+        <email>http://lgraham.senate.gov/public/index.cfm?FuseAction=Contact.LandingPage</email>
         
         <website>http://www.lgraham.senate.gov/</website>
         
@@ -1105,7 +1157,7 @@
         
         <state>NM</state>
         
-        <address>B40D DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>720 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5521</phone>
         
@@ -1136,7 +1188,7 @@
         
         <phone>(202) 224-2043</phone>
         
-        <email></email>
+        <email>http://www.heitkamp.senate.gov/contact.cfm</email>
         
         <website>http://www.heitkamp.senate.gov/</website>
         
@@ -1159,7 +1211,7 @@
         
         <state>NV</state>
         
-        <address>361A RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>324 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-6244</phone>
         
@@ -1186,11 +1238,11 @@
         
         <state>HI</state>
         
-        <address>B40E DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>330 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-6361</phone>
         
-        <email></email>
+        <email>http://www.hirono.senate.gov/contact.cfm</email>
         
         <website>http://www.hirono.senate.gov/</website>
         
@@ -1213,7 +1265,7 @@
         
         <state>ND</state>
         
-        <address>120 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>338 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-2551</phone>
         
@@ -1272,7 +1324,7 @@
         
         <phone>(202) 224-3643</phone>
         
-        <email>http://www.isakson.senate.gov/contact.cfm</email>
+        <email>http://www.isakson.senate.gov/public/index.cfm/email-me</email>
         
         <website>http://www.isakson.senate.gov</website>
         
@@ -1321,7 +1373,7 @@
         
         <state>WI</state>
         
-        <address>386 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>328 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5323</phone>
         
@@ -1377,11 +1429,11 @@
         
         <state>VA</state>
         
-        <address>B40C DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>388 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4024</phone>
         
-        <email>http://www.kaine.senate.gov/contact.cfm</email>
+        <email>http://www.kaine.senate.gov/contact</email>
         
         <website>http://www.kaine.senate.gov/</website>
         
@@ -1391,34 +1443,6 @@
     
     </member>
    
-
-    
-    <member>
-        
-        <member_full>Kerry (D-MA)</member_full>
-        
-        <last_name>Kerry</last_name>
-        
-        <first_name>John F.</first_name>
-        
-        <party>D</party>
-        
-        <state>MA</state>
-        
-        <address>218 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
-        
-        <phone>(202) 224-2742</phone>
-        
-        <email>http://www.kerry.senate.gov/contact/</email>
-        
-        <website>http://www.kerry.senate.gov/</website>
-        
-        <class>Class II</class>
-        
-        <bioguide_id>K000148</bioguide_id>
-    
-    </member>
-
 
     
     <member>
@@ -1433,11 +1457,11 @@
         
         <state>ME</state>
         
-        <address>188 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>359 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5344</phone>
         
-        <email>http://www.king.senate.gov/contact.cfm</email>
+        <email>http://www.king.senate.gov/contact</email>
         
         <website>http://www.king.senate.gov/</website>
         
@@ -1518,7 +1542,7 @@
         
         <state>LA</state>
         
-        <address>431 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>703 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5824</phone>
         
@@ -1531,32 +1555,23 @@
         <bioguide_id>L000550</bioguide_id>
     
     </member>
-    
+
+<!--
     <member>
-        
         <member_full>Lautenberg (D-NJ)</member_full>
-        
         <last_name>Lautenberg</last_name>
-        
         <first_name>Frank R.</first_name>
-        
         <party>D</party>
-        
         <state>NJ</state>
-        
-        <address>324 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
-        
+        <address>141 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         <phone>(202) 224-3224</phone>
-        
         <email>http://www.lautenberg.senate.gov/contact/routing.cfm</email>
-        
         <website>http://www.lautenberg.senate.gov/</website>
-        
         <class>Class II</class>
-        
         <bioguide_id>L000123</bioguide_id>
-    
     </member>
+-->
+
     
     <member>
         
@@ -1632,7 +1647,7 @@
         
         <phone>(202) 224-6221</phone>
         
-        <email>http://www.levin.senate.gov/contact/email/</email>
+        <email>http://www.levin.senate.gov/contact/</email>
         
         <website>http://www.levin.senate.gov/</website>
         
@@ -1655,7 +1670,7 @@
         
         <state>WV</state>
         
-        <address>303 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>306 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-3954</phone>
         
@@ -1841,11 +1856,11 @@
         
         <state>KS</state>
         
-        <address>354 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>361A RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-6521</phone>
         
-        <email>http://www.moran.senate.gov/public/index.cfm?p=e-mail-jerry</email>
+        <email>http://moran.senate.gov/public/index.cfm/e-mail-jerry</email>
         
         <website>http://www.moran.senate.gov</website>
         
@@ -1895,11 +1910,11 @@
         
         <state>CT</state>
         
-        <address>B40A DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>303 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4041</phone>
         
-        <email></email>
+        <email>http://www.murphy.senate.gov/contact.cfm</email>
         
         <website>http://www.murphy.senate.gov/</website>
         
@@ -1922,11 +1937,11 @@
         
         <state>WA</state>
         
-        <address>448 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>154 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-2621</phone>
         
-        <email>http://www.murray.senate.gov/email/index.cfm</email>
+        <email>http://www.murray.senate.gov/public/index.cfm/contactme</email>
         
         <website>http://www.murray.senate.gov/</website>
         
@@ -1976,7 +1991,7 @@
         
         <state>KY</state>
         
-        <address>208 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>124 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4343</phone>
         
@@ -2004,7 +2019,7 @@
         
         <state>OH</state>
         
-        <address>338 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>448 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-3353</phone>
         
@@ -2196,7 +2211,7 @@
         
         <state>FL</state>
         
-        <address>317 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>284 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-3041</phone>
         
@@ -2251,11 +2266,11 @@
       
         <state>HI</state>
       
-        <address>G11 DIRKSEN SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>722 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
       
         <phone>(202) 224-3934</phone>
       
-        <email></email>
+        <email>http://www.schatz.senate.gov/contact.cfm</email>
       
         <website>http://www.schatz.senate.gov</website>
       
@@ -2306,11 +2321,11 @@
         
         <state>SC</state>
         
-        <address>113 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>167 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-6121</phone>
         
-        <email></email>
+        <email>http://www.scott.senate.gov/contact</email>
         
         <website>http://www.scott.senate.gov/</website>
         
@@ -2438,7 +2453,7 @@
         
         <state>MT</state>
         
-        <address>724 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>706 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-2644</phone>
         
@@ -2493,7 +2508,7 @@
         
         <state>PA</state>
         
-        <address>502 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>248 RUSSELL SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4254</phone>
         
@@ -2521,7 +2536,7 @@
         
         <state>CO</state>
         
-        <address>328 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>730 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-5941</phone>
         
@@ -2577,7 +2592,7 @@
         
         <phone>(202) 224-4623</phone>
         
-        <email>http://www.vitter.senate.gov/public/index.cfm?FuseAction=Contact.ContactForm</email>
+        <email>http://www.vitter.senate.gov/contact</email>
         
         <website>http://www.vitter.senate.gov/</website>
         
@@ -2628,11 +2643,11 @@
         
         <state>MA</state>
         
-        <address>2 RUSSELL COURTYARD WASHINGTON DC 20510</address>
+        <address>317 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-4543</phone>
         
-        <email>http://www.warren.senate.gov/contact.cfm</email>
+        <email>http://www.warren.senate.gov/?p=email_senator</email>
         
         <website>http://www.warren.senate.gov</website>
         
@@ -2655,7 +2670,7 @@
         
         <state>RI</state>
         
-        <address>717 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
+        <address>530 HART SENATE OFFICE BUILDING WASHINGTON DC 20510</address>
         
         <phone>(202) 224-2921</phone>
         
@@ -2685,8 +2700,7 @@
         
         <phone>(202) 224-6253</phone>
         
-        <email>http://www.wicker.senate.gov/public/index.cfm?FuseAction=Contact.EMailSenatorWicker
-        </email>
+        <email>http://www.wicker.senate.gov/public/index.cfm/contact</email>
         
         <website>http://www.wicker.senate.gov</website>
         

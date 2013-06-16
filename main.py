@@ -63,7 +63,7 @@ def housetest(distToEmail=None):
     judCaptcha=set(['CA-49', 'MI-14' ])
 
     #n = set()
-    #n.update(correction); 
+    #n.update(correction);
     #n.update(err);
 
     # Speed up test.
@@ -158,7 +158,7 @@ def send_to(chamber, pnum, maxtodo):
             except Exception:
                 q = []
                 tries -= 1
-		db._ctx.clear()
+                db._ctx.clear()
                 import traceback; traceback.print_exc()
                 time.sleep(60)
     
@@ -244,6 +244,7 @@ def usage():
     print "Unknown usage"
 
 if __name__ == "__main__":
+    print("good morning")
     import sys
     if len(sys.argv) == 0:
         usage()

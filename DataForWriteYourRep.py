@@ -55,7 +55,7 @@ def getzip(dist):
     try:
         return dist_zip_dict[dist]
     except Exception:
-        return '', ''    
+        return '', ''
 
 
 # some district forms require the street match
@@ -98,7 +98,9 @@ distsStreetAddresses = {
 zipIncorrectErrorStrs = ["not correct for the selected state",
                          "was not found in our database",                     
                          "it appears that you live outside of",
-                         "Please re-enter your complete zip code"]
+                         "Please re-enter your complete zip code",
+                         "Zip Code is required",
+                         "Zip Code Authentication Failed"]
 addressMatchErrorStrs = ["exact street name match could not be found", "Address matched to multiple records", "is shared by more than one",
                          "street number in the input address was not valid"]
 jsRedirectErrorStrs = ["window.location"]
@@ -141,17 +143,16 @@ def getcontactcongressdict(ccdump):
     """
     d = {}
     for line in ccdump.strip().split('\n'):
-        if line.strip():
-            (dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
-            dist2=dist[:2]+"-" + dist[2:]
+        if len(line.strip()) > 1:
+            parts = line.split('\t')
+            dist = parts[1]
+            email_form = parts[-2]
+            #(fullname, dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
+            dist2 = dist[:2] + "-" + dist[2:]
             d[dist2] = email_form
     return d
 
 contact_congress_dict = getcontactcongressdict(file('ContactingCongress.db.txt').read())
-
-
-
-
 
 def getError(pagetxt):
     ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
