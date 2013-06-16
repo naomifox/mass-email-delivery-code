@@ -27,7 +27,8 @@
             if (strpos($distDef, "districts=") !== false) {
                 $distArrDef = str_replace(";", "", str_replace("districts=", "", $distDef));
                 $dists = json_decode($distArrDef, true);
-                foreach ($dists as $dist) { 
+                if (count($dists) == 1) {
+                    $dist = $dists[0];
                     $dist = substr($dist, 0, 2) . "-" . substr($dist, 2, 2);
                     if ( ! isset($zipsPerDist[$dist])) {
                         $zipsPerDist[$dist] = array();

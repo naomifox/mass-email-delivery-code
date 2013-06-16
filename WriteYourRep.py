@@ -367,7 +367,7 @@ class WriteYourRep:
 
             errorStr = self.getError(b.page)
             if errorStr:
-                import pdb; pdb.set_trace();
+                #import pdb; pdb.set_trace();
                 if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
                 foundError = True
 

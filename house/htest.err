@@ -7,36 +7,50 @@ KeyError: 'addr1'
 Traceback (most recent call last):
   File "main.py", line 85, in housetest
     q = writeYourRep.writerep(writeYourRep.prepare_i(dist))
-  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 61, in writerep
-    q = self.writerep_general(link, i)
-  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 195, in writerep_general
-    b.open(contact_link)
-  File "/Users/paul/mass-email-delivery-code/browser.py", line 32, in open
-    response = opener.open(request, data)
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 386, in open
-    protocol = req.get_type()
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 248, in get_type
-    raise ValueError, "unknown url type: %s" % self.__original
-ValueError: unknown url type: faleomavaega@mail.house.gov
+  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 55, in writerep
+    link = contact_congress_dict[i.dist]
+KeyError: 'AQ-00'
 Traceback (most recent call last):
-  File "main.py", line 252, in <module>
-    housetest()
   File "main.py", line 85, in housetest
     q = writeYourRep.writerep(writeYourRep.prepare_i(dist))
   File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 61, in writerep
     q = self.writerep_general(link, i)
-  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 363, in writerep_general
-    if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
-  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 363, in writerep_general
-    if DEBUG: print "Found error: ", errorStr, " done with ", contact_link
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/bdb.py", line 48, in trace_dispatch
-    return self.dispatch_line(frame)
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/bdb.py", line 66, in dispatch_line
-    self.user_line(frame)
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/pdb.py", line 158, in user_line
-    self.interaction(frame, None)
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/pdb.py", line 210, in interaction
-    self.cmdloop()
-  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/cmd.py", line 130, in cmdloop
-    line = raw_input(self.prompt)
-KeyboardInterrupt
+  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 203, in writerep_general
+    b.open(contact_link)
+  File "/Users/paul/mass-email-delivery-code/browser.py", line 32, in open
+    response = opener.open(request, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 400, in open
+    response = meth(req, response)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 513, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 438, in error
+    return self._call_chain(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 372, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 521, in http_error_default
+    raise HTTPError(req.get_full_url(), code, msg, hdrs, fp)
+HTTPError: HTTP Error 404: File Not Found
+caught a urllib2 http error
+Failed to submit form for url  https://gutierrez.house.gov/htbin/formproc_za/zip-auth.txt&form=/contact-me/email-me-zip-authenticated&nobase&fpGetVer=2  error: Traceback (most recent call last):
+  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 352, in writerep_general
+    nextpage = b.open(form.click())
+  File "/Users/paul/mass-email-delivery-code/browser.py", line 32, in open
+    response = opener.open(request, data)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 400, in open
+    response = meth(req, response)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 513, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 438, in error
+    return self._call_chain(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 372, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 521, in http_error_default
+    raise HTTPError(req.get_full_url(), code, msg, hdrs, fp)
+HTTPError: HTTP Error 404: Not Found
+None
+Traceback (most recent call last):
+  File "main.py", line 85, in housetest
+    q = writeYourRep.writerep(writeYourRep.prepare_i(dist))
+  File "/Users/paul/mass-email-delivery-code/WriteYourRep.py", line 55, in writerep
+    link = contact_congress_dict[i.dist]
+KeyError: 'MP-00'

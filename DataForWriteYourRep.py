@@ -143,17 +143,16 @@ def getcontactcongressdict(ccdump):
     """
     d = {}
     for line in ccdump.strip().split('\n'):
-        if line.strip():
-            (dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
-            dist2=dist[:2]+"-" + dist[2:]
+        if len(line.strip()) > 1:
+            parts = line.split('\t')
+            dist = parts[1]
+            email_form = parts[-2]
+            #(fullname, dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
+            dist2 = dist[:2] + "-" + dist[2:]
             d[dist2] = email_form
     return d
 
 contact_congress_dict = getcontactcongressdict(file('ContactingCongress.db.txt').read())
-
-
-
-
 
 def getError(pagetxt):
     ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
