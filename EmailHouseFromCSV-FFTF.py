@@ -32,7 +32,7 @@ def cleanName(first_name, last_name):
         if len(fnames)>1 and fnames[-1] == lname:
             fname = ' '.join(fnames[0:len(fnames)-1])
     # take care of Jrs, etc.
-    if fnames[-1].upper() in ('JR.', 'JR', 'SR.', 'SR', 'I', 'II', 'III', 'IV', 'V', 'VI'):
+    if len(fnames) > 1 and fnames[-1].upper() in ('JR.', 'JR', 'SR.', 'SR', 'I', 'II', 'III', 'IV', 'V', 'VI'):
         fname = ' '.join(fnames[0:len(fnames)-2])
         lname = ' '.join(fnames[len(fnames)-2:len(fnames)])
     return (fname,lname)
@@ -57,7 +57,8 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         status = ""
         try:
             #First_Name,Email,Street,Zip
-            (first_name, email, addr1, zip5) = row
+            (SignupDate,email,first_name,last_name,addr1,addr2,zip5,country,county,privacyPolicy,stayInformed,stayInformedOrg)=row
+            #(first_name, email, addr1, zip5) = row
             last_name = ""
             addr2=""
             zip4 = None
@@ -67,6 +68,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
                 zip5 = zip5.split('-')[0]            
             (first_name, last_name) = cleanName(first_name, last_name)
             zip5=zip5.zfill(5)
+            print "Parsed ", first_name, last_name, zip5, email
             (city, state) = zipLookup.getCityAndState(zip5)
             #print "found city and state: %s, %s" % (city, state)
             i = writeYourRep.prepare_i(state+"_" + "XX") #hack, need dist for prepare_i
