@@ -64,7 +64,7 @@ Brad Sherman (D-30)	CA30	Representative	Brad	Sherman	Democrat	202-225-5911	818-5
 Gary Miller (R-31)	CA31	Representative	Gary	Miller	Republican	202-225-3201	909-980-1492	http://garymiller.house.gov/contact/	http://garymiller.house.gov/
 Grace Napolitano (D-32)	CA32	Representative	Grace	Napolitano	Democrat	202-225-5256	626-350-0150	https://napolitano.house.gov/contact-me/email-me	http://napolitano.house.gov/
 Henry A. Waxman (D-33)	CA33	Representative	Henry	Waxman	Democrat	202-225-3976	323-651-1040	https://waxman.house.gov/contact-me/email-me	http://waxman.house.gov/
-Xavier Becerra (D-34)	CA34	Representative	Xavier	Becerra	Democrat	202-225-6235	213-481-1425	https://becerra.house.gov/email-xavier	http://becerra.house.gov/
+Xavier Becerra (D-34)	CA34	Representative	Xavier	Becerra	Democrat	202-225-6235	213-481-1425	http://becerraforms.house.gov/contact/	http://becerra.house.gov/
 Gloria Negrete McLeod (D-35)	CA35	Representative	Gloria	Negrete McLeod	Democrat	202-225-6161	909-626-2054	http://negretemcleod.house.gov/EmailGloria	http://negretemcleod.house.gov/
 Raul Ruiz (D-36)	CA36	Representative	Raul	Ruiz	Democrat	202-225-5330	760-424-8888	https://ruiz.house.gov/email-me	http://ruiz.house.gov/
 Karen Bass (D-37)	CA37	Representative	Karen	Bass	Democrat	202-225-7084	323-965-1422	https://bass.house.gov/contact-me/email-me	http://bass.house.gov/
@@ -77,7 +77,7 @@ Maxine Waters (D-43)	CA43	Representative	Maxine	Waters	Democrat	202-225-2201	323
 Janice Hahn (D-44)	CA44	Representative	Janice	Hahn	Democrat	202-225-8220	310-831-1799	https://hahn.house.gov/contact-me/email-me	http://hahn.house.gov/
 John Campbell (R-45)	CA45	Representative	John	Campbell	Republican	202-225-5611	949-756-2244	https://campbell.house.gov/email-me	http://campbell.house.gov/
 Loretta Sanchez (D-46)	CA46	Representative	Loretta	Sanchez	Democrat	202-225-2965	714-621-0102	https://lorettasanchez.house.gov/contact-me/email-me	http://www.lorettasanchez.house.gov/
-Alan Lowenthal (D-47)	CA47	Representative	Alan	Lowenthal	Democrat	202-225-7924	562-436-3828	https://lowenthal.house.gov/contact/email-me/#.UfEWvKyYsuQ	http://lowenthal.house.gov/
+Alan Lowenthal (D-47)	CA47	Representative	Alan	Lowenthal	Democrat	202-225-7924	562-436-3828	http://lowenthal.house.gov/contact/howtocontactme.htm	http://lowenthal.house.gov/
 Dana Rohrabacher (R-48)	CA48	Representative	Dana	Rohrabacher	Republican	202-225-2415	714-960-6483	https://rohrabacher.house.gov/contact-me/email-me	http://rohrabacher.house.gov/
 Darrell Issa (R-49)	CA49	Representative	Darrell	Issa	Republican	202-225-3906	760-599-5000	http://issa.house.gov/contact/contact-me	http://issa.house.gov/
 Duncan D. Hunter (R-50)	CA50	Representative	Duncan	Hunter	Republican	202-225-5672	619-448-5201	https://hunter.house.gov/contact-me/email-me	http://hunter.house.gov/
