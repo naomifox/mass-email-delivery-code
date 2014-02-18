@@ -61,7 +61,9 @@ def getzip(dist):
 # some district forms require the street match
 distsStreetAddresses = { 
     'AL-04' : {'addr1' : '1710 ALABAMA AVE', 'city' : 'JASPER', 'state' : 'AL', 'zip5' : '35501', 'zip4' : '5400'},
-    'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
+    'AZ-06' : {'addr1' : '10603 N HAYDEN RD', 'city' : 'Scottsdale', 'state' : 'AZ', 'zip5' : '85260', 'zip4' : '5504'},
+    'CA-03' : {'addr1' : '990 Klamath Lane', 'city' : 'Yuba City', 'state' : 'CA', 'zip5' : '95993', 'zip4' : '8978'},
+        'SC-04' : { 'addr1' : '212 S Pine St', 'city' : 'Spartanburg', 'state' : 'SC', 'zip5' : '29302', 'zip4' : '2627' },
                          'AR-01' : { 'addr1' : '2400 Highland Dr', 'city' : 'Jonesboro', 'state' : 'AR', 'zip5' : '72401', 'zip4' : '6213' },
                          'AR-02' : { 'addr1' : '717 ADA VALLEY RD', 'city' : 'Adona', 'state' : 'AR', 'zip5' : '72001', 'zip4' : '8706' },
                          'FL-24' : { 'addr1' : '112 BAY ST', 'city' : 'Daytona Beach', 'state' : 'FL', 'zip5' : '32114', 'zip4' : '3234' },

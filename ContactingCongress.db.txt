@@ -9,12 +9,12 @@ Martha Roby (R-02)	AL02	Representative	Martha	Roby	Republican	202-225-2901	334-4
 Mike Rogers (R-03)	AL03	Representative	Mike	Rogers	Republican	202-225-3261	256-236-5655	https://mike-rogers.house.gov/contact-mike/email-me	http://mike-rogers.house.gov/
 Robert B. Aderholt (R-04)	AL04	Representative	Robert	Aderholt	Republican	202-225-4876	205-221-2310	http://aderholt.house.gov/email-me2/	http://aderholt.house.gov/
 Mo Brooks (R-05)	AL05	Representative	Mo	Brooks	Republican	202-225-4801	256-355-9400	https://brooks.house.gov/email-me	http://brooks.house.gov/
-Spencer Bachus (R-06)	AL06	Representative	Spencer	Bachus	Republican	202-225-4921	205-280-0704	http://bachus.house.gov/send-me-an-email/	http://bachus.house.gov/
+Spencer Bachus (R-06)	AL06	Representative	Spencer	Bachus	Republican	202-225-4921	205-280-0704	https://bachus.house.gov/email-me	http://bachus.house.gov/
 Terri A. Sewell (D-07)	AL07	Representative	Terri	Sewell	Democrat	202-225-2665	334-262-1919	https://sewell.house.gov/email-me	http://sewell.house.gov/
 Sen. Mark Pryor (D)	ARSR	Senator	Mark	Pryor	Democrat	202-224-2353	501-324-6336	http://www.pryor.senate.gov/public/index.cfm?p=ContactForm	http://www.pryor.senate.gov/public/
 Sen. John Boozman (R)	ARJR	Senator	John	Boozman	Republican	202-224-4843	479-725-0400	http://www.boozman.senate.gov/public/index.cfm/e-mail-me	http://www.boozman.senate.gov/public/
 Rick Crawford (R-01)	AR01	Representative	Rick	Crawford	Republican	202-225-4076	501-843-3043	http://crawford.house.gov/contact/	http://crawford.house.gov
-Tim Griffin (R-02)	AR02	Representative	Tim	Griffin	Republican	202-225-2506	501-324-5941	https://griffin.house.gov/contact-me/email-me	http://griffin.house.gov/
+Tim Griffin (R-02)	AR02	Representative	Tim	Griffin	Republican	202-225-2506	501-324-5941	https://timgriffinforms.house.gov/forms/writeyourrep/	http://griffin.house.gov/
 Steve Womack (R-03)	AR03	Representative	Steve	Womack	Republican	202-225-4301	479-424-1146	http://womack.house.gov/contact/	http://womack.house.gov/
 Tom Cotton (R-04)	AR04	Representative	Tom	Cotton	Republican	202-225-3772	479-754-2120	https://cotton.house.gov/contact/email-me	http://cotton.house.gov/
 Del. Eni F. H. Faleomavaega (D)	AS00	Delegate	Eni	Faleomavaega	Democrat	202-225-8577	684-633-1372	https://faleomavaega.house.gov/contact/email-me	http://faleomavaega.house.gov/
