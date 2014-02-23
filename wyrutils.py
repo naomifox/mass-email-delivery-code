@@ -11,7 +11,7 @@ test_email = 'me@aaronsw.com' #wyr test emails to go to this
 production_test_email = 'me@aaronsw.com' #all production wyr msgs and their responses go here
 production_mode = True
 
-DEBUG = False #True
+DEBUG = False
 
             
 class ZipShared(Exception): pass
@@ -153,6 +153,7 @@ class Form(object):
         if emailcontrol == addr1control:
             #need to be more restrictive
             if DEBUG: print "email control and addr1control match.  that's not good"
+            addr1control = self.find_control(name='street')
 
         if (addr2control):
             if DEBUG: print "Found addr2control"
@@ -289,7 +290,7 @@ class Form(object):
         if type:
             if DEBUG: print "finding control by type"
             c = self.find_control_by_type(type)
-            if DEBUG: print "found control by type ", type, c
+            if DEBUG: print "found control by type", type, c
             return c
         try:
             names = name_options[name]
@@ -312,6 +313,7 @@ class Form(object):
         #labels = None
         if c_label:
             labeltext = [label.text for label in c_label.get_labels() ][0].lower()
+            print "labeltext", labeltext
             
         if DEBUG: print "Name to match: ", name
         if DEBUG:
@@ -383,9 +385,11 @@ class Form(object):
         try:
             return self.f.find_control(type=type)
         except ControlNotFoundError:
-            return None
+        	if DEBUG: print "ControlNotFoundError"
+        	return None
         except AmbiguityError:  #@@  TO BE FIXED
-            return self.f.find_control(type=type, nr=1)
+        	if DEBUG: print "AmbiguityError"
+        	return self.f.find_control(type=type, nr=1)
 
 def get_form(browser, predicate=None):
     """wrapper for browser.get_form method to return Form ojects instead of ClientForm objects"""

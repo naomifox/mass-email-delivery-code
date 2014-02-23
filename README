@@ -40,9 +40,9 @@ To run test over all reps:
 
 = Delivering emails for a large number of signers in a form =
 
-(1) Download data as a csv from the blue state digital site.
+(1) Download data as a csv from the blue state digital site or Action Kit.
 
-(2) Create a new main file to process your CSV file.  See SendBsdCSV.py as an example.
+(2) Create a new main module to parse your CSV file.  See EmailHouseFromCSV-FFTF.py as an example.
 
 (3) Create an Amazon Web Services account: http://aws.amazon.com/
 

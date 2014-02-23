@@ -2,6 +2,7 @@ import urllib2, re, subprocess, sys, os, time, urlparse
 import browser, captchasolver, xmltramp
 import web
 
+from parseZipToDist import *
 from wyrutils import *
 from ClientForm import ParseResponse, ControlNotFoundError, AmbiguityError
 import traceback
@@ -12,17 +13,31 @@ import socket; socket.setdefaulttimeout(30)
 
 from DataForWriteYourRep import *
 
-DEBUG = True
+DEBUG = False
 
 class WriteYourRep:
+    """
+    Class to support writing to rep.
 
+    Example usage:
+    writeYourRep = WriteYourRep()
+    q = writeYourRep.writerep(i)
+    status = writeYourRep.getStatus(q)
+    """
+    
     def __init__(self):
+        """
+        initialize two dicts:
+        sendb has all the senate offices for each state
+        zipToDistDB has the list of districts for each zip code
+        """
         self.sendb = get_senate_offices()
-
-    #
-    #
-    #         <a href="http://cleaver.house.gov/contact-me/email-me"><img src="/content/static/img/icon-email.gif" width="17" height="11" alt="Go to contact form" class="repLink"></a>
+        self.zipToDistDB = get_zip_to_dist_db()
+        
     def getWyrContactLink(self, i):
+        """
+        Use the Find Your Rep web site to look up the rep contact link
+        """
         b = browser.Browser()
         b.open('http://www.house.gov/htbin/findrep?ADDRLK')
         f = get_form(b, lambda f: f.find_control_by_id('state'))
@@ -38,6 +53,17 @@ class WriteYourRep:
         print "Contact link:", fullEmailLink
         contactUrl = fullEmailLink['href']
         return contactUrl
+   
+
+    def getWyrDistricts(self, zip):
+        """
+        Reimplements functionality of getWyrContactLink, but doesn't
+        go through Wyr page 
+        Will return multiple links if multip
+        """
+        distList = self.zipToDistDB[zip]
+        return distList
+        
 
     def writerep(self, i):
         """Looks up the right contact page and handles any simple challenges."""
@@ -50,20 +76,19 @@ class WriteYourRep:
         #    link = other_direct_forms[i.dist]
         # else:
 
-        print i.dist
+        #dist will end in XX unless we are testing
         if (i.dist[3:]!='XX'):
-            link = contact_congress_dict[i.dist]
+            links = [contact_congress_dict[i.dist]]
         else:
-            link = self.getWyrContactLink(i)
-
-
-        if DEBUG: print "contact_link selected: ", link
-        q = self.writerep_general(link, i)
-
-        # No longer user the WYR form.  Using the direct links works better
-        # if the direct link did not work, tries the house's WYR form.
-        # if not q:
-        #    q = writerep_general(WYR_URL, i)
+            if DEBUG: print "Zip: %s" % i.zip5
+            dists = self.getWyrDistricts(i.zip5)
+            links = [contact_congress_dict[dist] for dist in dists]
+        
+        for link in links:
+            if DEBUG: print "contact_link selected: ", link
+            q = self.writerep_general(link, i)
+            if q: break
+        if not q: q = writerep_general(WYR_URL, i)
         return q
 
     def writesenator(self, senator, i):
@@ -115,12 +140,8 @@ class WriteYourRep:
         i.addr2 = ''
         i.city = 'Franklin'
         i.phone = '571-336-2637'
-        # Aaron's
-        #   i.email = 'demandprogressoutreach@gmail.com'
-        # Naomi's
         i.email = 'demandprogressoutreach@yahoo.com'
         i.subject = 'Testing'
-
         i.full_msg = 'Testing'
 
         if dist in distsStreetAddresses.keys():
@@ -131,7 +152,6 @@ class WriteYourRep:
             i.zip4 = distAddress['zip4']
 
         if DEBUG: print "contact info object:\n", i
-
         return i
 
     # these strings show up when successful at submitting form
@@ -207,8 +227,6 @@ class WriteYourRep:
             labels = b.find_nodes('label', lambda x: x.get('for') == 'HIP_response')
             if labels: return labels[0].string
 
-
-
         def fill_inhofe_lgraham(f):
             """special function to fill in forms for inhofe and lgraham"""
             if DEBUG: print "Filling special inhofe or lgraham form"
@@ -242,14 +260,12 @@ class WriteYourRep:
                        Re='issue', #for billnelson
                        newsletter='noAction', aff1='Unsubscribe',
                        MessageType="Express an opinion or share your views with me")
-
-            # page has one required control that has no name.  so we need to fill it in
-            #if DEBUG:
-            #    if (i.dist == 'SD-00' or 'coburn' in b.url):
-            #        empty_controls = [c for c in f.controls if not c.value]
-            #    for c in empty_controls:
-            #        print f.fill('OTH', control=c)
-
+            
+            # fill in all empty radio controls
+            empty_controls = [c for c in f.controls if c.type=="radio" and not c.value]
+            for c in empty_controls:
+                   if DEBUG: print "empty ", c
+                   f.fill('OTH', control=c)
 
             # Solve captchas.  I included this here because it was placed here by Aaron,
             # but I haven't found a captcha that it works on. -NKF
@@ -378,7 +394,7 @@ class WriteYourRep:
                 print 'thanked, done with ', contact_link
                 thanked = True
 
-            # wierd check for mulvaney
+            # weird check for mulvaney
             successUrls = ['https://mulvaneyforms.house.gov/submit-contact.aspx']
             if b.url in successUrls:
                 thanked = True
