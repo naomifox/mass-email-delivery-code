@@ -88,6 +88,7 @@ distsStreetAddresses = {
                          'SC-05' : {'addr1' : '1456 Ebenezer Rd', 'city' : 'Rock Hill', 'state' : 'SC', 'zip5' : '29732', 'zip4' : '2339'},
                          'SC-01' : {'addr1' : '1800 N. Oak Street, Suite C', 'city' : 'Myrtle Beach', 'state' : 'SC', 'zip5' : '29577', 'zip4' : '3141'}, 
                          'CA-34' : {'addr1' : '255 E. Temple St., Ste. 1860', 'city' : 'Los Angeles', 'state' : 'CA', 'zip5' : '90012', 'zip4' : '3334'},
+                         'NY-10' : {'addr1' : '201 Varick Street, Suite 669', 'city' : 'New York', 'state' : 'NY', 'zip5' : '10014', 'zip4' : '7069'},
                          'NY-20' : {'addr1' : '136 Glen St', 'city' : 'Glens Falls', 'state' : 'NY', 'zip5' : '12801', 'zip4' : '4415'},
                          'TX-23' : {'addr1' : '100 W. Ogden St', 'city' : 'Del Rio', 'state' : 'TX', 'zip5' : '78840', 'zip4' : '5578'},
                          'OK-04' : {'addr1' : '711 SW D Ave., Ste. 201', 'city' : 'Lawton', 'state' : 'OK', 'zip5' : '73501', 'zip4' : '4561'},

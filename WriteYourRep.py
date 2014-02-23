@@ -13,7 +13,7 @@ import socket; socket.setdefaulttimeout(30)
 
 from DataForWriteYourRep import *
 
-DEBUG = False
+DEBUG = True
 
 class WriteYourRep:
     """
@@ -59,7 +59,7 @@ class WriteYourRep:
         """
         Reimplements functionality of getWyrContactLink, but doesn't
         go through Wyr page 
-        Will return multiple links if multip
+        Will return a list of districts in the form ["AK-00"] or ["MA-01", "MA-02"] 
         """
         distList = self.zipToDistDB[zip]
         return distList
@@ -78,17 +78,22 @@ class WriteYourRep:
 
         #dist will end in XX unless we are testing
         if (i.dist[3:]!='XX'):
-            links = [contact_congress_dict[i.dist]]
+            contact_links = [contact_congress_dict[i.dist]]
         else:
             if DEBUG: print "Zip: %s" % i.zip5
             dists = self.getWyrDistricts(i.zip5)
-            links = [contact_congress_dict[dist] for dist in dists]
-        
-        for link in links:
-            if DEBUG: print "contact_link selected: ", link
-            q = self.writerep_general(link, i)
-            if q: break
-        if not q: q = writerep_general(WYR_URL, i)
+            contact_links = [contact_congress_dict[dist] for dist in dists]
+
+        status=""
+        for contact_link in contact_links:
+            if DEBUG: print "contact_link selected: ", contact_link
+            q = self.writerep_general(contact_link, i)
+            status = self.getStatus(q)
+            if status.startswith("Thank"):
+                break
+        if not status.startswith("Thank"):
+            contact_link = self.getWyrContactLink(i)
+            q = self.writerep_general(contact_link, i)
         return q
 
     def writesenator(self, senator, i):
@@ -207,12 +212,11 @@ class WriteYourRep:
         for string in negation_texts:
             if string.lower() in pagetxt.lower():
                 return False
-
         return True
 
     def writerep_general(self, contact_link, i):
-        """ General function.
-        Works for the house's WYR form or just directly to a contact page.
+        """ General function for filling in any form with signer data.
+        Works for the house's WYR form or just directly on any contact page.
         Loops through 5 times attempting to fill in form details and clicking.
         Stops either when 5 loops is complete, or has achieved success, or known failure
         Returns the last successful page
