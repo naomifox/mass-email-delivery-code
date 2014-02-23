@@ -14,6 +14,7 @@ echo "Updating zip-district data"
 #uncomment the following line to rebuild the district-zip map whenever the congressional session changes
 #last update: session 113
 #./get_zip_district_script_alllines.sh
+# python parseZipToDist.py scriptlines.txt > ../wyr-all-zips-data.txt
 php make_dist_zip_db.php > ../zip_per_dist.tsv
 
 echo "OK"
