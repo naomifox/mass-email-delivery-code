@@ -10,16 +10,23 @@ import csv
 
 input = sys.argv[1]
 chunksize = int(sys.argv[2])
-reader = csv.DictReader(open(input, 'r'))
+reader = csv.reader(open(input, 'r'))
 lines = list(reader)
 
+headerRow = lines[0]
+lines = lines[1:]
 for i in range(0, len(lines)/chunksize):
     output = "x%02d" % i 
-    writer=csv.DictWriter(open(output, 'w'), reader.fieldnames)
-    writer.writeheader()
+    writer=csv.writer(open(output, 'w'))
+    writer.writerow(headerRow)
     writer.writerows(lines[i*chunksize:(i+1)*chunksize])
 
 if len(lines)%chunksize > 0:
+    output = "x%02d" % i 
+    writer=csv.writer(open(output, 'w'))
+    writer.writerow(headerRow)
+    writer.writerows(lines[i*chunksize:])
+
     output = "x%02d" % i 
     writer=csv.DictWriter(open(output, 'w'), reader.fieldnames)
     writer.writeheader()
