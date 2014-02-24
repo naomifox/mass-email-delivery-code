@@ -130,7 +130,8 @@ Ted Deutch (D-21)	FL21	Representative	Ted	Deutch	Democrat	202-225-3001	561-470-5
 Lois Frankel (D-22)	FL22	Representative	Lois	Frankel	Democrat	202-225-9890	561-998-9045	https://frankel.house.gov/contact/email-me	http://frankel.house.gov/
 Debbie Wasserman Schultz (D-23)	FL23	Representative	Debbie	Wasserman Schultz	Democrat	202-225-7931	305-936-5724	http://wassermanschultz.house.gov/contact/email-me.shtml	http://wassermanschultz.house.gov/
 Frederica Wilson (D-24)	FL24	Representative	Frederica	Wilson	Democrat	202-225-4506	305-690-5905	https://wilsonforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://wilson.house.gov/
-Mario Diaz-Balart (R-25)	FL25	Representative	Mario	Diaz-Balart	Republican	202-225-4211	239-348-1620	https://writerep.house.gov/writerep/welcome.shtml	http://mariodiazbalart.house.gov/
+Mario Diaz-Balart (R-25)	FL25	Representative	Mario	Diaz-Balart	Republican	202-225-4211	239-348-1620	
+http://mariodiazbalart.house.gov/contact-mario/write-rep-diaz-balart	http://mariodiazbalart.house.gov/
 Joe Garcia (D-26)	FL26	Representative	Joe	Garcia	Democrat	202-225-2778	305-222-0160	http://garciaforms.house.gov/email-me/	http://garcia.house.gov/
 Ileana Ros-Lehtinen (R-27)	FL27	Representative	Ileana	Ros-Lehtinen	Republican	202-225-3931	305-668-2285	https://ros-lehtinen.house.gov/contact-me/email-me	http://ros-lehtinen.house.gov/
 Sen. Saxby Chambliss (R)	GASR	Senator	Saxby	Chambliss	Republican	202-224-3521	770-763-9090	http://www.chambliss.senate.gov/public/index.cfm/email	http://www.chambliss.senate.gov/public/index.cfm
@@ -147,7 +148,7 @@ Doug Collins (R-09)	GA09	Representative	Doug	Collins	Republican	202-225-9893	770
 Paul C. Broun (R-10)	GA10	Representative	Paul	Broun	Republican	202-225-4101	706-549-9588	http://broun.house.gov/contact/zipauth.htm	http://broun.house.gov/
 Phil Gingrey (R-11)	GA11	Representative	Phil	Gingrey	Republican	202-225-2931	770-429-1776	http://www.house.gov/formgingrey/IMA/issue.htm	http://gingrey.house.gov/
 John Barrow (D-12)	GA12	Representative	John	Barrow	Democrat	202-225-2823	706-722-4494	http://barrowforms.house.gov/contact/	http://www.barrow.house.gov/
-David Scott (D-13)	GA13	Representative	David	Scott	Democrat	202-225-2939	770-432-5405	https://writerep.house.gov/writerep/welcome.shtml	http://davidscott.house.gov/
+David Scott (D-13)	GA13	Representative	David	Scott	Democrat	202-225-2939	770-432-5405	https://forms.house.gov/write/davidscott/email-me.shtml	http://davidscott.house.gov/
 Tom Graves (R-14)	GA14	Representative	Tom	Graves	Republican	202-225-5211	706-290-1776	http://tomgraves.house.gov/contact/	http://tomgraves.house.gov/
 Del. Madeleine Bordallo (D)	GU00	Delegate	Madeleine	Bordallo	Democrat	202-225-1188	671-477-4272	https://bordallo.house.gov/contact-me/email-me	http://bordallo.house.gov/
 Sen. Brian Schatz (D)	HISR	Senator	Brian	Schatz	Democrat	202-224-3934	808-523-2061	http://www.schatz.senate.gov/contact	http://www.schatz.senate.gov
@@ -453,7 +454,7 @@ Sen. Ted Cruz (R)	TXJR	Senator	Ted	Cruz	Republican	202-224-5922	512-916-5834	htt
 Louie Gohmert (R-01)	TX01	Representative	Louie	Gohmert	Republican	202-225-3035	903-236-8597	http://gohmert.house.gov/contact/	http://gohmert.house.gov/
 Ted Poe (R-02)	TX02	Representative	Ted	Poe	Republican	202-225-6565	713-681-8763	https://forms.house.gov/poe/webforms/zipauthen_contact.shtml	http://poe.house.gov/
 Sam Johnson (R-03)	TX03	Representative	Sam	Johnson	Republican	202-225-4201	469-304-0382	http://samjohnson.house.gov/contact/	http://samjohnson.house.gov/
-Ralph M. Hall (R-04)	TX04	Representative	Ralph	Hall	Republican	202-225-6673	903-628-8309	http://writerep.house.gov/writerep/welcome.shtml	http://ralphhall.house.gov/index.html
+Ralph M. Hall (R-04)	TX04	Representative	Ralph	Hall	Republican	202-225-6673	903-628-8309	https://ralphhallforms.house.gov/email-congressman-hall	http://ralphhall.house.gov/index.html
 Jeb Hensarling (R-05)	TX05	Representative	Jeb	Hensarling	Republican	202-225-3484	214-349-9996	https://hensarling.house.gov/contact/email-me.shtml	http://hensarling.house.gov/
 Joe Barton (R-06)	TX06	Representative	Joe	Barton	Republican	202-225-2002	817-543-1000	https://joebarton.house.gov/contact1	http://joebarton.house.gov/
 John Culberson (R-07)	TX07	Representative	John	Culberson	Republican	202-225-2571	713-682-8828	http://culberson.house.gov/contact/zipauth.htm	http://culberson.house.gov/
