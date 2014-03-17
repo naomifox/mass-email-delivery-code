@@ -85,7 +85,7 @@ Juan Vargas (D-51)	CA51	Representative	Juan	Vargas	Democrat	202-225-8045	619-422
 Scott Peters (D-52)	CA52	Representative	Scott	Peters	Democrat	202-225-0508	858-455-5550	https://scottpeters.house.gov/contact/email-me	http://scottpeters.house.gov/
 Susan A. Davis (D-53)	CA53	Representative	Susan	Davis	Democrat	202-225-2040	619-280-5353	https://susandavisforms.house.gov/forms/writeyourrep/	http://www.house.gov/susandavis/
 Sen. Mark Udall (D)	COSR	Senator	Mark	Udall	Democrat	202-224-5941	719-542-1701	http://www.markudall.senate.gov/?p=contact_us	http://www.markudall.senate.gov/
-Sen. Michael Bennet (D)	COJR	Senator	Michael	Bennet	Democrat	202-224-5852	970-224-2200	http://www.bennet.senate.gov/contact/	http://www.bennet.senate.gov/
+Sen. Michael Bennet (D)	COJR	Senator	Michael	Bennet	Democrat	202-224-5852	970-224-2200	http://www.bennet.senate.gov/contact/email	http://www.bennet.senate.gov/
 Diana DeGette (D-01)	CO01	Representative	Diana	DeGette	Democrat	202-225-4431	303-844-4988	https://degette.house.gov/contact/send-me-an-email/email-me	http://degette.house.gov/
 Jared Polis (D-02)	CO02	Representative	Jared	Polis	Democrat	202-225-2161	970-668-3240	https://polis.house.gov/forms/writeyourrep/default.aspx	http://polis.house.gov/
 Scott R. Tipton (R-03)	CO03	Representative	Scott	Tipton	Republican	202-225-4761	970-241-2499	https://tipton.house.gov/contact-me/email-me	http://tipton.house.gov/
@@ -438,7 +438,7 @@ Tom Rice, Jr. (R-07)	SC07	Representative	Tom	Rice	Republican	202-225-9895	843-44
 Sen. Tim Johnson (D)	SDSR	Senator	Tim	Johnson	Democrat	202-224-5842	605-332-8896	http://www.johnson.senate.gov/public/index.cfm?p=ContactForm	http://www.johnson.senate.gov/public/
 Sen. John Thune (R)	SDJR	Senator	John	Thune	Republican	202-224-2321	605-348-7551	http://www.thune.senate.gov/public/index.cfm/contact	http://www.thune.senate.gov/public/index.cfm/
 Kristi Noem (R-ALL)	SD00	Representative	Kristi	Noem	Republican	202-225-2801	605-275-2868	http://noem.house.gov/index.cfm/email-kristi	http://noem.house.gov/
-Sen. Lamar Alexander (R)	TNSR	Senator	Lamar	Alexander	Republican	202-224-4944	423-752-5337	http://www.alexander.senate.gov/public/index.cfm?p=OfficeLocations	http://www.alexander.senate.gov/public/index.cfm
+Sen. Lamar Alexander (R)	TNSR	Senator	Lamar	Alexander	Republican	202-224-4944	423-752-5337	http://www.alexander.senate.gov/public/index.cfm?p=Email	http://www.alexander.senate.gov/public/index.cfm
 Sen. Bob Corker (R)	TNJR	Senator	Bob	Corker	Republican	202-224-3344	423-753-2263	https://www.corker.senate.gov/public/index.cfm?p=ContactMe	http://www.corker.senate.gov/public/
 Phil Roe (R-01)	TN01	Representative	Phil	Roe	Republican	202-225-6356	423-254-1400	http://roe.house.gov/contact/	http://roe.house.gov/
 John J. Duncan, Jr. (R-02)	TN02	Representative	John	Duncan	Republican	202-225-5435	865-523-3772	https://duncan.house.gov/contact-me/email-me	http://duncan.house.gov/
