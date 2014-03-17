@@ -70,16 +70,16 @@ class WriteYourRep:
         b = browser.Browser()
         contact_links = [contact_congress_dict[dist] for dist in dists]
         status=""
+        ctr=0
         for contact_link in contact_links:
+            
             if DEBUG: print "contact_link selected: ", contact_link
             q = self.writerep_general(contact_link, i)
             status = self.getStatus(q)
             if status.startswith("Thank"):
                 break
-        if not status.startswith("Thank"):
-            contact_link = self.getWyrContactLink(i)
-            q = self.writerep_general(contact_link, i)
-        return q
+            ctr += 1
+        return (dists[ctr], q)
 
     
     def writerep(self, i):
