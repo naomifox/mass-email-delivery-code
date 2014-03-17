@@ -72,13 +72,14 @@ class WriteYourRep:
         status=""
         ctr=0
         for contact_link in contact_links:
-            
             if DEBUG: print "contact_link selected: ", contact_link
             q = self.writerep_general(contact_link, i)
             status = self.getStatus(q)
             if status.startswith("Thank"):
                 break
             ctr += 1
+        if ctr >= len(dists):
+            ctr = 0
         return (dists[ctr], q)
 
     
