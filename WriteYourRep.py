@@ -79,6 +79,7 @@ class WriteYourRep:
         #dist will end in XX unless we are testing
         if (i.dist[3:]!='XX'):
             contact_links = [contact_congress_dict[i.dist]]
+            print "contact_links list:", contact_links
         else:
             if DEBUG: print "Zip: %s" % i.zip5
             dists = self.getWyrDistricts(i.zip5)
@@ -174,7 +175,7 @@ class WriteYourRep:
         errorStr = self.getError(pagetxt)
         if errorStr:
             return "Failed: %s" % errorStr
-        return "Unknown status"
+        return "Unknown status "
 
     def getError(self, pagetxt):
         ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
@@ -221,11 +222,6 @@ class WriteYourRep:
         Stops either when 5 loops is complete, or has achieved success, or known failure
         Returns the last successful page
         """
-
-        b = browser.Browser()
-        if DEBUG: print "In writerep_general, opening contact_link", contact_link
-        b.open(contact_link)
-
         def get_challenge():
             ''' find captchas'''
             labels = b.find_nodes('label', lambda x: x.get('for') == 'HIP_response')
@@ -273,17 +269,21 @@ class WriteYourRep:
 
             # Solve captchas.  I included this here because it was placed here by Aaron,
             # but I haven't found a captcha that it works on. -NKF
-            challenge = get_challenge()
-            if challenge:
-                print "Found challenge!"
-                try:
-                    solution = captchasolver.solve(challenge)
-                except Exception, detail:
-                    print >> sys.stderr, 'Exception in CaptchaSolve', detail
-                    print >> sys.stderr, 'Could not solve:"%s"' % challenge,
+            #challenge = get_challenge()
+            #if challenge:
+            #    print "Found challenge!"
+            #    try:
+            #        solution = captchasolver.solve(challenge)
+            #    except Exception, detail:
+            #        print >> sys.stderr, 'Exception in CaptchaSolve', detail
+            #        print >> sys.stderr, 'Could not solve:"%s"' % challenge,
 
             if DEBUG: print "f filled and ready to submit to ", b.url, "\n", f
 
+
+        b = browser.Browser()
+        if DEBUG: print "In writerep_general, opening contact_link", contact_link
+        b.open(contact_link)
 
         # max loops
         k = 6
