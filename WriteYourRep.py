@@ -116,7 +116,6 @@ class WriteYourRep:
         for state in self.sendb:
             for contactlink in self.sendb.get(state, []):
                 sen = web.lstrips(web.lstrips(web.lstrips(contactlink, 'http://'), 'https://'), 'www.').split('.')[0]
-                if sen in WYR_MANUAL: contactlink = WYR_MANUAL[sen]
                 if sen == sen2contact:
                     return (state,contactlink)
         return (None, None)
