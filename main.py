@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 #
 # File to call WriteYourRep class.
 #
@@ -14,18 +13,11 @@ def senatetest():
     '''
     Creates a file sen/schumer.html with schumers contact page
     '''
-
-    # not working - 6-Jan-2011
-    notworking = ['hagan', 'corker', 'shelby', 'grassley', 'senate', 'coburn', 'inhofe', 'crapo', 'risch', 'lieberman', 'brown', 'moran', 'roberts']
-    
     sendb = get_senate_offices()
     statfile = open("senate-test-out.txt", "w")
     for state in sendb:
         for member in sendb[state]:
             sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
-            if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
-            #if sen != 'billnelson': continue
-            #if sen in working + failure: continue
             print repr(sen)
             q = None
 
@@ -33,15 +25,10 @@ def senatetest():
                 q = writeYourRep.writerep_general(member, writeYourRep.prepare_i(state))
                                 
                 file('sen/%s.html' % sen, 'w').write('<base href="%s"/>' % member + q)
-                #subprocess.Popen(['open', 'sen/%s.html' % sen])
-                #subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE).stdin.write(', ' + repr(sen))
-                if q.lower().find("thank") >= 0:
-                    status = "Thanked"
-                else:
-                    status = "Failed.  reason unknown."
+                status = writeYourRep.getStatus(q)
             except Exception, e:
                 print "Caught exception on senator: %s " % member
-                status="failed.  exception occurred %s" % e.__str__()
+                status="Failed:  exception occurred %s" % e.__str__()
             statfile.write("Member: %s, Status: %s\n" % (member, status))
             statfile.flush()
     statfile.close()
@@ -199,7 +186,6 @@ def contact_state(i):
     for member in sendb.get(i.state, []):
         print "member", member
         sen = web.lstrips(web.lstrips(web.lstrips(member, 'http://'), 'https://'), 'www.').split('.')[0]
-        if sen in WYR_MANUAL: member = WYR_MANUAL[sen]
         if sen in captcha:
             file('failures.log', 'a').write('%s %s %s\n' % (i.id, member, "Captcha-no-attempt-made"))
             status += "Captcha with " + `sen` + ". "
@@ -244,7 +230,6 @@ def usage():
     print "Unknown usage"
 
 if __name__ == "__main__":
-    print("good morning")
     import sys
     if len(sys.argv) == 0:
         usage()
