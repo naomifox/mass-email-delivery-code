@@ -1,45 +1,11 @@
 # Data for WriteYourRep class
-# Unsure where else to put this stuff
 # Naomi Fox <naomi.fox@gmail.com>
-# Date: Jan 22, 2012
+# Date: Jan 22, 2012, Mar 16, 2014
 
 
 import xmltramp
 
 WYR_URL = 'https://writerep.house.gov/writerep/welcome.shtml'
-SEN_URL = 'http://senate.gov/general/contact_information/senators_cfm.xml'
-WYR_MANUAL = {
-  'cleaver': 'http://www.house.gov/cleaver/IMA/issue.htm',
-  'quigley': 'http://forms.house.gov/quigley/webforms/issue_subscribe.htm',
-  'himes': 'http://himes.house.gov/index.cfm?sectionid=141&sectiontree=54,141',
-  'issa': 'http://issa.house.gov/index.php?option=com_content&view=article&id=597&Itemid=73',
-  'billnelson': 'http://billnelson.senate.gov/contact/email.cfm', # requires post
-  'lautenberg': 'http://lautenberg.senate.gov/contact/index1.cfm',
-  'bingaman': 'http://bingaman.senate.gov/contact/types/email-issue.cfm', #email avail
-  'johanns': 'http://johanns.senate.gov/public/?p=EmailSenatorJohanns',
-  'bennelson': 'http://bennelson.senate.gov/email-issues.cfm',
-  'boxer': 'http://boxer.senate.gov/en/contact/policycomments.cfm',
-  'warner': 'http://warner.senate.gov/public//index.cfm?p=ContactPage',
-  'markudall': 'http://markudall.senate.gov/?p=contact_us',
-  'murkowski': 'http://murkowski.senate.gov/public/index.cfm?p=EMailLisa',
-  'pryor': 'http://pryor.senate.gov/public/index.cfm?p=ContactForm',
-  'sanders': 'http://sanders.senate.gov/contact/contact.cfm',
-  'kirk': 'http://kirk.senate.gov/?p=comment_on_legislation',
-  'lugar': 'http://lugar.senate.gov/contact/contactform.cfm',
-  'harkin': 'http://harkin.senate.gov/contact_opinion.cfm',
-  'mikulski': 'http://mikulski.senate.gov/contact/shareyouropinion.cfm',
-  'scottbrown': 'http://scottbrown.senate.gov/public/index.cfm/contactme',
-  'franken': 'http://franken.senate.gov/?p=email_al',
-  'klobuchar': 'http://klobuchar.senate.gov/emailamy.cfm?contactForm=emailamy&submit=Go',
-  'levin': 'https://levin.senate.gov/contact/email/',
-  'demint': 'http://demint.senate.gov/public/index.cfm?p=CommentOnLegislationIssues',
-  'mcconnell': 'http://www.mcconnell.senate.gov/public/index.cfm?p=ContactForm',
-  'johnson': 'http://johnson.senate.gov/public/index.cfm?p=ContactForm',
-  'thune': 'http://thune.senate.gov/public/index.cfm/contact',
-  'fortenberry': 'https://forms.house.gov/fortenberry/webforms/issue_subscribe.html',
-  'wassermanschultz': 'http://wassermanschultz.house.gov/contact/email-me.shtml',
-  #'jackson': 'https://forms.house.gov/jackson/webforms/issue_subscribe.htm'
-}
 
 def getdistzipdict(zipdump):
     """returns a dict with district names as keys zipcodes falling in it as values"""
@@ -123,22 +89,32 @@ confirmationStrings = ['thank', 'the following information has been submitted', 
                        'email confirmation']
 
 def get_senate_offices():
+    return get_senate_offices_from_contactcongressdb(file('ContactingCongress.db.txt').read())
+
+def get_senate_offices_from_senators_cfm_file():
+    """returns a dict with district names as keys and email-contact urls as values
+    """
     out = {}
     d = xmltramp.load('senators_cfm.xml')
     for member in d: 
         out.setdefault(str(member.state), []).append(str(member.email))
     return out
 
-
-def getcontactcongressdict2(ccdump):
-    """returns a dict with district names as keys and email-contact urls as values"""
+def get_senate_offices_from_contactcongressdb(ccdump):
+    """returns a dict with district names as keys and email-contact urls as values
+    District	Name	Party	DC Office	DC Voice	District Voice	Electronic Correspondence	Web
+    """
     d = {}
     for line in ccdump.strip().split('\n'):
-        if line.strip():
-            (dist, email_form) = line.split()
-            d[dist] = email_form
+        if len(line.strip()) > 1:
+            parts = line.split('\t')
+            dist = parts[1]
+            state = dist[:2]
+            email_form = parts[-2]
+            #(fullname, dist, name, party, dc_office, dc_voice, district_voice, email_form, web) = line.split('\t')
+            if dist[2:]=="JR" or dist[2:]=="SR":
+                d.setdefault(str(state), []).append(str(email_form))
     return d
-#contact_congress_dict = getcontactcongressdict2(file('ContactingCongress-FromJordan.tsv').read())
 
 def getcontactcongressdict(ccdump):
     """returns a dict with district names as keys and email-contact urls as values
