@@ -19,6 +19,8 @@ from DataForWriteYourRep import *
 import csv
 from ZipLookup import ZipLookup
 from GenderLookup import GenderLookup
+from optparse import OptionParser
+
 
 def cleanName(first_name, last_name):
     fname = first_name
@@ -110,7 +112,7 @@ def csv_To_Data(row, writeYourRep, genderassigner, defaultSubject, defaultMessag
             return i
 
          
-def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False):
+def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_House.log', dryrun=False, onedistrict=None):
     '''
     Parse from the csv file
 
@@ -124,7 +126,10 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         state='unknown'
         status = ""
         try:
-            i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)            
+            i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)
+            if onedistrict!=None:
+                print "Feature of specifying one district is not supported yet"
+                return
             if dryrun:
             	distListStr=' '.join(writeYourRep.getWyrDistricts(i.zip5))
             	status += distListStr + " " + ": Not attempted with "+ i.__str__()+"\n"
@@ -137,7 +142,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
 
 
-def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False):
+def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False, onesenator=None):
     '''
     Parse from the csv file
 
@@ -172,9 +177,11 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)
             sens = writeYourRep.getSenators(i.state)
             for sen in sens:
+                if onesenator != None and onesenator not in sen:
+                    continue
                 print "Writing to senator %s" % sen
                 senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
-                captchaforms=['toomey','sessions','shelby','coburn','crapo','moran','roberts','paul']
+                captchaforms=['toomey','sessions','shelby','coburn','crapo','roberts','paul']
                 if senname in captchaforms:
                     status += senname + " has captcha.  skipping.  "
                 elif dryrun:
@@ -187,7 +194,6 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             import traceback; traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
-
 
 def parseMessageFile(messageFile):
     '''
@@ -206,10 +212,13 @@ def parseMessageFile(messageFile):
 def usage():
     import sys
     print "Usages of ", sys.argv[0], ":"
-    print "Normal: " + sys.argv[0] + "house csvfile messagefile statfile"
-    print "Normal: " + sys.argv[0] + "senate csvfile messagefile statfile"
+    print "Normal: " + sys.argv[0] + " house csvfile messagefile statfile"
+    print "Normal: " + sys.argv[0] + " senate csvfile messagefile statfile"
     print "Dryrun: " + sys.argv[0] + " -d house csvfile default-message-file output-status-file"
     print "Dryrun: " + sys.argv[0] + " -d senate csvfile default-message-file output-status-file"
+    print "Normal: " + sys.argv[0] + " senator csvfile messagefile statfile"
+    print "Dryrun: " + sys.argv[0] + " -d senator csvfile default-message-file output-status-file"
+    print "Example: " + sys.argv[0] + " -d boxer csvfile default-message-file output-status-file"
     print "csvfile header column names available (all optional): "
     print "first_name, last_name, email, addr1, addr2, zip5, zip4, message"
     print ""
@@ -222,22 +231,26 @@ def usage():
     print "$FIRSTNAME$ $LASTNAME$"
     print " "
     print "And here is more."
-      
+
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) == 5 and sys.argv[1] in ["house", "senate"]:
+    print sys.argv
+    if len(sys.argv) == 5:# and sys.argv[1] in ["house", "senate"]:
         houseOrSenate = sys.argv[1]
         csvfile = sys.argv[2]
         messagefile = sys.argv[3]
         statfile = sys.argv[4]
         if (houseOrSenate == "house"):
-            csv_Send_To_House(csvfile, messagefile, statfile)
+            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=False)
         elif (houseOrSenate == "senate"):
-            csv_Send_To_Senate(csvfile, messagefile, statfile)
+            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=False)
+        elif houseOrSenate[-1].isdigit():
+            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=False, onedistrict=houseOrSenate)
         else:
-            usage()
+            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=False, onesenator=houseOrSenate)
+            #usage()
         sys.exit(0)
-    if len(sys.argv) == 6 and sys.argv[1] == '-d' and sys.argv[2] in ["house", "senate"]: #dry run
+    if len(sys.argv) == 6 and sys.argv[1] == '-d':# and sys.argv[2] in ["house", "senate"]: #dry run
         houseOrSenate = sys.argv[2]
         csvfile = sys.argv[3]
         messagefile = sys.argv[4]
@@ -246,6 +259,10 @@ if __name__ == "__main__":
             csv_Send_To_House(csvfile, messagefile, statfile, dryrun=True)
         elif (houseOrSenate == "senate"):
             csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=True)
+        elif houseOrSenate[-1].isdigit():
+            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=True, onedistrict=houseOrSenate)
+        else:
+            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=True, onesenator=houseOrSenate)
         sys.exit(0)
     else:
         usage()
