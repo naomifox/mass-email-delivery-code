@@ -178,7 +178,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             sens = writeYourRep.getSenators(i.state)
             for sen in sens:
                 if onesenator != None and onesenator not in sen:
-                    status += " not a match for senator %s." % onesenator
+                    status += "%s: not attempted, " % (sen)
                     continue
                 print "Writing to senator %s" % sen
                 senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
