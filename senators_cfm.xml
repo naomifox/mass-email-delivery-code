@@ -290,7 +290,7 @@
         
         <phone>(202) 224-3553</phone>
         
-        <email>http://www.boxer.Senate.gov/en/contact/</email>
+        <email>http://www.boxer.senate.gov/en/contact/policycomments.cfm</email>
         
         <website>http://www.boxer.Senate.gov</website>
         
@@ -811,7 +811,7 @@
         
         <phone>(202) 224-3424</phone>
         
-        <email>http://www.enzi.Senate.gov/public/index.cfm/contact?p=e-mail-senator-enzi</email>
+        <email>http://www.enzi.senate.gov/public/index.cfm/e-mail-senator-enzi</email>
         
         <website>http://www.enzi.Senate.gov</website>
         
@@ -866,7 +866,7 @@
         
         <phone>(202) 224-6551</phone>
         
-        <email>http://www.fischer.Senate.gov/public/index.cfm/contact</email>
+        <email>http://www.fischer.senate.gov/public/?p=email-deb</email>
         
         <website>http://www.fischer.Senate.gov</website>
         
@@ -921,7 +921,7 @@
         
         <phone>(202) 224-5641</phone>
         
-        <email>http://www.franken.Senate.gov/?p=contact</email>
+        <email>http://www.franken.senate.gov/?p=email_al</email>
         
         <website>http://www.franken.Senate.gov</website>
         
@@ -1297,7 +1297,7 @@
         
         <phone>(202) 224-4224</phone>
         
-        <email>http://www.johanns.Senate.gov/public/?p=ContactSenatorJohanns</email>
+        <email>http://www.johanns.senate.gov/public/?p=EmailSenatorJohanns</email>
         
         <website>http://www.johanns.Senate.gov</website>
         
@@ -1466,8 +1466,8 @@
         
         <phone>(202) 224-3244</phone>
         
-        <email>http://www.klobuchar.Senate.gov/public/contact-amy</email>
-        
+        <email>http://www.klobuchar.senate.gov/public/email-amy</email>
+
         <website>http://www.klobuchar.Senate.gov/</website>
         
         <class>Class I</class>
@@ -1848,7 +1848,7 @@
         
         <phone>(202) 224-6665</phone>
         
-        <email>http://www.murkowski.Senate.gov/public/index.cfm?p=Contact</email>
+        <email>http://www.murkowski.senate.gov/public/index.cfm?p=EMailLisa</email>
         
         <website>http://www.murkowski.Senate.gov/</website>
         
@@ -1929,7 +1929,7 @@
         
         <phone>(202) 224-5274</phone>
         
-        <email>http://www.billnelson.Senate.gov/contact/index.cfm</email>
+        <email>http://www.billnelson.senate.gov/contact/email.cfm</email>
         
         <website>http://www.billnelson.Senate.gov/</website>
         
@@ -2012,7 +2012,7 @@
         
         <phone>(202) 224-2353</phone>
         
-        <email>http://www.pryor.Senate.gov/public/index.cfm?p=ContactMe</email>
+        <email>http://www.pryor.senate.gov/public/index.cfm?p=ContactForm</email>
         
         <website>http://www.pryor.Senate.gov</website>
         
@@ -2313,7 +2313,7 @@
         
         <phone>(202) 224-4124</phone>
         
-        <email>http://www.sessions.Senate.gov/public/index.cfm?FuseAction=ConstituentServices.ContactMe</email>
+        <email>http://www.sessions.senate.gov/public/index.cfm/contact-jeff</email>
         
         <website>http://www.sessions.Senate.gov/</website>
         
@@ -2473,7 +2473,7 @@
         
         <phone>(202) 224-4254</phone>
         
-        <email>http://www.toomey.Senate.gov/?p=contact</email>
+        <email>http://www.toomey.senate.gov/?p=contact</email>
         
         <website>http://www.toomey.Senate.gov/</website>
         
@@ -2501,7 +2501,7 @@
         
         <phone>(202) 224-5941</phone>
         
-        <email>http://www.markudall.Senate.gov/?p=contact</email>
+        <email>http://www.markudall.senate.gov/?p=contact_us</email>
         
         <website>http://www.markudall.Senate.gov</website>
         
@@ -2553,8 +2553,8 @@
         
         <phone>(202) 224-4623</phone>
         
-        <email>http://www.vitter.Senate.gov/contact</email>
-        
+        <email>http://www.vitter.senate.gov/contact/email-senator-vitter</email>
+
         <website>http://www.vitter.Senate.gov/</website>
         
         <class>Class III</class>
