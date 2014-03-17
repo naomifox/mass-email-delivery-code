@@ -65,6 +65,23 @@ class WriteYourRep:
         return distList
         
 
+    def write_reps_in_dists(self, i, dists):
+        """Attempt to submit the same data to specified districts."""
+        b = browser.Browser()
+        contact_links = [contact_congress_dict[dist] for dist in dists]
+        status=""
+        for contact_link in contact_links:
+            if DEBUG: print "contact_link selected: ", contact_link
+            q = self.writerep_general(contact_link, i)
+            status = self.getStatus(q)
+            if status.startswith("Thank"):
+                break
+        if not status.startswith("Thank"):
+            contact_link = self.getWyrContactLink(i)
+            q = self.writerep_general(contact_link, i)
+        return q
+
+    
     def writerep(self, i):
         """Looks up the right contact page and handles any simple challenges."""
         b = browser.Browser()
