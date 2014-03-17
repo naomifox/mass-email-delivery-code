@@ -160,8 +160,8 @@ def csv_Send_To_House_With_Exclusions(csvfile='demo-dataz.csv', messagefile="noC
             i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)
             alldists = writeYourRep.getWyrDistricts(i.zip5)
             culleddists = [dist for dist in alldists if dist not in excludedDists]
-            if dryrun or dist in excludedDists:
-            	distListStr=' '.join(culleddists)
+            if dryrun or len(culleddists)==0:
+            	distListStr=' '.join(alldists)
             	status += distListStr + " " + ": Not attempted with "+ i.__str__()+"\n"
             else:
                 q = writeYourRep. write_reps_in_dists(i, culleddists)
