@@ -60,7 +60,7 @@ Julia Brownley (D-26)	CA26	Representative	Julia	Brownley	Democrat	202-225-5811	8
 Judy Chu (D-27)	CA27	Representative	Judy	Chu	Democrat	202-225-5464	626-304-0110	http://chu.house.gov/connect-with-me/email-judy	http://chu.house.gov/
 Adam Schiff (D-28)	CA28	Representative	Adam	Schiff	Democrat	202-225-4176	818-450-2900	https://schiff.house.gov/email-congressman-schiff1	http://schiff.house.gov/index.html
 Tony Cardenas (D-29)	CA29	Representative	Tony	Cardenas	Democrat	202-225-6131	818-504-0090	https://cardenas.house.gov/contact/email-me	http://cardenas.house.gov/
-Brad Sherman (D-30)	CA30	Representative	Brad	Sherman	Democrat	202-225-5911	818-501-9200	http://shermanforms.house.gov/contact/contact-form.shtml	http://bradsherman.house.gov/
+Brad Sherman (D-30)	CA30	Representative	Brad	Sherman	Democrat	202-225-5911	818-501-9200	https://sherman.house.gov/contact/contact-congressman-sherman-form	http://bradsherman.house.gov/
 Gary Miller (R-31)	CA31	Representative	Gary	Miller	Republican	202-225-3201	909-980-1492	http://garymiller.house.gov/contact/	http://garymiller.house.gov/
 Grace Napolitano (D-32)	CA32	Representative	Grace	Napolitano	Democrat	202-225-5256	626-350-0150	https://napolitano.house.gov/contact-me/email-me	http://napolitano.house.gov/
 Henry A. Waxman (D-33)	CA33	Representative	Henry	Waxman	Democrat	202-225-3976	323-651-1040	https://waxman.house.gov/contact-me/email-me	http://waxman.house.gov/
@@ -130,8 +130,7 @@ Ted Deutch (D-21)	FL21	Representative	Ted	Deutch	Democrat	202-225-3001	561-470-5
 Lois Frankel (D-22)	FL22	Representative	Lois	Frankel	Democrat	202-225-9890	561-998-9045	https://frankel.house.gov/contact/email-me	http://frankel.house.gov/
 Debbie Wasserman Schultz (D-23)	FL23	Representative	Debbie	Wasserman Schultz	Democrat	202-225-7931	305-936-5724	http://wassermanschultz.house.gov/contact/email-me.shtml	http://wassermanschultz.house.gov/
 Frederica Wilson (D-24)	FL24	Representative	Frederica	Wilson	Democrat	202-225-4506	305-690-5905	https://wilsonforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://wilson.house.gov/
-Mario Diaz-Balart (R-25)	FL25	Representative	Mario	Diaz-Balart	Republican	202-225-4211	239-348-1620	
-http://mariodiazbalart.house.gov/contact-mario/write-rep-diaz-balart	http://mariodiazbalart.house.gov/
+Mario Diaz-Balart (R-25)	FL25	Representative	Mario Diaz-Balart	Republican	202-225-4211	239-348-1620	http://mariodiazbalart.house.gov/contact-mario/write-rep-diaz-balart	http://mariodiazbalart.house.gov/
 Joe Garcia (D-26)	FL26	Representative	Joe	Garcia	Democrat	202-225-2778	305-222-0160	http://garciaforms.house.gov/email-me/	http://garcia.house.gov/
 Ileana Ros-Lehtinen (R-27)	FL27	Representative	Ileana	Ros-Lehtinen	Republican	202-225-3931	305-668-2285	https://ros-lehtinen.house.gov/contact-me/email-me	http://ros-lehtinen.house.gov/
 Sen. Saxby Chambliss (R)	GASR	Senator	Saxby	Chambliss	Republican	202-224-3521	770-763-9090	http://www.chambliss.senate.gov/public/index.cfm/email	http://www.chambliss.senate.gov/public/index.cfm
@@ -180,7 +179,7 @@ Brad Schneider (D-10)	IL10	Representative	Brad	Schneider	Democrat	202-225-4835	8
 Bill Foster (D-11)	IL11	Representative	Bill	Foster	Democrat	202-225-3515	630-585-7672	https://foster.house.gov/contact/email-me	http://foster.house.gov/
 William Enyart (D-12)	IL12	Representative	William	Enyart	Democrat	202-225-5661	618-233-8026	https://enyart.house.gov/contact/email-me	http://enyart.house.gov/
 Rodney Davis (R-13)	IL13	Representative	Rodney	Davis	Republican	202-225-2371	217-403-4690	https://rodneydavis.house.gov/contact/email-me	http://rodneydavis.house.gov/
-Randy Hultgren (R-14)	IL14	Representative	Randy	Hultgren	Republican	202-225-2976	630-232-7104	https://hultgrenforms.house.gov/index.cfm?sectionid=89&sectiontree=389	http://hultgren.house.gov/
+Randy Hultgren (R-14)	IL14	Representative	Randy	Hultgren	Republican	202-225-2976	630-232-7104	https://hultgren.house.gov/contact/email-randy	http://hultgren.house.gov/
 John Shimkus (R-15)	IL15	Representative	John	Shimkus	Republican	202-225-5271	618-252-8271	https://shimkus.house.gov/contact/email-me	http://shimkus.house.gov/
 Adam Kinzinger (R-16)	IL16	Representative	Adam	Kinzinger	Republican	202-225-3635	815-726-4998	https://kinzingerforms.house.gov/email-adam	http://kinzinger.house.gov/
 Cheri Bustos (D-17)	IL17	Representative	Cheri	Bustos	Democrat	202-225-5905	309-786-3406	http://bustos.house.gov/contact	http://bustos.house.gov/
