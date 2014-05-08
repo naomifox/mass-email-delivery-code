@@ -27,8 +27,15 @@ if len(lines)%chunksize > 0:
     writer.writerow(headerRow)
     writer.writerows(lines[i*chunksize:])
 
+    output = "x%02d" % i
+    if len(lines)%chunksize > 0:
     output = "x%02d" % i 
-    writer=csv.DictWriter(open(output, 'w'), reader.fieldnames)
-    writer.writeheader()
+    writer=csv.writer(open(output, 'w'))
+    writer.writerow(headerRow)
+    writer.writerows(lines[i*chunksize:])
+
+    output = "x%02d" % i 
+    writer=csv.writer(open(output, 'w'))
+    writer.writerow(headerRow)
     writer.writerows(lines[i*chunksize:])
     

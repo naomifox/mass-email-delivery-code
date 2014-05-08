@@ -252,8 +252,8 @@ class Form(object):
                 value = self.select_value(c, value)
             elif isinstance(value, list):
                 value = value[0]
+            if DEBUG: print "setting value for ", c.name, "  to ", value
             self.f.set_value(value, name=c.name, type=c.type, nr=0)
-            if DEBUG: print "value set for ", c.name, "  is ", value
             return True
         return False
 
@@ -276,6 +276,7 @@ class Form(object):
                 for k in d.keys():
                     if DEBUG: print "key: ", k
                     if matches(k, [c.name, c.get_labels()]):
+                        if DEBUG: print "Found match for key %s, control %s" % (k, c.name)
                         filled = self.fill(d[k], control=c)
                         if DEBUG: print 'filled', k, "with ", d[k], "in control ", c
             if DEBUG and not filled and not c.value: print "couldn't fill %s" % (c.name)

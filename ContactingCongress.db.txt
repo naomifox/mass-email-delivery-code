@@ -11,7 +11,7 @@ Robert B. Aderholt (R-04)	AL04	Representative	Robert	Aderholt	Republican	202-225
 Mo Brooks (R-05)	AL05	Representative	Mo	Brooks	Republican	202-225-4801	256-355-9400	https://brooks.house.gov/email-me	http://brooks.house.gov/
 Spencer Bachus (R-06)	AL06	Representative	Spencer	Bachus	Republican	202-225-4921	205-280-0704	https://bachus.house.gov/email-me	http://bachus.house.gov/
 Terri A. Sewell (D-07)	AL07	Representative	Terri	Sewell	Democrat	202-225-2665	334-262-1919	https://sewell.house.gov/email-me	http://sewell.house.gov/
-Sen. Mark Pryor (D)	ARSR	Senator	Mark	Pryor	Democrat	202-224-2353	501-324-6336	http://www.pryor.senate.gov/public/index.cfm?p=ContactForm	http://www.pryor.senate.gov/public/
+Sen. Mark Pryor (D)	ARSR	Senator	Mark	Pryor	Democrat	202-224-2353	501-324-6336	http://www.pryor.senate.gov/contact/form	http://www.pryor.senate.gov/public/
 Sen. John Boozman (R)	ARJR	Senator	John	Boozman	Republican	202-224-4843	479-725-0400	http://www.boozman.senate.gov/public/index.cfm/e-mail-me	http://www.boozman.senate.gov/public/
 Rick Crawford (R-01)	AR01	Representative	Rick	Crawford	Republican	202-225-4076	501-843-3043	http://crawford.house.gov/contact/	http://crawford.house.gov
 Tim Griffin (R-02)	AR02	Representative	Tim	Griffin	Republican	202-225-2506	501-324-5941	https://timgriffinforms.house.gov/forms/writeyourrep/	http://griffin.house.gov/
@@ -104,7 +104,7 @@ Del. Eleanor Holmes Norton (D)	DC00	Delegate	Eleanor	Norton	Democrat	202-225-805
 Sen. Tom Carper (D)	DESR	Senator	Tom	Carper	Democrat	202-224-2441	302-674-3308	http://www.carper.senate.gov/public/index.cfm/email-senator-carper	http://www.carper.senate.gov/public/
 Sen. Christopher Coons (D)	DEJR	Senator	Christopher	Coons	Democrat	202-224-5042	302-573-6345	http://www.coons.senate.gov/contact/	http://www.coons.senate.gov/
 John Carney (D-ALL)	DE00	Representative	John	Carney	Democrat	202-225-4165	302-691-7333	https://forms.house.gov/carney/webforms/email-me.shtml	http://johncarney.house.gov/
-Sen. Bill Nelson (D)	FLSR	Senator	Bill	Nelson	Democrat	202-224-5274	239-334-7760	http://www.billnelson.senate.gov/contact/email.cfm	http://www.billnelson.senate.gov/
+Sen. Bill Nelson (D)	FLSR	Senator	Bill	Nelson	Democrat	202-224-5274	239-334-7760	http://www.billnelson.senate.gov/contact-bill	http://www.billnelson.senate.gov/
 Sen. Marco Rubio (R)	FLJR	Senator	Marco	Rubio	Republican	202-224-3041	407-254-2573	http://www.rubio.senate.gov/public/index.cfm/email-senator-rubio?p=Contact	http://www.rubio.senate.gov/public/
 Jeff Miller (R-01)	FL01	Representative	Jeff	Miller	Republican	202-225-4136	850-664-1266	http://jeffmiller.house.gov/contact/	http://jeffmiller.house.gov/
 Steve Southerland, II (R-02)	FL02	Representative	Steve	Southerland	Republican	202-225-5235	850-785-0812	https://southerland.house.gov/index.cfm/email-me	http://southerland.house.gov/
