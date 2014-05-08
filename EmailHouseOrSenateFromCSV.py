@@ -82,7 +82,18 @@ def csv_To_Data(row, writeYourRep, genderassigner, defaultSubject, defaultMessag
                 zip5 = zip5.split('-')[0]  
             zip5=zip5.zfill(5)
             zipLookup = ZipLookup()
-            (city, state) = zipLookup.getCityAndState(zip5)
+            try:
+                (city, state) = zipLookup.getCityAndState(zip5)
+            except:
+                if "city" in row:
+                    city=row["city"]
+                else:
+                    city="not specified"
+                if "state" in row:
+                    state=row["state"]
+                else:
+                    state="not specified"
+
             if DEBUG: print "found city and state for zip: %s, %s, %s" % (city, state, zip5)
             i = writeYourRep.prepare_i(state+"_" + "XX") #hack, need dist for prepare_i
             if email:
