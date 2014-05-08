@@ -10,7 +10,7 @@ import csv
 
 input = sys.argv[1]
 chunksize = int(sys.argv[2])
-reader = csv.reader(open(input, 'r'))
+reader = csv.reader(open(input, 'r').read().splitlines())
 lines = list(reader)
 
 headerRow = lines[0]
