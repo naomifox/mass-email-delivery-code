@@ -22,7 +22,7 @@ Sen. John McCain (R)	AZSR	Senator	John	McCain	Republican	202-224-2235	602-952-24
 Sen. Jeff Flake (R)	AZJR	Senator	Jeff	Flake	Republican	202-224-4521	602-840-1891	http://www.flake.senate.gov/public/index.cfm/contact-jeff	http://www.flake.senate.gov/public/
 Ann Kirkpatrick (D-01)	AZ01	Representative	Ann	Kirkpatrick	Democrat	202-225-3361	520-316-0839	https://kirkpatrick.house.gov/contact/email-me	http://kirkpatrick.house.gov/
 Ron Barber (D-02)	AZ02	Representative	Ron	Barber	Democrat	202-225-2542	520-459-3115	https://barber.house.gov/contact/email-me	http://barber.house.gov/
-Raul M. Grijalva (D-03)	AZ03	Representative	Raul	Grijalva	Democrat	202-225-2435	928-343-7933	http://grijalva.house.gov/index.cfm?sectionid=126&sectiontree=2126	http://grijalva.house.gov/index.html
+Raul M. Grijalva (D-03)	AZ03	Representative	Raul	Grijalva	Democrat	202-225-2435	928-343-7933	https://grijalvaforms.house.gov/email-raul	http://grijalva.house.gov/index.html
 Paul A. Gosar (R-04)	AZ04	Representative	Paul	Gosar	Republican	202-225-2315	928-445-1683	https://gosar.house.gov/contact-me/email-me	http://gosar.house.gov/
 Matt Salmon (R-05)	AZ05	Representative	Matt	Salmon	Republican	202-225-2635	480-699-8239	https://salmon.house.gov/contact/email-me	http://salmon.house.gov/
 David Schweikert (R-06)	AZ06	Representative	David	Schweikert	Republican	202-225-2190	480-946-2411	https://schweikert.house.gov/contact-form	https://schweikert.house.gov/
@@ -49,7 +49,7 @@ Eric Swalwell (D-15)	CA15	Representative	Eric	Swalwell	Democrat	202-225-5065	925
 Jim Costa (D-16)	CA16	Representative	Jim	Costa	Democrat	202-225-3341	559-495-1620	http://www.house.gov/formcosta/issue.htm	http://www.costa.house.gov/
 Mike Honda (D-17)	CA17	Representative	Mike	Honda	Democrat	202-225-2631	408-436-2720	https://honda.house.gov/contact/email-me	http://honda.house.gov/
 Anna G. Eshoo (D-18)	CA18	Representative	Anna	Eshoo	Democrat	202-225-8104	650-323-2984	https://eshoo.house.gov/email-me/	http://eshoo.house.gov/
-Zoe Lofgren (D-19)	CA19	Representative	Zoe	Lofgren	Democrat	202-225-3072	408-271-8700	https://lofgren.house.gov/contact-congresswoman-lofgren	http://www.lofgren.house.gov/
+Zoe Lofgren (D-19)	CA19	Representative	Zoe	Lofgren	Democrat	202-225-3072	408-271-8700	http://lofgren.house.gov/contact/	http://www.lofgren.house.gov/
 Sam Farr (D-20)	CA20	Representative	Sam	Farr	Democrat	202-225-2861	831-429-1976	https://forms.house.gov/farr/webforms/issue_subscribe.html	http://www.farr.house.gov/
 David Valadao (R-21)	CA21	Representative	David	Valadao	Republican	202-225-4695	559-582-5526	https://valadao.house.gov/contact/email-me/	http://valadao.house.gov/
 Devin Nunes (R-22)	CA22	Representative	Devin	Nunes	Republican	202-225-2523	559-733-3861	https://nunes.house.gov/contactform/default.aspx	http://nunes.house.gov/
@@ -100,7 +100,7 @@ Joe Courtney (D-02)	CT02	Representative	Joe	Courtney	Democrat	202-225-2076	860-7
 Rosa L. DeLauro (D-03)	CT03	Representative	Rosa	DeLauro	Democrat	202-225-3661	203-562-3718	https://forms.house.gov/delauro/webforms/contact_form_email.shtml	http://delauro.house.gov/
 Jim Himes (D-04)	CT04	Representative	Jim	Himes	Democrat	202-225-5541	866-453-0028	https://himes.house.gov/contact-me/email-me	http://himes.house.gov/
 Elizabeth Esty (D-05)	CT05	Representative	Elizabeth	Esty	Democrat	202-225-4476	860-223-8412	https://esty.house.gov/contact/email-me	http://esty.house.gov/
-Del. Eleanor Holmes Norton (D)	DC00	Delegate	Eleanor	Norton	Democrat	202-225-8050	202-408-9041	https://forms.house.gov/norton/webforms/issue_subscribe.htm	http://www.norton.house.gov/
+Del. Eleanor Holmes Norton (D)	DC00	Delegate	Eleanor	Norton	Democrat	202-225-8050	202-408-9041	https://norton.house.gov/contact/email-me	http://www.norton.house.gov/
 Sen. Tom Carper (D)	DESR	Senator	Tom	Carper	Democrat	202-224-2441	302-674-3308	http://www.carper.senate.gov/public/index.cfm/email-senator-carper	http://www.carper.senate.gov/public/
 Sen. Christopher Coons (D)	DEJR	Senator	Christopher	Coons	Democrat	202-224-5042	302-573-6345	http://www.coons.senate.gov/contact/	http://www.coons.senate.gov/
 John Carney (D-ALL)	DE00	Representative	John	Carney	Democrat	202-225-4165	302-691-7333	https://forms.house.gov/carney/webforms/email-me.shtml	http://johncarney.house.gov/
@@ -224,7 +224,7 @@ Richard E. Neal (D-01)	MA01	Representative	Richard	Neal	Democrat	202-225-5601	41
 Jim McGovern (D-02)	MA02	Representative	Jim	McGovern	Democrat	202-225-6101	413-584-8700	https://mcgovern.house.gov/contact/email-me	http://mcgovern.house.gov/
 Niki Tsongas (D-03)	MA03	Representative	Niki	Tsongas	Democrat	202-225-3411	978-459-0101	https://tsongasforms.house.gov/index.cfm?sectionid=117&sectiontree=116117	http://tsongas.house.gov/index.html
 Joseph P. Kennedy, III (D-04)	MA04	Representative	Joseph	Kennedy	Democrat	202-225-5931	508-431-1110	https://kennedy.house.gov/contact/email-me	http://kennedy.house.gov/
-Katherine Clark (D-05)	MA05	Representative	Katherine	Clark	Democrat	202-225-2836	508-875-2900	https://katherineclark.house.gov/contact/email-me	http://katherineclark.house.gov/
+Katherine Clark (D-05)	MA05	Representative	Katherine	Clark	Democrat	202-225-2836	508-875-2900	https://katherineclark.house.gov/index.cfm/email-me	http://katherineclark.house.gov/
 John F. Tierney (D-06)	MA06	Representative	John	Tierney	Democrat	202-225-8020	781-595-7375	https://tierney.house.gov/contact/email-me	http://tierney.house.gov/
 Michael E. Capuano (D-07)	MA07	Representative	Michael	Capuano	Democrat	202-225-5111	617-621-6208	http://www.house.gov/capuano/contact/email.shtml	http://www.house.gov/capuano/
 Stephen F. Lynch (D-08)	MA08	Representative	Stephen	Lynch	Democrat	202-225-8273	617-428-2000	https://lynch.house.gov/contact-me/email-me	http://lynch.house.gov/
@@ -413,7 +413,7 @@ Patrick Meehan (R-07)	PA07	Representative	Patrick	Meehan	Republican	202-225-2011
 Mike Fitzpatrick (R-08)	PA08	Representative	Mike	Fitzpatrick	Republican	202-225-4276	215-579-8102	https://fitzpatrick.house.gov/contact-me/email-me	http://fitzpatrick.house.gov/
 Bill Shuster (R-09)	PA09	Representative	Bill	Shuster	Republican	202-225-2431	814-696-6318	http://shuster.house.gov/contact-form/	http://shuster.house.gov/
 Thomas Marino (R-10)	PA10	Representative	Thomas	Marino	Republican	202-225-3731	570-322-3961	https://marino.house.gov/contact-me/email-me	http://marino.house.gov/
-Louis J. (Lou) Barletta (R-11)	PA11	Representative	Louis	Barletta	Republican	202-225-6511	570-751-0050	https://barletta.house.gov/index.cfm?sectionid=58&sectiontree=258	http://barletta.house.gov/index.html
+Louis J. (Lou) Barletta (R-11)	PA11	Representative	Louis	Barletta	Republican	202-225-6511	570-751-0050	https://barletta.house.gov/contact/email-me	http://barletta.house.gov/index.html
 Keith Rothfus (R-12)	PA12	Representative	Keith	Rothfus	Republican	202-225-2065	412-837-1361	https://rothfus.house.gov/email-keith	http://rothfus.house.gov/
 Allyson Y. Schwartz (D-13)	PA13	Representative	Allyson	Schwartz	Democrat	202-225-6111	215-517-6572	http://schwartz.house.gov/serving-you/email-me	http://schwartz.house.gov/
 Mike Doyle (D-14)	PA14	Representative	Mike	Doyle	Democrat	202-225-2135	412-241-6055	https://doyle.house.gov/contact-me/email-me	http://doyle.house.gov/
@@ -433,7 +433,7 @@ Joe Wilson (R-02)	SC02	Representative	Joe	Wilson	Republican	202-225-2452	803-939
 Jeff Duncan (R-03)	SC03	Representative	Jeff	Duncan	Republican	202-225-5301	803-649-5571	https://jeffduncan.house.gov/contact-me/email-me	http://jeffduncan.house.gov/
 Trey Gowdy (R-04)	SC04	Representative	Trey	Gowdy	Republican	202-225-6030	864-241-0175	http://gowdy.house.gov/contact/	http://gowdy.house.gov/
 Mick Mulvaney (R-05)	SC05	Representative	Mick	Mulvaney	Republican	202-225-5501	803-327-1114	https://forms.house.gov/mulvaney/webforms/zipauthen_contact.shtml	http://mulvaney.house.gov/
-James E. Clyburn (D-06)	SC06	Representative	James	Clyburn	Democrat	202-225-3315	803-854-4700	https://forms.house.gov/clyburn/zipauth.shtml	http://clyburn.house.gov/
+James E. Clyburn (D-06)	SC06	Representative	James	Clyburn	Democrat	202-225-3315	803-854-4700	https://clyburn.house.gov/contact-me/email-me	http://clyburn.house.gov/
 Tom Rice, Jr. (R-07)	SC07	Representative	Tom	Rice	Republican	202-225-9895	843-445-6459	http://tomriceforms.house.gov/contact/	http://rice.house.gov/
 Sen. Tim Johnson (D)	SDSR	Senator	Tim	Johnson	Democrat	202-224-5842	605-332-8896	http://www.johnson.senate.gov/public/index.cfm?p=ContactForm	http://www.johnson.senate.gov/public/
 Sen. John Thune (R)	SDJR	Senator	John	Thune	Republican	202-224-2321	605-348-7551	http://www.thune.senate.gov/public/index.cfm/contact	http://www.thune.senate.gov/public/index.cfm/
@@ -452,15 +452,15 @@ Steve Cohen (D-09)	TN09	Representative	Steve	Cohen	Democrat	202-225-3265	901-544
 Sen. John Cornyn (R)	TXSR	Senator	John	Cornyn	Republican	202-224-2934	972-239-1310	http://www.cornyn.senate.gov/public/index.cfm?p=ContactForm	http://www.cornyn.senate.gov/public/index.cfm?p=Home
 Sen. Ted Cruz (R)	TXJR	Senator	Ted	Cruz	Republican	202-224-5922	512-916-5834	http://www.cruz.senate.gov/?p=email_senator	http://www.cruz.senate.gov/
 Louie Gohmert (R-01)	TX01	Representative	Louie	Gohmert	Republican	202-225-3035	903-236-8597	http://gohmert.house.gov/contact/	http://gohmert.house.gov/
-Ted Poe (R-02)	TX02	Representative	Ted	Poe	Republican	202-225-6565	713-681-8763	https://forms.house.gov/poe/webforms/zipauthen_contact.shtml	http://poe.house.gov/
+Ted Poe (R-02)	TX02	Representative	Ted	Poe	Republican	202-225-6565	713-681-8763	https://poe.house.gov/index.cfm/contact-form	http://poe.house.gov/
 Sam Johnson (R-03)	TX03	Representative	Sam	Johnson	Republican	202-225-4201	469-304-0382	http://samjohnson.house.gov/contact/	http://samjohnson.house.gov/
 Ralph M. Hall (R-04)	TX04	Representative	Ralph	Hall	Republican	202-225-6673	903-628-8309	https://ralphhallforms.house.gov/email-congressman-hall	http://ralphhall.house.gov/index.html
-Jeb Hensarling (R-05)	TX05	Representative	Jeb	Hensarling	Republican	202-225-3484	214-349-9996	https://hensarling.house.gov/contact/email-me.shtml	http://hensarling.house.gov/
+Jeb Hensarling (R-05)	TX05	Representative	Jeb	Hensarling	Republican	202-225-3484	214-349-9996	https://hensarling.house.gov/contact/email-me	http://hensarling.house.gov/
 Joe Barton (R-06)	TX06	Representative	Joe	Barton	Republican	202-225-2002	817-543-1000	https://joebarton.house.gov/contact1	http://joebarton.house.gov/
 John Culberson (R-07)	TX07	Representative	John	Culberson	Republican	202-225-2571	713-682-8828	http://culberson.house.gov/contact/zipauth.htm	http://culberson.house.gov/
 Kevin Brady (R-08)	TX08	Representative	Kevin	Brady	Republican	202-225-4901	936-439-9532	https://kevinbradyforms.house.gov/index.cfm?sectionid=58&sectiontree=358	http://kevinbrady.house.gov/
 Al Green (D-09)	TX09	Representative	Al	Green	Democrat	202-225-7508	713-383-9234	https://algreen.house.gov/contact-me/email-me	http://algreen.house.gov/
-Michael McCaul (R-10)	TX10	Representative	Michael	McCaul	Republican	202-225-2401	281-255-8372	http://mccaul.house.gov/index.cfm?sectionid=133&sectiontree=3133	http://mccaul.house.gov/index.html
+Michael McCaul (R-10)	TX10	Representative	Michael	McCaul	Republican	202-225-2401	281-255-8372	https://mccaul.house.gov/contact/email-me	http://mccaul.house.gov/index.html
 Mike Conaway (R-11)	TX11	Representative	Mike	Conaway	Republican	202-225-3605	432-687-2390	http://conaway.house.gov/contact/	http://conaway.house.gov/
 Kay Granger (R-12)	TX12	Representative	Kay	Granger	Republican	202-225-5071	817-338-0909	http://kaygranger.house.gov/contact-kay/email-me	http://kaygranger.house.gov/
 Mac Thornberry (R-13)	TX13	Representative	Mac	Thornberry	Republican	202-225-3706	806-371-8844	http://thornberry.house.gov/contact/	http://thornberry.house.gov/
