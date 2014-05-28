@@ -145,6 +145,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             	distListStr=' '.join(writeYourRep.getWyrDistricts(i.zip5))
             	status += distListStr + " " + ": Not attempted with "+ i.__str__()+"\n"
             else:
+                status += i.dist + ": "
                 q = writeYourRep.writerep(i)
                 status += writeYourRep.getStatus(q) +", "
         except Exception, e:
