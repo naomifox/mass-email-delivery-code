@@ -17,6 +17,7 @@
 from WriteYourRep import *
 from DataForWriteYourRep import *
 import csv
+import json
 from ZipLookup import ZipLookup
 from GenderLookup import GenderLookup
 from optparse import OptionParser
@@ -43,8 +44,8 @@ def cleanName(first_name, last_name):
     return (fname,lname)
 
 
-def csv_To_Data(row, writeYourRep, genderassigner, defaultSubject, defaultMessage):
-    #(email,name,addr1,message,subject,zip5,org) = row
+def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultMessage):
+            print row
             if "name" in row:
             	first_name=row["name"]
             	last_name=""
@@ -122,14 +123,27 @@ def csv_To_Data(row, writeYourRep, genderassigner, defaultSubject, defaultMessag
 
             return i
 
-         
-def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_House.log', dryrun=False, onedistrict=None):
+def load_json(json_file):
+    '''
+    load a json file where each line is a separate json object
+    '''
+    rows = []
+    with open(json_file, 'rb') as json_data:
+        for line in json_data:
+            jdict = json.loads(line)
+            rows.append(jdict)
+    return rows
+
+def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_House.log', dryrun=False, onedistrict=None, jsoninput=False):
     '''
     Parse from the csv file
 
     '''
     writeYourRep = WriteYourRep()
-    reader = csv.DictReader(open(csvfile, 'rb'))
+    if not jsoninput:  # default is csv    
+        reader = csv.DictReader(open(csvfile, 'rb'))
+    else:
+        reader = load_json(csvfile)
     genderassigner = GenderLookup()
 
     (subject, message) = parseMessageFile(messagefile)
@@ -137,7 +151,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         state='unknown'
         status = ""
         try:
-            i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)
+            i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             if onedistrict!=None:
                 print "Feature of specifying one district is not supported yet"
                 return
@@ -145,15 +159,15 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             	distListStr=' '.join(writeYourRep.getWyrDistricts(i.zip5))
             	status += distListStr + " " + ": Not attempted with "+ i.__str__()+"\n"
             else:
-                status += i.dist + ": "
                 q = writeYourRep.writerep(i)
-                status += writeYourRep.getStatus(q) +", "
+                status += i.dist + ": "
+                status += writeYourRep.getStatus(q)
         except Exception, e:
             import traceback; traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
 
-def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False, onesenator=None):
+def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False, onesenator=None, jsoninput=False ):
     '''
     Parse from the csv file
 
@@ -176,7 +190,10 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
     from ZipLookup import ZipLookup
     from GenderLookup import GenderLookup
     writeYourRep = WriteYourRep()
-    reader = csv.DictReader(open(csvfile, 'rb'))
+    if not jsoninput:  # default is csv    
+        reader = csv.DictReader(open(csvfile, 'rb'))
+    else:
+        reader = load_json(csvfile)
     genderassigner = GenderLookup()
 
     (subject, message) = parseMessageFile(messagefile)
@@ -185,7 +202,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
         state='unknown'
         status = ""
         try:
-            i = csv_To_Data(row, writeYourRep, genderassigner, subject, message)
+            i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             sens = writeYourRep.getSenators(i.state)
             for sen in sens:
                 if onesenator != None and onesenator not in sen:
@@ -205,6 +222,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
         except Exception, e:
             import traceback; traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
+        print "i", i
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
 
 def parseMessageFile(messageFile):
@@ -232,7 +250,7 @@ def usage():
     print "Dryrun: " + sys.argv[0] + " -d senator csvfile default-message-file output-status-file"
     print "Example: " + sys.argv[0] + " -d boxer csvfile default-message-file output-status-file"
     print "csvfile header column names available (all optional): "
-    print "first_name, last_name, email, addr1, addr2, zip5, zip4, message"
+    print "name, first_name, last_name, email, addr1, addr2, zip5, zip4, message"
     print ""
     print "messagefile can contain FIRSTNAME and LASTNAME fields which are replaced."
     print "messagefile is of the form: "
@@ -245,36 +263,29 @@ def usage():
     print "And here is more."
 
 if __name__ == "__main__":
-    import sys
-    print sys.argv
-    if len(sys.argv) == 5:# and sys.argv[1] in ["house", "senate"]:
-        houseOrSenate = sys.argv[1]
-        csvfile = sys.argv[2]
-        messagefile = sys.argv[3]
-        statfile = sys.argv[4]
+    import sys, getopt
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "dj", ["dry-run", "json"])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+    use_dryrun = ('-d' in opts or '--dry-run' in opts)
+    use_json = ('-j' in opts or '--json' in opts)
+    houseOrSenate = args[0]
+    csvfile = args[1]
+    messagefile = args[2]
+    statfile = args[3]
+    if len(args) == 4 : 
         if (houseOrSenate == "house"):
-            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=False)
+            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=use_dryrun, jsoninput=use_json)
         elif (houseOrSenate == "senate"):
-            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=False)
+            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=use_dryrun, jsoninput=use_json)
         elif houseOrSenate[-1].isdigit():
-            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=False, onedistrict=houseOrSenate)
+            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=use_dryrun, onedistrict=houseOrSenate, jsoninput=use_json)
         else:
-            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=False, onesenator=houseOrSenate)
-            #usage()
-        sys.exit(0)
-    if len(sys.argv) == 6 and sys.argv[1] == '-d':# and sys.argv[2] in ["house", "senate"]: #dry run
-        houseOrSenate = sys.argv[2]
-        csvfile = sys.argv[3]
-        messagefile = sys.argv[4]
-        statfile = sys.argv[5]
-        if (houseOrSenate == "house"):
-            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=True)
-        elif (houseOrSenate == "senate"):
-            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=True)
-        elif houseOrSenate[-1].isdigit():
-            csv_Send_To_House(csvfile, messagefile, statfile, dryrun=True, onedistrict=houseOrSenate)
-        else:
-            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=True, onesenator=houseOrSenate)
+            csv_Send_To_Senate(csvfile, messagefile, statfile, dryrun=use_dryrun, onesenator=houseOrSenate, jsoninput=use_json)
         sys.exit(0)
     else:
         usage()

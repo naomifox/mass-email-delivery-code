@@ -104,11 +104,12 @@ class WriteYourRep:
             contact_links = [contact_congress_dict[dist] for dist in dists]
 
         status=""
-        for contact_link in contact_links:
+        for (cnt, contact_link) in enumerate(contact_links):
             if DEBUG: print "contact_link selected: ", contact_link
             q = self.writerep_general(contact_link, i)
             status = self.getStatus(q)
             if status.startswith("Thank"):
+                i.dist = dists[cnt] 
                 break
         if not status.startswith("Thank"):
             contact_link = self.getWyrContactLink(i)
@@ -191,8 +192,8 @@ class WriteYourRep:
             return "Thanked"
         errorStr = self.getError(pagetxt)
         if errorStr:
-            return "Failed: %s" % errorStr
-        return "Unknown status "
+            return "Failed %s" % errorStr
+        return "Unknown"
 
     def getError(self, pagetxt):
         ''' Attempt pattern matching on the pagetxt, to see if we can diagnose the error '''
