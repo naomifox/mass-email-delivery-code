@@ -45,6 +45,7 @@ def cleanName(first_name, last_name):
 
 
 def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultMessage):
+            print "row_dict_to_data"
             print row
             if "name" in row:
             	first_name=row["name"]
@@ -130,8 +131,8 @@ def load_json(json_file):
     rows = []
     with open(json_file, 'rb') as json_data:
         for line in json_data:
-            jdict = json.loads(line)
-            rows.append(jdict)
+            d = json.loads(line)
+            rows.append(d)
     return rows
 
 def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_House.log', dryrun=False, onedistrict=None, jsoninput=False):
@@ -144,9 +145,10 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         reader = csv.DictReader(open(csvfile, 'rb'))
     else:
         reader = load_json(csvfile)
+        print "loaded json data", reader
     genderassigner = GenderLookup()
-
     (subject, message) = parseMessageFile(messagefile)
+    i = None
     for row in reader:
         state='unknown'
         status = ""
@@ -165,7 +167,8 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         except Exception, e:
             import traceback; traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
-        file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
+        if i is not None:
+            file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
 
 def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False, onesenator=None, jsoninput=False ):
     '''
@@ -195,12 +198,12 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
     else:
         reader = load_json(csvfile)
     genderassigner = GenderLookup()
-
     (subject, message) = parseMessageFile(messagefile)
     zipLookup = ZipLookup()
     for row in reader:
         state='unknown'
         status = ""
+        i = None
         try:
             i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             sens = writeYourRep.getSenators(i.state)
@@ -218,9 +221,10 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                 else:
                     status += senname + ": "
                     q = writeYourRep.writerep_general(sen, i)
-                    status += writeYourRep.getStatus(q) +", "
+                    status += writeYourRep.getStatus(q) +" | "
         except Exception, e:
             import traceback; traceback.print_exc()
+            print "row", row
             status=status + ' failed: ' + e.__str__()
         print "i", i
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
@@ -271,8 +275,16 @@ if __name__ == "__main__":
         print str(err) # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
-    use_dryrun = ('-d' in opts or '--dry-run' in opts)
-    use_json = ('-j' in opts or '--json' in opts)
+    use_dryrun = False
+    use_json = False
+    for o, a in opts:
+        if o in ('-d', '--dry-run'):
+            use_dryrun = True
+        elif o in ('-j', '--json'):
+            use_json = True
+    print "use_json", use_json
+    print "opts", opts
+    print "args", args
     houseOrSenate = args[0]
     csvfile = args[1]
     messagefile = args[2]
