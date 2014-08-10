@@ -168,7 +168,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
             import traceback; traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         if i is not None:
-            file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname, i.lname, i.state, status))
+            file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
 
 def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt", statfile='csv_Send_To_Senate.log', dryrun=False, onesenator=None, jsoninput=False ):
     '''
