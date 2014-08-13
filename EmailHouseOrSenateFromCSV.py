@@ -21,7 +21,7 @@ import json
 from ZipLookup import ZipLookup
 from GenderLookup import GenderLookup
 from optparse import OptionParser
-
+import traceback
 
 def cleanName(first_name, last_name):
     fname = first_name
@@ -167,7 +167,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
                 status += i.dist + ": "
                 status += writeYourRep.getStatus(q)
         except Exception, e:
-            import traceback; traceback.print_exc()
+            traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         if i is not None:
             file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
@@ -224,10 +224,10 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                     status += senname + ": "
                     q = writeYourRep.writerep_general(sen, i)
                     status += writeYourRep.getStatus(q) +" | "
-        except Exception, e:
-            import traceback; traceback.print_exc()
-            print "row", row
-            status=status + ' failed: ' + e.__str__()
+                except Exception, e:                  
+                    traceback.print_exc()
+                    print "row", row
+                    status=status + ' failed: ' + e.__str__() + " | "
         print "i", i
         file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
 
