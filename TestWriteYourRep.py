@@ -47,7 +47,6 @@ class TestSequenceFunctions(unittest.TestCase):
     	'''
     	i = web.storage()
     	i.id="jamesmith"
-        #i.dist=dist
         i.state = 'MO'
         i.zip5 = '64108'
         i.addr1 = '101 W. 31 Street'
@@ -55,9 +54,6 @@ class TestSequenceFunctions(unittest.TestCase):
         i.city = 'Kansas City'
         contactLink = self.writer.getWyrContactLink(i)
         self.assertTrue(contactLink == 'http://cleaver.house.gov/contact-me/email-me')
-
-        
-
 
 if __name__ == '__main__':
     unittest.main()

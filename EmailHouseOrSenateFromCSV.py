@@ -58,6 +58,8 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
             addr2=""
             if "address" in row:
             	addr1 = row["address"]
+            elif "address1" in row:
+                addr1 = row["address1"]
             elif "addr" in row:
             	addr1 = row["addr"]
             elif "addr1" in row:
