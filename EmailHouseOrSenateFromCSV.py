@@ -224,7 +224,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                     status += senname + ": "
                     q = writeYourRep.writerep_general(sen, i)
                     status += writeYourRep.getStatus(q) +" | "
-                except Exception, e:                  
+                except Exception as e:                  
                     traceback.print_exc()
                     print "row", row
                     status=status + ' failed: ' + e.__str__() + " | "
