@@ -209,25 +209,28 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
         try:
             i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             sens = writeYourRep.getSenators(i.state)
-            for sen in sens:
-                if onesenator != None and onesenator not in sen:
-                    status += "%s: not attempted, " % (sen)
-                    continue
-                print "Writing to senator %s" % sen
-                senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
-                captchaforms=['toomey','sessions','shelby','coburn','crapo','roberts','paul']
-                if senname in captchaforms:
-                    status += senname + " has captcha.  skipping.  "
-                elif dryrun:
-                    status += sen + " " + senname + ": Not attempted with "+ i.__str__()+"\n"
-                else:
-                    status += senname + ": "
+        except Exception, e:
+            continue
+        for sen in sens:
+            if onesenator != None and onesenator not in sen:
+                status += "%s: not attempted, " % (sen)
+                continue
+            print "Writing to senator %s" % sen
+            senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
+            captchaforms=['toomey','sessions','shelby','coburn','crapo','roberts','paul']
+            if senname in captchaforms:
+                status += senname + " has captcha.  skipping.  "
+            elif dryrun:
+                status += sen + " " + senname + ": Not attempted with "+ i.__str__()+"\n"
+            else:
+                status += senname + ": "
+                try:
                     q = writeYourRep.writerep_general(sen, i)
                     status += writeYourRep.getStatus(q) +" | "
-        except Exception, e:                  
-            traceback.print_exc()
-            print "row", row
-            status=status + ' failed: ' + e.__str__() + " | "
+                except Exception, e:                  
+                    traceback.print_exc()
+                    print "row", row
+                    status=status + ' failed: ' + e.__str__() + " | "
         if i is not None:
             file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
 
