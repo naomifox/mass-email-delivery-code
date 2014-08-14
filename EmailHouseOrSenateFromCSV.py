@@ -228,8 +228,8 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                     traceback.print_exc()
                     print "row", row
                     status=status + ' failed: ' + e.__str__() + " | "
-        print "i", i
-        file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
+        if i is not None:
+            file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
 
 def parseMessageFile(messageFile):
     '''
