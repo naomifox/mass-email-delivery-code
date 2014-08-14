@@ -166,7 +166,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
                 q = writeYourRep.writerep(i)
                 status += i.dist + ": "
                 status += writeYourRep.getStatus(q)
-        except Exception, e:
+        except Exception as e:
             traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         if i is not None:
