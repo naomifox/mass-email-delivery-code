@@ -219,7 +219,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
             captchaforms=['toomey','sessions','shelby','coburn','crapo','roberts','paul']
             if senname in captchaforms:
-                status += senname + " has captcha.  skipping.  "
+                status += senname + ": has captcha | "
             elif dryrun:
                 status += sen + " " + senname + ": Not attempted with "+ i.__str__()+"\n"
             else:
