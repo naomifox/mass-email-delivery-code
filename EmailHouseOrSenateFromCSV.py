@@ -150,8 +150,8 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         print "loaded json data", reader
     genderassigner = GenderLookup()
     (subject, message) = parseMessageFile(messagefile)
-    i = None
     for row in reader:
+        i = None
         state='unknown'
         status = ""
         try:
@@ -166,7 +166,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
                 q = writeYourRep.writerep(i)
                 status += i.dist + ": "
                 status += writeYourRep.getStatus(q)
-        except Exception as e:
+        except Exception, e:
             traceback.print_exc()
             status=status + ' failed: ' + e.__str__()
         if i is not None:
@@ -203,9 +203,9 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
     (subject, message) = parseMessageFile(messagefile)
     zipLookup = ZipLookup()
     for row in reader:
+        i = None
         state='unknown'
         status = ""
-        i = None
         try:
             i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             sens = writeYourRep.getSenators(i.state)
@@ -224,10 +224,10 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
                     status += senname + ": "
                     q = writeYourRep.writerep_general(sen, i)
                     status += writeYourRep.getStatus(q) +" | "
-                except Exception as e:                  
-                    traceback.print_exc()
-                    print "row", row
-                    status=status + ' failed: ' + e.__str__() + " | "
+        except Exception, e:                  
+            traceback.print_exc()
+            print "row", row
+            status=status + ' failed: ' + e.__str__() + " | "
         if i is not None:
             file(statfile, 'a').write('%s %s, %s, "%s"\n' % (i.fname.encode('utf-8'), i.lname.encode('utf-8'), i.state, status))
 
