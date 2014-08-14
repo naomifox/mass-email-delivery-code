@@ -79,3 +79,11 @@ Then view the file senate_test_out.txt for failures.  Attempt to find the correc
 Test contact links and update as needed:
 python main.py htest
 
+= To do =
+
+1. Write code to split up signer data by state, and potentially by district.  
+In this way, we can control the rate that the reps' servers are receiving emails, and might help with the HTTP 403 errors.
+
+2. Write whole row for failures into a file, to make it easier to resend emails again.
+
+
