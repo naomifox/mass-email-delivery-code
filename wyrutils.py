@@ -42,7 +42,7 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     phone=['phone'],
                     issue=['issue', 'title', 'Re'], #Re from bill nelson's form
                     subject=['subject', 'topic', 'view', 'subjectline'],
-                    message=['message', 'msg', 'comment', 'text', 'body'],
+                    message=['message', 'msg', 'comment', 'text', 'body', 'action_comment'],
                     captcha=['captcha', 'validat'],
                     reply=['reply', 'response', 'answer', 'respond', 'required-rsp', 'Express an opinion or share your views with me'],
                     newsletter=['enewssign', 'required-newsletter',  'newsletter'],
