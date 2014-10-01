@@ -95,6 +95,7 @@ class WriteYourRep:
         # else:
 
         #dist will end in XX unless we are testing
+        dists = None
         if (i.dist[3:]!='XX'):
             contact_links = [contact_congress_dict[i.dist]]
             print "contact_links list:", contact_links
@@ -102,14 +103,14 @@ class WriteYourRep:
             if DEBUG: print "Zip: %s" % i.zip5
             dists = self.getWyrDistricts(i.zip5)
             contact_links = [contact_congress_dict[dist] for dist in dists]
-
         status=""
         for (cnt, contact_link) in enumerate(contact_links):
             if DEBUG: print "contact_link selected: ", contact_link
             q = self.writerep_general(contact_link, i)
             status = self.getStatus(q)
             if status.startswith("Thank"):
-                i.dist = dists[cnt] 
+                if dists:
+                    i.dist = dists[cnt]
                 break
         if not status.startswith("Thank"):
             contact_link = self.getWyrContactLink(i)
@@ -179,11 +180,15 @@ class WriteYourRep:
         return i
 
     # these strings show up when successful at submitting form
-    confirmationStrings = ['thank', 'the following information has been submitted', 'your email has been successfully sent'
-                           'your message has been sent', 'your message has been submitted',
+    confirmationStrings = ['thank',
+                           'the following information has been submitted',
+                           'your email has been successfully sent'
+                           'your message has been sent',
+                           'your message has been submitted',
                            'contact_opinion_ty.cfm', #weird one for harkin
                            '../free_details.asp?id=79', #weird one for sarbanes
-                           'email confirmation']
+                           'email confirmation',
+                           'correspondence has been sent']
 
 
     def getStatus(self, pagetxt):
@@ -283,8 +288,11 @@ class WriteYourRep:
             empty_controls = [c for c in f.controls if c.type=="radio" and not c.value]
             for c in empty_controls:
                    if DEBUG: print "empty ", c
-                   f.fill('OTH', control=c)
-
+                   try:
+                       f.fill('OTH', control=c)
+                   except:
+                       if DEBUG: print "Failed to fill control %s" % c.name
+                       
             # Solve captchas.  I included this here because it was placed here by Aaron,
             # but I haven't found a captcha that it works on. -NKF
             #challenge = get_challenge()
@@ -335,13 +343,14 @@ class WriteYourRep:
             # For example, there may be a search tool in the sidebar.
             # or there may be forms which are hidden by not displayed by the css.
             # try to see what we can grab out the page, then we'll decide which one's the best to try
+            
             textareaform = get_form(b, lambda f: f.find_control_by_type('textarea'))
             zipform = get_form(b, lambda f: f.has(name='zip'))
-            verificationform = get_form(b, lambda f: 'formproc' in f.action)
+            verificationform = get_form(b, lambda f: 'formproc' in f.action)            
             nameform = get_form(b, lambda f: 'wrep_const' in f.action) #see AL-06 for an example,  has zip form in page too
             wyrform = get_form(b, lambda f: f.find_control_by_id('state') and
                                f.find_control_by_name('zip') and
-                               f.find_control_by_name('zip4')) #get_form(b, not_signup_or_search)
+                               f.find_control_by_name('zip4'))
             indexform = get_form(b, lambda f: f.has(name='Re')) # see billnelson for example
 
             # choose which form we want to use
@@ -383,7 +392,7 @@ class WriteYourRep:
             if "inhofe" in contact_link or "lgraham" in contact_link:
                 fill_inhofe_lgraham(form)
             else:
-                fill_form(form) #, aggressive=True)
+                fill_form(form)
 
             try:
                 if DEBUG: print "trying the next page"
@@ -421,8 +430,11 @@ class WriteYourRep:
             if b.url in successUrls:
                 thanked = True
 
-            if (thanked and self.is_thankyou_genuine(b.page)) or foundError:
+            if thanked and self.is_thankyou_genuine(b.page):
                 return nextpage
+
+            if foundError:
+                return b.page
 
         if DEBUG: print "Tried ", k, "times, unsuccessfully, to fill form"
         return b.page # raise UnsuccessfulAfter5Attempts(b.page)
@@ -431,7 +443,7 @@ class WriteYourRep:
 def usage():
     ''' print command line usage '''
     print "stest senator - example: stest boxer"
-    print "htest dist - example: stest MA-01"
+    print "htest dist - example: htest MA-01"
 
 if __name__ == "__main__":
     import sys
