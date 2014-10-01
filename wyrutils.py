@@ -38,7 +38,7 @@ name_options = dict(prefix=['prefix', 'pre', 'salut', 'title'],
                     addr2=['street2', 'addr2', 'add2', 'address2', 'address 2'],
                     city=['city'],
                     state=['state'],
-                    email=['email', 'e-mail'],
+                    email=['email', 'e-mail', 'emailaddress'],
                     phone=['phone'],
                     issue=['issue', 'title', 'Re'], #Re from bill nelson's form
                     subject=['subject', 'topic', 'view', 'subjectline'],
