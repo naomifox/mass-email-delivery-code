@@ -46,7 +46,7 @@ def cleanName(first_name, last_name):
 
 def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultMessage):
             print "row_dict_to_data"
-            print row
+            #print row
             if "name" in row:
             	first_name=row["name"]
             	last_name=""
@@ -150,7 +150,7 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
         print "loaded json data", reader
     genderassigner = GenderLookup()
     (subject, message) = parseMessageFile(messagefile)
-    for row in reader:
+    for row in reader[0]:
         i = None
         state='unknown'
         status = ""
