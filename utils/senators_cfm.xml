@@ -42,23 +42,10 @@
         <state>WY</state>
         <address>307 Dirksen Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-6441</phone>
-        <email>http://www.barrasso.senate.gov/public/index.cfm?FuseAction=ContactUs.ContactForm</email>
+        <email>http://www.barrasso.senate.gov/public/index.cfm/contact-form</email>
         <website>http://www.barrasso.senate.gov</website>
         <class>Class I</class>
         <bioguide_id>B001261</bioguide_id>
-    </member><member>
-        <member_full>Begich (D-AK)</member_full>
-        <last_name>Begich</last_name>
-        <first_name>Mark</first_name>
-        <party>D</party>
-        <state>AK</state>
-        <address>111 Russell Senate Office Building Washington DC 20510
-        </address>
-        <phone>(202) 224-3004</phone>
-        <email>http://www.begich.senate.gov/public/index.cfm?p=EmailSenator</email>
-        <website>http://www.begich.senate.gov</website>
-        <class>Class II</class>
-        <bioguide_id>B001265</bioguide_id>
     </member><member>
         <member_full>Bennet (D-CO)</member_full>
         <last_name>Bennet</last_name>
@@ -128,7 +115,7 @@
         <address>112 Hart Senate Office Building Washington DC 20510
         </address>
         <phone>(202) 224-3553</phone>
-        <email>http://www.boxer.senate.gov/en/contact/</email>
+        <email>http://www.boxer.senate.gov/contact/</email>
         <website>http://www.boxer.senate.gov</website>
         <class>Class III</class>
         <bioguide_id>B000711</bioguide_id>
@@ -162,12 +149,24 @@
         <first_name>Maria</first_name>
         <party>D</party>
         <state>WA</state>
-        <address>311 Hart Senate Office Building Washington DC 20510</address>
+        <address>511 Hart Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-3441</phone>
         <email>http://www.cantwell.senate.gov/public/index.cfm/email-maria</email>
         <website>http://www.cantwell.senate.gov</website>
         <class>Class I</class>
         <bioguide_id>C000127</bioguide_id>
+    </member><member>
+        <member_full>Capito (R-WV)</member_full>
+        <last_name>Capito</last_name>
+        <first_name>Shelley Moore</first_name>
+        <party>R</party>
+        <state>WV</state>
+        <address>5 Russell Senate Courtyard Washington DC 20510</address>
+        <phone>(202) 224-6472</phone>
+        <email>http://www.capito.senate.gov/content/contact-shelley</email>
+        <website>http://www.capito.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>C001047</bioguide_id>
     </member><member>
         <member_full>Cardin (D-MD)</member_full>
         <last_name>Cardin</last_name>
@@ -205,17 +204,17 @@
         <class>Class I</class>
         <bioguide_id>C001070</bioguide_id>
     </member><member>
-        <member_full>Chambliss (R-GA)</member_full>
-        <last_name>Chambliss</last_name>
-        <first_name>Saxby</first_name>
+        <member_full>Cassidy (R-LA)</member_full>
+        <last_name>Cassidy</last_name>
+        <first_name>Bill</first_name>
         <party>R</party>
-        <state>GA</state>
-        <address>416 Russell Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-3521</phone>
-        <email>http://www.chambliss.senate.gov/public/index.cfm?p=Email</email>
-        <website>http://www.chambliss.senate.gov</website>
+        <state>LA</state>
+        <address>703 Hart Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-5824</phone>
+        <email>http://www.cassidy.senate.gov/content/contact-bill</email>
+        <website>http://www.cassidy.senate.gov</website>
         <class>Class II</class>
-        <bioguide_id>C000286</bioguide_id>
+        <bioguide_id>C001075</bioguide_id>
     </member><member>
         <member_full>Coats (R-IN)</member_full>
         <last_name>Coats</last_name>
@@ -229,18 +228,6 @@
         <website>http://www.coats.senate.gov</website>
         <class>Class III</class>
         <bioguide_id>C000542</bioguide_id>
-    </member><member>
-        <member_full>Coburn (R-OK)</member_full>
-        <last_name>Coburn</last_name>
-        <first_name>Tom</first_name>
-        <party>R</party>
-        <state>OK</state>
-        <address>172 Russell Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-5754</phone>
-        <email>http://www.coburn.senate.gov/public/index.cfm/contactsenatorcoburn?p=ContactForm</email>
-        <website>http://www.coburn.senate.gov</website>
-        <class>Class III</class>
-        <bioguide_id>C000560</bioguide_id>
     </member><member>
         <member_full>Cochran (R-MS)</member_full>
         <last_name>Cochran</last_name>
@@ -285,7 +272,7 @@
         <state>TN</state>
         <address>425 Dirksen Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-3344</phone>
-        <email>http://www.corker.senate.gov/public/index.cfm?p=ContactMe</email>
+        <email>http://www.corker.senate.gov/public/index.cfm/emailme</email>
         <website>http://www.corker.senate.gov/</website>
         <class>Class I</class>
         <bioguide_id>C001071</bioguide_id>
@@ -302,6 +289,19 @@
         <website>http://www.cornyn.senate.gov/</website>
         <class>Class II</class>
         <bioguide_id>C001056</bioguide_id>
+    </member><member>
+        <member_full>Cotton (R-AR)</member_full>
+        <last_name>Cotton</last_name>
+        <first_name>Tom</first_name>
+        <party>R</party>
+        <state>AR</state>
+        <address>B33 Russell Senate Office Building Washington DC 20510
+        </address>
+        <phone>(202) 224-2353</phone>
+        <email>http://www.cotton.senate.gov/content/contact-tom</email>
+        <website>http://www.cotton.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>C001095</bioguide_id>
     </member><member>
         <member_full>Crapo (R-ID)</member_full>
         <last_name>Crapo</last_name>
@@ -326,6 +326,18 @@
         <website>http://www.cruz.senate.gov</website>
         <class>Class I</class>
         <bioguide_id>C001098</bioguide_id>
+    </member><member>
+        <member_full>Daines (R-MT)</member_full>
+        <last_name>Daines</last_name>
+        <first_name>Steve</first_name>
+        <party>R</party>
+        <state>MT</state>
+        <address>1 Russell Senate Courtyard Washington DC 20510</address>
+        <phone>(202) 224-2651</phone>
+        <email>http://www.daines.senate.gov/content/contact-steve</email>
+        <website>http://www.daines.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>D000618</bioguide_id>
     </member><member>
         <member_full>Donnelly (D-IN)</member_full>
         <last_name>Donnelly</last_name>
@@ -363,6 +375,18 @@
         <website>http://www.enzi.senate.gov</website>
         <class>Class II</class>
         <bioguide_id>E000285</bioguide_id>
+    </member><member>
+        <member_full>Ernst (R-IA)</member_full>
+        <last_name>Ernst</last_name>
+        <first_name>Joni</first_name>
+        <party>R</party>
+        <state>IA</state>
+        <address>825 B&amp;C Hart Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-3254</phone>
+        <email/>
+        <website>http://www.ernst.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>E000295</bioguide_id>
     </member><member>
         <member_full>Feinstein (D-CA)</member_full>
         <last_name>Feinstein</last_name>
@@ -412,6 +436,18 @@
         <class>Class II</class>
         <bioguide_id>F000457</bioguide_id>
     </member><member>
+        <member_full>Gardner (R-CO)</member_full>
+        <last_name>Gardner</last_name>
+        <first_name>Cory</first_name>
+        <party>R</party>
+        <state>CO</state>
+        <address>B40B Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-5941</phone>
+        <email>http://www.gardner.senate.gov/content/contact-cory</email>
+        <website>http://www.gardner.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>G000562</bioguide_id>
+    </member><member>
         <member_full>Gillibrand (D-NY)</member_full>
         <last_name>Gillibrand</last_name>
         <first_name>Kirsten E.</first_name>
@@ -443,34 +479,10 @@
         <state>IA</state>
         <address>135 Hart Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-3744</phone>
-        <email>http://www.grassley.senate.gov/contact/contact.cfm</email>
+        <email>http://www.grassley.senate.gov/contact</email>
         <website>http://www.grassley.senate.gov</website>
         <class>Class III</class>
         <bioguide_id>G000386</bioguide_id>
-    </member><member>
-        <member_full>Hagan (D-NC)</member_full>
-        <last_name>Hagan</last_name>
-        <first_name>Kay R.</first_name>
-        <party>D</party>
-        <state>NC</state>
-        <address>521 Dirksen Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-6342</phone>
-        <email>http://www.hagan.senate.gov/?p=contact</email>
-        <website>http://www.hagan.senate.gov</website>
-        <class>Class II</class>
-        <bioguide_id>H001049</bioguide_id>
-    </member><member>
-        <member_full>Harkin (D-IA)</member_full>
-        <last_name>Harkin</last_name>
-        <first_name>Tom</first_name>
-        <party>D</party>
-        <state>IA</state>
-        <address>731 Hart Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-3254</phone>
-        <email>http://www.harkin.senate.gov/contact.cfm</email>
-        <website>http://www.harkin.senate.gov/</website>
-        <class>Class II</class>
-        <bioguide_id>H000206</bioguide_id>
     </member><member>
         <member_full>Hatch (R-UT)</member_full>
         <last_name>Hatch</last_name>
@@ -568,18 +580,6 @@
         <class>Class III</class>
         <bioguide_id>I000055</bioguide_id>
     </member><member>
-        <member_full>Johanns (R-NE)</member_full>
-        <last_name>Johanns</last_name>
-        <first_name>Mike</first_name>
-        <party>R</party>
-        <state>NE</state>
-        <address>404 Russell Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-4224</phone>
-        <email>http://www.johanns.senate.gov/public/?p=ContactSenatorJohanns</email>
-        <website>http://www.johanns.senate.gov</website>
-        <class>Class II</class>
-        <bioguide_id>J000291</bioguide_id>
-    </member><member>
         <member_full>Johnson (R-WI)</member_full>
         <last_name>Johnson</last_name>
         <first_name>Ron</first_name>
@@ -591,18 +591,6 @@
         <website>http://www.ronjohnson.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>J000293</bioguide_id>
-    </member><member>
-        <member_full>Johnson (D-SD)</member_full>
-        <last_name>Johnson</last_name>
-        <first_name>Tim</first_name>
-        <party>D</party>
-        <state>SD</state>
-        <address>136 Hart Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-5842</phone>
-        <email>http://www.johnson.senate.gov/public/index.cfm?p=Contact</email>
-        <website>http://www.johnson.senate.gov/</website>
-        <class>Class II</class>
-        <bioguide_id>J000177</bioguide_id>
     </member><member>
         <member_full>Kaine (D-VA)</member_full>
         <last_name>Kaine</last_name>
@@ -652,17 +640,17 @@
         <class>Class I</class>
         <bioguide_id>K000367</bioguide_id>
     </member><member>
-        <member_full>Landrieu (D-LA)</member_full>
-        <last_name>Landrieu</last_name>
-        <first_name>Mary L.</first_name>
-        <party>D</party>
-        <state>LA</state>
-        <address>703 Hart Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-5824</phone>
-        <email>http://www.landrieu.senate.gov/?p=contact</email>
-        <website>http://www.landrieu.senate.gov/</website>
-        <class>Class II</class>
-        <bioguide_id>L000550</bioguide_id>
+        <member_full>Lankford (R-OK)</member_full>
+        <last_name>Lankford</last_name>
+        <first_name>James</first_name>
+        <party>R</party>
+        <state>OK</state>
+        <address>B40C Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-5754</phone>
+        <email>http://www.lankford.senate.gov/content/contact-james</email>
+        <website>http://www.lankford.senate.gov</website>
+        <class>Class III</class>
+        <bioguide_id>L000575</bioguide_id>
     </member><member>
         <member_full>Leahy (D-VT)</member_full>
         <last_name>Leahy</last_name>
@@ -687,18 +675,6 @@
         <website>http://www.lee.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>L000577</bioguide_id>
-    </member><member>
-        <member_full>Levin (D-MI)</member_full>
-        <last_name>Levin</last_name>
-        <first_name>Carl</first_name>
-        <party>D</party>
-        <state>MI</state>
-        <address>269 Russell Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-6221</phone>
-        <email>http://www.levin.senate.gov/contact/</email>
-        <website>http://www.levin.senate.gov/</website>
-        <class>Class II</class>
-        <bioguide_id>L000261</bioguide_id>
     </member><member>
         <member_full>Manchin (D-WV)</member_full>
         <last_name>Manchin</last_name>
@@ -744,7 +720,7 @@
         <state>MO</state>
         <address>506 Hart Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-6154</phone>
-        <email>http://www.mccaskill.senate.gov/?p=contact</email>
+        <email>http://www.mccaskill.senate.gov/contact</email>
         <website>http://www.mccaskill.senate.gov/</website>
         <class>Class I</class>
         <bioguide_id>M001170</bioguide_id>
@@ -870,6 +846,30 @@
         <class>Class III</class>
         <bioguide_id>P000603</bioguide_id>
     </member><member>
+        <member_full>Perdue (R-GA)</member_full>
+        <last_name>Perdue</last_name>
+        <first_name>David</first_name>
+        <party>R</party>
+        <state>GA</state>
+        <address>B40D Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-3521</phone>
+        <email>http://www.perdue.senate.gov/content/contact-david</email>
+        <website>http://www.perdue.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>P000612</bioguide_id>
+    </member><member>
+        <member_full>Peters (D-MI)</member_full>
+        <last_name>Peters</last_name>
+        <first_name>Gary</first_name>
+        <party>D</party>
+        <state>MI</state>
+        <address>2 Russell Senate Courtyard Washington DC 20510</address>
+        <phone>(202) 224-6221</phone>
+        <email/>
+        <website>http://www.peters.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>P000595</bioguide_id>
+    </member><member>
         <member_full>Portman (R-OH)</member_full>
         <last_name>Portman</last_name>
         <first_name>Rob</first_name>
@@ -881,18 +881,6 @@
         <website>http://www.portman.senate.gov</website>
         <class>Class III</class>
         <bioguide_id>P000449</bioguide_id>
-    </member><member>
-        <member_full>Pryor (D-AR)</member_full>
-        <last_name>Pryor</last_name>
-        <first_name>Mark L.</first_name>
-        <party>D</party>
-        <state>AR</state>
-        <address>255 Dirksen Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-2353</phone>
-        <email>http://www.pryor.senate.gov/contact</email>
-        <website>http://www.pryor.senate.gov</website>
-        <class>Class II</class>
-        <bioguide_id>P000590</bioguide_id>
     </member><member>
         <member_full>Reed (D-RI)</member_full>
         <last_name>Reed</last_name>
@@ -943,17 +931,17 @@
         <class>Class II</class>
         <bioguide_id>R000307</bioguide_id>
     </member><member>
-        <member_full>Rockefeller (D-WV)</member_full>
-        <last_name>Rockefeller</last_name>
-        <first_name>John D., IV</first_name>
-        <party>D</party>
-        <state>WV</state>
-        <address>531 Hart Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-6472</phone>
-        <email>http://www.rockefeller.senate.gov/public/index.cfm/email-jay</email>
-        <website>http://www.rockefeller.senate.gov/</website>
+        <member_full>Rounds (D-SD)</member_full>
+        <last_name>Rounds</last_name>
+        <first_name>Mike</first_name>
+        <party>R</party>
+        <state>SD</state>
+        <address>4 Russell Senate Courtyard Washington DC 20510</address>
+        <phone>(202) 224-5842</phone>
+        <email>http://www.rounds.senate.gov/content/contact-mike</email>
+        <website>http://www.rounds.senate.gov</website>
         <class>Class II</class>
-        <bioguide_id>R000361</bioguide_id>
+        <bioguide_id>R000605</bioguide_id>
     </member><member>
         <member_full>Rubio (R-FL)</member_full>
         <last_name>Rubio</last_name>
@@ -979,6 +967,18 @@
         <class>Class I</class>
         <bioguide_id>S000033</bioguide_id>
     </member><member>
+        <member_full>Sasse (R-NE)</member_full>
+        <last_name>Sasse</last_name>
+        <first_name>Ben</first_name>
+        <party>R</party>
+        <state>NE</state>
+        <address>B40E Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-4224</phone>
+        <email/>
+        <website>http://www.sasse.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>S001197</bioguide_id>
+    </member><member>
       <member_full>Schatz (D-HI)</member_full>
       <last_name>Schatz</last_name>
       <first_name>Brian</first_name>
@@ -998,7 +998,7 @@
         <state>NY</state>
         <address>322 Hart Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-6542</phone>
-        <email>http://www.schumer.senate.gov/Contact/contact_chuck.cfm</email>
+        <email>http://www.schumer.senate.gov/contact/email-chuck</email>
         <website>http://www.schumer.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>S000148</bioguide_id>
@@ -1056,12 +1056,24 @@
         <first_name>Debbie</first_name>
         <party>D</party>
         <state>MI</state>
-        <address>133 Hart Senate Office Building Washington DC 20510</address>
+        <address>731 Hart Senate Office Building Washington DC 20510</address>
         <phone>(202) 224-4822</phone>
         <email>http://www.stabenow.senate.gov/?p=contact</email>
         <website>http://www.stabenow.senate.gov/</website>
         <class>Class I</class>
         <bioguide_id>S000770</bioguide_id>
+    </member><member>
+        <member_full>Sullivan (R-AK)</member_full>
+        <last_name>Sullivan</last_name>
+        <first_name>Daniel</first_name>
+        <party>R</party>
+        <state>AK</state>
+        <address>B40A Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-3004</phone>
+        <email/>
+        <website>http://www.sullivan.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>S001198</bioguide_id>
     </member><member>
         <member_full>Tester (D-MT)</member_full>
         <last_name>Tester</last_name>
@@ -1087,6 +1099,18 @@
         <class>Class III</class>
         <bioguide_id>T000250</bioguide_id>
     </member><member>
+        <member_full>Tillis (R-NC)</member_full>
+        <last_name>Tillis</last_name>
+        <first_name>Thom</first_name>
+        <party>R</party>
+        <state>NC</state>
+        <address>G55 Dirksen Senate Office Building Washington DC 20510</address>
+        <phone>(202) 224-6342</phone>
+        <email>http://www.tillis.senate.gov/content/contact-thom</email>
+        <website>http://www.tillis.senate.gov</website>
+        <class>Class II</class>
+        <bioguide_id>T000476</bioguide_id>
+    </member><member>
         <member_full>Toomey (R-PA)</member_full>
         <last_name>Toomey</last_name>
         <first_name>Patrick J.</first_name>
@@ -1098,18 +1122,6 @@
         <website>http://www.toomey.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>T000461</bioguide_id>
-    </member><member>
-        <member_full>Udall (D-CO)</member_full>
-        <last_name>Udall</last_name>
-        <first_name>Mark</first_name>
-        <party>D</party>
-        <state>CO</state>
-        <address>730 Hart Senate Office Building Washington DC 20510</address>
-        <phone>(202) 224-5941</phone>
-        <email>http://www.markudall.senate.gov/?p=contact</email>
-        <website>http://www.markudall.senate.gov</website>
-        <class>Class II</class>
-        <bioguide_id>U000038</bioguide_id>
     </member><member>
         <member_full>Udall (D-NM)</member_full>
         <last_name>Udall</last_name>
@@ -1134,18 +1146,6 @@
         <website>http://www.vitter.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>V000127</bioguide_id>
-    </member><member>
-        <member_full>Walsh (D-MT)</member_full>
-        <last_name>Walsh</last_name>
-        <first_name>John E.</first_name>
-        <party>D</party>
-        <state>MT</state>
-        <address>2 Russell Courtyard Washington DC 20510</address>
-        <phone>(202) 224-2651</phone>
-        <email>http://www.walsh.senate.gov/contact.cfm</email>
-        <website>http://www.walsh.senate.gov/</website>
-        <class>Class II</class>
-        <bioguide_id>W000818</bioguide_id>
     </member><member>
         <member_full>Warner (D-VA)</member_full>
         <last_name>Warner</last_name>
@@ -1206,4 +1206,4 @@
         <website>http://www.wyden.senate.gov/</website>
         <class>Class III</class>
         <bioguide_id>W000779</bioguide_id>
-    </member><last_updated>Monday, May 5, 2014: 3:49 PM EST</last_updated></contact_information>
+    </member><last_updated>Tuesday, January 27, 2015: 2:39 PM EST</last_updated></contact_information>
