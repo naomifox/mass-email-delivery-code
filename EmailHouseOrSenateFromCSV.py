@@ -45,7 +45,7 @@ def cleanName(first_name, last_name):
 
 
 def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultMessage):
-            print "row_dict_to_data"
+            #print "row_dict_to_data"
             #print row
             if "name" in row:
             	first_name=row["name"]
@@ -64,7 +64,7 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
             	addr1 = row["addr"]
             elif "addr1" in row:
             	addr1=row["addr1"]
-            if addr2 in row:
+            if "addr2" in row:
             	addr2=row["addr2"]
             message=defaultMessage
             subject=defaultSubject
@@ -144,20 +144,21 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
     '''
     writeYourRep = WriteYourRep()
     if not jsoninput:  # default is csv    
-        reader = csv.DictReader(open(csvfile, 'rb'))
+        reader = csv.DictReader(open(csvfile, 'rb'), delimiter='\t')
     else:
-        reader = load_json(csvfile)
+        reader = load_json(csvfile)[0]
         print "loaded json data", reader
     genderassigner = GenderLookup()
     (subject, message) = parseMessageFile(messagefile)
-    for row in reader[0]:
+
+    for row in reader:
         i = None
         state='unknown'
         status = ""
         try:
             i = row_dict_to_data(row, writeYourRep, genderassigner, subject, message)
             if onedistrict!=None:
-                print "Feature of specifying one district is not supported yet"
+                if DEBUG: print "Feature of specifying one district is not supported yet"
                 return
             if dryrun:
             	distListStr=' '.join(writeYourRep.getWyrDistricts(i.zip5))
@@ -196,7 +197,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
     from GenderLookup import GenderLookup
     writeYourRep = WriteYourRep()
     if not jsoninput:  # default is csv    
-        reader = csv.DictReader(open(csvfile, 'rb'))
+        reader = csv.DictReader(open(csvfile, 'rb'), delimiter='\t')
     else:
         reader = load_json(csvfile)
     genderassigner = GenderLookup()
@@ -215,7 +216,7 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
             if onesenator != None and onesenator not in sen:
                 status += "%s: not attempted, " % (sen)
                 continue
-            print "Writing to senator %s" % sen
+            if DEBUG: print "Writing to senator %s" % sen
             senname = web.lstrips(web.lstrips(web.lstrips(sen, 'http://'), 'https://'), 'www.').split('.')[0]
             captchaforms=['toomey','sessions','shelby','coburn','crapo','roberts','paul']
             if senname in captchaforms:
