@@ -63,7 +63,9 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
             elif "addr" in row:
             	addr1 = row["addr"]
             elif "addr1" in row:
-            	addr1=row["addr1"]
+            	addr1 = row["addr1"]
+            elif "street_address" in row:
+                addr1 = row["street_address"]
             if "addr2" in row:
             	addr2=row["addr2"]
             message=defaultMessage
@@ -78,6 +80,8 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
             	zip5=row["zip"]
             elif "zip5" in row:
             	zip5=row["zip5"]
+            elif "postcode" in row:
+                zip5 = row["postcode"]
             if "zip4" in row:
             	zip4=row["zip4"]
             (first_name, last_name) = cleanName(first_name, last_name)
@@ -199,7 +203,10 @@ def csv_Send_To_Senate(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt
     if not jsoninput:  # default is csv    
         reader = csv.DictReader(open(csvfile, 'rb'), delimiter='\t')
     else:
-        reader = load_json(csvfile)
+        try:
+            reader = json.load(open(csvfile, 'r'))
+        except:
+            reader = load_json(csvfile)
     genderassigner = GenderLookup()
     (subject, message) = parseMessageFile(messagefile)
     zipLookup = ZipLookup()
