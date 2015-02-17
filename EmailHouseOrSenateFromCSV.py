@@ -70,10 +70,12 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
             	addr2=row["addr2"]
             message=defaultMessage
             subject=defaultSubject
-            if "message" in row:
+            if "message" in row and row["message"]:
             	message=row["message"]
+            elif "action_comment" in row and row["action_comment"]:
+                message = row["action_comment"]
             if "subject" in row:
-            	subject=row["subject"]
+            	subject=row["subject"].strip()
             zip5=""
             zip4=""
             if "zip" in row:
@@ -121,6 +123,7 @@ def row_dict_to_data(row, writeYourRep, genderassigner, defaultSubject, defaultM
                 i.zip4 = zip4
             if city:
                 i.city = city
+
             if message:
                 i.full_msg = message
             if subject:
