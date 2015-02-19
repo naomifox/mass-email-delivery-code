@@ -153,8 +153,10 @@ def csv_Send_To_House(csvfile='demo-dataz.csv', messagefile="noCispaMessage.txt"
     if not jsoninput:  # default is csv    
         reader = csv.DictReader(open(csvfile, 'rb'), delimiter='\t')
     else:
-        reader = load_json(csvfile)[0]
-        print "loaded json data", reader
+        try:
+            reader = json.load(open(csvfile, 'r'))
+        except:
+            reader = load_json(csvfile)
     genderassigner = GenderLookup()
     (subject, message) = parseMessageFile(messagefile)
 
