@@ -24,8 +24,8 @@ from optparse import OptionParser
 import traceback
 
 def cleanName(first_name, last_name):
-    fname = first_name
-    lname = last_name
+    fname = first_name.encode('utf-8', 'ignore')
+    lname = last_name.encode('utf-8', 'ignore')
     fnames = first_name.split()
     # process if last_name field is empty
     if len(last_name) == 0:
